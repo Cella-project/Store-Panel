@@ -14,7 +14,6 @@ export const AddProduct = () => {
     const mode = useSelector((state) => state.theme.mode);
     const language = useSelector((state) => state.language.language);
     const translate = languages[language];
-    const stores = useSelector(state => state.store.stores);
     const specialities = useSelector((state) => state.speciality.specialties);
     const mainCategories = useSelector((state) => state.mainCategory.mainCategories);
     const subCategories = useSelector((state) => state.subCategory.subCategories);
@@ -35,10 +34,10 @@ export const AddProduct = () => {
         const isValid = value.trim() !== '';
         let error = '';
         if (value.trim() === '') {
-            error = 'Please enter a title.';
+            error = translate.pleaseEnterTitle;
         }
         else if (value.length < 3 || value.length > 50) {
-            error = 'Please enter a title with at least 3 characters and at most 50 characters.';
+            error = translate.pleaseEnterTitle3_50;
         }
         return { isValid, error };
     });
@@ -53,24 +52,11 @@ export const AddProduct = () => {
         const isValid = value.trim() !== '';
         let error = '';
         if (value.trim() === '') {
-            error = 'Please enter a description.';
+            error = translate.pleaseEnterDescription;
         }
         return { isValid, error };
     });
-    const {
-        value: enterStore,
-        error: storeError,
-        isTouched: storeIsTouched,
-        valueChangeHandler: storeChangedHandler,
-        inputBlurHandler: storeBlurHandler,
-    } = useInput((value) => {
-        const isValid = value !== '';
-        let error = '';
-        if (value === '') {
-            error = 'Please enter a store.';
-        }
-        return { isValid, error };
-    });
+
 
     const {
         value: enteredspeciality,
@@ -82,7 +68,7 @@ export const AddProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please select a speciality.';
+            error = translate.pleaseEnterSpeciality;
         }
         return { isValid, error };
     });
@@ -96,7 +82,7 @@ export const AddProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please select a mainCategory.';
+            error = translate.pleaseEnterSpeciality;
         }
         return { isValid, error };
     });
@@ -110,7 +96,7 @@ export const AddProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please select a subCategory.';
+            error = translate.pleaseEnterMainCategory;
         }
         return { isValid, error };
     });
@@ -124,10 +110,10 @@ export const AddProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please enter a quantity.';
+            error = translate.pleaseEnterQuantity;
         }
         else if (value <= 0) {
-            error = 'Please enter a quantity greater than 0.';
+            error = translate.pleaseEnterQuantityMoreThan0;
         }
         return { isValid, error };
     }, 0);
@@ -142,7 +128,7 @@ export const AddProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please select a material.';
+            error = translate.pleaseEnterMaterial;
         }
         return { isValid, error };
     });
@@ -157,10 +143,10 @@ export const AddProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please enter a price.';
+            error = translate.pleaseEnterPrice;
         }
         else if (value <= 0) {
-            error = 'Please enter a price greater than 0.';
+            error = translate.pleaseEnterPriceMoreThan0;
         }
         return { isValid, error };
     }, 0);
@@ -181,7 +167,7 @@ export const AddProduct = () => {
         newPhotos.splice(index, 1);
         setPhotos(newPhotos);
     };
-    
+
     const [album, setAlbum] = useState([]);
     const uploadPhotosToServer = async (files) => {
         const album = { photos: [] };
@@ -335,10 +321,6 @@ export const AddProduct = () => {
             description: enteredDescription,
             price: parseInt(enteredPrice),
             avilableQuantity: parseInt(enteredQuantity),
-            store: {
-                _id: enterStore.id,
-                storeName: enterStore.storeName,
-            },
             category: {
                 _id: enteredSubCategory.id,
                 title: enteredSubCategory.title,
@@ -369,7 +351,7 @@ export const AddProduct = () => {
 
         dispatch(productActions.addProduct(product,
             () => {
-                navigate(`/stores/${enterStore.id}`);
+                navigate(`/home/`);
             }));
     };
 
@@ -380,7 +362,7 @@ export const AddProduct = () => {
                 <div className="full-width flex-row-center margin-12px-V">
                     <p
                         style={{ margin: '30px' }}
-                        className="size-26px font-bold inter gray">Add Product
+                        className="size-26px font-bold inter gray">{translate.addProduct}
                     </p>
                 </div>
 
@@ -461,36 +443,9 @@ export const AddProduct = () => {
                                 </div>
                                 {descriptionIsTouched && (<div className="error-message">{descriptionError}</div>)}
                             </div>
-                            {
-                                stores && stores.length > 0 && (
-                                    <div className='full-width flex-col-left-start add-product--input-container'>
-                                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='store'>Store <span className='red'>*</span></label>
-                                        <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input`}>
-                                            <i className='bi bi-pin-map size-20px gray' />
-                                            <Select
-                                                className='add-product--select full-width gray margin-4px-H'
-                                                styles={{
-                                                    option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
-                                                    menu: (provided) => ({
-                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
-                                                    }),
-                                                }}
-                                                value={enterStore}
-                                                placeholder="Select Store"
-                                                options={stores.filter(store => store.status === "Active").map(store => ({ label: store.storeName, value: { label: store.storeName, id: store._id, storeName: store.storeName } }))}
-                                                onChange={(store) =>
-                                                    storeChangedHandler({ target: { id: "store", value: store.value } })
-                                                }
-                                                onBlur={storeBlurHandler}
-                                            />
-                                        </div>
-                                        {storeIsTouched && (<div className="error-message">{storeError}</div>)}
-                                    </div>
-                                )
-                            }
                             {specialities && specialities.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
-                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='speciality'>speciality <span className='red'>*</span></label>
+                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='speciality'>{translate.specialty} <span className='red'>*</span></label>
                                     <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input`}>
                                         <i className='bi bi-pin-map size-20px gray' />
                                         <Select
@@ -502,7 +457,7 @@ export const AddProduct = () => {
                                                 }),
                                             }}
                                             value={enteredspeciality}
-                                            placeholder="Select speciality"
+                                            placeholder={translate.selectspecialty}
                                             options={specialities.filter(speciality => speciality.status === "Active").map(speciality => ({ label: speciality.title, value: { label: speciality.title, title: speciality.title, id: speciality._id } }))}
                                             onChange={(speciality) =>
                                                 specialityChangedHandler({ target: { id: "speciality", label: speciality.title, value: speciality.value } })
@@ -515,7 +470,7 @@ export const AddProduct = () => {
                             )}
                             {mainCategories && mainCategories.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
-                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='MainCategory'>Main Category <span className='red'>*</span></label>
+                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='MainCategory'>{translate.mainCategory} <span className='red'>*</span></label>
                                     <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input`}>
                                         <i className='bi bi-pin-map size-20px gray' />
                                         <Select
@@ -528,7 +483,7 @@ export const AddProduct = () => {
                                             }}
                                             value={enteredMainCategory}
                                             disabled={mainCategories.length === 0}
-                                            placeholder="Select Main Category"
+                                            placeholder={translate.selectMainCategory}
                                             options={mainCategories.filter(mainCategory => mainCategory.status === "Active").map(mainCategory => ({ label: mainCategory.title, value: { label: mainCategory.title, title: mainCategory.title, id: mainCategory._id } }))}
                                             onChange={(mainCategory) =>
                                                 mainCategoryChangedHandler({ target: { id: "mainCategory", label: mainCategory.title, value: mainCategory.value } })
@@ -541,7 +496,7 @@ export const AddProduct = () => {
                             )}
                             {subCategories && subCategories.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
-                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='SubCategory'>Sub Category <span className='red'>*</span></label>
+                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='SubCategory'>{translate.subCategory} <span className='red'>*</span></label>
                                     <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
                                         <i className='bi bi-pin-map size-20px gray' />
                                         <Select
@@ -573,7 +528,7 @@ export const AddProduct = () => {
                                         navigate('/products');
                                     }}
                                 >
-                                    Cancel
+                                    {translate.cancel}
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
@@ -581,23 +536,23 @@ export const AddProduct = () => {
                                         setCurrentPage(2);
                                     }}
                                 >
-                                    Next
+                                    {translate.next}
                                 </button>
                             </div>
                         </div>
                     }
                     {currentPage === 2 && <div>
                         <div className='full-width flex-col-left-start add-product--header'>
-                            <label className='pointer full-width text-shadow gray font-bold size-26px'>Product Album</label>
+                            <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productAlbum}</label>
                         </div>
                         <div className='full-width flex-col-left-start add-product--input-container'>
-                            <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>Product images : <span className='red'>*</span></label>
+                            <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.productImages} : <span className='red'>*</span></label>
                         </div>
                         <div className="add-product--photo flex-col-center">
                             <div className="flex-row-center flex-wrap">
                                 {photos.map((photo, index) => (
                                     <div className="add-product--photo--item padding-10px-H flex-col-center " key={index}>
-                                        <div className={`inter ${mode === 'dark-mode' ? 'gray' : 'orange'} margin-6px-V`}> Photo number : {index + 1}</div>
+                                        <div className={`inter ${mode === 'dark-mode' ? 'gray' : 'orange'} margin-6px-V`}> {translate.photoNumber} : {index + 1}</div>
                                         <img src={URL.createObjectURL(photo)} alt={` ${index}`} />
                                         <div className="flex-row-between full-width margin-6px-V ">
                                             <button
@@ -625,7 +580,7 @@ export const AddProduct = () => {
                             </div>
                             <div className="flex-row-center full-width">
                                 <label htmlFor="photos" className={`add-product--actions--button radius-10px orange-bg ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`}>
-                                    Add photo
+                                    {translate.addPhoto}
                                 </label>
                                 <input type="file" id="photos" onChange={handlePhotoAdd} multiple hidden />
                             </div>
@@ -638,7 +593,7 @@ export const AddProduct = () => {
                                     setCurrentPage(1);
                                 }}
                             >
-                                Back
+                                {translate.back}
                             </button>
                             <button
                                 className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
@@ -647,7 +602,7 @@ export const AddProduct = () => {
                                     setCurrentPage(3);
                                 }}
                             >
-                                Next
+                                {translate.next}
                             </button>
                         </div>
                     </div>}
@@ -655,10 +610,10 @@ export const AddProduct = () => {
                     {currentPage === 3 &&
                         <div>
                             <div className='full-width flex-col-left-start add-product--header'>
-                                <label className='pointer full-width text-shadow gray font-bold size-26px'>Product Variants</label>
+                                <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productVariants}</label>
                             </div>
                             <div>
-                                <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="quantity">Quantity : <span className='red'>*</span></label>
+                                <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="quantity">{translate.quantity} : <span className='red'>*</span></label>
                                 <input className="pointer margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="Quantity" value={enteredQuantity} onChange={quantityChangedHandler} onBlur={quantityBlurHandler} />
                                 {quantityIsTouched && (<div className="error-message">{quantityError}</div>)}
                             </div>
@@ -666,7 +621,7 @@ export const AddProduct = () => {
                                 materials && materials.length > 0 && (
                                     <div className='full-width flex-col-left-start add-product--input-container'>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='material'>
-                                            Materials :<span className='red'>*</span>
+                                            {translate.material} :<span className='red'>*</span>
                                         </label>
                                         <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
                                             <i className='bi bi-pin-map size-20px gray' />
@@ -680,10 +635,10 @@ export const AddProduct = () => {
                                                 }}
                                                 value={enteredMaterial}
                                                 disabled={materials.length === 0}
-                                                placeholder="Select Material"
+                                                placeholder={translate.selectMaterial}
                                                 options={materials.map(m => ({ label: m.title, value: { label: m.title, title: m.title, id: m._id } }))}
                                                 onChange={(subCategory) =>
-                                                    materialChangedHandler({ target: { id: "subCategory", label: subCategory.title, value: subCategory.value } })
+                                                    materialChangedHandler({ target: { id: "material", label: subCategory.title, value: subCategory.value } })
                                                 }
                                                 onBlur={materialBlurHandler}
                                             />
@@ -696,7 +651,7 @@ export const AddProduct = () => {
                             {colors && colors.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='color'>
-                                        Colors :<span className='red'>*</span>
+                                        {translate.colors} :<span className='red'>*</span>
                                     </label>
                                     <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
                                         <i className='bi bi-pin-map size-20px gray' />
@@ -710,7 +665,7 @@ export const AddProduct = () => {
                                                 }),
                                             }}
                                             disabled={colors.length === 0}
-                                            placeholder='Select Colors'
+                                            placeholder={translate.selectColors}
                                             options={colors.map((color) => ({
                                                 label: color.title,
                                                 value: { label: color.title, title: color.title, id: color._id, hexCode: color.hexCode },
@@ -738,7 +693,7 @@ export const AddProduct = () => {
                                 sizes && sizes.length && (
                                     <div className='full-width flex-col-left-start add-product--input-container'>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='size'>
-                                            Sizes :<span className='red'>*</span>
+                                            {translate.sizes} :<span className='red'>*</span>
                                         </label>
                                         <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
                                             <i className='bi bi-pin-map size-20px gray' />
@@ -752,7 +707,7 @@ export const AddProduct = () => {
                                                     }),
                                                 }}
                                                 disabled={sizes.length === 0}
-                                                placeholder='Select Sizes'
+                                                placeholder={translate.selectSizes}
                                                 options={sizes.map((size) => ({
                                                     label: size.title,
                                                     value: { label: size.title, title: size.title, id: size._id },
@@ -782,7 +737,7 @@ export const AddProduct = () => {
                                 tags && tags.length > 0 && (
                                     <div className='full-width flex-col-left-start add-product--input-container'>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='tags'>
-                                            Tags :<span className='red'>*</span>
+                                            {translate.tags} :<span className='red'>*</span>
                                         </label>
                                         <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
                                             <i className='bi bi-pin-map size-20px gray' />
@@ -796,7 +751,7 @@ export const AddProduct = () => {
                                                     }),
                                                 }}
                                                 disabled={tags.length === 0}
-                                                placeholder='Select Tags'
+                                                placeholder={translate.selectTags}
                                                 options={tags.map((tag) => ({
                                                     label: tag.title,
                                                     value: { label: tag.title, title: tag.title, id: tag._id },
@@ -825,7 +780,7 @@ export const AddProduct = () => {
                                         setCurrentPage(2);
                                     }}
                                 >
-                                    Back
+                                    {translate.back}
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
@@ -834,7 +789,7 @@ export const AddProduct = () => {
                                         setCurrentPage(4);
                                     }}
                                 >
-                                    Next
+                                    {translate.next}
                                 </button>
                             </div>
 
@@ -845,11 +800,11 @@ export const AddProduct = () => {
                     {currentPage === 4 &&
                         <div>
                             <div className='full-width flex-col-left-start add-product--header'>
-                                <label className='pointer full-width text-shadow gray font-bold size-26px'>Product Pricing</label>
+                                <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productPricing}</label>
                             </div>
                             <div className="add-product--price full-width flex-col-left-start add-product--input-container">
                                 <div>
-                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="price">Price:<span className='red'>*</span></label>
+                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="price">{translate.price}:<span className='red'>*</span></label>
                                     <input className="pointer margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="price" value={enteredPrice} onChange={priceChangedHandler} onBlur={priceBlurHandler} />
                                 </div>
                                 {priceIsTouched && (<div className="error-message">{priceError}</div>)}
@@ -858,15 +813,15 @@ export const AddProduct = () => {
                                     <div className='margin-6px-V'>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
                                             <input className="pointer margin-12px-H" type="radio" name="discount-type" value="None" checked={discountType === 'None'} onChange={handleDiscountTypeChange} />
-                                            No discount
+                                            {translate.noDiscount}
                                         </label>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
                                             <input className="pointer margin-12px-H" type="radio" name="discount-type" value="Percentage" checked={discountType === 'Percentage'} onChange={handleDiscountTypeChange} />
-                                            Percentage
+                                            {translate.percentage}
                                         </label>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
                                             <input className="pointer margin-12px-H" type="radio" name="discount-type" value="Value" checked={discountType === 'Value'} onChange={handleDiscountTypeChange} />
-                                            Value
+                                            {translate.percentage}
                                         </label>
                                     </div>
                                     {discountType !== 'None' && (
@@ -876,7 +831,7 @@ export const AddProduct = () => {
                                                 <input className='gray add-product--input radius-10px' min='0' type="number" id="discount-value" value={discountValue} onChange={handleDiscountValueChange} />
                                             </div>
                                             <div className='flex-row-center'>
-                                                <label className='text-shadow gray font-bold margin-6px-H'>New price:</label>
+                                                <label className='text-shadow gray font-bold margin-6px-H'>{translate.newPrice}:</label>
                                                 <div className={`${mode === 'dark-mode' ? 'gray' : 'orange'} font-bold size-26px`}>{calculateNewPrice()}</div>
                                             </div>
                                         </div>
@@ -890,13 +845,13 @@ export const AddProduct = () => {
                                         setCurrentPage(3);
                                     }}
                                 >
-                                    Back
+                                    {translate.back}
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
                                     type="submit"
                                 >
-                                    Confirm
+                                    {translate.confirm}
                                 </button>
                             </div>
                         </div>}

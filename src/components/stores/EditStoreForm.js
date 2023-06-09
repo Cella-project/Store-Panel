@@ -5,13 +5,15 @@ import { specialityMutations } from '../../redux/mutations';
 import PhoneInput from 'react-phone-number-input';
 import useInput from '../../hooks/useInput';
 import Select from 'react-select';
-
+import languages from '../global/languages';
 import './EditStoreForm.scss'
 
 const EditStoreForm = ({ popupToggle }) => {
     const dispatch = useDispatch();
     const storeData = useSelector((state) => state.store.storeData);
     const specialities = useSelector((state) => state.speciality.specialties);
+    const language = useSelector((state) => state.language.language);
+    const translate = languages[language];
     const specialtyRef = useRef({
         id: storeData.speciality._id,
         title: storeData.speciality.title,
@@ -135,7 +137,7 @@ const EditStoreForm = ({ popupToggle }) => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please select a speciality.';
+            error = translate.pleaseEnterSpeciality;
         }
         return { isValid, error };
     }, storeData.speciality.title);

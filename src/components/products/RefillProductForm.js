@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { productActions } from '../../apis/actions';
-
+import languages from '../global/languages';
 import useInput from '../../hooks/useInput';
 import './RefillProductForm.scss'
 export const RefillProductForm = ({ popupToggle }) => {
     const dispatch = useDispatch();
     const mode = useSelector((state) => state.theme.mode);
+    const language = useSelector((state) => state.language.language);
+    const translate = languages[language];
     const productData = useSelector((state) => state.product.productData);
 
 
@@ -20,10 +22,10 @@ export const RefillProductForm = ({ popupToggle }) => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please enter a quantity.';
+            error = translate.pleaseEnterQuantity;
         }
         else if (value <= 0) {
-            error = 'Please enter a quantity greater than 0.';
+            error = translate.pleaseEnterQuantityMoreThan0;
         }
         return { isValid, error };
     }, 0);
@@ -32,7 +34,7 @@ export const RefillProductForm = ({ popupToggle }) => {
     const [selectedColors, setSelectedColors] = useState(productData.colors.map((color) => ({
         ...color,
         quantity: 0
-      }))
+    }))
     );
     const [selectedSizes, setSelectedSizes] = useState(productData.sizes.map((size) => ({
         ...size,
@@ -92,17 +94,17 @@ export const RefillProductForm = ({ popupToggle }) => {
                 <form onSubmit={handleSubmit} noValidate className=' flex-col-center'>
                     <div>
                         <div className='full-width flex-col-left-start refill-product--header'>
-                            <label className='pointer full-width text-shadow gray font-bold size-26px'>Refill Product</label>
+                            <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.refillProduct}</label>
                         </div>
                         <div>
-                            <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="quantity">Quantity : <span className='red'>*</span></label>
+                            <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="quantity">{translate.quantity} : <span className='red'>*</span></label>
                             <input className="pointer margin-12px-H gray refill-product--input radius-10px" min='0' type="number" id="Quantity" value={enteredQuantity} onChange={quantityChangedHandler} onBlur={quantityBlurHandler} />
                             {quantityIsTouched && (<div className="error-message">{quantityError}</div>)}
                         </div>
                         {productData.colors && productData.colors.length > 0 && (
                             <div className='full-width flex-col-left-start refill-product--input-container'>
                                 <label className='pointer full-width flex-row-between text-shadow gray font-bold margin-6px-H' htmlFor='color'>
-                                    Colors :
+                                    {translate.colors} :
                                     {
 
                                         remainingQuantitiesOfColors !== 0 && (remainingQuantitiesOfColors >= 0 ? (<span className={`${mode === 'dark-mode' ? 'gray' : 'white'} orange-bg radius-10px padding-6px-H`}>Remaining {remainingQuantitiesOfColors}</span>) : (<span className={`${mode === 'dark-mode' ? 'gray' : 'white'} red-bg radius-10px padding-6px-H`}>{remainingQuantitiesOfColors}</span>))
@@ -122,7 +124,7 @@ export const RefillProductForm = ({ popupToggle }) => {
 
                         <div className='full-width flex-col-left-start refill-product--input-container'>
                             <label className='pointer full-width flex-row-between text-shadow gray font-bold margin-6px-V' htmlFor='size'>
-                                Sizes :
+                                {translate.sizes} :
                                 {
                                     remainingQuantitiesOfSizes !== 0 && (remainingQuantitiesOfSizes >= 0 ? (<span className={`${mode === 'dark-mode' ? 'gray' : 'white'} orange-bg radius-10px padding-6px-H`}>Remaining {remainingQuantitiesOfSizes}</span>) : (<span className={`${mode === 'dark-mode' ? 'gray' : 'white'} red-bg radius-10px padding-6px-H`}>{remainingQuantitiesOfSizes}</span>))
                                 }
@@ -143,7 +145,7 @@ export const RefillProductForm = ({ popupToggle }) => {
                                 className={`refill-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
                                 type="submit"
                             >
-                                Confirm
+                                {translate.confirm}
                             </button>
                             <button
                                 className="refill-product--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
@@ -152,7 +154,7 @@ export const RefillProductForm = ({ popupToggle }) => {
                                     document.getElementById("dashboard-view").style.zIndex = 10;
                                     window.onscroll = function () { };
                                 }} >
-                                Cancel
+                                {translate.cancel}
                             </button>
                         </div>
 

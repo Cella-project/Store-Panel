@@ -55,10 +55,10 @@ export const EditProduct = () => {
         const isValid = value.trim() !== '';
         let error = '';
         if (value.trim() === '') {
-            error = 'Please enter a title.';
+            error = translate.pleaseEnterTitle;
         }
         else if (value.length < 3 || value.length > 50) {
-            error = 'Please enter a title with at least 3 characters and at most 50 characters.';
+            error = translate.pleaseEnterTitle3_50;
         }
         return { isValid, error };
     }, product.title);
@@ -73,7 +73,7 @@ export const EditProduct = () => {
         const isValid = value.trim() !== '';
         let error = '';
         if (value.trim() === '') {
-            error = 'Please enter a description.';
+            error = translate.pleaseEnterDescription;
         }
         return { isValid, error };
     }, product.description);
@@ -89,7 +89,7 @@ export const EditProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please select a material.';
+            error = translate.pleaseEnterMaterial;
         }
         return { isValid, error };
     }, product.material);
@@ -104,10 +104,10 @@ export const EditProduct = () => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please enter a price.';
+            error = translate.pleaseEnterPrice;
         }
         else if (value <= 0) {
-            error = 'Please enter a price greater than 0.';
+            error = translate.pleaseEnterPriceMoreThan0;
         }
         return { isValid, error };
     }, product.price);
