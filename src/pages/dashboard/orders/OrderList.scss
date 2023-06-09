@@ -1,0 +1,47 @@
+.orders {
+    position: relative;
+
+    &--cards {
+        width: 20%;
+        float: right;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--link {
+        all: unset;
+    }
+
+    &--list-header {
+        box-sizing: border-box;
+        padding: 5px 0px;
+        padding-left: 80px;
+    }
+
+    &--braud-cramb {
+        box-sizing: border-box;
+        padding-left: 60px;
+    }
+}
+
+@media (max-width: 992px) {
+    .orders {
+        &--cards {
+            width: 100%;
+            float: none;
+            justify-content: space-between;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        &--list-header {
+            display: none !important;
+        }
+
+        &--braud-cramb {
+            padding-left: 10px;
+        }
+    }
+}

@@ -1,0 +1,213 @@
+.profile {
+    position: relative;
+
+    & .none {
+        display: none;
+    }
+
+    &--braud-cramb {
+        box-sizing: border-box;
+        padding-left: 60px;
+    }
+
+    &--content {
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    &--img {
+        width: 250px;
+        height: 250px;
+        overflow: hidden;
+
+        &>img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &--btn {
+        border: transparent;
+        box-sizing: border-box;
+        padding: 5px;
+        transition: all ease-in-out .3s;
+
+        &:hover {
+            transform: translateY(3px);
+        }
+    }
+
+    &--change-img {
+        width: 250px;
+        height: 255px;
+        position: absolute;
+        overflow: hidden;
+        align-items: flex-end !important;
+
+        &--tag {
+            box-sizing: border-box;
+            padding: 5px 20px 25px;
+            opacity: 0.8;
+
+            & input {
+                display: none;
+            }
+
+            &:hover {
+                opacity: 0.9;
+                color: #70c8b0;
+                font-weight: 600;
+            }
+        }
+    }
+
+    &--input {
+        border: transparent;
+        background-color: transparent;
+
+        &--container {
+            box-sizing: border-box;
+            padding: 5px 10px;
+            border: transparent;
+            margin: 10px 0;
+        }
+
+        &--btn {
+            transition: all ease-in-out .3s;
+
+            &:hover {
+                transform: translateY(3px);
+            }
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &[type='date'] {
+            cursor: text;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+
+    &--info {
+        all: unset;
+
+        & label,
+        & input {
+            padding: 0;
+        }
+
+        box-sizing: border-box;
+        padding: 10px 20px;
+        border-radius: 40px;
+
+        & .PhoneInputInput {
+            border: transparent;
+            font-size: 18px;
+            color: #737373;
+            width: 120px;
+            background-color: transparent;
+
+            &:focus {
+                outline: none;
+                color: #737373;
+            }
+        }
+
+        & .PhoneInputCountry {
+            font-size: 20px;
+
+            &Select {
+                & option {
+                    font-size: 14px;
+                    color: #737373;
+                    background-color: #fefefe;
+                }
+            }
+        }
+
+        & .focus {
+            border: #70c8b0 double 2px;
+        }
+
+        & button {
+            transition: all ease-in-out .3s;
+
+            &:hover {
+                transform: translateY(3px);
+            }
+        }
+
+    }
+
+    & input[type='button'] {
+        transition: all ease-in-out .3s;
+
+        &:hover {
+            transform: translateY(5px);
+        }
+    }
+
+    & ul {
+        margin: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .profile {
+        &--braud-cramb {
+            padding-left: 10px;
+        }
+
+        &--img {
+            width: 150px;
+            height: 150px;
+        }
+
+        &--btn {
+            font-size: 12px !important;
+        }
+
+        &--info {
+
+            & div,
+            & button,
+            & i,
+            & label,
+            & input,
+            & .PhoneInputInput,
+            & .PhoneInputCountrySelect option {
+                font-size: 12px !important;
+            }
+        }
+
+        & input[type='button'] {
+            font-size: 12px;
+        }
+
+        &--change-img {
+            width: 150px;
+            height: 155px;
+
+            &--tag {
+                padding: 5px 15px 17px;
+                font-size: 10px;
+
+                &>i {
+                    font-size: 12px;
+                }
+
+                &:hover {
+                    opacity: 0.8;
+                    color: #737373;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+:local {
+    .login {
+        width: 450px;
+        box-sizing: border-box;
+        padding: 40px 30px;
+
+        &--slot {
+            position: relative;
+
+            &--input {
+                width: 100%;
+                height: 40px;
+                border: 1px solid #ffffff;
+                outline: none;
+                box-sizing: border-box;
+                padding-left: 50px;
+
+                &--error {
+                    border-color: #FF3636;
+                }
+            }
+
+            &--icon {
+                position: absolute;
+                top: 40px;
+                left: 15px;
+
+                &--right {
+                    position: absolute;
+                    top: 40px;
+                    right: 15px;
+                }
+
+            }
+
+        }
+
+        &--btn {
+            border: none;
+            height: 40px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: all .15s ease-in-out;
+
+            &:hover {
+                transform: translateY(2px);
+            }
+        }
+    }
+    .arabic-login {
+        width: 450px;
+        box-sizing: border-box;
+        padding: 40px 30px;
+
+        &--slot {
+            position: relative;
+
+            &--input {
+                width: 100%;
+                height: 40px;
+                border: 1px solid #ffffff;
+                outline: none;
+                box-sizing: border-box;
+                padding-right: 50px;
+
+                &--error {
+                    border-color: #FF3636;
+                }
+            }
+
+            &--icon {
+                position: absolute;
+                top: 40px;
+                right: 15px;
+
+                &--left {
+                    position: absolute;
+                    top: 40px;
+                    left: 15px;
+                }
+
+            }
+            
+        }
+
+        &--btn {
+            border: none;
+            height: 40px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: all .15s ease-in-out;
+
+            &:hover {
+                transform: translateY(2px);
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        .login {
+            width: 90%;
+            padding: 30px 15px;
+        }
+        .arabic-login {
+            width: 90%;
+            padding: 30px 15px;
+        }
+    }
+}

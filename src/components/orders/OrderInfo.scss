@@ -1,0 +1,9 @@
+.order-info {
+    box-sizing: border-box;
+    padding: 10px;
+
+    &-money {
+        border-bottom: 2px solid #ff8800;
+        margin: 2px;
+    }
+}

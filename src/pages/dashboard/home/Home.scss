@@ -1,0 +1,51 @@
+.home {
+    position: relative;
+
+    &--braud-cramb {
+        box-sizing: border-box;
+        padding: 0px 60px 0px 60px;
+    }
+
+    &--application-container {
+        position: relative;
+        box-sizing: border-box;
+        padding: 10px;
+        margin: 10px;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.15s ease-in-out;
+
+        &:hover {
+            transform: translateY(5px);
+        }
+    }
+
+    &--pending-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+
+    &--scroll--cont {
+        width: 100%;
+        max-height: 340px;
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 0 10px;
+
+        & .ps__thumb-y,
+        & .ps__rail-y {
+            top: 0 !important;
+            height: 0 !important;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .home--braud-cramb {
+        padding: 0px 10px 0px 10px;
+    }
+}

@@ -1,0 +1,87 @@
+:local {
+    .pop-up {
+        min-width: 300px;
+        max-width: 500px;
+        box-sizing: border-box;
+        padding: 30px 40px;
+
+        &--icon {
+            font-size: 42px;
+            margin-right: 25px;
+
+            &--success {
+                animation: jump .5s ease-out infinite;
+            }
+
+            &--info {
+                animation: jump .5s ease-out infinite;
+            }
+
+            &--error {
+                animation: errorShack 1s ease-out infinite;
+            }
+        }
+
+        &--btn {
+            border: none;
+            margin-top: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px #000;
+
+            &:hover {
+                transition: all .25s ease-in-out;
+                transform: translateY(5px);
+            }
+        }
+    }
+
+    @keyframes jump {
+        0% {
+            transform: translateY(2px);
+        }
+
+        50% {
+            transform: translateY(-2px);
+
+        }
+
+        100% {
+            transform: translateY(2px);
+        }
+    }
+
+    @keyframes errorShack {
+        0% {
+            transform: translateX(0px);
+        }
+
+        5% {
+            transform: translateX(-5px);
+        }
+
+        10% {
+            transform: translateX(5px);
+        }
+
+        15% {
+            transform: translateX(0px);
+        }
+    }
+
+    @media (max-width: 992px) {
+        .pop-up {
+            min-width: 250px;
+            max-width: 300px;
+            padding: 20px 30px;
+
+            &--icon {
+                font-size: 32px;
+            }
+
+            &--btn {
+                padding: 8px 20px;
+            }
+        }
+    }
+}

@@ -1,0 +1,149 @@
+// $orange: #70c8b0;
+
+$orange: #ff8800;
+
+$white: #ffffff;
+$off-white: #fefefe;
+
+$gray: #737373;
+$light-gray: #9ba2ab;
+$off-gray: #dddddd;
+
+$yellow: #fef875;
+$red: #FF3636;
+$green: #18CE0F;
+
+$baby-blue: #7FBCD2;
+$pink: #FFAFCC;
+$lavender: #C8D0FA;
+
+$gold: #FDCC0D;
+
+.white {
+    color: $white;
+}
+
+.white-bg {
+    background-color: $white;
+}
+
+.off-white {
+    color: $off-white;
+}
+
+.off-white-bg {
+    background-color: $off-white;
+}
+
+.gray {
+    color: $gray;
+}
+
+.gray-bg {
+    background-color: $gray;
+}
+
+.light-gray {
+    color: $light-gray;
+}
+
+.light-gray-bg {
+    background-color: $light-gray;
+}
+
+.off-gray {
+    color: $off-gray;
+}
+
+.off-gray-bg {
+    background-color: $off-gray;
+}
+
+// .orange {
+//     color: $orange;
+// }
+
+// .orange-bg {
+//     background-color: $orange;
+// }
+
+.orange {
+    color: $orange;
+}
+
+.orange-bg {
+    background-color: $orange;
+}
+
+.yellow {
+    color: $yellow;
+}
+
+.yellow-bg {
+    background-color: $yellow;
+}
+
+.yellow-status {
+    border-left: 4px solid $yellow ;
+}
+
+.gold {
+    color: $gold;
+}
+
+.gold-bg {
+    background-color: $gold;
+}
+
+.lavender {
+    color: $lavender;
+}
+
+.lavender-bg {
+    background-color: $lavender;
+}
+
+.baby-blue {
+    color: $baby-blue;
+}
+
+.baby-blue-bg {
+    background-color: $baby-blue;
+}
+
+.baby-blue-status {
+    border-left: 4px solid $baby-blue ;
+}
+
+.pink {
+    color: $pink;
+}
+
+.pink-bg {
+    background-color: $pink;
+}
+
+.red {
+    color: $red;
+}
+
+.red-bg {
+    background-color: $red;
+}
+
+.red-status {
+    border-left: 4px solid $red ;
+}
+
+.green {
+    color: $green;
+}
+
+.green-bg {
+    background-color: $green;
+}
+
+.green-status {
+    border-left: 4px solid $green ;
+
+}

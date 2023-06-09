@@ -1,0 +1,157 @@
+.refill-product {
+    position: relative;
+
+    &--header {
+        margin: 20px 0;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    &--selected-item {
+        padding: 5px 10px;
+        margin: 10px;
+        
+    }
+
+    &--input-container {
+        margin: 20px 0;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    
+
+    &--input {
+        border: 2px inset #8986867c;
+        position: relative;
+        box-sizing: border-box;
+        padding: 5px !important;
+
+        &--number {
+            width: 40px;
+            border: transparent;
+            text-align: center;
+
+            &:focus {
+                outline: transparent;
+            }
+
+
+            &--button {
+                background-color: transparent;
+                border: none;
+                transition: all 0.2s ease-in-out;
+                &:hover {
+
+                    transform: translateY(3px);
+                }
+            }
+        }
+
+        >input {
+            border: transparent;
+            font-size: 14px;
+
+            &:focus {
+                outline: none;
+                color: #737373;
+            }
+        }
+
+        >textarea {
+            border: transparent;
+            font-size: 14px;
+            height: 100px;
+
+            &:focus {
+                outline: none;
+                color: #737373;
+            }
+        }
+    }
+
+    &--photo {
+        border: 2px dashed #ccc;
+        padding: 10px;
+
+        &--item {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            margin: 4px;
+
+            >img {
+                width: 150px;
+                height: 150px;
+                border-radius: 15px;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &--gallary {
+        background: none;
+        border: none;
+
+        &-left,
+        &-right {
+            background: none;
+            border: none;
+            height: 100%;
+            transition: all 0.2s ease-in-out;
+
+            &:disabled {
+                visibility: hidden;
+            }
+        }
+
+        &-left {
+            &:hover {
+                transform: translateX(-2px);
+            }
+        }
+
+        &-right {
+            &:hover {
+                transform: translateX(2px);
+            }
+        }
+    }
+
+    &--actions {
+        box-sizing: border-box;
+        padding: 20px;
+        padding-top: 40px;
+
+        &--button {
+            text-align: center;
+            width: 49%;
+            border: none;
+            box-sizing: border-box;
+            padding: 2px;
+            transition: all ease-in-out .15s;
+
+            &-hide {
+                display: none;
+            }
+
+            &:hover:not(:disabled),
+            &:active:not(:disabled) {
+                transform: translateY(3px);
+            }
+
+            &:disabled,
+            :disabled:hover,
+            :disabled:active {
+                background-color: #ccc;
+                color: white;
+                border-color: #ccc;
+                cursor: not-allowed;
+            }
+        }
+
+    }
+
+}

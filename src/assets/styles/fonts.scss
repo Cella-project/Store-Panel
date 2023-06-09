@@ -1,0 +1,30 @@
+@font-face {
+    font-family: Inter;
+    src: url('../fonts/Inter-Regular.ttf');
+}
+$Inter: Inter, sans-serif;
+
+.inter {
+    font-family: $Inter;
+}
+
+@font-face {
+    font-family: PT sans;
+    src: url('../fonts/PTSans-Regular.ttf');
+}
+
+$PTSans: PT sans, sans-serif;
+
+.pt-sans {
+    font-family: $PTSans;
+}
+
+@font-face {
+    font-family: Open-Sans;
+    src: url('../fonts/OpenSans-Regular.ttf');
+}
+$Open-Sans: Open-Sans, sans-serif;
+
+.open-sans {
+    font-family: $Open-Sans;
+}

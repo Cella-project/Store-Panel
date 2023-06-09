@@ -1,0 +1,122 @@
+.product-details {
+    box-sizing: border-box;
+    padding: 10px;
+
+
+    &--tags {
+        box-sizing: border-box;
+        padding: 10px;
+        justify-content: space-around !important;
+
+        &--tag {
+            box-sizing: border-box;
+            padding: 10px;
+
+            &--button {
+                box-sizing: border-box;
+                padding: 10px;
+                border: none;
+                background-color: transparent;
+
+                &:hover {
+                    transform: translateY(3px);
+                }
+
+                &--icon {
+                    padding: 10px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+
+    &--sizes {
+        position: relative;
+        box-sizing: border-box;
+        margin: 5px;
+
+        &--size {
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        &--quantity {
+            margin: 2px;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        &--delete {
+            box-sizing: border-box;
+            padding: 3px;
+            position: absolute;
+            right: -3px;
+            bottom: 1px;
+            transition: all 0.15s ease-in-out;
+
+            &:hover {
+                transform: scale(1.5);
+            }
+
+        }
+    }
+
+    &--colors {
+        box-sizing: border-box;
+        position: relative;
+        margin: 5px;
+
+        &--quantity {
+            margin: 2px;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        &--color {
+            box-sizing: border-box;
+            margin: 2px;
+            width: 40px;
+            height: 40px;
+        }
+
+        &--delete {
+            box-sizing: border-box;
+            padding: 3px;
+            position: absolute;
+            right: -3px;
+            bottom: 1px;
+            transition: all 0.15s ease-in-out;
+
+            &:hover {
+                transform: scale(1.5);
+            }
+
+        }
+    }
+
+
+    &--scroll--cont {
+        overflow: hidden;
+        position: relative;
+        &--add {
+            box-sizing: border-box;
+            padding: 3px;
+            position: absolute;
+            border: transparent;
+            right: 25px;
+            transition: all 0.15s ease-in-out;
+
+            &:hover {
+                transform: scale(1.5);
+            }
+
+        }
+
+
+        & .ps__thumb-x,
+        & .ps__rail-x {
+            left: 0 !important;
+            width: 0 !important;
+        }
+    }
+}

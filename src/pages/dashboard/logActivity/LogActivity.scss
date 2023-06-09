@@ -1,0 +1,32 @@
+.log-activity {
+    position: relative;
+    z-index: 2;
+
+    &--list-header {
+        box-sizing: border-box;
+        padding:0px 80px 0px 80px;
+    }
+
+    &--braud-cramb {
+        box-sizing: border-box;
+        padding: 0px 60px 0px 60px;
+    }
+}
+
+@media (max-width: 992px) {
+    .log-activity {
+        &--list-header {
+            display: none !important;
+        }
+
+        &--braud-cramb {
+            padding: 0px 10px 0px 10px;
+        }
+    }
+
+    .lists-card--info>div {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+}

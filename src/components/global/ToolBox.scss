@@ -1,0 +1,125 @@
+.tool-box {
+    bottom: 20px;
+    z-index: 45;
+
+    &--btns {
+        margin-bottom: 20px;
+    }
+
+    &--btn {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        animation: slide-in 0.5s ease-out;
+
+        &--tag {
+            display: none !important;
+            position: absolute;
+            right: 60px;
+            padding: 6px 8px;
+            background-color: rgba($color: #000000, $alpha: 0.6);
+        }
+        
+        &--tag-arabic {
+            display: none !important;
+            position: absolute;
+            left: 60px;
+            padding: 6px 8px;
+            background-color: rgba($color: #000000, $alpha: 0.6);
+        }
+
+        &:hover &--tag {
+            display: flex !important;
+        }
+        &:hover &--tag-arabic {
+            display: flex !important;
+        }
+    }
+
+    /* Target the calendar container */
+    & .calendar-container {
+        box-sizing: border-box;
+        padding: 10px;
+        width: 300px;
+        border-radius: 15px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+        & .react-calendar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border: none;
+
+            &__navigation,
+            &__viewContainer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+
+            &__month-view>div>div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+
+            & button {
+                border: none;
+                background-color: transparent;
+                outline: none;
+                cursor: pointer;
+                color: #737373;
+            }
+
+            &__month-view__weekdays {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+
+                & abbr {
+                    text-decoration: none;
+                    color: #70c8b0;
+                }
+            }
+        }
+    }
+
+    & .rsc-float-button {
+        position: absolute !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: transparent !important;
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .tool-box {
+        &--btn {
+            &:hover &--tag {
+                display: none !important;
+            }
+        }
+    }
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

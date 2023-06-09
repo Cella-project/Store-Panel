@@ -1,0 +1,58 @@
+:local {
+    .auth {
+        position: relative;
+        min-height: 100vh;
+        background-color: #f5f3fc;
+    
+        &--header {
+            box-sizing: border-box;
+            padding: 0px 20px;
+        
+            &--tag {
+                box-sizing: border-box;
+                padding: 20px;
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+
+                &--logo {
+                    width: 120px;
+                }
+            }
+        }
+    
+        &--body{
+            min-height: calc(100vh - (40px + 2.67em) );
+            box-sizing: border-box;
+            padding: 50px;
+    
+            &--img {
+                width: 50%;
+            }
+        }
+    
+        &--sign {
+            position: absolute;
+            bottom: 10px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .auth {
+            &--body {
+                min-height: calc(100vh - (40px + 2.67em) );
+                padding: 50px 10px;
+            }
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .auth{
+            &--header--tag--logo {
+                width: 100px;
+            }
+            &--body--img {
+                width: 90%;
+            }
+        }
+    }
+}

@@ -1,0 +1,131 @@
+.nav-bar {
+    position: fixed;
+    top: 0;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 40;
+
+    &.dark {
+        position: fixed;
+        top: 0;
+        background: #242526ce;
+        z-index: 40;
+    }
+
+    & a {
+        all: unset;
+    }
+
+    &--cont {
+        position: relative;
+        top: 10px;
+        box-sizing: border-box;
+        padding: 10px 80px;
+    }
+
+    &--logo {
+        width: 150px;
+    }
+
+    &--btn {
+        display: none;
+    }
+
+    &--card {
+        min-width: 40px;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 10px;
+
+        &--img {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            overflow: hidden;
+
+            &>img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &--tag {
+            display: none !important;
+            position: absolute;
+            top: 55px;
+            padding: 6px 8px;
+            background-color: rgba($color: #000000, $alpha: 0.6);
+            width: max-content;
+        }
+
+        &:hover &--tag {
+            display: flex !important;
+        }
+    }
+
+    &--lang-menu {
+        position: absolute;
+        top: 45px;
+        left: 0px;
+        box-sizing: border-box;
+        padding: 10px 0px;
+        width: 110px;
+        overflow: hidden;
+
+        &--item {
+            height: 40px;
+            box-sizing: border-box;
+            padding: 0px 10px;
+            transition: all .15s ease-in-out;
+
+            &--img {
+                width: 25px;
+                height: 25px;
+                margin-right: 10px;
+                overflow: hidden;
+            }
+
+            &:hover {
+                background-color: rgba($color: #444444, $alpha: 0.1);
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-bar {
+        & .home-link {
+            display: none;
+        }
+
+        &--cont {
+            padding: 10px;
+        }
+
+        &--logo {
+            display: none;
+        }
+
+        &--btn {
+            display: block;
+        }
+
+        &--card {
+            &--img {
+                margin-right: 0px;
+            }
+
+            &--content {
+                display: none;
+            }
+
+            &:hover &--tag {
+                display: none !important;
+            }
+        }
+
+        &--lang-menu {
+            left: -60px;
+        }
+    }
+}

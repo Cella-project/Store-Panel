@@ -1,0 +1,101 @@
+.order-details {
+    box-sizing: border-box;
+    padding: 10px;
+
+    &--container {
+        align-items: flex-start !important;
+    }
+
+    &--control {
+        align-items: flex-start !important;
+    }
+
+    &--product {
+        padding: 0 !important;
+    }
+
+    &--content-container {
+        box-sizing: border-box;
+        padding: 7px;
+        text-align: center;
+    }
+
+    &--card-cont {
+        box-sizing: border-box;
+        padding: 10px;
+
+    }
+
+    &--socials {
+        box-sizing: border-box;
+        padding-bottom: 10px;
+
+        &--btn {
+            position: relative;
+            width: 55px;
+            height: 55px;
+
+            &>img {
+                box-sizing: border-box;
+                padding: 5px;
+                width: 50px;
+                border-radius: 50%;
+            }
+
+            &--tag {
+                display: none !important;
+                position: absolute;
+                left: -10px;
+                top: 50px;
+                padding: 6px 8px;
+                background-color: rgba($color: #000000, $alpha: 0.6);
+                width: max-content;
+            }
+
+            &:hover &--tag {
+                display: flex !important;
+            }
+        }
+    }
+
+    & .review-scroll--cont {
+        max-height: 370px;
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 10px;
+
+        & .ps__thumb-y,
+        & .ps__rail-y {
+            top: 0 !important;
+            height: 0 !important;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .order-details {
+        &--socials {
+            justify-content: space-around !important;
+
+            &--btn {
+                padding: 0 15px;
+
+                &>img {
+                    width: 55px;
+                }
+
+                &:hover &--tag {
+                    display: none !important;
+                }
+            }
+        }
+
+        &--card-cont {
+            width: 100%;
+        }
+
+        &--control {
+            flex-direction: column-reverse !important;
+        }
+    }
+}

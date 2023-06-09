@@ -1,0 +1,151 @@
+.edit-store {
+    &--input-container {
+        margin: 20px 0;
+
+        &.hide {
+            display: none;
+        }
+    }
+
+    &--header {
+        margin: 20px 0;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    &--img {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+
+        &.hide {
+            display: none;
+        }
+
+        &>img {
+            width: 100%;
+            opacity: 1 !important;
+            object-fit: contain !important;
+        }
+    }
+
+    &--change-img {
+        overflow: hidden;
+
+        &--tag {
+            height: 200px;
+            box-sizing: border-box;
+            opacity: 0.8;
+
+            &.hide {
+                position: absolute;
+                margin-top: 25px;
+                align-items: end;
+                z-index: 20;
+            }
+
+            & input {
+                display: none;
+            }
+
+            &:hover {
+                opacity: 0.9;
+                color: #70c8b0;
+            }
+        }
+    }
+
+    &--input {
+        border: 2px inset #8986867c;
+        position: relative;
+        box-sizing: border-box;
+        padding: 5px;
+
+        & .PhoneInputInput {
+            border: transparent;
+            font-size: 14px;
+            color: #737373;
+
+            &:focus {
+                outline: none;
+                color: #737373;
+            }
+        }
+
+        & .PhoneInputCountry {
+            font-size: 20px;
+
+            &Select {
+                & option {
+                    font-size: 14px;
+                    color: #737373;
+                    background-color: transparent;
+                }
+            }
+        }
+
+        >input {
+            border: transparent;
+            font-size: 14px;
+            background-color: transparent;
+
+            &:focus {
+                outline: none;
+                color: #737373;
+            }
+        }
+    }
+
+    &--select {
+        & .css-13cymwt-control {
+            cursor: pointer;
+            border: none;
+        }
+
+        & .css-t3ipsp-control {
+            cursor: pointer;
+            border: none;
+            box-shadow: none;
+
+            &:hover {
+                border: none;
+                box-shadow: none;
+            }
+        }
+    }
+
+    &--actions {
+        box-sizing: border-box;
+        padding: 20px;
+        padding-top: 40px;
+
+        &--button {
+            text-align: center;
+            width: 49%;
+            border: none;
+            box-sizing: border-box;
+            padding: 2px;
+            transition: all ease-in-out .15s;
+
+            &-hide {
+                display: none;
+            }
+
+            &:hover:not(:disabled),
+            &:active:not(:disabled) {
+                transform: translateY(3px);
+            }
+
+            &:disabled,
+            :disabled:hover,
+            :disabled:active {
+                background-color: #ccc;
+                color: white;
+                border-color: #ccc;
+                cursor: not-allowed;
+            }
+        }
+
+    }
+}
