@@ -1,0 +1,154 @@
+$dark-orange: #163a4a;
+
+$dark-white: #242526;
+
+$dark-gray: #f2f4f3;
+
+$dark-yellow: #fef875;
+$dark-red: #FF3636;
+$dark-green: #18CE0F;
+
+$dark-baby-blue: #7FBCD2;
+$dark-pink: #FFAFCC;
+$dark-lavender: #C8D0FA;
+
+$dark-gold: #FDCC0D;
+
+.dark-mode {
+    background-color: #18191a;
+}
+
+.dark-mode .white {
+    color: $dark-white;
+}
+
+.dark-mode .white-bg {
+    background-color: $dark-white;
+}
+
+.dark-mode .gray {
+    color: $dark-gray;
+}
+
+.dark-mode .gray-bg {
+    background-color: $dark-gray;
+}
+
+.dark-mode .orange {
+    color: $dark-orange;
+}
+
+.dark-mode .orange-bg {
+    background-color: $dark-orange;
+}
+
+.dark-mode .yellow {
+    color: $dark-yellow !important;
+}
+
+.dark-mode .yellow-bg {
+    background-color: $dark-yellow !important;
+}
+
+.dark-mode .gold {
+    color: $dark-gold !important;
+}
+
+.dark-mode .gold-bg {
+    background-color: $dark-gold !important;
+}
+
+.dark-mode .lavender {
+    color: $dark-lavender;
+}
+
+.dark-mode .lavender-bg {
+    background-color: $dark-lavender;
+}
+
+.dark-mode .baby-blue {
+    color: $dark-baby-blue;
+}
+
+.dark-mode .baby-blue-bg {
+    background-color: $dark-baby-blue;
+}
+
+.dark-mode .pink {
+    color: $dark-pink;
+}
+
+.dark-mode .pink-bg {
+    background-color: $dark-pink;
+}
+
+.dark-mode .red {
+    color: $dark-red !important;
+}
+
+.dark-mode .red-bg {
+    background-color: $dark-red !important;
+}
+
+.dark-mode .green {
+    color: $dark-green !important;
+}
+
+.dark-mode .green-bg {
+    background-color: $dark-green !important;
+}
+
+.dark-mode .PhoneInputInput {
+    border: transparent;
+    color: $dark-gray !important;
+    width: 120px;
+
+    &:focus {
+        outline: none;
+        color: $dark-gray !important;
+    }
+}
+
+.dark-mode .PhoneInputCountry {
+    font-size: 20px;
+
+    &Select {
+        & option {
+            font-size: 14px;
+            color: $dark-gray;
+            background-color: $dark-white !important;
+        }
+    }
+}
+
+.dark-mode .css-13cymwt-control {
+    cursor: pointer;
+    border: none;
+    background-color: $dark-white !important;
+}
+
+.dark-mode .css-1dimb5e-singleValue {
+    color: $dark-gray !important;
+}
+
+.dark-mode .css-t3ipsp-control {
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+    background-color: $dark-white !important;
+
+    &:hover {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="email"],
+.dark-mode input[type="number"],
+.dark-mode input[type="password"],
+.dark-mode textarea,
+.dark-mode input[type="date"] {
+    background-color: transparent !important;
+    color: $dark-gray !important;
+}
