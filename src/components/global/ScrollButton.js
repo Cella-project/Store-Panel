@@ -32,7 +32,7 @@ const ScrollButton = () => {
             <FaArrowCircleUp onClick={scrollToTop}
                 style={{
                     display: visible ? 'inline' : 'none',
-                    color: `${mode === 'dark-mode' ? '#163a4a' : '#70c8b0'}`
+                    color: `${mode === 'dark-mode' ? '#163a4a' : '#ff8800'}`
                 }}
             />
         </div>
