@@ -15,6 +15,7 @@ let isLoaded = false;
 const App = () => {
   const dispatch = useDispatch();
   const language = useSelector(state => state.language.language);
+  const mode = useSelector(state => state.theme.mode);
 
   const checkAuth = () => {
     const user = JSON.parse(localStorage.getItem('User'));
@@ -55,7 +56,7 @@ const App = () => {
   const isPopupShown = useSelector(state => state.popup.popPanelShown);
 
   return (
-    <div className='u-disable-touch'>
+    <div className={`u-disable-touch ${mode}`}>
       {notes.length > 0 && <StickyBoard />}
       {isPopupShown && <Popup />}
       <Outlet />
