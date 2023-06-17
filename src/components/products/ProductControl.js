@@ -48,25 +48,25 @@ const ProductControl = ({ id }) => {
       {popupShown &&
         <Popup popupToggle={setPopupShown} header={'Refill Product'} />
       }
-      <div onClick={handleChangeState} className="product-control--btn flex-row-center white orange-bg radius-circular pointer">
+      <div onClick={handleChangeState} className="product-control--btn flex-row-center white mint-green-bg radius-circular pointer">
         <i className={`bi bi-arrow-clockwise size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`}></i>
         <div className={`product-control--btn--tag${language === 'ar' ? '-arabic' : ''} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           {translate.changeState}
         </div>
       </div>
-      <div className="product-control--btn flex-row-center white orange-bg radius-circular pointer" onClick={handleDelete}>
+      <div className="product-control--btn flex-row-center white mint-green-bg radius-circular pointer" onClick={handleDelete}>
         <i className={`bi bi-trash pointer size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`}></i>
         <div className={`product-control--btn--tag${language === 'ar' ? '-arabic' : ''} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           {translate.delete}
         </div>
       </div>
-      <div className="product-control--btn flex-row-center white orange-bg radius-circular pointer" onClick={handleEdit}>
+      <div className="product-control--btn flex-row-center white mint-green-bg radius-circular pointer" onClick={handleEdit}>
         <i className={`bi bi-pencil-square size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`}></i>
         <div className={`product-control--btn--tag${language === 'ar' ? '-arabic' : ''} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           {translate.edit}
         </div>
       </div>
-      <div className="product-control--btn flex-row-center white orange-bg radius-circular pointer" onClick={handleRefill}>
+      <div className="product-control--btn flex-row-center white mint-green-bg radius-circular pointer" onClick={handleRefill}>
         <i className={`bi bi-arrow-repeat size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`}></i>
         <div className={`product-control--btn--tag${language === 'ar' ? '-arabic' : ''} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           {translate.refill}

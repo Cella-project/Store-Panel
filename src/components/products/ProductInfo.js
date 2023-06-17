@@ -74,8 +74,8 @@ export const ProductInfo = ({ product }) => {
           {product.album.length > 1 && product.album.map((_, index) => (
             <div
               key={Math.random().toString()}
-              className={`pointer product-info--thumbnail ${index === currentPhotoIndex ? "orange-bg" : ""}`}
-              style={{ borderColor: "orange" }}
+              className={`pointer product-info--thumbnail ${index === currentPhotoIndex ? "mint-green-bg" : ""}`}
+              style={{ borderColor: "mint-green" }}
               
               onClick={() => handleSelectPhoto(index)}
             />
@@ -101,7 +101,7 @@ export const ProductInfo = ({ product }) => {
         <div className="flex-col-left-start gray size-24px margin-8px-V font-bold">
           {product.title}
         </div>
-        <Link to={`/stores/${product.store._id}`} className={`pointer lists-card--link product-info--store size-20px margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'orange'}`}>
+        <Link to={`/stores/${product.store._id}`} className={`pointer lists-card--link product-info--store size-20px margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'mint-green'}`}>
           {translate.store} : {product.store.storeName}
         </Link>
         <div className="product-info-details">{product.description}</div>
@@ -110,7 +110,7 @@ export const ProductInfo = ({ product }) => {
 
         <div className="full-width flex-row-between">
           <div className="flex-row-left-start lavender">{product.category.title}</div>
-          <div className="product-info--price flex-row-center orange margin-2px-V">
+          <div className="product-info--price flex-row-center mint-green margin-2px-V">
             {hasDiscount && (
               <div className='gray'>
                 <s>
@@ -119,7 +119,7 @@ export const ProductInfo = ({ product }) => {
                 </s>
               </div>
             )}
-            <div className={`${mode === 'dark-mode' ? 'gray' : 'orange'} margin-2px-V`}>
+            <div className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-2px-V`}>
               <span className='product-card--new-price size-40px font-bold'>{Math.trunc(formattedNewPrice)}</span>
               <span className='size-14px'>.{formattedNewPrice.slice(-2)}</span>
             </div>

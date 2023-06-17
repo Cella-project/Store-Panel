@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import OrangeCard from '../../../components/common/OrangeCard';
+import GreenCard from '../../../components/common/GreenCard';
 import Search from '../../../components/common/Search';
 import ListsCard from '../../../components/common/ListsCard';
 import ReviewCard from '../../../components/reviews/ReviewCard';
@@ -55,12 +55,12 @@ const Reviews = () => {
         {
           cards.map((card, index) => {
             return (
-              <OrangeCard title={card.title} key={index}>
+              <GreenCard title={card.title} key={index}>
                 <div className="full-width flex-row-center">
-                  <i className={`${card.icon} orange size-28px`}></i>
+                  <i className={`${card.icon} mint-green size-28px`}></i>
                   <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
                 </div>
-              </OrangeCard>
+              </GreenCard>
             );
           })
         }

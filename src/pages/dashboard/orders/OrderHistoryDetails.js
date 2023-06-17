@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
-import OrangeCard from "../../../components/common/OrangeCard";
+import GreenCard from "../../../components/common/GreenCard";
 import OrderInfo from "../../../components/orders/OrderInfo";
 import ProductCard from "../../../components/products/ProductCard";
 import ListsCard from "../../../components/common/ListsCard";
@@ -50,7 +50,7 @@ const OrderHistoryDetails = () => {
                     <div className="flex-col-center width-80-100">
                         <div className="flex-col-left-start orderHistory-details--card-cont full-width">
                             <div className="flex-col-center full-width">
-                                <OrangeCard title={translate.products}>
+                                <GreenCard title={translate.products}>
                                     <PerfectScrollbar className="review-scroll--cont full-width">
                                         {order.items
                                             .map((item) => {
@@ -74,16 +74,16 @@ const OrderHistoryDetails = () => {
                                     <Link to={`/Products`} className="pointer lists-card--link">
                                         <i className={`flex-row-right-start ${language==='ar'?'bi bi-arrow-left':"bi bi-arrow-right"}`}></i>
                                     </Link>
-                                </OrangeCard>
+                                </GreenCard>
                             </div>
                             <div className="flex-row-top-between2col full-width full-width">
-                                <OrangeCard title={translate.reviews}>
+                                <GreenCard title={translate.reviews}>
                                     {/* <PerfectScrollbar className="review-scroll--cont full-width"></PerfectScrollbar> */}
                                     <Link to={`/Reviews`} className="pointer lists-card--link">
                                         <i className={`flex-row-right-start ${language==='ar'?'bi bi-arrow-left':"bi bi-arrow-right"}`}></i>
                                     </Link>
-                                </OrangeCard>
-                                <OrangeCard title={translate.vouchers}>
+                                </GreenCard>
+                                <GreenCard title={translate.vouchers}>
                                     {/* {
                                     voucherCards.map((voucher) => {
                                         return (
@@ -100,27 +100,27 @@ const OrderHistoryDetails = () => {
                                     <Link to={`/Vouchers`} className="pointer lists-card--link">
                                     <i className="bi bi-arrow-right flex-row-right-start"></i>
                                 </Link> */}
-                                </OrangeCard>
+                                </GreenCard>
                             </div>
                         </div>
 
                     </div>
                     <div className="flex-col-top-start orderHistory-details--card-cont width-20-100">
-                        <OrangeCard title={translate.delivery}>
+                        <GreenCard title={translate.delivery}>
                             {order.driver.state === 'NotAssigned' ? (
                                 <div className="gray inter size-20px font-bold flex-row-center">{translate.notAssigned}</div>
                             ) : (
                                 <div className="gray inter size-20px font-bold flex-row-center">{translate.assigned}</div>
                             )}
-                        </OrangeCard>
-                        <OrangeCard title={translate.pickupLocation}>
+                        </GreenCard>
+                        <GreenCard title={translate.pickupLocation}>
                             {order && order.pickupLocation && (
                                 <div>
                                     <div className="pointer flex-col-right-start" onClick={handleExpandPick}>
                                         <div className="orderHistory-details--content-container shadow-2px flex-col-left-start radius-15px margin-8px-V gray inter full-width">
                                             <div className="text-shadow full-width flex-row-center">{order.pickupLocation.addressTitle}</div>
                                             {expandedPickup && (
-                                                <div className="flex-col-left-start gray orange full-width margin-8px-V">
+                                                <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
                                                     <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
                                                         <div className='gray margin-12px-H'>{order.pickupLocation.addressType}</div>
                                                     </div>
@@ -162,15 +162,15 @@ const OrderHistoryDetails = () => {
                             )}
 
 
-                        </OrangeCard>
-                        <OrangeCard title={translate.dropLocation}>
+                        </GreenCard>
+                        <GreenCard title={translate.dropLocation}>
                             {order && order.dropLocation && (
                                 <div>
                                     <div className="pointer flex-col-right-start" onClick={() => handleExpandDrop()}>
                                         <div className="orderHistory-details--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
                                             <div className="text-shadow">{order.dropLocation.addressTitle}</div>
                                             {expandedDrop && (
-                                                <div className="flex-col-left-start gray orange full-width margin-8px-V">
+                                                <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
                                                     <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
                                                         <div className='gray margin-12px-H'>
                                                             {order.dropLocation.addressType}
@@ -227,7 +227,7 @@ const OrderHistoryDetails = () => {
                                 </div>
                             )}
 
-                        </OrangeCard>
+                        </GreenCard>
                     </div>
                 </div>
             </>)}

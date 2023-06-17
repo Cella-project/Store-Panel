@@ -35,7 +35,7 @@ const MobMenu = ({ menuToggle }) => {
     });
 
     return (
-        <div className={`mob-menu ${language === 'ar' ? 'mob-menu-arabic' : ''} flex-col-top-start orange-bg full-screen-height shadow-5px`} ref={menuRef}>
+        <div className={`mob-menu ${language === 'ar' ? 'mob-menu-arabic' : ''} flex-col-top-start mint-green-bg full-screen-height shadow-5px`} ref={menuRef}>
             <div className='full-width flex-row-right-start'>
                 <i className={`bi bi-x size-40px ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`} onClick={menuToggle.bind(null, false)} />
             </div>

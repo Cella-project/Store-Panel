@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import OrangeCard from '../../../components/common/OrangeCard';
+import GreenCard from '../../../components/common/GreenCard';
 import Search from '../../../components/common/Search';
 import ListsCard from '../../../components/common/ListsCard';
 import './OrderHistoryList.scss';
@@ -27,11 +27,11 @@ const OrderHistoryList = () => {
     }, []);
 
     let cards = [
-        { title: translate.totalOrders, content: 0, icon: "bi bi-people orange" },
-        { title: translate.delivered, content: 0, icon: "bi bi-people orange" },
-        { title: translate.pending, content: 0, icon: "bi bi-people orange" },
-        { title: translate.canceledByCustomer, content: 0, icon: "bi bi-people orange" },
-        { title: translate.canceledByAdmin, content: 0, icon: "bi bi-people orange" },
+        { title: translate.totalOrders, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.delivered, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.pending, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.canceledByCustomer, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.canceledByAdmin, content: 0, icon: "bi bi-people mint-green" },
     ]
 
     let content = <Loading />;
@@ -96,11 +96,11 @@ const OrderHistoryList = () => {
             })
 
         cards = [
-            { title: translate.totalOrders, content: orderHistoryCards.length, icon: "bi bi-people orange" },
-            { title: translate.delivered, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'Delivered').length, icon: "bi bi-people orange" },
-            { title: translate.pending, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'Pending').length, icon: "bi bi-people orange" },
-            { title: translate.canceledByCustomer, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByCustomer').length, icon: "bi bi-people orange" },
-            { title: translate.canceledByAdmin, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByAdmin').length, icon: "bi bi-people orange" },
+            { title: translate.totalOrders, content: orderHistoryCards.length, icon: "bi bi-people mint-green" },
+            { title: translate.delivered, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'Delivered').length, icon: "bi bi-people mint-green" },
+            { title: translate.pending, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'Pending').length, icon: "bi bi-people mint-green" },
+            { title: translate.canceledByCustomer, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByCustomer').length, icon: "bi bi-people mint-green" },
+            { title: translate.canceledByAdmin, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByAdmin').length, icon: "bi bi-people mint-green" },
         ]
     }
 
@@ -113,12 +113,12 @@ const OrderHistoryList = () => {
                 {
                     cards.map((card, index) => {
                         return (
-                            <OrangeCard title={card.title} key={index}>
+                            <GreenCard title={card.title} key={index}>
                                 <div className="full-width flex-row-center">
-                                    <i className='bi bi-receipt orange size-28px'></i>
+                                    <i className='bi bi-receipt mint-green size-28px'></i>
                                     <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
                                 </div>
-                            </OrangeCard>
+                            </GreenCard>
                         );
                     })
                 }

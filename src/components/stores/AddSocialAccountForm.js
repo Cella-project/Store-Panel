@@ -107,7 +107,7 @@ const AddSocialAccountForm = ({ popupToggle }) => {
             </div>
             <div className="add-store--actions flex-row-between full-width">
                 <button
-                    className={`add-store--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
+                    className={`add-store--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
                     type="submit"
                 >
                     Confirm

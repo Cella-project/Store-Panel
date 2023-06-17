@@ -83,19 +83,19 @@ const Tools = () => {
       }
       {isMenuShown &&
         <div className="tool-box--btns flex-col-center">
-          <div className='tool-box--btn flex-row-center orange-bg pointer radius-circular margin-4px-V shadow-5px'>
+          <div className='tool-box--btn flex-row-center mint-green-bg pointer radius-circular margin-4px-V shadow-5px'>
             <i className={`bi bi-stickies ${mode === 'dark-mode' ? 'gray' : 'white'} size-22px`} />
             <div className={`tool-box--btn--${language==='ar' ? 'tag-arabic':'tag'}  flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
               {translations.notes}
             </div>
           </div>
-          <div className='tool-box--btn flex-row-center orange-bg pointer radius-circular margin-4px-V shadow-5px' onClick={toggleTheme}>
+          <div className='tool-box--btn flex-row-center mint-green-bg pointer radius-circular margin-4px-V shadow-5px' onClick={toggleTheme}>
             <i className={mode === 'dark-mode' ? 'bi bi-moon gray size-26px' : 'bi bi-sun white size-26px'} />
             <div className={`tool-box--btn--${language==='ar' ? 'tag-arabic':'tag'} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
               {translations.theme}
             </div>
           </div>
-          <div className='tool-box--btn flex-row-center orange-bg pointer radius-circular margin-4px-V shadow-5px'
+          <div className='tool-box--btn flex-row-center mint-green-bg pointer radius-circular margin-4px-V shadow-5px'
             onClick={() => {
               setIsCalendarShown(true)
               setIsMenuShown(false)
@@ -107,7 +107,7 @@ const Tools = () => {
           </div>
         </div>
       }
-      <div onClick={clickHandler} className={`${isMenuShown ? 'gray-bg white' : `orange-bg ${mode === 'dark-mode' ? 'gray' : 'white'}`} tool-box--btn flex-row-center pointer radius-circular shadow-5px`}>
+      <div onClick={clickHandler} className={`${isMenuShown ? 'gray-bg white' : `mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'}`} tool-box--btn flex-row-center pointer radius-circular shadow-5px`}>
         <i className={isMenuShown ? 'bi bi-x size-34px' : 'bi bi-columns-gap size-22px'} />
         <div className={`tool-box--btn--${language==='ar' ? 'tag-arabic':'tag'} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           {isMenuShown ? translations.close : translations.tools}

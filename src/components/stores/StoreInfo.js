@@ -21,7 +21,7 @@ const StoreInfo = ({ store }) => {
       </div>
       <div className="store-info--info flex-row-top-between2col flex-wrap">
         <div className="store-info--name flex-col-left-start">
-          <div className={`${mode === 'dark-mode' ? 'gray' : 'orange'} size-24px margin-8px-V font-bold`}>
+          <div className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-24px margin-8px-V font-bold`}>
             {store.storeName}
           </div>
           <div className="gray size-18px margin-12px-H">

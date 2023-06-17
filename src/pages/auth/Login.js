@@ -28,7 +28,7 @@ const Login = () => {
     <form onSubmit={handleSubmit} noValidate className={`${style['login']} flex-col-center white-bg radius-5px shadow-5px`}>
       <div className={`${language === 'ar' ? style['arabic-login--slot'] : style['login--slot']} full-width flex-col-left-start margin-4px-V`}>
         <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.emailAddress}</p>
-        <i className={`${language === 'ar' ? style['arabic-login--slot--icon'] : style['login--slot--icon']} orange size-20px bi bi-envelope`}></i>
+        <i className={`${language === 'ar' ? style['arabic-login--slot--icon'] : style['login--slot--icon']} mint-green size-20px bi bi-envelope`}></i>
         <input
           className={`${language === 'ar' ? style['arabic-login--slot--input'] : style['login--slot--input']} ${errors.email && touched.email ? style['login--slot--input--error'] : ''} inter gray size-14px radius-10px shadow-2px`}
           type="Email"
@@ -46,8 +46,8 @@ const Login = () => {
       </div>
       <div className={`${language === 'ar' ? style['arabic-login--slot'] : style['login--slot']} full-width flex-col-left-start margin-4px-V`}>
         <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.password}</p>
-        <i className={`${language === 'ar' ? style['arabic-login--slot--icon'] : style['login--slot--icon']} orange size-20px bi bi-key`}></i>
-        <i className={`${language === 'ar' ? style['arabic-login--slot--icon--left'] : style['login--slot--icon--right']} bi bi-eye${!passwordShown ? "-slash" : ""} size-20px pointer orange`} onClick={() => setPasswordShown(!passwordShown)} />
+        <i className={`${language === 'ar' ? style['arabic-login--slot--icon'] : style['login--slot--icon']} mint-green size-20px bi bi-key`}></i>
+        <i className={`${language === 'ar' ? style['arabic-login--slot--icon--left'] : style['login--slot--icon--right']} bi bi-eye${!passwordShown ? "-slash" : ""} size-20px pointer mint-green`} onClick={() => setPasswordShown(!passwordShown)} />
         <input
           className={`${language === 'ar' ? style['arabic-login--slot--input'] : style['login--slot--input']} ${errors.password && touched.password ? style['login--slot--input--error'] : ''} inter gray size-14px radius-10px shadow-2px`}
           type={passwordShown ? "text" : "password"}
@@ -62,9 +62,9 @@ const Login = () => {
           <i className="bi bi-exclamation-triangle-fill red"></i> {errors.password}
         </p>
       </div>
-      <button className={`${style['login--btn']} full-width orange-bg white inter pointer radius-10px shadow-2px`} type="submit">{translations.logIn}</button>
+      <button className={`${style['login--btn']} full-width mint-green-bg white inter pointer radius-10px shadow-2px`} type="submit">{translations.logIn}</button>
       <div className="full-width flex-row-left-start">
-        <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className="space-none inter orange size-14px margin-12px-H pointer">{translations.forgetPassword}</NavLink>
+        <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className="space-none inter mint-green size-14px margin-12px-H pointer">{translations.forgetPassword}</NavLink>
       </div>
     </form>
   );

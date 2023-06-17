@@ -19,7 +19,7 @@ const SideBar = () => {
   }
 
   return (
-    <div className={`side-bar ${language === 'ar' ? 'side-bar-arabic' : ''} flex-col-center orange-bg`}>
+    <div className={`side-bar ${language === 'ar' ? 'side-bar-arabic' : ''} flex-col-center mint-green-bg`}>
       <PerfectScrollbar className="side-bar--cont flex-col-top-start">
         <NavLink end to={'/'}>
           <i className={`bi bi-house-door margin-8px-V size-24px ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />

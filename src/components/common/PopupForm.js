@@ -43,7 +43,7 @@ const Popup = ({ popupToggle, header, data }) => {
             <div className='popup--content flex-col-top-start inter white-bg width-25-100' ref={popupRef}>
                 <img src={mode === 'dark-mode' ? backgroundDark : background} className={mode === 'dark-mode' ? 'dark' : ''} alt='bg' />
 
-                <div className={`popup--header flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-20px orange-bg full-width`}>
+                <div className={`popup--header flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-20px mint-green-bg full-width`}>
                     {header}
                 </div>
 

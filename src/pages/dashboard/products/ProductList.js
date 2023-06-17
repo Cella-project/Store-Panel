@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import OrangeCard from '../../../components/common/OrangeCard';
+import GreenCard from '../../../components/common/GreenCard';
 import Search from '../../../components/common/Search';
 import ProductCard from '../../../components/products/ProductCard';
 import { useDispatch, useSelector } from 'react-redux';
@@ -125,12 +125,12 @@ const ProductList = () => {
         {
           cards.map((card, index) => {
             return (
-              <OrangeCard title={card.title} key={index}>
+              <GreenCard title={card.title} key={index}>
                 <div className="full-width flex-row-center">
-                  <i className={`${card.icon} orange size-28px`}></i>
+                  <i className={`${card.icon} mint-green size-28px`}></i>
                   <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
                 </div>
-              </OrangeCard>
+              </GreenCard>
             );
           })
         }
@@ -138,7 +138,7 @@ const ProductList = () => {
       <div className='flex-row-top-start'>
         <Search width={'width-90-100'} page={'Products'} onSearch={handleSearch} />
         <Link to={`/products/addProduct`} className='pointer flex-row-left-start2col flex-wrap'>
-          <div className='add-icon flex-row-center size-34px orange-bg radius-circular pointer'>
+          <div className='add-icon flex-row-center size-34px mint-green-bg radius-circular pointer'>
             <i className="bi bi-plus-lg white" />
           </div>
         </Link>

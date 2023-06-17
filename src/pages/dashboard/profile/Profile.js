@@ -73,11 +73,11 @@ const Profile = () => {
                     {editIMG &&
                         <>
                             <button
-                                className={`profile--btn shadow-2px width-50-100 ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px orange-bg font-bold size-20px pointer margin-12px-V`}
+                                className={`profile--btn shadow-2px width-50-100 ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px mint-green-bg font-bold size-20px pointer margin-12px-V`}
                                 onClick={handleChangeIMG}
                             >Save</button>
                             <button
-                                className={`profile--btn shadow-2px width-50-100 ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px orange-bg font-bold size-20px pointer`}
+                                className={`profile--btn shadow-2px width-50-100 ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px mint-green-bg font-bold size-20px pointer`}
                                 onClick={handleCancelIMG}
                             >Cancel</button>
                         </>
