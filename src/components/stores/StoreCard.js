@@ -24,7 +24,7 @@ const StoreCard = ({ storeCards, index }) => {
                 <div className='store-card--cont flex-row-between2col'>
                     <div className='store-card--store-info full-width flex-col-left-start'>
                         <div className='flex-row-left-start full-width'>
-                            <span className={`size-22px ${mode === 'dark-mode' ? 'gray' : 'orange'} text-shadow font-bold`}>{storeCards.storeName}</span>
+                            <span className={`size-22px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} text-shadow font-bold`}>{storeCards.storeName}</span>
                         </div>
                         <div className='store-card--owner-info size-14px flex-col-left-start'>
                             <span className='gray margin-2px-V'>

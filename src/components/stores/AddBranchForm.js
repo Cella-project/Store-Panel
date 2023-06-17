@@ -509,7 +509,7 @@ const AddBranchForm = ({ popupToggle }) => {
               className='gray radius-10px white-bg margin-4px-V add-branch--input-number'
             />
           </label>
-          <button onClick={locateMe} className={`add-branch--actions--locate pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-12px font-bold orange-bg`}>
+          <button onClick={locateMe} className={`add-branch--actions--locate pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-12px font-bold mint-green-bg`}>
             Locate me
           </button>
         </div>
@@ -523,7 +523,7 @@ const AddBranchForm = ({ popupToggle }) => {
       </MapContainer>
       <div className="add-branch--actions flex-row-between full-width">
         <button
-          className={`add-branch--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
+          className={`add-branch--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
           type="submit"
         >
           Confirm

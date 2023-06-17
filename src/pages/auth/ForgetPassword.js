@@ -29,7 +29,7 @@ const ForgetPassword = () => {
       </div>
       <div className={`${language === 'ar' ? style['arabic-forget--slot'] : style['forget--slot']} full-width flex-col-left-start margin-4px-V`}>
         <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.emailAddress}</p>
-        <i className={`${language === 'ar' ? style['arabic-forget--slot--icon'] :style['forget--slot--icon']} orange size-20px bi bi-envelope`}></i>
+        <i className={`${language === 'ar' ? style['arabic-forget--slot--icon'] :style['forget--slot--icon']} mint-green size-20px bi bi-envelope`}></i>
         <input
           className={`${language === 'ar' ? style['arabic-forget--slot--input'] :style['forget--slot--input']} ${errors.email && touched.email ? style['login--slot--input--error'] : ''} inter gray size-14px radius-10px shadow-2px`}
           type="Email"
@@ -45,9 +45,9 @@ const ForgetPassword = () => {
           <i className="bi bi-exclamation-triangle-fill red"></i> {errors.email}
         </p>
       </div>
-      <button type="submit" className={`${style['forget--btn']} full-width orange-bg white inter pointer radius-10px shadow-2px`}>{translations.requestPasswordReset}</button>
+      <button type="submit" className={`${style['forget--btn']} full-width mint-green-bg white inter pointer radius-10px shadow-2px`}>{translations.requestPasswordReset}</button>
       <div className="full-width flex-row-left-start">
-        <NavLink to={'/auth/login'} style={{ textDecoration: 'none' }} className="space-none inter orange size-14px margin-12px-H pointer">{translations.login}</NavLink>
+        <NavLink to={'/auth/login'} style={{ textDecoration: 'none' }} className="space-none inter mint-green size-14px margin-12px-H pointer">{translations.login}</NavLink>
       </div>
     </form>
   );

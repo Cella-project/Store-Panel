@@ -66,7 +66,7 @@ const Search = ({ width, onSearch, page }) => {
         <i className="bi bi-sliders search-bar--icon pointer size-18px" onClick={filterClickHandler.bind(null, filterList)} />
       </div>
       {(filterList && page) &&
-        <form noValidate className="flex-row-top-between2col search-bar--filter orange-bg shadow-5px full-width gray inter">
+        <form noValidate className="flex-row-top-between2col search-bar--filter mint-green-bg shadow-5px full-width gray inter">
           {( page === 'Products' || page === 'OrdersHistory') &&
             <div className="flex-row-top-start size-16px margin-8px-V width-50-100">
               {translate.searchBy}:

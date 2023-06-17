@@ -110,7 +110,7 @@ const AddProductTagForm = ({ popupToggle }) => {
             }
             <div className="add-product-tag--actions flex-row-between full-width">
                 <button
-                    className={`add-product-tag--actions--button full-width pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
+                    className={`add-product-tag--actions--button full-width pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
                     type="submit"
                 >
                     {translate.confirm}

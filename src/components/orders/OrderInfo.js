@@ -16,22 +16,22 @@ const OrderInfo = ({ order }) => {
       <div className="full-witdh flex-row-between2col">
         <div className="flex-col-center">
           <span className="gray size-20px">{translate.paymentMethod}:
-            <span className={`${mode === 'dark-mode' ? 'gray' : 'orange'} size-20px margin-6px-H`}>{order.paymentMethod}</span>
+            <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px margin-6px-H`}>{order.paymentMethod}</span>
           </span>
         </div>
         <div className="flex-row-left-start gray ">
           <div className="flex-col-center ">
             <div className="flex-row-center ">
               {translate.subtotal} :
-              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'orange'} size-18px margin-2px-H`}>{order.subTotal} {translate.EGP}</div>
+              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-18px margin-2px-H`}>{order.subTotal} {translate.EGP}</div>
             </div>
             <div className="flex-row-center order-info-money">
               {translate.deliveryFee} :
-              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'orange'} size-18px margin-2px-H`}> {order.deliveryFee} {translate.EGP}</div>
+              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-18px margin-2px-H`}> {order.deliveryFee} {translate.EGP}</div>
             </div>
             <div className="flex-row-center">
               {translate.total} :
-              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'orange'} size-24px margin-2px-H`}> {order.total} {translate.EGP}</div>
+              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-24px margin-2px-H`}> {order.total} {translate.EGP}</div>
             </div>
           </div>
         </div>

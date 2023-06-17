@@ -29,7 +29,7 @@ const ReviewCard = ({ visible, customer, type, name, rating, status }) => {
                         {type &&
                             <div className='review-lists-card--cont margin-2px-V'>
                                 <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.type}: </span>
-                                <i className={`${type} orange size-30px`} />
+                                <i className={`${type} mint-green size-30px`} />
                             </div>
                         }
                         {name &&

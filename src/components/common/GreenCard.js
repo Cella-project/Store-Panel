@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import './OrangeCard.scss';
+import './GreenCard.scss';
 
-const OrangeCard = ({ title, children, icon, iconClickHandle }, props) => {
+const GreenCard = ({ title, children, icon, iconClickHandle }, props) => {
     const mode = useSelector(state => state.theme.mode);
 
     return (
@@ -21,4 +21,4 @@ const OrangeCard = ({ title, children, icon, iconClickHandle }, props) => {
     );
 };
 
-export default OrangeCard;
+export default GreenCard;

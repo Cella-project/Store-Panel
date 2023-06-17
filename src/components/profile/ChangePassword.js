@@ -129,7 +129,7 @@ const ChangePassword = () => {
 
     return (
         <div className='full-width'>
-            {!editPass && <input type='button' className={`profile--input--container ${editPass && 'none'} full-width shadow-5px font-bold ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px orange-bg size-20px pointer`}
+            {!editPass && <input type='button' className={`profile--input--container ${editPass && 'none'} full-width shadow-5px font-bold ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px mint-green-bg size-20px pointer`}
                 onClick={() => {
                     setEditPass(true)
                 }}
@@ -138,9 +138,9 @@ const ChangePassword = () => {
             {editPass &&
                 <form noValidate className={`profile--info ${!editPass && 'none'} full-width white-bg shadow-5px flex-col-center margin-12px-V`}
                     onSubmit={handleSubmit}>
-                    <div className={`full-width flex-row-between pt-sans ${mode === 'dark-mode' ? 'gray' : 'orange'} size-28px font-bold`}>
+                    <div className={`full-width flex-row-between pt-sans ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-28px font-bold`}>
                         Change Password
-                        <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px orange-bg size-20px pointer`}
+                        <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px mint-green-bg size-20px pointer`}
                             type="button"
                             onClick={handleCancelForm}>
                             Cancel
@@ -218,7 +218,7 @@ const ChangePassword = () => {
                             <p className="error-message">{confirmedPasswordError}</p>
                         )}
                     </div>
-                    <button disabled={formIsValid} className={ `profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px width-50-100 orange-bg size-20px pointer`}
+                    <button disabled={formIsValid} className={ `profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px width-50-100 mint-green-bg size-20px pointer`}
                         type='submit'
                     >
                         Save

@@ -14,7 +14,7 @@ const Auth = () =>  {
     return (
         <div className={`${style['auth']} full-width`}>
             <div className={`${style['auth--header']} flex-row-between`}>
-                <div className={`${style['auth--header--tag']} flex-row-center orange-bg shadow-5px`}>
+                <div className={`${style['auth--header--tag']} flex-row-center mint-green-bg shadow-5px`}>
                     <img src={logo} alt='ACTORE' className={style['auth--header--tag--logo']} />
                 </div>
             </div>
@@ -22,7 +22,7 @@ const Auth = () =>  {
                 {/* <img className={style['auth--body--img']} src={AuthImg} alt="auth-img" /> */}
                 <Outlet />
             </div>
-            <div className={`${style['auth--sign']} full-width flex-row-center inter orange size-12px`}>
+            <div className={`${style['auth--sign']} full-width flex-row-center inter mint-green size-12px`}>
                 {translations.allRightsReserved} <i className="bi bi-suit-heart-fill margin-4px-H"></i> {translations.ACTORE}
             </div>
         </div>

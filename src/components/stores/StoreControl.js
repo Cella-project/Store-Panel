@@ -41,20 +41,20 @@ const StoreControl = ({ id }) => {
         <Popup popupToggle={setPopupShown} header={'Edit Store'} />
       }
       <div
-        className={`store-control--btn flex-row-center white orange-bg radius-circular pointer }`}
+        className={`store-control--btn flex-row-center white mint-green-bg radius-circular pointer }`}
         onClick={handleChangeState}>
         <i className={`bi bi-arrow-clockwise size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`} />
         <div className={`store-control--btn--tag flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           Change State
         </div>
       </div>
-      <div className="store-control--btn flex-row-center white orange-bg radius-circular pointer" onClick={handleDelete}>
+      <div className="store-control--btn flex-row-center white mint-green-bg radius-circular pointer" onClick={handleDelete}>
         <i className={`bi bi-trash pointer size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`} />
         <div className={`store-control--btn--tag flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           Delete
         </div>
       </div>
-      <div className="store-control--btn flex-row-center white orange-bg radius-circular pointer" onClick={handleEdit}>
+      <div className="store-control--btn flex-row-center white mint-green-bg radius-circular pointer" onClick={handleEdit}>
         <i className={`bi bi-pencil-square size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`} />
         <div className={`store-control--btn--tag flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
           Edit

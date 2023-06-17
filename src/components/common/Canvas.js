@@ -24,7 +24,7 @@ const Canvas = ({ name, width, height, fontSize, borderRadius = '15px' }) => {
     });
 
     return (
-        <canvas ref={canvasRef} style={{ borderRadius: borderRadius }} className='orange-bg' />
+        <canvas ref={canvasRef} style={{ borderRadius: borderRadius }} className='mint-green-bg' />
     )
 }
 

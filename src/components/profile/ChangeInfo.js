@@ -122,17 +122,17 @@ const ChangeInfo = () => {
 
     return (
         <form onSubmit={handleSubmit} noValidate className={`profile--info full-width white-bg shadow-5px flex-col-center margin-12px-V`}>
-            <div className={`full-width flex-row-between pt-sans ${mode === 'dark-mode' ? 'gray' : 'orange'} size-28px font-bold`}>
+            <div className={`full-width flex-row-between pt-sans ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-28px font-bold`}>
                 Info
                 {editMode ? (
-                    <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px orange-bg size-20px pointer`}
+                    <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px mint-green-bg size-20px pointer`}
                         type="button"
                         onClick={handleCancelForm}
                     >
                         Cancel
                     </button>
                 ) : (
-                    <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px orange-bg size-20px pointer`}
+                    <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px mint-green-bg size-20px pointer`}
                         onClick={() => {
                             setEditMode(true)
                         }}>
@@ -204,7 +204,7 @@ const ChangeInfo = () => {
                 </div>
             </div>
             {editMode &&
-                <button className={`profile--input--container shadow-2px width-50-100 ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px orange-bg font-bold size-20px pointer`}
+                <button className={`profile--input--container shadow-2px width-50-100 ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px mint-green-bg font-bold size-20px pointer`}
                     type='submit'
                 >
                     Save
