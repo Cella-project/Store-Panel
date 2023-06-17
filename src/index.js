@@ -9,6 +9,8 @@ import store from './redux/index';
 
 import './assets/styles/style.scss';
 import 'normalize.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
