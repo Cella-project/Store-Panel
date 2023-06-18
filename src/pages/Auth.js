@@ -11,8 +11,10 @@ import style from './Auth.module.scss';
 const Auth = () =>  {
     const language = useSelector(state => state.language.language);
     const translations = languages[language];
+    const mode = useSelector(state => state.theme.mode);
+
     return (
-        <div className={`${style['auth']} full-width`}>
+        <div className={`${style['auth']} ${mode === 'dark-mode' ? 'dark-mode' : ''} full-width`}>
             <div className={`${style['auth--header']} flex-row-between`}>
                 <div className={`${style['auth--header--tag']} flex-row-center mint-green-bg shadow-5px`}>
                     <img src={logo} alt='ACTORE' className={style['auth--header--tag--logo']} />
