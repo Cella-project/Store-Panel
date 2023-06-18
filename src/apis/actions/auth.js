@@ -23,8 +23,9 @@ const authActions = {
                         token: response.data.token,
                         userData: response.data.data
                     }));
-                    localStorage.setItem('Token' , response.data.token);
-                    localStorage.setItem('User' , JSON.stringify(response.data.data));
+                    localStorage.setItem('Access Token', response.data.token.access);
+                    localStorage.setItem('Refresh Token', response.data.token.refresh);
+                    localStorage.setItem('User', JSON.stringify(response.data.data));
                     router.navigate('/');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
@@ -33,6 +34,23 @@ const authActions = {
                     }));
                 }
             } catch (error) {
+                errorHandler(dispatch, error.response);
+            }
+        }
+    },
+    refreshToken(payload) {
+        return async (dispatch) => {
+            try {
+                const response = await Axios.post('/api/store-auth/refresh-token', {
+                    refreshToken: payload
+                });
+                if (response.status === 200) {
+                    dispatch(authMutations.setToken(response.data.token));
+                    localStorage.setItem('Access Token', response.data.token.access);
+                    localStorage.setItem('Refresh Token', response.data.token.refresh);
+                }
+            }
+            catch (error) {
                 errorHandler(dispatch, error.response);
             }
         }
@@ -100,9 +118,9 @@ const authActions = {
             }
         }
     },
-    changeProfileImage() {},
-    editProfile() {},
-    changePassword() {},
+    changeProfileImage() { },
+    editProfile() { },
+    changePassword() { },
     logout() {
         return async (dispatch) => {
             dispatch(stickyMutations.popAllNotes());
@@ -110,7 +128,8 @@ const authActions = {
                 type: 'success',
                 msg: 'You logged out successfully.'
             }));
-            localStorage.removeItem('Token');
+            localStorage.removeItem('Access Token');
+            localStorage.removeItem('Refresh Token');
             localStorage.removeItem('User');
             dispatch(authMutations.setAuthData({
                 token: null,

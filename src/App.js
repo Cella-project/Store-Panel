@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ import Popup from './components/popups/Popup';
 
 import { authMutations } from './redux/mutations';
 import router from './router/router';
+import { authActions } from './apis/actions';
 
 let isLoaded = false;
 
@@ -16,33 +17,42 @@ const App = () => {
   const dispatch = useDispatch();
   const language = useSelector(state => state.language.language);
   const mode = useSelector(state => state.theme.mode);
+  const user = JSON.parse(localStorage.getItem('User'));
+  const accessToken = localStorage.getItem('Access Token');
+  const refreshToken = localStorage.getItem('Refresh Token');
 
   const checkAuth = () => {
-    const user = JSON.parse(localStorage.getItem('User'));
-    const token = localStorage.getItem('Token');
-
-    if (user && token) {
+    if (user && accessToken && refreshToken) {
       dispatch(authMutations.setAuthData({
         userData: user,
-        token: token
+        access: accessToken,
+        refresh: refreshToken
       }));
     } else {
       localStorage.removeItem('User');
-      localStorage.removeItem('Token');
+      localStorage.removeItem('Access Token');
+      localStorage.removeItem('Refresh Token');
       router.navigate('/auth/login');
+    }
+  };
+
+  const refreshTokenHandler = (token) => {
+    if (token) {
+      dispatch(authActions.refreshToken(token));
     }
   };
 
   if (!isLoaded) {
     checkAuth();
+    refreshTokenHandler(refreshToken);
+    setInterval(() => {
+      refreshTokenHandler(refreshToken);
+    }, 14 * 60 * 1000);
     isLoaded = true;
   }
+  
   useEffect(() => {
-    // Update the document's language attribute when the selected language changes
     document.documentElement.lang = language;
-  }, [language]);
-
-  useEffect(() => {
     const htmlElement = document.documentElement;
     if (language === 'ar') {
       htmlElement.setAttribute('dir', 'rtl');
@@ -50,7 +60,7 @@ const App = () => {
       htmlElement.setAttribute('dir', 'ltr');
     }
   }, [language]);
-  
+
 
   const notes = useSelector(state => state.sticky.notes);
   const isPopupShown = useSelector(state => state.popup.popPanelShown);

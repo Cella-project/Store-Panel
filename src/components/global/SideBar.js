@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from "react-redux";
 import languages from './languages';
 
@@ -20,7 +19,7 @@ const SideBar = () => {
 
   return (
     <div className={`side-bar ${language === 'ar' ? 'side-bar-arabic' : ''} flex-col-center mint-green-bg`}>
-      <PerfectScrollbar className="side-bar--cont flex-col-top-start">
+      <div className="side-bar--cont flex-col-top-start">
         <NavLink end to={'/'}>
           <i className={`bi bi-house-door margin-8px-V size-24px ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />
           <span className={`side-bar--cont--description inter size-20px font-light ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.home}</span>
@@ -57,7 +56,7 @@ const SideBar = () => {
           <i className={`bi bi-door-open margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />
           <span className={`side-bar--cont--description inter size-20px font-light ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.logout}</span>
         </NavLink>
-      </PerfectScrollbar>
+      </div>
     </div>
   );
 }

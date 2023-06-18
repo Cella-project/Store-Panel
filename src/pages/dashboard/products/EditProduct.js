@@ -119,7 +119,7 @@ export const EditProduct = () => {
         data.append('path', 'products');
         data.append('file', event.target.files[0]);
         dispatch(productActions.addProductPicture(data, (response) => {
-            const url = 'http://143.244.196.79:4012/api/file-manager/' + response.data.data;
+            const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
             album.imgURL = url;
             dispatch(productActions.addProductImage({ _id: product._id, imgURL: album.imgURL }));
         }));

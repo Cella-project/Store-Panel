@@ -218,7 +218,7 @@ const EditStoreForm = ({ popupToggle }) => {
         data.append('path', 'store/profile');
         data.append('file', e.target.files[0]);
         dispatch(storeActions.addStorePicture(data, (response) => {
-            setStoreIMG('http://143.244.196.79:4012/api/file-manager/' + response.data.data);
+            setStoreIMG('http://www.actore.store/api/file-manager/file/' + response.data.data);
         }))
     }
 
@@ -301,7 +301,7 @@ const EditStoreForm = ({ popupToggle }) => {
                     </label>
                     <button
                         type="button"
-                        className={`add-admin--actions--button${photoFile === 'No Image' ? '-hide' : ''} margin-4px-V full-width pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
+                        className={`add-admin--actions--button${photoFile === 'No Image' ? '-hide' : ''} margin-4px-V full-width pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
                         onClick={clearIMG}
                     >
                         Clear
@@ -367,7 +367,7 @@ const EditStoreForm = ({ popupToggle }) => {
                 )}
                 <div className="edit-store--actions flex-row-between full-width">
                     <button
-                        className={`edit-store--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
+                        className={`edit-store--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold orange-bg`}
                         type="submit"
                     >
                         Confirm
