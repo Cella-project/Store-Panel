@@ -10,7 +10,7 @@ const Home = () => {
   const translations = languages[language];
 
   useEffect(() => {
-    document.title = 'Home • S Panel';
+    document.title = 'Home • Store Panel';
   }, [dispatch]);
 
   let cards = [

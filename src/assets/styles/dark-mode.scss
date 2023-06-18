@@ -40,6 +40,7 @@ $dark-gold: #FDCC0D;
 
 .dark-mode .mint-green-bg {
     background-color: $dark-mint-green;
+    background: linear-gradient(to bottom , $dark-mint-green, lighten($dark-mint-green, 8%));
 }
 
 .dark-mode .yellow {

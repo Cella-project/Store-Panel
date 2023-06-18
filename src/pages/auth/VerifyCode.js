@@ -16,6 +16,7 @@ import languages from '../../components/global/languages';
 
 const VerifyCode = () => {
     const dispatch = useDispatch();
+    const mode = useSelector(state => state.theme.mode);
     const language = useSelector(state => state.language.language);
     const translations = languages[language];
     const email = useSelector(state => state.auth.forgetPasswordCycle.email);
@@ -45,6 +46,8 @@ const VerifyCode = () => {
 
 
     useEffect(() => {
+        document.title = 'Reset Password • Store Panel';
+
         const timeOut = setTimeout(() => {
             router.navigate('/auth/forget-password');
             dispatch(popupMutation.popFeedBack({
@@ -77,7 +80,7 @@ const VerifyCode = () => {
             </div>
             <button type="submit" className={`${style['verify--btn']} full-width mint-green-bg white inter pointer radius-10px shadow-2px`}>{translations.verify}</button>
             <div className="full-width flex-row-left-start">
-                <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className="space-none inter mint-green size-14px margin-12px-H pointer">{translations.didNotReceiveCode}</NavLink>
+                <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.didNotReceiveCode}</NavLink>
             </div>
         </form>
     );

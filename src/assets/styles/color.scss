@@ -62,7 +62,7 @@ $gold: #FDCC0D;
 }
 
 .mint-green-bg {
-    background-color: $mint-green;
+    background: linear-gradient(to bottom , $mint-green, lighten($mint-green, 8%));
 }
 
 .yellow {
