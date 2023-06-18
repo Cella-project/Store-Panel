@@ -1,10 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
+import store from "../redux/index";
 
-export default axios.create({
-  baseURL: 'http://134.209.132.246:8080/',
-  headers: {
-    common: {
-      "Content-Type": "application/json"
-    }
-  }
+const axiosInstance = axios.create({
+  baseURL: "http://www.actore.store/"
 });
+
+axiosInstance.interceptors.request.use((config) => {
+  const { accessToken } = store.getState().auth;
+
+  if (accessToken != null) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  return config;
+});
+
+export default axiosInstance;
