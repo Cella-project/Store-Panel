@@ -10,6 +10,7 @@ import specialityControlSlice from './slices/specialityControl';
 import mainCategorySlice from './slices/mainCategory';
 import subCategorySlice from './slices/subCategory';
 import productSlice from './slices/product';
+import orderSlice from './slices/order';
 import orderHistorySlice from './slices/orderHistory';
 import storeSlice from './slices/store';
 
@@ -26,6 +27,7 @@ export default configureStore({
         mainCategory: mainCategorySlice.reducer,
         subCategory: subCategorySlice.reducer,
         product: productSlice.reducer,
+        order: orderSlice.reducer,
         orderHistory: orderHistorySlice.reducer,
         store: storeSlice.reducer,
     }

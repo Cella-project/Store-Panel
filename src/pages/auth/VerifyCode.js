@@ -62,8 +62,8 @@ const VerifyCode = () => {
     return (
         <form onSubmit={handleSubmit} noValidate className={`${style['verify']} flex-col-center white-bg radius-5px shadow-2px`}>
             <Timer className={`gold margin-12px-V`} sec={300} />
-            <div className={`${style['verify--info']} full-width flex-col-left-start off-gray-bg radius-5px`}>
-                <p className="space-none inter gray margin-4px-V size-12px">{translations.resetCodeSent}</p>
+            <div className={`${style['verify--info']} full-width flex-col-left-start ${mode === 'dark-mode' ? 'gray-bg' : 'off-gray-bg'} radius-5px`}>
+                <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>{translations.resetCodeSent}</p>
             </div>
             <div className={`${style['verify--slot']} full-width flex-col-left-start margin-4px-V`}>
                 <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.verifyCode}</p>
@@ -78,7 +78,7 @@ const VerifyCode = () => {
                     renderInput={(props) => <input {...props} />}
                 />
             </div>
-            <button type="submit" className={`${style['verify--btn']} full-width mint-green-bg white inter pointer radius-10px shadow-2px`}>{translations.verify}</button>
+            <button type="submit" className={`${style['verify--btn']} full-width mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} inter pointer radius-10px shadow-2px`}>{translations.verify}</button>
             <div className="full-width flex-row-left-start">
                 <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.didNotReceiveCode}</NavLink>
             </div>

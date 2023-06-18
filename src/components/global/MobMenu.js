@@ -51,9 +51,9 @@ const MobMenu = ({ menuToggle }) => {
                     <NavLink onClick={menuToggle.bind(null, false)} to={'/products'} className="margin-8px-V">
                         <i className={`bi bi-box-seam ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.products}</span>
                     </NavLink>
-                    {/* <NavLink onClick={menuToggle.bind(null, false)} to={'/orders'} className="margin-8px-V">
-                        <i className={`bi bi-receipt ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>Orders</span>
-                    </NavLink> */}
+                    <NavLink onClick={menuToggle.bind(null, false)} to={'/orders'} className="margin-8px-V">
+                        <i className={`bi bi-receipt ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.orders}</span>
+                    </NavLink>
                     <NavLink onClick={menuToggle.bind(null, false)} to={'/ordersHistory'} className="margin-8px-V">
                         <i className={`bi bi-hourglass-split ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.orderHistory}</span>
                     </NavLink>

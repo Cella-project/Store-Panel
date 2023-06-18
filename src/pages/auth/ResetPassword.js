@@ -43,8 +43,8 @@ const ResetPassword = () => {
 
     return (
         <form onSubmit={handleSubmit} noValidate className={`${style['reset']} flex-col-center white-bg radius-5px shadow-2px`}>
-            <div className={`${language === 'ar' ? style['arabic-reset--info'] : style['reset--info']} full-width flex-col-left-start off-gray-bg radius-5px`}>
-                <p className="space-none inter gray margin-4px-V size-12px">{translations.enterNewPassword}</p>
+            <div className={`${language === 'ar' ? style['arabic-reset--info'] : style['reset--info']} full-width flex-col-left-start ${mode === 'dark-mode' ? 'gray-bg' : 'off-gray-bg'} radius-5px`}>
+                <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>{translations.enterNewPassword}</p>
             </div>
             <div className={`${language === 'ar' ? style['arabic-reset--slot'] : style['reset--slot']} full-width flex-col-left-start margin-4px-V`}>
                 <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.newPassword}</p>
@@ -83,7 +83,7 @@ const ResetPassword = () => {
                     <i className="bi bi-exclamation-triangle-fill red"></i> {errors.confirm}
                 </p>
             </div>
-            <button type="submit" className={`${style['reset--btn']} full-width mint-green-bg white inter pointer radius-10px shadow-2px`}>{translations.resetPassword}</button>
+            <button type="submit" className={`${style['reset--btn']} full-width mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} inter pointer radius-10px shadow-2px`}>{translations.resetPassword}</button>
             <div className="full-width flex-row-left-start">
                 <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.back}</NavLink>
             </div>

@@ -19,7 +19,7 @@
             padding: 6px 8px;
             background-color: rgba($color: #000000, $alpha: 0.6);
         }
-        
+
         &--tag-arabic {
             display: none !important;
             position: absolute;
@@ -31,6 +31,7 @@
         &:hover &--tag {
             display: flex !important;
         }
+
         &:hover &--tag-arabic {
             display: flex !important;
         }
