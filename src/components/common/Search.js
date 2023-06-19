@@ -96,6 +96,7 @@ const Search = ({ width, onSearch, page }) => {
                   <label className="pointer" htmlFor="name">
                     {page === 'Stores' && translate.store}
                     {page === 'OrdersHistory' && translate.customerName}
+                    {page === 'Products' && translate.name}
                   </label>
                 </div>
                 {page === 'Products' &&

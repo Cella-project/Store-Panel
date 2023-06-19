@@ -75,12 +75,12 @@ const Home = () => {
             <GreenCard title="Orders History">
               {orderHistory && orderHistory !== null ?
                 <PerfectScrollbar className="home--scroll--cont full-width flex-col-top-start">
-                  {order
+                  {orderHistory
                     .slice()
                     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                     .slice(0, 5)
-                    .map((order) => (
-                      <OrderCard key={order._id} order={order} />
+                    .map((orderHistory) => (
+                      <OrderCard key={orderHistory._id} order={orderHistory} />
                     ))}
                 </PerfectScrollbar> : <Loading />
               }

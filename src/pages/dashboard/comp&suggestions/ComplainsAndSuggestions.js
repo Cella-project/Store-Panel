@@ -8,7 +8,7 @@ import languages from '../../../components/global/languages';
 import './ComplainsAndSuggestions.scss';
 
 const ComplainsAndSuggestions = () => {
-  const mode = useSelector(state => state.theme.mode);
+  // const mode = useSelector(state => state.theme.mode);
   const language = useSelector(state => state.language.language);
   const translate = languages[language];
   useEffect(() => {

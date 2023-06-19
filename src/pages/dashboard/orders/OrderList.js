@@ -16,11 +16,11 @@ const OrderList = () => {
     const language = useSelector(state => state.language.language);
     const translate = languages[language];
     const orderCards = useSelector(state => state.order.orders);
-
+    const storeData = useSelector(state => state.auth.userData);
     useEffect(() => {
         dispatch(orderMutations.setOrder(null));
-        dispatch(orderActions.getOrder());
-    }, [dispatch]);
+        dispatch(orderActions.getOrder(storeData._id));
+    }, [dispatch, storeData._id]);
 
     useEffect(() => {
         document.title = 'Orders • Store panel';
