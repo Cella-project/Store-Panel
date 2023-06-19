@@ -20,11 +20,12 @@ export const EditProduct = () => {
     const materials = useSelector(state => state.specialityControl.materials);
     const product = useSelector((state) => state.product.products.find((p) => p._id === params.id));
     const [currentPage, setCurrentPage] = useState(1);
+    const storeData = useSelector(state => state.auth.userData);
 
     useEffect(() => {
         document.title = 'Edit product • Store Panel';
-        dispatch(productActions.getProducts());
-    }, [dispatch]);
+        dispatch(productActions.getProducts(storeData._id));
+    }, [dispatch, storeData._id]);
 
 
     // useEffect(() => {

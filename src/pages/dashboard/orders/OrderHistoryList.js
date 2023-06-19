@@ -16,11 +16,12 @@ const OrderHistoryList = () => {
     const language = useSelector(state => state.language.language);
     const translate = languages[language];
     const orderHistoryCards = useSelector(state => state.orderHistory.ordersHistory);
+    const storeData = useSelector(state => state.auth.userData);
 
     useEffect(() => {
         dispatch(orderHistoryMutations.setOrderHistory(null));
-        dispatch(orderHistoryActions.getOrderHistory());
-    }, [dispatch]);
+        dispatch(orderHistoryActions.getOrderHistory(storeData._id));
+    }, [dispatch, storeData._id]);
 
     useEffect(() => {
         document.title = 'OrdersHistory • Store panel';
@@ -47,7 +48,7 @@ const OrderHistoryList = () => {
     };
 
     if (orderHistoryCards !== null && orderHistoryCards.length === 0) {
-        content = <p>Found no orders history.</p>
+        content = <p>{translate.foundNoOrders}</p>
     }
 
     if (orderHistoryCards !== null && orderHistoryCards.length > 0) {

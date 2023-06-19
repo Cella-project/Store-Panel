@@ -40,7 +40,6 @@ const MobMenu = ({ menuToggle }) => {
                 <i className={`bi bi-x size-40px ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`} onClick={menuToggle.bind(null, false)} />
             </div>
             <div className='full-width flex-row-center margin-10px-V'>
-                {/* <h1 className='pt-sans white space-none size-32px'>CELLA</h1> */}
                 <img src={logo} alt='ACTORE' className={`mob-menu${language === 'ar' ? '-arabic' : ''}--logo`} />
             </div>
             <PerfectScrollbar className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body margin-10px-V`}>
@@ -51,9 +50,9 @@ const MobMenu = ({ menuToggle }) => {
                     <NavLink onClick={menuToggle.bind(null, false)} to={'/products'} className="margin-8px-V">
                         <i className={`bi bi-box-seam ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.products}</span>
                     </NavLink>
-                    {/* <NavLink onClick={menuToggle.bind(null, false)} to={'/orders'} className="margin-8px-V">
-                        <i className={`bi bi-receipt ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>Orders</span>
-                    </NavLink> */}
+                    <NavLink onClick={menuToggle.bind(null, false)} to={'/orders'} className="margin-8px-V">
+                        <i className={`bi bi-receipt ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.orders}</span>
+                    </NavLink>
                     <NavLink onClick={menuToggle.bind(null, false)} to={'/ordersHistory'} className="margin-8px-V">
                         <i className={`bi bi-hourglass-split ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.orderHistory}</span>
                     </NavLink>

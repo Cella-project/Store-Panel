@@ -25,8 +25,8 @@ const ForgetPassword = () => {
 
   return (
     <form onSubmit={handleSubmit} noValidate className={`${style['forget']} flex-col-center white-bg radius-5px shadow-2px`}>
-      <div className={`${language === 'ar' ? style['arabic-forget--info'] : style['forget--info']} full-width flex-col-left-start ${mode === 'dark-mode' ? 'mint-green-bg' : 'off-gray-bg'} margin-10px-V radius-5px`}>
-        <p className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'gray'} margin-4px-V size-12px`}>{translations.pleaseEnterEmail}</p>
+      <div className={`${language === 'ar' ? style['arabic-forget--info'] : style['forget--info']} full-width flex-col-left-start ${mode === 'dark-mode' ? 'gray-bg' : 'off-gray-bg'} margin-10px-V radius-5px`}>
+        <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>{translations.pleaseEnterEmail}</p>
       </div>
       <div className={`${language === 'ar' ? style['arabic-forget--slot'] : style['forget--slot']} full-width flex-col-left-start margin-4px-V`}>
         <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.emailAddress}</p>

@@ -7,6 +7,7 @@ const languages = {
     customers: 'Customers',
     specialty: 'Specialty',
     products: 'Products',
+    orders: 'Orders',
     orderHistory: 'Order History',
     drivers: 'Drivers',
     reviews: 'Reviews',
@@ -161,6 +162,8 @@ const languages = {
     subCategory: "Sub Category",
     selectSubCategory: "Select Sub Category",
     refillProduct: "Refill Product",
+    foundNoOrders: 'Found no orders .',
+    customerName: 'Customer Name',
 
   },
   ar: {
@@ -170,6 +173,7 @@ const languages = {
     customers: 'العملاء',
     specialty: 'التخصص',
     products: 'المنتجات',
+    orders : 'الطلبات',
     orderHistory: 'سجل الطلبات',
     drivers: 'السائقون',
     reviews: 'التقييمات',
@@ -324,6 +328,8 @@ const languages = {
     subCategory: "الفئة الفرعية",
     selectSubCategory: "من فضلك اختر الفئة الفرعية.",
     refillProduct: "إعادة تعبئة المنتج",
+    foundNoOrders: "لم يتم العثور على طلبات",
+    customerName : "اسم العميل",
   },
 };
 

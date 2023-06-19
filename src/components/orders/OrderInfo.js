@@ -13,7 +13,7 @@ const OrderInfo = ({ order }) => {
       <div className="flex-col-left-start gray font-bold size-26px padding-10px-V">
         {order.code}
       </div>
-      <div className="full-witdh flex-row-between2col">
+      <div className="full-width flex-row-between2col">
         <div className="flex-col-center">
           <span className="gray size-20px">{translate.paymentMethod}:
             <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px margin-6px-H`}>{order.paymentMethod}</span>

@@ -1,167 +1,138 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import GreenCard from '../../../components/common/GreenCard';
 import Search from '../../../components/common/Search';
 import ListsCard from '../../../components/common/ListsCard';
-import OrderCard from '../../../components/orders/OrderCard';
 import './OrderList.scss';
-
-export const orderCards = [
-  {
-    id: "1",
-    customerName: 'Ziad Tarek',
-    orderCode: '#abcdFGH',
-    store: 'Dima',
-    date: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', }) + "",
-    status: 'green',
-    img: '',
-    total: 650,
-    driver: 'Delivery',
-    product: ['1', '2', '4'],
-    voucher: '1',
-    rate: 3.5,
-    PaymentMethod: 'Cash'
-  },
-  {
-    id: "2",
-    customerName: 'Mohamed Ashraf Ibrahim',
-    orderCode: '#abcdFGH',
-    store: 'Open Shop',
-    date: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', }) + "",
-    status: 'baby-blue',
-    img: '',
-    total: 650,
-    driver: 'Delivery',
-    product: ['1', '2', '4'],
-    voucher: '1',
-    rate: 3.5
-  },
-  {
-    id: "3",
-    customerName: 'Yousef Ebrahim',
-    orderCode: '#abcdFGH',
-    store: 'Mr & Mrs',
-    date: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', }) + "",
-    status: 'yellow',
-    img: '',
-    total: 650,
-    driver: 'Delivery',
-    product: ['1', '2', '4'],
-    voucher: '1',
-    rate: 3.5
-  },
-  {
-    id: "4",
-    customerName: 'Abdallah Khaled',
-    orderCode: '#abcdFGH',
-    store: 'Dima',
-    date: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', }) + "",
-    status: 'red',
-    img: '',
-    total: 650,
-    driver: 'Delivery',
-    product: ['1', '2', '4'],
-    voucher: '1',
-    rate: 3.5
-  },
-  {
-    id: "5",
-    customerName: 'Ahmed Basiony',
-    orderCode: '#abcdFGH',
-    store: 'Dima',
-    date: new Date().toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', }) + "",
-    status: 'red',
-    img: '',
-    total: 650,
-    driver: 'Delivery',
-    product: ['1', '2', '4'],
-    voucher: '1',
-    rate: 3.5
-  },
-];
+import OrderCard from '../../../components/orders/OrderCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { orderActions } from '../../../apis/actions';
+import { orderMutations } from '../../../redux/mutations';
+import Loading from '../../../components/global/Loading';
+import languages from '../../../components/global/languages';
 
 const OrderList = () => {
-  let success = 0;
-  let inProgress = 0;
-  let cancelled = 0;
-  let returned = 0;
+    const dispatch = useDispatch();
+    const language = useSelector(state => state.language.language);
+    const translate = languages[language];
+    const orderCards = useSelector(state => state.order.orders);
+    const storeData = useSelector(state => state.auth.userData);
+    useEffect(() => {
+        dispatch(orderMutations.setOrder(null));
+        dispatch(orderActions.getOrder(storeData._id));
+    }, [dispatch, storeData._id]);
 
-  useEffect(() => {
-    document.title = 'Orders • Store Panel';
-  }, []);
+    useEffect(() => {
+        document.title = 'Orders • Store panel';
+    }, []);
 
-  orderCards.map((card) => {
-    if (card.status === 'green') {
-      success++;
+    let cards = [
+        { title: translate.totalOrders, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.delivered, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.pending, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.canceledByCustomer, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.canceledByAdmin, content: 0, icon: "bi bi-people mint-green" },
+    ]
+
+    let content = <Loading />;
+
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchType, setSearchType] = useState("");
+    const [searchStatus, setSearchStatus] = useState("");
+
+    const handleSearch = (query, type, filter) => {
+        setSearchQuery(query);
+        setSearchType(type);
+        setSearchStatus(filter.status);
+    };
+
+    if (orderCards !== null && orderCards.length === 0) {
+        content = <p>{translate.foundNoOrders}</p>
     }
-    if (card.status === 'red') {
-      inProgress++;
-    }
-    if (card.status === 'yellow') {
-      cancelled++;
-    }
-    if (card.status === 'baby-blue') {
-      returned++;
-    }
 
-    return card;
-  });
+    if (orderCards !== null && orderCards.length > 0) {
+        const sortedOrder = [...orderCards].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  const cards = [
-    { title: 'Orders', content: orderCards.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") },
-    { title: 'Success Orders', content: success },
-    { title: 'In Progress Orders', content: inProgress },
-    { title: 'Cancelled Orders', content: cancelled },
-    { title: 'Returned Orders', content: returned },
-  ]
-
-  return (
-    <div className="orders full-width" >
-      <div className="orders--braud-cramb gray inter size-16px font-bold">
-        Orders
-      </div>
-      <div className="orders--cards">
-        {
-          cards.map((card, index) => {
-            return (
-              <GreenCard title={card.title} key={index}>
-                <div className="full-width flex-row-center">
-                  <i className='bi bi-receipt mint-green size-28px'></i>
-                  <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
-                </div>
-              </GreenCard>
-            );
-          })
+        let filteredOrder = sortedOrder;
+        if (searchQuery !== '') {
+            if (searchType === translate.all) {
+                filteredOrder = filteredOrder.filter(order =>
+                    (order.customer.name + order.code + order.store.storeName)?.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            } else {
+                filteredOrder = filteredOrder.filter(order => {
+                    if (searchType.includes('.')) {
+                        return order[searchType.split('.')[0]][searchType.split('.')[1]]?.toLowerCase().includes(searchQuery.toLowerCase())
+                    } else return order[searchType]?.toLowerCase().includes(searchQuery.toLowerCase())
+                });
+            }
         }
-      </div>
+        if (searchStatus !== '' && searchStatus !== translate.all) {
+            filteredOrder = filteredOrder.filter(order => {
+                return (
+                    searchQuery === '' ? order.status === searchStatus :
+                        (order.status === searchStatus &&
+                            (searchType === translate.all ?
+                                (order.name + order.code + order.store.storeName)?.toLowerCase().includes(searchQuery.toLowerCase()) :
+                                (searchType.includes('.') ?
+                                    order[searchType.split('.')[0]][searchType.split('.')[1]]?.toLowerCase().includes(searchQuery.toLowerCase()) :
+                                    order[searchType]?.toLowerCase().includes(searchQuery.toLowerCase())
 
-      <div className='flex-row-left-start'>
-        <Search width={'width-90-100'} />
-      </div>
-
-      <div className='flex-col-left-start inter gray'>
-        {
-          orderCards.map((orderCard) => {
-            return (
-              <ListsCard>
-                <OrderCard
-                  img={orderCard.img}
-                  id={orderCard.id}
-                  status={orderCard.status}
-                  customerName={orderCard.customerName}
-                  orderCode={orderCard.orderCode}
-                  store={orderCard.store}
-                  date={orderCard.date}
-                  total={orderCard.total}
-                />
-              </ListsCard>
-            )
-          })
+                                )
+                            ))
+                )
+            });
         }
-      </div>
-    </div>
-  )
+
+        content = filteredOrder.length === 0 ? translate.noResultFound :
+            filteredOrder.map((orderCard) => {
+                return (
+                    <ListsCard key={orderCard._id} >
+                        <OrderCard
+                            order={orderCard}
+                        />
+                    </ListsCard>
+                )
+            })
+
+        cards = [
+            { title: translate.totalOrders, content: orderCards.length, icon: "bi bi-people mint-green" },
+            { title: translate.delivered, content: orderCards.filter(orderCard => orderCard.status === 'Delivered').length, icon: "bi bi-people mint-green" },
+            { title: translate.pending, content: orderCards.filter(orderCard => orderCard.status === 'Pending').length, icon: "bi bi-people mint-green" },
+            { title: translate.canceledByCustomer, content: orderCards.filter(orderCard => orderCard.status === 'CanceledByCustomer').length, icon: "bi bi-people mint-green" },
+            { title: translate.canceledByAdmin, content: orderCards.filter(orderCard => orderCard.status === 'CanceledByAdmin').length, icon: "bi bi-people mint-green" },
+        ]
+    }
+
+    return (
+        <div className="orders full-width" >
+            <div className="orders--braud-cramb gray inter size-16px font-bold">
+                {translate.order}
+            </div>
+            <div className={`orders--cards${language === 'ar' ? '-arabic' : ''}`}>
+                {
+                    cards.map((card, index) => {
+                        return (
+                            <GreenCard title={card.title} key={index}>
+                                <div className="full-width flex-row-center">
+                                    <i className='bi bi-receipt mint-green size-28px'></i>
+                                    <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
+                                </div>
+                            </GreenCard>
+                        );
+                    })
+                }
+            </div>
+
+            <div className='flex-row-left-start'>
+                <Search width={'width-90-100'} page={'Orders'} onSearch={handleSearch} />
+            </div>
+
+            <div className='flex-col-left-start inter gray'>
+                {content}
+            </div>
+        </div>
+    )
 }
-
 
 export default OrderList;
