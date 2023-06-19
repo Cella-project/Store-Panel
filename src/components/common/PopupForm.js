@@ -11,14 +11,14 @@ import AddProductSizeForm from "../products/AddProductSizeForm";
 import RefillProductForm from "../products/RefillProductForm";
 
 import { useSelector } from "react-redux";
-import languages from "../global/languages";
+// import languages from "../global/languages";
 import './PopupForm.scss';
 
 const Popup = ({ popupToggle, header, data }) => {
     let popupRef = useRef();
     const mode = useSelector(state => state.theme.mode);
-    const language = useSelector(state => state.language.language);
-    const translations = languages[language];
+    // const language = useSelector(state => state.language.language);
+    // const translations = languages[language];
     const dashboard = document.getElementById('dashboard-view');
 
     useEffect(() => {

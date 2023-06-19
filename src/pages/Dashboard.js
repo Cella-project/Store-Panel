@@ -14,9 +14,13 @@ const Dashboard = () => {
     const [mobMenuShown, setMobMenuShown] = useState(false);
     const mode = useSelector(state => state.theme.mode);
 
+    const userData = useSelector(state => state.auth.userData);
+
+    if (userData === null) return (<div></div>);
+
     return (
         <div className={`dashboard`}>
-            <div className={`dashboard--bg${mode === 'dark-mode' ? '--dark' : '--light' }`}></div>
+            <div className={`dashboard--bg${mode === 'dark-mode' ? '--dark' : '--light'}`}></div>
             <NavBar menuToggle={setMobMenuShown} />
             <SideBar />
             {mobMenuShown && <MobMenu menuToggle={setMobMenuShown} />}

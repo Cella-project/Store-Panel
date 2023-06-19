@@ -15,21 +15,27 @@ let isLoaded = false;
 
 const App = () => {
   const dispatch = useDispatch();
+
   const language = useSelector(state => state.language.language);
+
+  const lastRefreshTime = localStorage.getItem('Refresh Token Time');
+  const currentTime = new Date().getTime();
+  const timeDifference = currentTime - lastRefreshTime;
+
   const mode = useSelector(state => state.theme.mode);
-  const user = JSON.parse(localStorage.getItem('User'));
   const accessToken = localStorage.getItem('Access Token');
   const refreshToken = localStorage.getItem('Refresh Token');
+  const user = useSelector(state => state.auth.userData);
 
   const checkAuth = () => {
-    if (user && accessToken && refreshToken) {
+    if (accessToken && refreshToken) {
+      dispatch(authActions.getProfile());
       dispatch(authMutations.setAuthData({
         userData: user,
         access: accessToken,
         refresh: refreshToken
       }));
     } else {
-      localStorage.removeItem('User');
       localStorage.removeItem('Access Token');
       localStorage.removeItem('Refresh Token');
       router.navigate('/auth/login');
@@ -39,18 +45,21 @@ const App = () => {
   const refreshTokenHandler = (token) => {
     if (token) {
       dispatch(authActions.refreshToken(token));
+      localStorage.setItem('Refresh Token Time', new Date().getTime());
     }
   };
 
   if (!isLoaded) {
     checkAuth();
-    refreshTokenHandler(refreshToken);
+    if (timeDifference >= 15 * 60 * 1000) {
+      refreshTokenHandler(refreshToken);
+    }
     setInterval(() => {
       refreshTokenHandler(refreshToken);
     }, 14 * 60 * 1000);
     isLoaded = true;
   }
-  
+
   useEffect(() => {
     document.documentElement.lang = language;
     const htmlElement = document.documentElement;

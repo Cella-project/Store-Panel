@@ -20,18 +20,32 @@ const authActions = {
                 const response = await Axios.post('/api/store-auth/login', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.setAuthData({
-                        token: response.data.token,
+                        access: response.data.token.access,
+                        refresh: response.data.token.refresh,
                         userData: response.data.data
                     }));
                     localStorage.setItem('Access Token', response.data.token.access);
                     localStorage.setItem('Refresh Token', response.data.token.refresh);
-                    localStorage.setItem('User', JSON.stringify(response.data.data));
+
                     router.navigate('/');
+
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
                         msg: 'Logged In successfully, Welcome Back.'
                     }));
+                }
+            } catch (error) {
+                errorHandler(dispatch, error.response);
+            }
+        }
+    },
+    getProfile() {
+        return async (dispatch) => {
+            try {
+                const response = await Axios.get('/api/store-profile/profile');
+                if (response.status === 200) {
+                    dispatch(authMutations.setUserData(response.data.data));
                 }
             } catch (error) {
                 errorHandler(dispatch, error.response);
@@ -51,6 +65,11 @@ const authActions = {
                 }
             }
             catch (error) {
+                if (error.response.status === 401 && error.response.message === 'jwt expired') {
+                    localStorage.removeItem('Access Token');
+                    localStorage.removeItem('Refresh Token');
+                    router.navigate('/login');
+                }
                 errorHandler(dispatch, error.response);
             }
         }
