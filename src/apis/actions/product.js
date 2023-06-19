@@ -3,10 +3,10 @@ import { productMutations, popupMutation, stickyMutations } from '../../redux/mu
 import errorHandler from '../../services/errorHandler';
 
 const productActions = {
-    getProducts() {
+    getProducts(storeId) {
         return async (dispatch) => {
             try {
-                const response = await Axios.get('/api/product-main/products');
+                const response = await Axios.get(`/api/product-main/store-products/${storeId}`);
                 dispatch(productMutations.setProducts(response.data.data));
             } catch (error) {
                 dispatch(productMutations.setProducts([]));

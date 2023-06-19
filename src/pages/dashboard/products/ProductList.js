@@ -15,12 +15,13 @@ const ProductList = () => {
   const products = useSelector(state => state.product.products);
   const language = useSelector(state => state.language.language);
   const translate = languages[language];
+  const storeData = useSelector(state => state.auth.userData);
 
   useEffect(() => {
     document.title = 'Products • Store Panel';
     dispatch(productMutations.setProducts(null));
-    dispatch(productActions.getProducts());
-  }, [dispatch]);
+    dispatch(productActions.getProducts(storeData._id));
+  }, [dispatch, storeData._id]);
 
   let cards = [
     { title: translate.products, content: 0, icon: "bi bi-box-seam" },

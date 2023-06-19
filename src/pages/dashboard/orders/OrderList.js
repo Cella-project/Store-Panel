@@ -9,9 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { orderActions } from '../../../apis/actions';
 import { orderMutations } from '../../../redux/mutations';
 import Loading from '../../../components/global/Loading';
+import languages from '../../../components/global/languages';
 
 const OrderList = () => {
     const dispatch = useDispatch();
+    const language = useSelector(state => state.language.language);
+    const translate = languages[language];
     const orderCards = useSelector(state => state.order.orders);
 
     useEffect(() => {
@@ -20,15 +23,15 @@ const OrderList = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        document.title = 'Orders • Admin Panel';
+        document.title = 'Orders • Store panel';
     }, []);
 
     let cards = [
-        { title: 'Total Orders', content: 0, icon: "bi bi-people mint-green" },
-        { title: 'Delivered', content: 0, icon: "bi bi-people mint-green" },
-        { title: 'Pending', content: 0, icon: "bi bi-people mint-green" },
-        { title: 'Cancelled By Customer', content: 0, icon: "bi bi-people mint-green" },
-        { title: 'Cancelled By Admin', content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.totalOrders, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.delivered, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.pending, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.canceledByCustomer, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.canceledByAdmin, content: 0, icon: "bi bi-people mint-green" },
     ]
 
     let content = <Loading />;
@@ -44,7 +47,7 @@ const OrderList = () => {
     };
 
     if (orderCards !== null && orderCards.length === 0) {
-        content = <p>Found no orders .</p>
+        content = <p>{translate.foundNoOrders}</p>
     }
 
     if (orderCards !== null && orderCards.length > 0) {
@@ -52,7 +55,7 @@ const OrderList = () => {
 
         let filteredOrder = sortedOrder;
         if (searchQuery !== '') {
-            if (searchType === 'all') {
+            if (searchType === translate.all) {
                 filteredOrder = filteredOrder.filter(order =>
                     (order.customer.name + order.code + order.store.storeName)?.toLowerCase().includes(searchQuery.toLowerCase())
                 );
@@ -64,12 +67,12 @@ const OrderList = () => {
                 });
             }
         }
-        if (searchStatus !== '' && searchStatus !== 'all') {
+        if (searchStatus !== '' && searchStatus !== translate.all) {
             filteredOrder = filteredOrder.filter(order => {
                 return (
                     searchQuery === '' ? order.status === searchStatus :
                         (order.status === searchStatus &&
-                            (searchType === 'all' ?
+                            (searchType === translate.all ?
                                 (order.name + order.code + order.store.storeName)?.toLowerCase().includes(searchQuery.toLowerCase()) :
                                 (searchType.includes('.') ?
                                     order[searchType.split('.')[0]][searchType.split('.')[1]]?.toLowerCase().includes(searchQuery.toLowerCase()) :
@@ -81,10 +84,10 @@ const OrderList = () => {
             });
         }
 
-        content = filteredOrder.length === 0 ? 'No results found.' :
+        content = filteredOrder.length === 0 ? translate.noResultFound :
             filteredOrder.map((orderCard) => {
                 return (
-                    <ListsCard key={orderCard._id}>
+                    <ListsCard key={orderCard._id} >
                         <OrderCard
                             order={orderCard}
                         />
@@ -93,20 +96,20 @@ const OrderList = () => {
             })
 
         cards = [
-            { title: 'Total Orders', content: orderCards.length, icon: "bi bi-people mint-green" },
-            { title: 'Delivered', content: orderCards.filter(orderCard => orderCard.status === 'Delivered').length, icon: "bi bi-people mint-green" },
-            { title: 'Pending', content: orderCards.filter(orderCard => orderCard.status === 'Pending').length, icon: "bi bi-people mint-green" },
-            { title: 'Cancelled By Customer', content: orderCards.filter(orderCard => orderCard.status === 'CanceledByCustomer').length, icon: "bi bi-people mint-green" },
-            { title: 'Cancelled By Admin', content: orderCards.filter(orderCard => orderCard.status === 'CanceledByAdmin').length, icon: "bi bi-people mint-green" },
+            { title: translate.totalOrders, content: orderCards.length, icon: "bi bi-people mint-green" },
+            { title: translate.delivered, content: orderCards.filter(orderCard => orderCard.status === 'Delivered').length, icon: "bi bi-people mint-green" },
+            { title: translate.pending, content: orderCards.filter(orderCard => orderCard.status === 'Pending').length, icon: "bi bi-people mint-green" },
+            { title: translate.canceledByCustomer, content: orderCards.filter(orderCard => orderCard.status === 'CanceledByCustomer').length, icon: "bi bi-people mint-green" },
+            { title: translate.canceledByAdmin, content: orderCards.filter(orderCard => orderCard.status === 'CanceledByAdmin').length, icon: "bi bi-people mint-green" },
         ]
     }
 
     return (
         <div className="orders full-width" >
             <div className="orders--braud-cramb gray inter size-16px font-bold">
-                Order 
+                {translate.order}
             </div>
-            <div className="orders--cards">
+            <div className={`orders--cards${language === 'ar' ? '-arabic' : ''}`}>
                 {
                     cards.map((card, index) => {
                         return (

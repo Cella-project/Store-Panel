@@ -40,7 +40,6 @@ const MobMenu = ({ menuToggle }) => {
                 <i className={`bi bi-x size-40px ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`} onClick={menuToggle.bind(null, false)} />
             </div>
             <div className='full-width flex-row-center margin-10px-V'>
-                {/* <h1 className='pt-sans white space-none size-32px'>CELLA</h1> */}
                 <img src={logo} alt='ACTORE' className={`mob-menu${language === 'ar' ? '-arabic' : ''}--logo`} />
             </div>
             <PerfectScrollbar className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body margin-10px-V`}>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { specialityActions, mainCategoryActions, subCategoryActions, specialityControlActions, productActions, storeActions } from '../../../apis/actions';
-import { specialityMutations, mainCategoryMutations, subCategoryMutations, specialityControlMutations, storeMutations } from '../../../redux/mutations';
+import {  mainCategoryActions, subCategoryActions, specialityControlActions, productActions } from '../../../apis/actions';
+import {  mainCategoryMutations, subCategoryMutations, specialityControlMutations } from '../../../redux/mutations';
 
 import useInput from '../../../hooks/useInput';
 import languages from '../../../components/global/languages';
@@ -14,7 +14,7 @@ export const AddProduct = () => {
     const mode = useSelector((state) => state.theme.mode);
     const language = useSelector((state) => state.language.language);
     const translate = languages[language];
-    const specialities = useSelector((state) => state.speciality.specialties);
+    const storeData = useSelector((state) => state.auth.userData);
     const mainCategories = useSelector((state) => state.mainCategory.mainCategories);
     const subCategories = useSelector((state) => state.subCategory.subCategories);
     const colors = useSelector(state => state.specialityControl.colors);
@@ -57,21 +57,6 @@ export const AddProduct = () => {
         return { isValid, error };
     });
 
-
-    const {
-        value: enteredspeciality,
-        error: specialityError,
-        isTouched: specialityIsTouched,
-        valueChangeHandler: specialityChangedHandler,
-        inputBlurHandler: specialityBlurHandler,
-    } = useInput((value) => {
-        const isValid = value !== '';
-        let error = '';
-        if (value === '') {
-            error = translate.pleaseEnterSpeciality;
-        }
-        return { isValid, error };
-    });
     const {
         value: enteredMainCategory,
         error: mainCategoryError,
@@ -86,6 +71,7 @@ export const AddProduct = () => {
         }
         return { isValid, error };
     });
+
     const {
         value: enteredSubCategory,
         error: subCategoryError,
@@ -281,22 +267,13 @@ export const AddProduct = () => {
             return enteredPrice;
         }
     };
-
-
-    // Dispatch Actions OF speciality , MainCategory , SubCategory , Material , Color , Tag
     useEffect(() => {
-        dispatch(storeMutations.setStores(null));
-        dispatch(storeActions.getStores());
-        dispatch(specialityMutations.setSpecialties(null));
-        dispatch(specialityActions.getSpecialties());
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (enteredspeciality !== '') {
+        if (enteredMainCategory === '') {
             dispatch(mainCategoryMutations.setMainCategories(null));
-            dispatch(mainCategoryActions.getMainCategories(enteredspeciality.id));
+            dispatch(mainCategoryActions.getMainCategories(storeData.speciality._id));
         }
-    }, [dispatch, enteredspeciality]);
+    }, [dispatch, enteredMainCategory,storeData.speciality._id]);
+
 
     useEffect(() => {
         if (enteredMainCategory !== '') {
@@ -306,12 +283,12 @@ export const AddProduct = () => {
             dispatch(specialityControlMutations.setTags(null));
             dispatch(specialityControlMutations.setMaterials(null));
             dispatch(specialityControlMutations.setSizes(null));
-            dispatch(specialityControlActions.getColors(enteredspeciality.id));
-            dispatch(specialityControlActions.getTags(enteredspeciality.id));
-            dispatch(specialityControlActions.getMaterials(enteredspeciality.id));
-            dispatch(specialityControlActions.getSizes(enteredspeciality.id));
+            dispatch(specialityControlActions.getColors(storeData.speciality._id));
+            dispatch(specialityControlActions.getTags(storeData.speciality._id));
+            dispatch(specialityControlActions.getMaterials(storeData.speciality._id));
+            dispatch(specialityControlActions.getSizes(storeData.speciality._id));
         }
-    }, [dispatch, enteredMainCategory, enteredspeciality]);
+    }, [dispatch, enteredMainCategory,storeData.speciality._id]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -443,31 +420,6 @@ export const AddProduct = () => {
                                 </div>
                                 {descriptionIsTouched && (<div className="error-message">{descriptionError}</div>)}
                             </div>
-                            {specialities && specialities.length > 0 && (
-                                <div className='full-width flex-col-left-start add-product--input-container'>
-                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='speciality'>{translate.specialty} <span className='red'>*</span></label>
-                                    <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input`}>
-                                        <i className='bi bi-pin-map size-20px gray' />
-                                        <Select
-                                            className='add-product--select full-width gray margin-4px-H'
-                                            styles={{
-                                                option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
-                                                menu: (provided) => ({
-                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
-                                                }),
-                                            }}
-                                            value={enteredspeciality}
-                                            placeholder={translate.selectspecialty}
-                                            options={specialities.filter(speciality => speciality.status === "Active").map(speciality => ({ label: speciality.title, value: { label: speciality.title, title: speciality.title, id: speciality._id } }))}
-                                            onChange={(speciality) =>
-                                                specialityChangedHandler({ target: { id: "speciality", label: speciality.title, value: speciality.value } })
-                                            }
-                                            onBlur={specialityBlurHandler}
-                                        />
-                                    </div>
-                                    {specialityIsTouched && (<div className="error-message">{specialityError}</div>)}
-                                </div>
-                            )}
                             {mainCategories && mainCategories.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='MainCategory'>{translate.mainCategory} <span className='red'>*</span></label>
@@ -784,7 +736,7 @@ export const AddProduct = () => {
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
-                                    disabled={remainingQuantitiesOfColors !== 0 || (remainingQuantitiesOfSizes !== 0 && enteredspeciality.title === 'Clothes')}
+                                    disabled={remainingQuantitiesOfColors !== 0 || (remainingQuantitiesOfSizes !== 0 )}
                                     onClick={() => {
                                         setCurrentPage(4);
                                     }}
