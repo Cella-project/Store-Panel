@@ -164,6 +164,12 @@ const languages = {
     refillProduct: "Refill Product",
     foundNoOrders: 'Found no orders .',
     customerName: 'Customer Name',
+    sales : 'Sales',
+    pendingOrders: 'Pending Orders',
+    newProducts: 'New Products',
+    approveOrder: 'Approve Order',
+    cancelOrder: 'Cancel Order',
+    ReadyForPickup: 'Ready For Pickup',
 
   },
   ar: {
@@ -330,6 +336,12 @@ const languages = {
     refillProduct: "إعادة تعبئة المنتج",
     foundNoOrders: "لم يتم العثور على طلبات",
     customerName : "اسم العميل",
+    sales : 'المبيعات',
+    pendingOrders: 'الطلبات المعلقة',
+    newProducts: 'منتجات جديدة',
+    approveOrder: 'قبول الطلب',
+    cancelOrder: 'إلغاء الطلب',
+    ReadyForPickup: 'جاهز للاستلام',
   },
 };
 

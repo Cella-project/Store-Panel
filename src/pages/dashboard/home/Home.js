@@ -29,20 +29,20 @@ const Home = () => {
   }, [dispatch, storeData._id]);
 
   let cards = [
-    { title: 'Sales', content: 0, icon: "bi bi-currency-dollar" },
-    { title: 'Products', content: 0, icon: "bi bi-box-seam" },
-    { title: 'Orders History', content: 0, icon: "bi bi-receipt" },
-    { title: 'Pending Orders', content: 0, icon: "bi bi-people" },
+    { title: translations.sales, content: 0, icon: "bi bi-currency-dollar" },
+    { title: translations.products, content: 0, icon: "bi bi-box-seam" },
+    { title: translations.orderHistory, content: 0, icon: "bi bi-receipt" },
+    { title: translations.pendingOrders, content: 0, icon: "bi bi-people" },
   ]
 
   if (products !== null && orderHistory !== null && order !== null) {
     const sales = order.reduce((total, order) => total + order.total, 0);
 
     cards = [
-      { title: 'Sales', content: sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") },
-      { title: 'Products', content: products.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: "bi bi-box-seam" },
-      { title: 'Orders History', content: orderHistory.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: "bi bi-receipt" },
-      { title: 'Pending Orders', content: order.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: "bi bi-people" },
+      { title: translations.sales, content: sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") },
+      { title: translations.products, content: products.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: "bi bi-box-seam" },
+      { title: translations.orderHistory, content: orderHistory.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: "bi bi-receipt" },
+      { title: translations.pendingOrders, content: order.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: "bi bi-people" },
     ]
   }
 
@@ -72,7 +72,7 @@ const Home = () => {
         <div className="full-width flex-row2col">
           <div className="full-width flex-row-top-between2col">
             <BarChart />
-            <GreenCard title="Orders History">
+            <GreenCard title={translations.orderHistory}>
               {orderHistory && orderHistory !== null ?
                 <PerfectScrollbar className="home--scroll--cont full-width flex-col-top-start">
                   {orderHistory
@@ -85,14 +85,14 @@ const Home = () => {
                 </PerfectScrollbar> : <Loading />
               }
               <Link to={`/OrdersHistory`} className="pointer lists-card--link">
-                <i className="bi bi-arrow-right flex-row-right-start"></i>
+                <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>
           </div>
         </div>
         <div className="full-width flex-row2col home">
           <div className="full-width flex-row-top-between2col">
-            <GreenCard title="New Products">
+            <GreenCard title={translations.newProducts}>
               {products && products !== null ?
                 <PerfectScrollbar className="home--scroll--cont full-width flex-col-top-start">
                   {products
@@ -107,10 +107,10 @@ const Home = () => {
                 : <Loading />
               }
               <Link to={`/Products`} className="pointer lists-card--link">
-                <i className="bi bi-arrow-right flex-row-right-start"></i>
+                <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>
-            <GreenCard title="Reviews">
+            <GreenCard title={translations.reviews}>
 
             </GreenCard>
           </div>
