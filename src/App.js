@@ -51,7 +51,7 @@ const App = () => {
 
   if (!isLoaded) {
     checkAuth();
-    if (timeDifference >= 15 * 60 * 1000) {
+    if (timeDifference >= 14 * 60 * 1000) {
       refreshTokenHandler(refreshToken);
     }
     setInterval(() => {

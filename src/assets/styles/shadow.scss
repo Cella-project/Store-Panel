@@ -1,4 +1,5 @@
 $shadow: rgba($color: #737373, $alpha: 0.25);
+$dark-shadow: rgba($color: #000, $alpha: 0.5);
 
 .shadow-2px {
     box-shadow: 2px 2px 5px $shadow;
@@ -14,4 +15,20 @@ $shadow: rgba($color: #737373, $alpha: 0.25);
 
 .text-shadow {
     text-shadow: 2px 2px 3px $shadow;
+}
+
+.dark-mode .shadow-2px {
+    box-shadow: 2px 2px 5px $dark-shadow;
+}
+
+.dark-mode .shadow-5px {
+    box-shadow: 5px 5px 10px $dark-shadow;
+}
+
+.dark-mode .shadow-10px {
+    box-shadow: 10px 10px 15px $dark-shadow;
+}
+
+.dark-mode .text-shadow {
+    text-shadow: 2px 2px 3px $dark-shadow;
 }

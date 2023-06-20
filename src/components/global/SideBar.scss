@@ -32,10 +32,16 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-        }
 
-        & a:hover div {
-            display: flex !important;
+            &:hover {
+                & i {
+                    color: #737373;
+                }
+
+                & div {
+                    display: flex !important;
+                }
+            }
         }
 
         & a:last-of-type:hover i,
@@ -90,10 +96,16 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-        }
 
-        & a:hover div {
-            display: flex !important;
+            &:hover {
+                & i {
+                    color: #737373;
+                }
+
+                & div {
+                    display: flex !important;
+                }
+            }
         }
 
         & a:last-of-type:hover i,
@@ -124,6 +136,7 @@
     .side-bar {
         display: none !important;
     }
+
     .side-bar-arabic {
         display: none !important;
     }
