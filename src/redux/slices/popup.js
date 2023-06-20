@@ -14,8 +14,7 @@ const popupSlice = createSlice({
         },
         questionPop: {
             shown: false,
-            op: '',
-            payload: null,
+            onSubmit: null,
             msg: ''
         }
     },
@@ -32,8 +31,7 @@ const popupSlice = createSlice({
             };
             state.questionPop = {
                 shown: false,
-                op: '',
-                payload: null,
+                onSubmit: null,
                 msg: ''
             };
         },
@@ -55,8 +53,7 @@ const popupSlice = createSlice({
             state.popPanelShown = true;
             state.questionPop = {
                 shown: true,
-                op: action.payload.op,
-                payload: action.payload.payload,
+                onSubmit: action.payload.onSubmit,
                 msg: action.payload.msg
             };
         }

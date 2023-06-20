@@ -88,7 +88,7 @@ const OrderList = () => {
             filteredOrder.map((orderCard) => {
                 return (
                     <ListsCard key={orderCard._id} >
-                        <OrderCard
+                        <OrderCard 
                             order={orderCard}
                         />
                     </ListsCard>

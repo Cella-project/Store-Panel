@@ -294,8 +294,13 @@ export const AddProduct = () => {
         event.preventDefault();
 
         const product = {
-            title: enteredDescription,
+            title: enteredTitle,
             description: enteredDescription,
+            store:
+            {   
+                _id: storeData._id,
+                storeName: storeData.storeName,
+            },
             price: parseInt(enteredPrice),
             avilableQuantity: parseInt(enteredQuantity),
             category: {
@@ -311,12 +316,16 @@ export const AddProduct = () => {
                 size: item.size,
                 quantity: parseInt(item.quantity)
             })),
-            tags: selectedTags.map(item => ({
-                tag: item.tag
-            })),
             material: enteredMaterial.title,
-            album: album,
         };
+        if (selectedTags.length > 0) {
+            product.tags = selectedTags.map(item => ({
+                tag: item.tag
+            }));
+        }
+        if (album.length > 0) {
+            product.album = album;
+        }
 
         if (discountType !== 'None') {
             product.discount = {
@@ -773,7 +782,7 @@ export const AddProduct = () => {
                                         </label>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
                                             <input className="pointer margin-12px-H" type="radio" name="discount-type" value="Value" checked={discountType === 'Value'} onChange={handleDiscountTypeChange} />
-                                            {translate.percentage}
+                                            {translate.value}
                                         </label>
                                     </div>
                                     {discountType !== 'None' && (
