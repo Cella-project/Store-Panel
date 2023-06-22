@@ -44,7 +44,7 @@ const Profile = () => {
 
         dispatch(authActions.changeProfileImage(data, (response) => {
             setLogoIMG('http://www.actore.store/api/file-manager/file/' + response.data.data);
-        },translate.logoAddedSuccessfully, translate.someThingWentWrongPleaseTry))
+        }, translate.logoAddedSuccessfully, translate.someThingWentWrongPleaseTry))
     }
 
 
@@ -166,42 +166,51 @@ const Profile = () => {
                                                                 </div>
                                                                 {isExpanded && (
                                                                     <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
-                                                                        <div className="margin-6px-V flex-row-left-start">Address Type:
+                                                                        <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
                                                                             <div className='gray margin-12px-H'>
                                                                                 {address.addressType}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">City:
+                                                                        <div className="margin-6px-V flex-row-left-start">{translate.city}:
                                                                             <div className='gray margin-12px-H'>
                                                                                 {address.city}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">District:
+                                                                        <div className="margin-6px-V flex-row-left-start">{translate.district}:
                                                                             <div className='gray margin-12px-H'>
                                                                                 {address.district}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">Street:
+                                                                        <div className="margin-6px-V flex-row-left-start">{translate.street}:
                                                                             <div className='gray margin-12px-H'>
                                                                                 {address.street}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">Building:
+                                                                        <div className="margin-6px-V flex-row-left-start">{translate.building}:
                                                                             <div className='gray margin-12px-H'>
                                                                                 {address.building}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">Floor:
+                                                                        <div className="margin-6px-V flex-row-left-start">{translate.floor}:
                                                                             <div className='gray margin-12px-H'>
                                                                                 {address.floor}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">Flat:
+                                                                        <div className="margin-6px-V flex-row-left-start">{translate.flat}:
                                                                             <div className='gray margin-12px-H'>
                                                                                 {address.flat}
                                                                             </div>
                                                                         </div>
-                                                                        <div className="margin-6px-V flex-row-top-start full-width">Phone Numbers:
+                                                                        {
+                                                                            address.landmark && (
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.landmark}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.landmark}
+                                                                                    </div>
+                                                                                </div>
+                                                                            )
+                                                                        }
+                                                                        <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumber}:
                                                                             <div className="margin-12px-H flex-col-left-start gray">
                                                                                 {address.phoneNums.map((phone) => (
                                                                                     <div key={phone._id}>

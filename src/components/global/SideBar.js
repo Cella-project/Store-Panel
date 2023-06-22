@@ -14,7 +14,7 @@ const SideBar = () => {
   const translations = languages[language];
 
   const handleLogout = () => {
-    dispatch(authActions.logout());
+    dispatch(authActions.logout(translations.logoutSuccessfully));
   }
 
   return (

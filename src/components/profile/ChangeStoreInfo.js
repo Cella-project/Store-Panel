@@ -112,7 +112,7 @@ const ChangeStoreInfo = () => {
             </div>
             <div className='width-80-100 flex-col-left-start inter gray margin-12px-V'>
                 <div className='full-width flex-col-left-start profile--input-container'>
-                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='store-name'>{translate.storeName}</label>
+                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='store-name'>{translate.storeName}:</label>
                     <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${storeNameClasses}`}>
                         <i className='bi bi-shop-window size-20px' />
                         <input className='profile--input full-width margin-12px-H gray radius-10px'
@@ -127,7 +127,7 @@ const ChangeStoreInfo = () => {
                     {storeNameIsTouched && (<div className="error-message">{storeNameError}</div>)}
                 </div>
                 <div className='full-width flex-col-left-start profile--input-container'>
-                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='slogan'>{translate.slogan}</label>
+                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='slogan'>{translate.slogan}:</label>
                     <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${sloganClasses}`}>
                         <i className='bi bi-megaphone size-20px' />
                         <input className='profile--input full-width margin-8px-H gray radius-10px'

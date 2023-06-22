@@ -68,7 +68,7 @@ const AddSocialAccountForm = ({ popupToggle }) => {
     return (
         <form noValidate className='add-store-socials full-width' onSubmit={formSubmissionHandler}>
             <div className='full-width flex-col-center add-store-socials--input-container'>
-                <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.setSocialMediaAccounts}</label>
+                <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.socialMediaAccounts}</label>
                 <div className='full-width gray radius-10px margin-8px-V white-bg flex-row-left-start add-store-socials--input'>
                     <i className='bi bi-facebook size-20px' />
                     <input className='full-width gray margin-6px-H'

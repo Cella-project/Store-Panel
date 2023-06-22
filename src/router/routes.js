@@ -11,7 +11,7 @@ import ResetPassword from '../pages/auth/ResetPassword';
 import Dashboard from '../pages/Dashboard';
 
 import Home from "../pages/dashboard/home/Home";
-import Profile from '../pages/dashboard/Profile/Profile';
+import Profile from '../pages/dashboard/profile/Profile';
 
 import Products from "../pages/dashboard/products/Products";
 import ProductList from "../pages/dashboard/products/ProductList"

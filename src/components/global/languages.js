@@ -265,7 +265,6 @@ const languages = {
     productUpdatedSuccessfully: "Product updated successfully.",
     areYouSureDeleteProduct: "Are you sure you want to delete this product?",
     productDeletedSuccessfully: "Product deleted successfully.",
-    
     ok : "Ok",
     pleaseWait : "Please wait...",
     yes: "Yes",
@@ -286,6 +285,23 @@ const languages = {
     areYouShowDeleteProductImage: "Are you sure you want to delete this product image?",
     productImageDeletedSuccessfully: "Product image deleted successfully.",
     someThingWentWrongPleaseTry: "Something went wrong, please try again.",
+
+    hello: 'Hello',
+    pleaseVerifyYourEmailByClicking :"Please verify your email by clicking",
+    thisLink: 'this link.',
+    aRestCodeHasBeenSentToYourEmailPleaseEnterItBelow: 'A reset code has been sent to your email, please enter it below.',
+
+    verified: 'Verified',
+    unverified: 'Unverified',
+
+    code : 'Code',
+    saleOn : 'Sale on',
+    saleFor : 'Sale for',
+    for : 'for',
+    min: 'min',
+    max : 'max',
+    remaining : 'remaining',
+
   },
   ar: {
     home: 'الرئيسية',
@@ -575,6 +591,22 @@ const languages = {
     areYouShowDeleteProductImage: "هل أنت متأكد من حذف صورة المنتج هذه؟",
     productImageDeletedSuccessfully: "تم حذف صورة المنتج بنجاح",
     someThingWentWrongPleaseTry: "حدث خطأ ما، من فضلك حاول مرة أخرى",
+
+    hello: 'مرحبا',
+    pleaseVerifyYourEmailByClicking :"من فضلك قم بتأكيد بريدك الإلكتروني بالضغط على الرابط المرسل إليك",
+    thisLink: 'هذا الرابط.',
+    aRestCodeHasBeenSentToYourEmailPleaseEnterItBelow: 'تم إرسال رمز إعادة التعيين إلى بريدك الإلكتروني، من فضلك أدخله أدناه',
+
+    verified: 'تم التحقق منها',
+    unverified: 'لم يتم التحقق منها',
+
+    code: 'الرمز',
+    saleOn : 'الخصم على',
+    saleFor : 'الخصم لـ',
+    for : 'لـ',
+    min: 'الحد الأدنى',
+    max : 'الحد الأقصى',
+    remaining : 'المتبقي',
 
 
   },

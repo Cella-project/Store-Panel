@@ -4,13 +4,15 @@ import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../apis/actions';
 import { popupMutation } from '../../redux/mutations';
-
+import languages from '../global/languages';
 import './VerifyOTP.scss';
 
 const VerifyOTP = ({ popupToggle }) => {
     const [value, setValue] = useState('');
     const userData = useSelector((state) => state.auth.userData);
     const mode = useSelector((state) => state.theme.mode);
+    const language = useSelector(state => state.language.language);
+    const translate = languages[language];
     const codeRef = useRef('');
     const dispatch = useDispatch();
     const handleCodeChange = (event) => {
@@ -63,7 +65,7 @@ const VerifyOTP = ({ popupToggle }) => {
             <Timer className={'gold margin-12px-V'} sec={5 * 60} />
             <div className="verifyOTP--info full-width flex-col-left-start gray-bg radius-5px">
                 <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>
-                    A Reset code has been sent to your email address. Please enter the code below.
+                    {translate.aRestCodeHasBeenSentToYourEmailPleaseEnterItBelow}
                 </p>
             </div>
             <div className="verifyOTP--slot full-width flex-col-left-start margin-12px-V">
@@ -71,7 +73,7 @@ const VerifyOTP = ({ popupToggle }) => {
                     style={{ marginLeft: "5px" }}
                     className="no-padding margin-6px-V size-16px inter gray"
                 >
-                    Verify Code
+                    {translate.verifyCode}
                 </p>
                 <OtpInput
                     value={value}
@@ -89,7 +91,7 @@ const VerifyOTP = ({ popupToggle }) => {
                 type="submit"
                 className={`verifyOTP--btn full-width mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} inter pointer radius-10px shadow-2px`}
             >
-                VERIFY
+                {translate.verify}
             </button>
         </form>
     )
