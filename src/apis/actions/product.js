@@ -14,7 +14,7 @@ const productActions = {
             }
         }
     },
-    addProduct(payload, afterSuccess) {
+    addProduct(payload, afterSuccess,msg1,msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -25,15 +25,15 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'product added successfully.'
+                    msg: msg1
                 }));
                 afterSuccess();
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    addProductPicture(payload, afterSuccess) {
+    addProductPicture(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -43,16 +43,15 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'product picture added successfully.'
+                    msg: msg1
                 }));
                 afterSuccess(response);
             } catch (error) {
-                console.log(error)
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    updateProduct(payload,afterSuccess) {
+    updateProduct(payload,afterSuccess,msg1,msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -63,22 +62,22 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'product updated successfully.'
+                    msg: msg1
                 }));
                 afterSuccess();
             } catch (error) {
                 console.log(error)
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    deleteProduct(productId, afterSuccess) {
+    deleteProduct(productId, afterSuccess, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to delete this product?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -87,13 +86,13 @@ const productActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'product deleted successfully.'
+                            msg: msg2
                         }));
                         afterSuccess();
                     }
                 }))
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
@@ -112,13 +111,13 @@ const productActions = {
             }
         }
     },
-    changeProductState(productId) {
+    changeProductState(productId, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to change this product state?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -127,16 +126,16 @@ const productActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'product state changed successfully.'
+                            msg: msg2
                         }));
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
-    addProductColor(payload) {
+    addProductColor(payload,msg1,msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -147,19 +146,19 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'product color added successfully.'
+                    msg: msg1
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    deleteProductColor(payload) {
+    deleteProductColor(payload,msg1,msg2,msg3) {
         return async (dispatch) => {
             dispatch(popupMutation.clearPopPanel());
             dispatch(stickyMutations.popAllNotes());
             dispatch(popupMutation.popQuestion({
-                msg: 'Are you sure you want to delete this color?',
+                msg: msg1,
                 onSubmit: async () => {
                     try {
                         dispatch(popupMutation.clearPopPanel());
@@ -169,16 +168,16 @@ const productActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'product color deleted successfully.'
+                            msg: msg2
                         }));
                     } catch (error) {
-                        errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                        errorHandler(dispatch, error.response, msg3);
                     }
                 }
             }));
         }
     },
-    addProductSize(payload) {
+    addProductSize(payload,msg1,msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -189,20 +188,20 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'product size added successfully.'
+                    msg: msg1
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    deleteProductSize(payload, afterSuccess) {
+    deleteProductSize(payload, afterSuccess, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to delete this size?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -211,17 +210,17 @@ const productActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'product size deleted successfully.'
+                            msg: msg2
                         }));
                         afterSuccess();
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
-    addProductTag(payload) {
+    addProductTag(payload,msg1,msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -232,20 +231,20 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'product tag added successfully.'
+                    msg: msg1
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    deleteProductTag(payload) {
+    deleteProductTag(payload,msg1,msg2,msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to delete this tag?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -254,16 +253,16 @@ const productActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'product tag deleted successfully.'
+                            msg: msg2
                         }));
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
-    refillProductQuantity(payload, afterSuccess) {
+    refillProductQuantity(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -274,15 +273,15 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'Product quantity refilled successfully.'
+                    msg: msg1
                 }));
                 afterSuccess();
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    addProductImage(payload) {
+    addProductImage(payload, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -293,20 +292,19 @@ const productActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'product image added successfully.'
+                    msg: msg1
                 }));
             } catch (error) {
-                console.log("error ",error);
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    deleteProductImage(payload) {
+    deleteProductImage(payload, msg1, msg2, msg3) {
         return async (dispatch) => {
             dispatch(popupMutation.clearPopPanel());
             dispatch(stickyMutations.popAllNotes());
             dispatch(popupMutation.popQuestion({
-                msg: 'Are you sure you want to delete this image?',
+                msg: msg1,
                 onSubmit: async () => {
                     try {
                         dispatch(popupMutation.clearPopPanel());
@@ -317,11 +315,11 @@ const productActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'product image deleted successfully.'
+                            msg: msg2
                         }));
                     } catch (error) {
                         
-                        errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                        errorHandler(dispatch, error.response, msg3);
                     }
                 }
             }));

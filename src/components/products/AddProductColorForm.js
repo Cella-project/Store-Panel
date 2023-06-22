@@ -27,12 +27,12 @@ const AddProductColorForm = ({ popupToggle }) => {
                     color: selectedColor.target.label,
                     hexCode: selectedColor.target.hexCode
                 }
-            }));
+            },translations.productColorAddedSuccessfully,translations.someThingWentWrongPleaseTry));
         } else {
             dispatch(productActions.deleteProductColor({
                 _id: product._id,
                 colorId: product.colors[index]._id
-            }));
+            },translations.areYouSureDeleteProductColor,translations.productColorDeletedSuccessfully,translations.someThingWentWrongPleaseTry));
         }
     };
 
@@ -40,7 +40,7 @@ const AddProductColorForm = ({ popupToggle }) => {
         dispatch(productActions.deleteProductColor({
             _id: product._id,
             colorId: colorId
-        }));
+        },translations.areYouSureDeleteProductColor,translations.productColorDeletedSuccessfully,translations.someThingWentWrongPleaseTry));
     };
     useEffect(() => {
         if (category === null) {

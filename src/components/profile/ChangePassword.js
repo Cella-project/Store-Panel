@@ -126,7 +126,7 @@ const ChangePassword = () => {
             resetPassword();
             resetConfirmedPassword();
             resetCurrentPassword();
-        }))
+        },translate.yourPasswordChangedSuccessfully,translate.someThingWentWrongPleaseTry))
     };
 
     return (

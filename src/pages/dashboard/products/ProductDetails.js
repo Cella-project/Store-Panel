@@ -59,7 +59,7 @@ const ProductDetails = () => {
     dispatch(productActions.deleteProductColor({
       _id: params.id,
       colorId: colorId
-    }));
+    },translate.areYouSureDeleteProductColor,translate.productColorDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
   };
 
   const handleSizeDelete = (sizeId) => {

@@ -123,7 +123,7 @@ export const EditProduct = () => {
             const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
             album.imgURL = url;
             dispatch(productActions.addProductImage({ _id: product._id, imgURL: album.imgURL }));
-        }));
+        },translate.productImageAddedSuccessfully,translate.someThingWentWrongPleaseTry));
     };
 
     // const handlePhotoIndexChange = (oldIndex, newIndex) => {
@@ -133,7 +133,7 @@ export const EditProduct = () => {
     // };
 
     const handlePhotoRemove = (_id) => {
-        dispatch(productActions.deleteProductImage({ _id: product._id, imgId: _id }));
+        dispatch(productActions.deleteProductImage({ _id: product._id, imgId: _id },translate.areYouShowDeleteProductImage,translate.someThingWentWrongPleaseTry));
     };
 
 
@@ -182,7 +182,7 @@ export const EditProduct = () => {
         dispatch(productActions.updateProduct(editedProduct,
             () => {
                 navigate(`/products/${product._id}`);
-            }));
+            },translate.productUpdatedSuccessfully,translate.someThingWentWrongPleaseTry));
     };
 
 

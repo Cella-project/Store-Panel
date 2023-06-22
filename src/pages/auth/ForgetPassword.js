@@ -19,7 +19,7 @@ const ForgetPassword = () => {
     },
     validationSchema: forgetPasswordSchema,
     onSubmit(values, actions) {
-      dispatch(authActions.forgetPassword(values));
+      dispatch(authActions.forgetPassword(values,translations.checkYourEmailWeSentYouOTPToResetPassword));
     }
   });
 

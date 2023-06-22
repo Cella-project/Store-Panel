@@ -5,10 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { popupMutation } from '../../redux/mutations';
 
 import style from './FeedbackPopup.module.scss';
-
+import languages from "../global/languages";
 const FeedbackPopup = () => {
     const dispatch = useDispatch();
-
+    const language = useSelector(state => state.language.language);
+    const translate = languages[language];
     const feedbackPop = useSelector(state => state.popup.feedbackPop);
 
     const clickHandler = () => {
@@ -24,7 +25,7 @@ const FeedbackPopup = () => {
             <p className="inter gray">{ feedbackPop.msg }</p>
         </div>
         <div className="full-width-cont flex-col-center">
-            <button onClick={clickHandler} className={`${style['pop-up--btn']} ${feedbackPop.type === 'success' ? 'green-bg' : feedbackPop.type === 'info' ? 'baby-blue-bg' : feedbackPop.type === 'error' ? 'red-bg' : ''} inter white radius-5px`}>OK</button>
+            <button onClick={clickHandler} className={`${style['pop-up--btn']} ${feedbackPop.type === 'success' ? 'green-bg' : feedbackPop.type === 'info' ? 'baby-blue-bg' : feedbackPop.type === 'error' ? 'red-bg' : ''} inter white radius-5px`}>{translate.ok}</button>
         </div>
     </div>
     );

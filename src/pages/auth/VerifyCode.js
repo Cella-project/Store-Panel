@@ -35,7 +35,7 @@ const VerifyCode = () => {
         dispatch(authActions.verifyOTP({
             email: email,
             otp: codeRef.current
-        }));
+        }, translations.successfulSetNewPassword));
     }
 
     useEffect(() => {

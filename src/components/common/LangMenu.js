@@ -6,13 +6,12 @@ import { languageMutations } from "../../redux/mutations";
 
 
 import './LangMenu.scss';
-
+import languages from "../global/languages";
 const LangMenu = () => {
     const dispatch = useDispatch();
     const [langMenuShown, setLangMenuShown] = useState(false);
     const lang = useSelector(state => state.language.language);
-
-
+    const translate = languages[lang];
     const mode = useSelector(state => state.theme.mode);
 
     const changeLangHandler = (val) => {
@@ -47,16 +46,16 @@ const LangMenu = () => {
     return (
         <div ref={menuRef} onClick={setLangMenuShown.bind(null, !langMenuShown)} className='menu flex-row-center white-bg radius-15px margin-6px-H shadow-2px pointer'>
             <img className='menu--img margin-8px-H flex-row-center radius-circular' src={lang === 'en' ? UKFlag : EGFlag} alt='flag' />
-            <p className={`menu--content space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-12px margin-4px-H`}>{lang.toLocaleUpperCase()}</p>
+            <p className={`menu--content space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-12px margin-4px-H`}>{lang==='ar'?translate.AR:translate.EN}</p>
             <i className={`menu--content bi bi-chevron-${langMenuShown ? 'up' : 'down'} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-12px margin-4px-H`}></i>
             {langMenuShown && <div className='menu--lang-menu flex-col-center white-bg radius-15px shadow-2px'>
                 <div onClick={changeLangHandler.bind(null, 'en')} className='menu--lang-menu--item full-width flex-row-left-start margin-2px-V pointer'>
                     <img className='menu--lang-menu--item--img margin-8px-H flex-row-center radius-circular' src={UKFlag} alt='flag' />
-                    <p className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-12px`}>EN</p>
+                    <p className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-12px`}>{translate.EN}</p>
                 </div>
                 <div onClick={changeLangHandler.bind(null, 'ar')} className='menu--lang-menu--item full-width flex-row-left-start margin-2px-V pointer'>
                     <img className='menu--lang-menu--item--img margin-8px-H flex-row-center radius-circular' src={EGFlag} alt='flag' />
-                    <p className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-12px`}>AR</p>
+                    <p className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-12px`}>{translate.AR}</p>
                 </div>
             </div>}
         </div>

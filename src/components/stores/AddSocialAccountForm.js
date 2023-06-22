@@ -35,7 +35,7 @@ const AddSocialAccountForm = ({ popupToggle }) => {
                 popupToggle(false);
                 document.getElementById("dashboard-view").style.zIndex = 10;
                 window.onscroll = function () { };
-            }));
+            },translate.socialMediaAddedSuccessfully,translate.someThingWentWrongPleaseTry));
         }
         if (Whatsapp.current.length > 0) {
             dispatch(authActions.addStoreSocialMediaAccount({
@@ -48,7 +48,7 @@ const AddSocialAccountForm = ({ popupToggle }) => {
                 popupToggle(false);
                 document.getElementById("dashboard-view").style.zIndex = 10;
                 window.onscroll = function () { };
-            }));
+            },translate.socialMediaAddedSuccessfully,translate.someThingWentWrongPleaseTry));
         }
         if (Instagram.current.length > 0) {
             dispatch(authActions.addStoreSocialMediaAccount({
@@ -61,7 +61,7 @@ const AddSocialAccountForm = ({ popupToggle }) => {
                 popupToggle(false);
                 document.getElementById("dashboard-view").style.zIndex = 10;
                 window.onscroll = function () { };
-            }));
+            },translate.socialMediaAddedSuccessfully,translate.someThingWentWrongPleaseTry));
         }
     }
 

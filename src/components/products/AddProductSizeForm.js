@@ -24,12 +24,12 @@ const AddProductSizeForm = ({ popupToggle }) => {
             dispatch(productActions.addProductSize({
                 _id: product._id,
                 size: selectedSize.target.label
-            }));
+            },translations.productSizeAddedSuccessfully,translations.someThingWentWrongPleaseTry));
         } else {
             dispatch(productActions.deleteProductSize({
                 _id: product._id,
                 sizeId: product.sizes[index]._id
-            }));
+            },translations.areYouSureDeleteProductSize,translations.productSizeDeletedSuccessfully,translations.someThingWentWrongPleaseTry));
         }
     };
 
@@ -37,7 +37,7 @@ const AddProductSizeForm = ({ popupToggle }) => {
         dispatch(productActions.deleteProductSize({
             _id: product._id,
             sizeId: sizeId
-        }));
+        },translations.areYouSureDeleteProductSize,translations.productSizeDeletedSuccessfully,translations.someThingWentWrongPleaseTry));
     };
 
     useEffect(() => {

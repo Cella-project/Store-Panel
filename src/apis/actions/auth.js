@@ -11,7 +11,7 @@ import {
 } from '../../redux/mutations';
 
 const authActions = {
-    login(payload) {
+    login(payload, msg1) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -30,7 +30,7 @@ const authActions = {
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
-                        msg: 'Logged In successfully, Welcome Back.'
+                        msg: msg1
                     }));
                 }
             } catch (error) {
@@ -72,7 +72,7 @@ const authActions = {
             }
         }
     },
-    forgetPassword(payload) {
+    forgetPassword(payload, msg1) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -85,7 +85,7 @@ const authActions = {
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
-                        msg: 'Check your email, we send you an OTP to reset your password.'
+                        msg: msg1
                     }));
                 }
             } catch (error) {
@@ -93,7 +93,7 @@ const authActions = {
             }
         }
     },
-    verifyOTP(payload) {
+    verifyOTP(payload, msg1) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -106,7 +106,7 @@ const authActions = {
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
-                        msg: 'Successfall, set your new password.'
+                        msg: msg1
                     }));
                 }
             } catch (error) {
@@ -114,7 +114,7 @@ const authActions = {
             }
         }
     },
-    resetPassword(payload) {
+    resetPassword(payload, msg1) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -127,7 +127,7 @@ const authActions = {
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
-                        msg: 'Your password changed successfully.'
+                        msg: msg1
                     }));
                 }
             } catch (error) {
@@ -135,7 +135,7 @@ const authActions = {
             }
         }
     },
-    changeProfileImage(payload, afterSuccess) {
+    changeProfileImage(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -145,15 +145,15 @@ const authActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'Logo added successfully.'
+                    msg: msg1
                 }));
                 afterSuccess(response);
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    editProfile(payload, afterSuccess) {
+    editProfile(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -165,18 +165,18 @@ const authActions = {
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
-                        msg: 'Store updated successfully.'
+                        msg: msg1
                     }));
                     afterSuccess();
                 }
             } catch (error) {
                 console.log(error);
                 console.log(payload);
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    changePassword(payload, afterSuccess) {
+    changePassword(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -187,21 +187,21 @@ const authActions = {
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
-                        msg: 'Your password changed successfully.'
+                        msg: msg1
                     }));
                     afterSuccess();
                 }
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    logout() {
+    logout(msg1) {
         return async (dispatch) => {
             dispatch(stickyMutations.popAllNotes());
             dispatch(stickyMutations.pushNote({
                 type: 'success',
-                msg: 'You logged out successfully.'
+                msg: msg1
             }));
             localStorage.removeItem('Access Token');
             localStorage.removeItem('Refresh Token');
@@ -212,7 +212,7 @@ const authActions = {
             }));
         }
     },
-    addStoreSocialMediaAccount(payload, afterSuccess) {
+    addStoreSocialMediaAccount(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -223,21 +223,21 @@ const authActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'Social Accounts added successfully.'
+                    msg: msg1
                 }));
                 afterSuccess();
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong while adding social media accounts.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    deleteStoreSocialMediaAccount(payload) {
+    deleteStoreSocialMediaAccount(payload, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to delete this social media account?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -246,16 +246,16 @@ const authActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'Social Accounts deleted successfully.'
+                            msg: msg2
                         }));
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong while deleting social media accounts.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
-    addStoreBranch(payload, afterSuccess) {
+    addStoreBranch(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -266,21 +266,21 @@ const authActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.pushNote({
                     type: 'success',
-                    msg: 'Branch added successfully.'
+                    msg: msg1
                 }));
                 afterSuccess();
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong while adding branch.');
+                errorHandler(dispatch, error.response, msg2);
             }
         }
     },
-    deleteStoreBranch(payload) {
+    deleteStoreBranch(payload, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to delete this branch?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -289,36 +289,15 @@ const authActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'Branch deleted successfully.'
+                            msg: msg2
                         }));
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong while deleting branch.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
-    updateStore(payload, afterSuccess) {
-        return async (dispatch) => {
-            try {
-                dispatch(popupMutation.clearPopPanel());
-                dispatch(stickyMutations.popAllNotes());
-                dispatch(popupMutation.popLoading());
-                const response = await Axios.put('/api/store-main/store', payload);
-                if (response.status === 200) {
-                    dispatch(authMutations.setUserData(response.data.data));
-                    dispatch(popupMutation.clearPopPanel());
-                    dispatch(stickyMutations.pushNote({
-                        type: 'success',
-                        msg: 'Store updated successfully.'
-                    }));
-                    afterSuccess();
-                }
-            } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
-            }
-        }
-    }
 }
 
 export default authActions;

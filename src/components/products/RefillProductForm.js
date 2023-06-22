@@ -82,7 +82,7 @@ export const RefillProductForm = ({ popupToggle }) => {
             popupToggle(false);
             document.getElementById("dashboard-view").style.zIndex = 10;
             window.onscroll = function () { };
-        }));
+        },translate.productQuantityAddedSuccessfully,translate.someThingWentWrongPleaseTry));
 
     }
 

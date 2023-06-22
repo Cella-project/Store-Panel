@@ -22,7 +22,7 @@ const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit(values, actions) {
-      dispatch(authActions.login(values));
+      dispatch(authActions.login(values,translations.logInSuccessfullyWelcomeBack));
     }
   });
 

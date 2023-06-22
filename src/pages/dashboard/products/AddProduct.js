@@ -164,7 +164,7 @@ export const AddProduct = () => {
             dispatch(productActions.addProductPicture(data, (response) => {
                 const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
                 album.photos.push({ 'URL': url });
-            }));
+            },translate.productPictureAddedSuccessfully,translate.someThingWentWrongPleaseTry));
         }
         setAlbum(album.photos);
     }
@@ -338,7 +338,7 @@ export const AddProduct = () => {
         dispatch(productActions.addProduct(product,
             () => {
                 navigate(`/home/`);
-            }));
+            },translate.productAddedSuccessfully,translate.someThingWentWrongPleaseTry));
     };
 
 

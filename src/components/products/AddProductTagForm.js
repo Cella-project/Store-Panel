@@ -24,12 +24,12 @@ const AddProductTagForm = ({ popupToggle }) => {
             dispatch(productActions.addProductTag({
                 _id: product._id,
                 tag: selectedTag.target.label
-            }));
+            },translate.productTagAddedSuccessfully,translate.someThingWentWrongPleaseTry));
         } else {
             dispatch(productActions.deleteProductTag({
                 _id: product._id,
                 tagId: product.tags[index]._id
-            }));
+            },translate.areYouSureDeleteProductTag,translate.productTagDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
         }
     };
 
@@ -37,7 +37,7 @@ const AddProductTagForm = ({ popupToggle }) => {
         dispatch(productActions.deleteProductTag({
             _id: product._id,
             tagId: tagId
-        }));
+        },translate.areYouSureDeleteProductTag,translate.productTagDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
     };
     useEffect(() => {
         if (category === null) {

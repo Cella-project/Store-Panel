@@ -17,7 +17,7 @@ const ProductControl = ({ id }) => {
 
   //handle change state
   const handleChangeState = async () => {
-    dispatch(productActions.changeProductState(id));
+    dispatch(productActions.changeProductState(id,translate.areYouSureYouWantChangeStateOfThisProduct,translate.productStateChangedSuccessfully,translate.someThingWentWrongPleaseTry));
   };
 
   //handle delete
@@ -25,7 +25,7 @@ const ProductControl = ({ id }) => {
     dispatch(
       productActions.deleteProduct(id, () => {
         router.navigate("/products");
-      })
+      },translate.areYouSureDeleteProduct,translate.productDeletedSuccessfully,translate.someThingWentWrongPleaseTry)
     );
   };
   const handleRefill = () => {

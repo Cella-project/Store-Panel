@@ -12,15 +12,15 @@ const OrderControl = () => {
   const orderData = useSelector((state) => state.order.orderData);
 
   const handleApprove = async () => {
-    dispatch(orderActions.approveOrder(orderData._id))
+    dispatch(orderActions.approveOrder(orderData._id,translate.areYouSureApproveOrder,translate.orderApproved,translate.someThingWentWrongPleaseTry))
   }
 
   const handleCancel = async () => {
-    dispatch(orderActions.cancelOrder(orderData._id))
+    dispatch(orderActions.cancelOrder(orderData._id,translate.areYouSureCancelOrder,translate.orderCanceled,translate.someThingWentWrongPleaseTry))
   }
 
   const handleReady = async () => {
-    dispatch(orderActions.readyForPickup(orderData._id))
+    dispatch(orderActions.readyForPickup(orderData._id,translate.areYouSureReadyForPickup,translate.orderReadyForPickup,translate.someThingWentWrongPleaseTry))
   }
 
   return (

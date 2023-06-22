@@ -33,7 +33,7 @@ const ResetPassword = () => {
                 email: forgetPasswordData.email,
                 otp: `${forgetPasswordData.OTP}`,
                 newPassword: values.password
-            }));
+            }, translations.yourPasswordChangedSuccessfully));
         }
     });
     

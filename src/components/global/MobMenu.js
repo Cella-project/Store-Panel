@@ -14,7 +14,7 @@ const MobMenu = ({ menuToggle }) => {
     const language = useSelector(state => state.language.language);
     const translations = languages[language];
     const handleLogout = () => {
-        dispatch(authActions.logout());
+        dispatch(authActions.logout(translations.logoutSuccessfully));
     }
 
 

@@ -30,13 +30,13 @@ const orderActions = {
             }
         }
     },
-    cancelOrder(orderId) {
+    cancelOrder(orderId,msg1,msg2,msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to cancel this order?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -45,22 +45,22 @@ const orderActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'Order cancelled successfully.'
+                            msg: msg2
                         }));
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
-    approveOrder(orderId) {
+    approveOrder(orderId,msg1,msg2,msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to approve this order?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -69,22 +69,22 @@ const orderActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'Order approved successfully.'
+                            msg: msg2
                         }));
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     },
-    readyForPickup(orderId) {
+    readyForPickup(orderId,msg1,msg2,msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
-                    msg: 'Are you sure you want to mark this order as ready for pickup?',
+                    msg: msg1,
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
@@ -93,12 +93,12 @@ const orderActions = {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
                             type: 'success',
-                            msg: 'Order marked as ready for pickup successfully.'
+                            msg: msg2
                         }));
                     }
                 }));
             } catch (error) {
-                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+                errorHandler(dispatch, error.response, msg3);
             }
         }
     }

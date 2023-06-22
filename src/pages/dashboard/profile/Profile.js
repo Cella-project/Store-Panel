@@ -44,7 +44,7 @@ const Profile = () => {
 
         dispatch(authActions.changeProfileImage(data, (response) => {
             setLogoIMG('http://www.actore.store/api/file-manager/file/' + response.data.data);
-        }))
+        },translate.logoAddedSuccessfully, translate.someThingWentWrongPleaseTry))
     }
 
 
@@ -80,13 +80,13 @@ const Profile = () => {
         dispatch(authActions.deleteStoreSocialMediaAccount({
             _id: userData._id,
             socialMediaAccountId: accountID
-        }));
+        }, translate.areYouSureDeleteSocialMedia, translate.socialMediaDeletedSuccessfully, translate.someThingWentWrongPleaseTry));
     }
     const deleteAddress = (addressID) => {
         dispatch(authActions.deleteStoreBranch({
             _id: userData._id,
             addressId: addressID
-        }));
+        }, translate.areYouSureDeleteBranch, translate.branchDeletedSuccessfully, translate.someThingWentWrongPleaseTry));
     }
 
     return (

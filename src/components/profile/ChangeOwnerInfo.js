@@ -117,7 +117,7 @@ const ChangeOwnerInfo = () => {
         dispatch(authActions.editProfile({
             _id: userData._id,
             ...updatedFields,
-        }, () => setEditMode(false)))
+        }, () => setEditMode(false),translate.ownerInfoUpdatedSuccessfully,translate.someThingWentWrongPleaseTry))
 
     };
 
