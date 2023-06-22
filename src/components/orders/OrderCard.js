@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import languages from '../global/languages';
 
 
-const OrderCard = ({ order,type="" }) => {
+const OrderCard = ({ order, type = "" }) => {
     const language = useSelector(state => state.language.language);
     const translate = languages[language]
     return (
@@ -18,16 +18,12 @@ const OrderCard = ({ order,type="" }) => {
                     <div className='flex-row-left-start margin-2px-V'>
                         <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.orderCode}: </span>{order.code}
                     </div>
-                    <div className='flex-row-left-start margin-2px-V flex-wrap'>
-                        <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.store}: </span>
-                        <i className='bi bi-shop-window mint-green size-30px margin-4px-H' />{order.store.storeName}
-                    </div>
                     <div className='flex-row-left-start margin-2px-V'>
                         <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.date}: </span>{order.createdAt.split("T")[0]}
                     </div>
                     <div className='flex-row-left-start margin-2px-V'>
                         <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.status}: </span>
-                        <span className={`${order.status === 'Delivered' ? 'green' : order.status === 'pending' ? 'yellow' : 'red'}`}>
+                        <span className={`${order.status === 'Delivered' || order.status === 'Ready' ? 'green' : order.status === 'Pending' ? 'yellow' : order.status === 'Approved' ? 'mint-green' : 'red'}`}>
                             {order.status}
                         </span>
                     </div>

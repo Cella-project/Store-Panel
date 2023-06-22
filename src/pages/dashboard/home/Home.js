@@ -4,7 +4,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import GreenCard from "../../../components/common/GreenCard";
 import ProductCard from "../../../components/products/ProductCard";
 import OrderCard from "../../../components/orders/OrderCard";
-import { productActions, orderHistoryActions } from "../../../apis/actions";
+import { productActions, orderActions,orderHistoryActions } from "../../../apis/actions";
 import BarChart from "../../../components/common/BarChart";
 import { useDispatch, useSelector } from "react-redux";
 import languages from '../../../components/global/languages';
@@ -25,6 +25,7 @@ const Home = () => {
   useEffect(() => {
     document.title = 'Home • Store Panel';
     dispatch(productActions.getProducts(storeData._id));
+    dispatch(orderActions.getOrder(storeData._id))
     dispatch(orderHistoryActions.getOrderHistory(storeData._id));
   }, [dispatch, storeData._id]);
 

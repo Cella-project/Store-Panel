@@ -3,7 +3,7 @@ import useInput from '../../hooks/useInput';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../apis/actions';
-
+import languages from '../global/languages';
 const ChangePassword = () => {
     const [editPass, setEditPass] = useState(false);
     const [currentPasswordShown, setCurrentPasswordShown] = useState(false);
@@ -14,6 +14,8 @@ const ChangePassword = () => {
 
     const dispatch = useDispatch();
     const mode = useSelector((state) => state.theme.mode);
+    const language = useSelector(state => state.language.language);
+    const translate = languages[language];
 
     const userData = useSelector((state) => state.auth.userData);
 
@@ -28,13 +30,13 @@ const ChangePassword = () => {
     } = useInput((value) => {
         let error = "";
         if (value === "") {
-            error = "Passwords Is required.";
+            error = translate.passwordRequired;
         }
         if (value.length < 8) {
-            error = 'Password must be at least 8 digits';
+            error = translate.passwordLength;
         }
         if (value === enteredPassword) {
-            error = `You can't match the new password`;
+            error = translate.passwordMatch;
         }
         return { isValid: !error, error };
     });
@@ -52,13 +54,13 @@ const ChangePassword = () => {
         const test = regex.test(value);
         let error = '';
         if (value.trim() === '') {
-            error = 'Please enter a password.';
+            error = translate.passwordCurrent;
         } else if (!test) {
-            error = 'Please enter a password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 special character.';
+            error = translate.passwordCurrentMatch;
         } else if (value.length < 8) {
-            error = 'Password must be at least 8 digits';
+            error = translate.passwordLength;
         } else if (value === currentPassword) {
-            error = "You can't use the Current Password";
+            error = translate.passwordCannotMatch;
         }
         return { isValid: !error, error };
     });
@@ -74,7 +76,7 @@ const ChangePassword = () => {
     } = useInput((value) => {
         let error = "";
         if (value !== enteredPassword) {
-            error = "Passwords do not match.";
+            error = translate.passwordDoNotMatch;
         }
         return { isValid: !error, error };
     });
@@ -133,29 +135,29 @@ const ChangePassword = () => {
                 onClick={() => {
                     setEditPass(true)
                 }}
-                value='Change Password' />
+                value={translate.changePassword} />
             }
             {editPass &&
                 <form noValidate className={`profile--info ${!editPass && 'none'} full-width white-bg shadow-5px flex-col-center margin-12px-V`}
                     onSubmit={handleSubmit}>
                     <div className={`full-width flex-row-between pt-sans ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-28px font-bold`}>
-                        Change Password
+                        {translate.changePassword}
                         <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px mint-green-bg size-20px pointer`}
                             type="button"
                             onClick={handleCancelForm}>
-                            Cancel
+                            {translate.cancel}
                         </button>
                     </div>
                     <div className='width-70-100 flex-col-left-start inter gray margin-12px-V'>
                         <div className='full-width flex-col-left-start'>
                             <div className='full-width flex-row-left-start margin-12px-V size-18px'>
-                                <label className="font-bold size-20px pt-sans margin-12px-H" htmlFor="current" >Current:</label>
+                                <label className="font-bold size-20px pt-sans margin-12px-H" htmlFor="current" >{translate.current}:</label>
                                 <div className={`profile--input--container focus full-width shadow-2px flex-row-left-start radius-10px ${currentPasswordClasses}`}>
                                     <i className="bi bi-key gray size-18px" />
                                     <input
                                         className="profile--input full-width margin-8px-H gray radius-10px"
                                         type={currentPasswordShown ? "text" : "password"}
-                                        placeholder="Current Password"
+                                        placeholder={translate.currentPassword}
                                         value={currentPassword}
                                         onChange={currentPasswordChangedHandler}
                                         onBlur={currentPasswordBlurHandler}
@@ -171,13 +173,13 @@ const ChangePassword = () => {
                         </div>
                         <div className='full-width flex-col-left-start'>
                             <div className='full-width flex-row-left-start margin-12px-V size-18px'>
-                                <label className="font-bold size-20px pt-sans margin-12px-H" htmlFor="newPass" >New:</label>
+                                <label className="font-bold size-20px pt-sans margin-12px-H" htmlFor="newPass" >{translate.new}:</label>
                                 <div className={`profile--input--container focus full-width shadow-2px flex-row-left-start radius-10px ${passwordClasses}`}>
                                     <i className="bi bi-key gray size-18px" />
                                     <input
                                         className="profile--input full-width margin-8px-H gray radius-10px"
                                         type={passwordShown ? "text" : "password"}
-                                        placeholder="New Password"
+                                        placeholder={translate.newPassword}
                                         value={enteredPassword}
                                         onChange={(event) => {
                                             passwordChangedHandler(event);
@@ -195,12 +197,12 @@ const ChangePassword = () => {
                         )}
                         <div className='full-width flex-col-left-start'>
                             <div className='full-width flex-row-left-start margin-12px-V size-18px'>
-                                <label className="font-bold size-20px pt-sans margin-12px-H" htmlFor="confirmNew" >Confirm:</label>
+                                <label className="font-bold size-20px pt-sans margin-12px-H" htmlFor="confirmNew" >{translate.confirm}:</label>
                                 <div className={`profile--input--container focus full-width shadow-2px flex-row-left-start radius-10px ${confirmedPasswordClasses}`}>
                                     <i className="bi bi-key gray size-18px" />
                                     <input
                                         className="profile--input full-width margin-8px-H gray radius-10px"
-                                        placeholder="Confirm New Password"
+                                        placeholder={translate.confirmNewPassword}
                                         type={confirmedPasswordShown ? "text" : "password"}
                                         value={confirmedPassword}
                                         onChange={(event) => {
@@ -221,7 +223,7 @@ const ChangePassword = () => {
                     <button disabled={formIsValid} className={ `profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px width-50-100 mint-green-bg size-20px pointer`}
                         type='submit'
                     >
-                        Save
+                        {translate.save}
                     </button>
 
                 </form>

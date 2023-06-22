@@ -3,16 +3,17 @@ import PhoneInput from 'react-phone-number-input';
 import useInput from '../../hooks/useInput';
 
 import { useDispatch, useSelector } from 'react-redux';
-
+import languages from '../global/languages';
 import authActions from '../../apis/actions/auth';
 
-const ChangeInfo = () => {
+const ChangeOwnerInfo = () => {
     const [editMode, setEditMode] = useState(false);
 
     const userData = useSelector((state) => state.auth.userData);
 
     const mode = useSelector((state) => state.theme.mode);
-
+    const language = useSelector(state => state.language.language);
+    const translate = languages[language];
     const dispatch = useDispatch();
 
     const {
@@ -27,12 +28,12 @@ const ChangeInfo = () => {
         const isValid = value.trim() !== '' && value.trim().length >= 3 && value.trim().length <= 50;
         let error = '';
         if (value.trim() === '') {
-            error = 'Please enter a full name.';
+            error = translate.pleaseEnterFullName;
         } else if (value.trim().length < 3 || value.trim().length > 50) {
-            error = 'Please enter a full name between 3 and 50 characters.';
+            error = translate.pleaseEnterFullNameBetween3_50;
         }
         return { isValid, error };
-    }, userData.name);
+    }, userData.owner.name);
     const {
         value: enteredEmail,
         isValid: enteredEmailIsValid,
@@ -47,12 +48,12 @@ const ChangeInfo = () => {
         const isValid = regex.test(value);
         let error = '';
         if (value.trim() === '') {
-            error = 'Please enter an email address.';
+            error = translate.pleaseEnterEmail;
         } else if (!isValid) {
-            error = 'Please enter a valid email address.';
+            error = translate.pleaseEnterValidEmail;
         }
         return { isValid, error };
-    }, userData.email);
+    }, userData.owner.email);
     const {
         value: enteredPhone,
         isValid: enteredPhoneIsValid,
@@ -65,14 +66,14 @@ const ChangeInfo = () => {
         let error = '';
         let isValid = true;
         if (!value) {
-            error = 'Phone number is required';
+            error = translate.pleaseEnterPhoneNumber;
             isValid = false;
         } else if (value.length < 10) {
-            error = 'Please enter a valid phone number';
+            error = translate.pleaseEnterValidPhoneNumber;
             isValid = false;
         }
         return { error, isValid };
-    }, "+2" + userData.phoneNum);
+    }, "+2" + userData.owner.phoneNum);
 
     const fullNameClasses = fullNameIsTouched && !enteredFullNameIsValid
         ? 'form-control-invalid'
@@ -98,23 +99,24 @@ const ChangeInfo = () => {
         if (event) {
             event.preventDefault();
         }
-        const updatedFields = {};
+        const updatedFields = { owner: {} };
 
-        if (enteredFullName.trim() !== userData.name) {
-            updatedFields.name = enteredFullName.trim();
+        if (enteredFullName.trim() !== userData.owner.name) {
+            updatedFields.owner.name = enteredFullName.trim();
         }
 
-        if (enteredEmail.trim() !== userData.email) {
-            updatedFields.email = enteredEmail.trim();
+        if (enteredEmail.trim() !== userData.owner.email) {
+            updatedFields.owner.email = enteredEmail.trim();
         }
 
-        if (enteredPhone && userData.phoneNum && enteredPhone.replace("+20", "") !== userData.phoneNum.replace("+20", "")) {
-            updatedFields.phoneNum = enteredPhone.replace("+2", "");
+        if (enteredPhone && userData.owner.phoneNum && enteredPhone.replace("+2", "") !== userData.owner.phoneNum.replace("+20", "")) {
+            updatedFields.owner.phoneNum = enteredPhone.replace("+2", "");
         }
 
 
         dispatch(authActions.editProfile({
-            ...updatedFields, _id: userData._id
+            _id: userData._id,
+            ...updatedFields,
         }, () => setEditMode(false)))
 
     };
@@ -123,80 +125,79 @@ const ChangeInfo = () => {
     return (
         <form onSubmit={handleSubmit} noValidate className={`profile--info full-width white-bg shadow-5px flex-col-center margin-12px-V`}>
             <div className={`full-width flex-row-between pt-sans ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-28px font-bold`}>
-                Info
+                {translate.ownerInfo}
                 {editMode ? (
                     <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px mint-green-bg size-20px pointer`}
                         type="button"
                         onClick={handleCancelForm}
                     >
-                        Cancel
+                        {translate.cancel}
                     </button>
                 ) : (
                     <button className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-10px mint-green-bg size-20px pointer`}
                         onClick={() => {
                             setEditMode(true)
                         }}>
-                        Edit
+                        {translate.edit}
                     </button>
                 )}
             </div>
-            <div className='width-70-100 flex-col-left-start inter gray margin-12px-V'>
+            <div className='width-80-100 flex-col-left-start inter gray margin-12px-V'>
                 <div className='full-width flex-col-left-start'>
-                    <div className='full-width flex-row-left-start margin-12px-V size-18px'>
-                        <label className='font-bold size-20px pt-sans margin-12px-H' htmlFor="fullName">Name: </label>
-                        <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${fullNameClasses}`}>
-                            <i className="bi bi-person gray size-18px " />
-                            <input className='profile--input full-width margin-8px-H gray radius-10px'
-                                type="text"
-                                disabled={!editMode}
-                                value={enteredFullName}
-                                onChange={fullNameChangedHandler}
-                                onBlur={fullNameBlurHandler}
-                            />
-                        </div>
+                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="fullName">{translate.ownerName}:</label>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${fullNameClasses}`}>
+                        <i className="bi bi-person gray size-18px " />
+                        <input className='profile--input full-width margin-8px-H gray radius-10px'
+                            type="text"
+                            disabled={!editMode}
+                            value={enteredFullName}
+                            onChange={fullNameChangedHandler}
+                            onBlur={fullNameBlurHandler}
+                        />
                     </div>
                     {fullNameIsTouched && (
                         <div className="error-message">{fullNameError}</div>
                     )}
                 </div>
                 <div className='full-width flex-col-left-start'>
-                    <div className='full-width flex-row-left-start margin-12px-V size-18px'>
-                        <label className='font-bold size-20px pt-sans margin-12px-H' htmlFor="email">Email:</label>
-                        <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${emailClasses}`}>
-                            <i className="bi bi-envelope gray size-18px " />
-                            <input className='profile--input full-width margin-8px-H gray radius-10px'
-                                type="email"
-                                id={'email'}
-                                disabled={!editMode}
-                                value={enteredEmail}
-                                onChange={emailChangedHandler}
-                                onBlur={emailBlurHandler}
-                            />
+                    <div className='flex-row-between full-width'>
+                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="email">{translate.ownerEmail}:</label>
+                        <div className={`${userData.status==='Active'?'green':'red'} font-bold`}>
+                            {userData.status}
                         </div>
+                    </div>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${emailClasses}`}>
+                        <i className="bi bi-envelope gray size-18px " />
+                        <input className='profile--input full-width margin-8px-H gray radius-10px'
+                            type="email"
+                            id={'email'}
+                            disabled={!editMode}
+                            value={enteredEmail}
+                            onChange={emailChangedHandler}
+                            onBlur={emailBlurHandler}
+                        />
                     </div>
                     {emailIsTouched && (
                         <div className="error-message">{emailError}</div>
                     )}
                 </div>
                 <div className='full-width flex-col-left-start'>
-                    <div className='full-width flex-row-left-start margin-12px-V size-18px'>
-                        <label className='font-bold size-20px pt-sans margin-12px-H' htmlFor="phone">Phone:</label>
-                        <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${phoneClasses}`}>
-                            <PhoneInput
-                                id={'phone'}
-                                className={`profile--input white-bg full-width radius-10px`}
-                                international
-                                countryCallingCodeEditable={false}
-                                countrySelectProps={{ unicodeFlags: true }}
-                                defaultCountry={"EG"}
-                                disabled={!editMode}
-                                limitMaxLength
-                                value={enteredPhone}
-                                onChange={(phone) =>
-                                    phoneChangedHandler({ target: { id: "phone", value: phone } })}
-                                onBlur={phoneBlurHandler}
-                            />
-                        </div>
+                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="phone">{translate.ownerPhoneNumber}:</label>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${phoneClasses}`}>
+                        <PhoneInput
+                            id={'phone'}
+                            className={`profile--input white-bg full-width radius-10px`}
+                            international
+                            countryCallingCodeEditable={false}
+                            countrySelectProps={{ unicodeFlags: true }}
+                            defaultCountry={"EG"}
+                            disabled={!editMode}
+                            limitMaxLength
+                            value={enteredPhone}
+                            onChange={(phone) =>
+                                phoneChangedHandler({ target: { id: "phone", value: phone } })}
+                            onBlur={phoneBlurHandler}
+                        />
                     </div>
                     {phoneIsTouched && (
                         <div className="error-message">{phoneError}</div>
@@ -207,11 +208,11 @@ const ChangeInfo = () => {
                 <button className={`profile--input--container shadow-2px width-50-100 ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px mint-green-bg font-bold size-20px pointer`}
                     type='submit'
                 >
-                    Save
+                    {translate.save}
                 </button>
             }
         </form>
     )
 }
 
-export default ChangeInfo;
+export default ChangeOwnerInfo;

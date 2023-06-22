@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { storeActions } from '../../apis/actions';
+import { authActions } from '../../apis/actions';
 import router from "../../router/router";
 import Popup from "../common/PopupForm";
 
@@ -13,12 +13,12 @@ const StoreControl = ({ id }) => {
 
   //handle change state
   const handleChangeState = async () => {
-    dispatch(storeActions.changeStoreState(id))
+    dispatch(authActions.changeStoreState(id))
   };
 
   //handle delete 
   const handleDelete = () => {
-    dispatch(storeActions.deleteStore(id, () => {
+    dispatch(authActions.deleteStore(id, () => {
       router.navigate("/stores");
     }))
   }

@@ -37,7 +37,7 @@ const orderActions = {
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
                     msg: 'Are you sure you want to cancel this order?',
-                    onsubmit: async () => {
+                    onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
                         const response = await Axios.put('/api/order-operation/canceled-by-store', {_id: orderId});
@@ -61,7 +61,7 @@ const orderActions = {
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
                     msg: 'Are you sure you want to approve this order?',
-                    onsubmit: async () => {
+                    onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
                         const response = await Axios.put('/api/order-operations/approve', {_id: orderId});
@@ -85,7 +85,7 @@ const orderActions = {
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popQuestion({
                     msg: 'Are you sure you want to mark this order as ready for pickup?',
-                    onsubmit: async () => {
+                    onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
                         const response = await Axios.put('/api/order-operations/ready', {_id: orderId});

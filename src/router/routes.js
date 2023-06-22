@@ -11,6 +11,7 @@ import ResetPassword from '../pages/auth/ResetPassword';
 import Dashboard from '../pages/Dashboard';
 
 import Home from "../pages/dashboard/home/Home";
+import Profile from '../pages/dashboard/Profile/Profile';
 
 import Products from "../pages/dashboard/products/Products";
 import ProductList from "../pages/dashboard/products/ProductList"
@@ -118,6 +119,10 @@ export const routes = [
                                 element: <OrderHistoryDetails />,
                             }
                         ],
+                    },
+                    {
+                        path: "profile",
+                        element: <Profile />,
                     },
                     {
                         path: "reviews",

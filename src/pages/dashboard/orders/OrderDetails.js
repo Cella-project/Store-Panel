@@ -81,43 +81,7 @@ const OrderDetails = () => {
                 </GreenCard>
               </div>
               <div className="flex-row-top-between2col full-width full-width">
-                <GreenCard title={translate.reviews}>
-                  {/* <PerfectScrollbar className="review-scroll--cont full-width"></PerfectScrollbar> */}
-                  <Link to={`/Reviews`} className="pointer lists-card--link">
-                    <i className={`flex-row-right-start ${language === 'ar' ? 'bi bi-arrow-left' : "bi bi-arrow-right"}`}></i>
-                  </Link>
-                </GreenCard>
-                <GreenCard title={translate.vouchers}>
-                  {/* {
-                                    voucherCards.map((voucher) => {
-                                        return (
-                                            voucher.id === order.voucher &&
-                                            <VoucherCard type={voucher.type}
-                                            status={voucher.status}
-                                            store={voucher.store}
-                                            value={voucher.value}
-                                            code={voucher.code}
-                                            img={voucher.img} />
-                                            );
-                                        })
-                                    }
-                                    <Link to={`/Vouchers`} className="pointer lists-card--link">
-                                    <i className="bi bi-arrow-right flex-row-right-start"></i>
-                                </Link> */}
-                </GreenCard>
-              </div>
-            </div>
-
-          </div>
-          <div className="flex-col-top-start order-details--card-cont width-20-100">
-            <GreenCard title={translate.delivery}>
-              {order.driver.state === 'NotAssigned' ? (
-                <div className="gray inter size-20px font-bold flex-row-center">{translate.notAssigned}</div>
-              ) : (
-                <div className="gray inter size-20px font-bold flex-row-center">{translate.assigned}</div>
-              )}
-            </GreenCard>
-            <GreenCard title={translate.pickupLocation}>
+              <GreenCard title={translate.pickupLocation}>
               {order && order.pickupLocation && (
                 <div>
                   <div className="pointer flex-col-right-start" onClick={handleExpandPick}>
@@ -232,6 +196,36 @@ const OrderDetails = () => {
               )}
 
             </GreenCard>
+              </div>
+            </div>
+
+          </div>
+          <div className="flex-col-top-start order-details--card-cont width-20-100">
+            <GreenCard title={translate.delivery}>
+              {order.driver.state === 'NotAssigned' ? (
+                <div className="gray inter size-20px font-bold flex-row-center">{translate.notAssigned}</div>
+              ) : (
+                <div className="gray inter size-20px font-bold flex-row-center">{translate.assigned}</div>
+              )}
+            </GreenCard>
+            <GreenCard title={translate.vouchers}>
+                  {/* {
+                                    voucherCards.map((voucher) => {
+                                        return (
+                                            voucher.id === order.voucher &&
+                                            <VoucherCard type={voucher.type}
+                                            status={voucher.status}
+                                            store={voucher.store}
+                                            value={voucher.value}
+                                            code={voucher.code}
+                                            img={voucher.img} />
+                                            );
+                                        })
+                                    }
+                                    <Link to={`/Vouchers`} className="pointer lists-card--link">
+                                    <i className="bi bi-arrow-right flex-row-right-start"></i>
+                                </Link> */}
+                </GreenCard>
           </div>
         </div>
       </>)}

@@ -4,18 +4,19 @@ import { Icon } from 'leaflet';
 import PhoneInput from 'react-phone-number-input';
 import { RegionDropdown } from 'react-country-region-selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import { storeActions } from '../../apis/actions';
+import { authActions } from '../../apis/actions';
 import useInput from '../../hooks/useInput';
 import 'react-phone-number-input/style.css';
 import './AddBranchForm.scss';
 import "leaflet/dist/leaflet.css";
+import languages from '../global/languages';
 
 const AddBranchForm = ({ popupToggle }) => {
   const dispatch = useDispatch();
-  const params = useParams();
+  const userData = useSelector((state) => state.auth.userData);
   const mode = useSelector((state) => state.theme.mode);
-
+  const language = useSelector(state => state.language.language);
+  const translate = languages[language];
   const [lat, setLat] = useState(31.25654);
   const [long, setLong] = useState(32.28411);
   const [position, setPosition] = useState([lat, long]);
@@ -36,9 +37,9 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value.trim() !== '' && value.length >= 3 && value.length <= 50;
     let error = '';
     if (value.trim() === '') {
-      error = 'Please enter an address type.';
+      error = translate.pleaseEnterAddressType;
     } else if (value.length < 3 || value.length > 50) {
-      error = 'Please enter an address type between 3 and 50 characters.';
+      error = translate.pleaseEnterAddressTypeBetween3_50;
     }
     return { isValid, error };
   });
@@ -54,9 +55,9 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value.trim() !== '' && value.length >= 3 && value.length <= 50;
     let error = '';
     if (value.trim() === '') {
-      error = 'Please enter an address title.';
+      error = translate.pleaseEnterAddressTitle;
     } else if (value.length < 3 || value.length > 50) {
-      error = 'Please enter an address title between 3 and 50 characters.';
+      error = translate.pleaseEnterAddressTitleBetween3_50;
     }
     return { isValid, error };
   });
@@ -72,7 +73,7 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value !== '';
     let error = '';
     if (value === '') {
-      error = 'Please select a City.';
+      error = translate.pleaseEnterCity;
     }
     return { isValid, error };
   }, 'Port Said');
@@ -88,9 +89,9 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value.trim() !== '' && value.length >= 3 && value.length <= 50;
     let error = '';
     if (value.trim() === '') {
-      error = 'Please enter a district.';
+      error = translate.pleaseEnterDistrict;
     } else if (value.length < 3 || value.length > 50) {
-      error = 'Please enter a district between 3 and 50 characters.';
+      error = translate.pleaseEnterDistrictBetween3_50;
     }
     return { isValid, error };
   });
@@ -106,9 +107,9 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value.trim() !== '' && value.length >= 3 && value.length <= 50;
     let error = '';
     if (value.trim() === '') {
-      error = 'Please enter a street.';
+      error = translate.pleaseEnterStreet;
     } else if (value.length < 3 || value.length > 50) {
-      error = 'Please enter a street between 3 and 50 characters.';
+      error = translate.pleaseEnterStreetBetween3_50;
     }
     return { isValid, error };
   });
@@ -124,9 +125,9 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value.trim() !== '' && value.length >= 1 && value.length <= 50;
     let error = '';
     if (value.trim() === '') {
-      error = 'Please enter a building.';
+      error = translate.pleaseEnterBuilding;
     } else if (value.length < 1 || value.length > 50) {
-      error = 'Please enter a building between 1 and 50 characters.';
+      error = translate.pleaseEnterBuildingBetween1_50;
     }
     return { isValid, error };
   });
@@ -142,9 +143,9 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value.trim() !== '' && value.length >= 1 && value.length <= 50;
     let error = '';
     if (value.trim() === '') {
-      error = 'Please enter a floor.';
+      error = translate.pleaseEnterFloor;
     } else if (value.length < 1 || value.length > 50) {
-      error = 'Please enter a floor between 1 and 50 characters.';
+      error = translate.pleaseEnterFloorBetween1_50;
     }
     return { isValid, error };
   });
@@ -160,11 +161,29 @@ const AddBranchForm = ({ popupToggle }) => {
     const isValid = value.trim() !== '' && value.length >= 1 && value.length <= 50;
     let error = '';
     if (value.trim() === '') {
-      error = 'Please enter a flat.';
+      error = translate.pleaseEnterFlat;
     } else if (value.length < 1 || value.length > 50) {
-      error = 'Please enter a flat between 1 and 50 characters.';
+      error = translate.pleaseEnterFlatBetween1_50;
     }
     return { isValid, error };
+  });
+  const {
+    value: landmark,
+    isValid: landmarkIsValid,
+    error: landmarkError,
+    isTouched: landmarkIsTouched,
+    valueChangeHandler: handleLandmarkChange,
+    inputBlurHandler: handleLandmarkBlur,
+  } = useInput((value) => {
+    let error = '';
+    let isValid = true;
+    if (value.length < 3) {
+      error = translate.pleaseEnterLandmark;
+      isValid = false;
+    } else if (value.length < 3 || value.length > 50) {
+      error = translate.pleaseEnterLandmarkBetween3_50;
+    }
+    return { error, isValid };
   });
   const {
     value: primaryPhone,
@@ -177,10 +196,10 @@ const AddBranchForm = ({ popupToggle }) => {
     let error = '';
     let isValid = true;
     if (!value) {
-      error = 'Phone number is required';
+      error = translate.pleaseEnterPhoneNumber;
       isValid = false;
     } else if (value.length < 13) {
-      error = 'Please enter a valid phone number';
+      error = translate.pleaseEnterValidPhoneNumber;
       isValid = false;
     }
     return { error, isValid };
@@ -197,7 +216,7 @@ const AddBranchForm = ({ popupToggle }) => {
     let error = '';
     let isValid = true;
     if (value.length < 13) {
-      error = 'Please enter a valid phone number';
+      error = translate.pleaseEnterValidPhoneNumber;
       isValid = false;
     }
     return { error, isValid };
@@ -211,10 +230,11 @@ const AddBranchForm = ({ popupToggle }) => {
   const buildingClass = buildingIsTouched && !buildingIsValid ? 'form-control-invalid' : '';
   const floorClass = floorIsTouched && !floorIsValid ? 'form-control-invalid' : '';
   const flatClass = flatIsTouched && !flatIsValid ? 'form-control-invalid' : '';
+  const landmarkClass = landmarkIsTouched && !landmarkIsValid ? 'form-control-invalid' : '';
   const primaryPhoneClass = primaryPhoneIsTouched && !primaryPhoneIsValid ? 'form-control-invalid' : '';
   const optionalPhoneClass = optionalPhoneIsTouched && !optionalPhoneIsValid ? 'form-control-invalid' : '';
 
-  const formIsValid = addressTypeIsValid && cityIsValid && districtIsValid && streetIsValid && buildingIsValid && floorIsValid && flatIsValid && primaryPhoneIsValid;
+  const formIsValid = addressTypeIsValid && cityIsValid && districtIsValid && streetIsValid && buildingIsValid && floorIsValid && flatIsValid && landmarkIsValid && primaryPhoneIsValid;
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -242,7 +262,7 @@ const AddBranchForm = ({ popupToggle }) => {
       ]
     }
     const branchData = {
-      _id: params.id,
+      _id: userData._id,
       addressType: addressType,
       addressTitle: addressTitle,
       city: city,
@@ -254,9 +274,10 @@ const AddBranchForm = ({ popupToggle }) => {
       coordinates: {
         lat: lat, lng: long
       },
+      landmark: landmark,
       phoneNums: phoneNums
     };
-    dispatch(storeActions.addStoreBranch(branchData, () => {
+    dispatch(authActions.addStoreBranch(branchData, () => {
       popupToggle(false);
       document.getElementById("dashboard-view").style.zIndex = 10;
       window.onscroll = function () { };
@@ -294,7 +315,7 @@ const AddBranchForm = ({ popupToggle }) => {
   }
 
   if (!position) {
-    return <p>Loading...</p>;
+    return <p>{translate.loading}</p>;
   }
 
   function handleInputChange(e) {
@@ -310,14 +331,14 @@ const AddBranchForm = ({ popupToggle }) => {
     <form noValidate className='add-branch' onSubmit={submitHandler}>
       <div className="full-width flex-col-left-start add-branch--input-container">
         <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="type" >
-          Address Type
+          {translate.addressType}
         </label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${addressTypeClass}`}>
           <i className="bi bi-person size-20px" />
           <input
             className="full-width gray margin-4px-H"
             type={"text"}
-            placeholder={"Branch Type"}
+            placeholder={translate.addressType}
             id={"title"}
             value={addressType}
             onChange={addressTypeChangedHandler}
@@ -330,14 +351,14 @@ const AddBranchForm = ({ popupToggle }) => {
       </div>
       <div className="full-width flex-col-left-start add-branch--input-container">
         <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="title" >
-          Address Title
+          {translate.addressTitle}
         </label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${addressTitleClass}`}>
           <i className="bi bi-person size-20px" />
           <input
             className="full-width gray margin-4px-H"
             type={"text"}
-            placeholder={"Branch Title"}
+            placeholder={translate.addressTitle}
             id={"title"}
             value={addressTitle}
             onChange={addressTitleChangedHandler}
@@ -349,7 +370,7 @@ const AddBranchForm = ({ popupToggle }) => {
         )}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='City'>City</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='City'>{translate.city}</label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${cityClass}`}>
           <i className='bi bi-pin-map size-20px' />
           <RegionDropdown className='full-width gray margin-4px-H radius-10px flex-row-left-start add-branch--select'
@@ -367,13 +388,13 @@ const AddBranchForm = ({ popupToggle }) => {
         {cityIsTouched && (<div className="error-message">{cityError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='District'>District</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='District'>{translate.district}</label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${districtClass}`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
             type={'text'}
-            placeholder={'District'}
+            placeholder={translate.district}
             id={'district'}
             value={district}
             onChange={handleDistrictChange}
@@ -383,13 +404,13 @@ const AddBranchForm = ({ popupToggle }) => {
         {districtIsTouched && (<div className="error-message">{districtError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Street'>Street</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Street'>{translate.street}</label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${streetClass}`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
             type={'text'}
-            placeholder={'Street'}
+            placeholder={translate.street}
             id={'street'}
             value={street}
             onChange={handleStreetChange}
@@ -399,13 +420,13 @@ const AddBranchForm = ({ popupToggle }) => {
         {streetIsTouched && (<div className="error-message">{streetError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Building'>Building</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Building'>{translate.building}</label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${buildingClass}`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
             type={'text'}
-            placeholder={'Building'}
+            placeholder={translate.building}
             id={'building'}
             value={building}
             onChange={handleBuildingChange}
@@ -415,13 +436,13 @@ const AddBranchForm = ({ popupToggle }) => {
         {buildingIsTouched && (<div className="error-message">{buildingError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Floor'>Floor</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Floor'>{translate.floor}</label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${floorClass}`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
             type={'text'}
-            placeholder={'Floor'}
+            placeholder={translate.floor}
             id={'floor'}
             value={floor}
             onChange={handleFloorChange}
@@ -431,13 +452,13 @@ const AddBranchForm = ({ popupToggle }) => {
         {floorIsTouched && (<div className="error-message">{floorError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Flat'>Flat</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Flat'>{translate.flat}</label>
         <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${flatClass}`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
             type={'text'}
-            placeholder={'Flat'}
+            placeholder={translate.flat}
             id={'flat'}
             value={flat}
             onChange={handleFlatChange}
@@ -447,11 +468,27 @@ const AddBranchForm = ({ popupToggle }) => {
         {flatIsTouched && (<div className="error-message">{flatError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='PrimaryPhoneNum'>Primary Phone Number</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Landmark'>{translate.landmark}</label>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${landmarkClass}`}>
+          <i className='bi bi-pin-map-fill size-20px' />
+          <input
+            className='full-width gray margin-4px-H'
+            type={'text'}
+            placeholder={translate.landmark}
+            id={'landmark'}
+            value={landmark}
+            onChange={handleLandmarkChange}
+            onBlur={handleLandmarkBlur}
+          />
+        </div>
+        {landmarkIsTouched && (<div className="error-message">{landmarkError}</div>)}
+      </div>
+      <div className='full-width flex-col-left-start add-branch--input-container'>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='PrimaryPhoneNum'>{translate.primaryPhoneNumber}</label>
         <PhoneInput
           className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input ${primaryPhoneClass}`}
           id={'PrimaryPhoneNum'}
-          placeholder="Primary phone number"
+          placeholder={translate.primaryPhoneNumber}
           international
           countryCallingCodeEditable={false}
           limitMaxLength
@@ -466,11 +503,11 @@ const AddBranchForm = ({ popupToggle }) => {
         {primaryPhoneIsTouched && (<div className="error-message">{primaryPhoneError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='OptionallyPhoneNum'>Optionally Phone Number</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='OptionallyPhoneNum'>{translate.optionalPhoneNumber}</label>
         <PhoneInput
           className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input ${optionalPhoneClass}`}
           id={'OptionallyPhoneNum'}
-          placeholder="Optionally phone number"
+          placeholder={translate.optionalPhoneNumber}
           international
           countryCallingCodeEditable={false}
           limitMaxLength
@@ -488,29 +525,29 @@ const AddBranchForm = ({ popupToggle }) => {
         <div className='flex-row-between'>
 
           <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
-            Latitude:
+            {translate.latitude}:
             <input
               type="number"
               step={0.00001}
-              name="lat"
+              name={translate.latitude}
               value={lat}
               onChange={handleInputChange}
               className='gray radius-10px white-bg margin-4px-V add-branch--input-number'
             />
           </label>
           <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
-            Longitude:
+            {translate.longitude}:
             <input
               type="number"
               step={0.00001}
-              name="long"
+              name={translate.longitude}
               value={long}
               onChange={handleInputChange}
               className='gray radius-10px white-bg margin-4px-V add-branch--input-number'
             />
           </label>
           <button onClick={locateMe} className={`add-branch--actions--locate pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-12px font-bold mint-green-bg`}>
-            Locate me
+            {translate.locateMe}
           </button>
         </div>
       </div>
@@ -518,7 +555,7 @@ const AddBranchForm = ({ popupToggle }) => {
       <MapContainer center={[lat, long]} zoom={13} style={{ height: '200px', width: "100%" }} scrollWheelZoom={false}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={[lat, long]} icon={customIcon}>
-          <Popup>Your location</Popup>
+          <Popup>{translate.yourLocation}</Popup>
         </Marker>
       </MapContainer>
       <div className="add-branch--actions flex-row-between full-width">
@@ -526,16 +563,14 @@ const AddBranchForm = ({ popupToggle }) => {
           className={`add-branch--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
           type="submit"
         >
-          Confirm
+          {translate.confirm}
         </button>
         <button
           className="add-branch--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
           onClick={() => {
             popupToggle(false);
-            document.getElementById("dashboard-view").style.zIndex = 10;
-            window.onscroll = function () { };
           }} >
-          Cancel
+          {translate.cancel}
         </button>
       </div>
     </form>

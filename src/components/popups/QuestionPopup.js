@@ -13,7 +13,7 @@ const QuestionPopup = () => {
 
     const answerHandler = (ans) => {
         if (ans) {
-
+            questionPop.onSubmit();
         } else {
             dispatch(popupMutation.clearPopPanel());
         }
