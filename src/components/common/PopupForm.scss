@@ -13,6 +13,44 @@
         }
     }
 
+    &--verify {
+        position: relative;
+        border: none;
+        width: 30%;
+        border-radius: 20px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        & .dark {
+            opacity: 0.10 !important;
+        }
+
+        & img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+            object-fit: cover;
+        }
+
+        &--header {
+            position: relative;
+            box-sizing: border-box;
+            padding: 5px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        &--cont {
+            position: relative;
+            box-sizing: border-box;
+            padding: 0 10px;
+            height: 100%;
+            overflow: hidden;
+            border: 10px solid transparent;
+        }
+    }
+
     &--content {
         position: relative;
         height: 100%;
@@ -35,7 +73,8 @@
             all: unset;
             width: 100%;
 
-            & label, & input {
+            & label,
+            & input {
                 padding: 0;
             }
         }

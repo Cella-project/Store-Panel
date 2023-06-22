@@ -18,7 +18,7 @@ const NavBar = ({ menuToggle }) => {
   const firstName = userData.owner.name.split(' ')[0];
 
   return (
-    <div className={`nav-bar ${mode === 'dark-mode' ? 'dark' : ''} full-width`}>
+    <div className={`nav-bar ${mode === 'dark-mode' ? 'dark' : ''} full-width`} style={{ marginTop: (userData.owner.validEmail !== null && userData.owner.validEmail) ? '0px' : '15px' }}>
       <div className='nav-bar--cont full-width white-bg flex-row-between'>
         <Link to={'/'} className='home-link'>
           <img src={mode === 'dark-mode' ? darkLogo : logo} alt='ACTORE' className='nav-bar--logo pointer' />
@@ -35,7 +35,7 @@ const NavBar = ({ menuToggle }) => {
           <Link to={'/profile'}>
             <div className='nav-bar--card flex-row-center white-bg radius-15px margin-6px-H shadow-2px pointer'>
               <div className='nav-bar--card--img flex-row-center radius-circular'>
-                <Canvas name={userData.owner.name} borderRadius='50%' width={50} height={50} fontSize={'28px'} /> :
+                <Canvas name={userData.owner.name} borderRadius='50%' width={55} height={55} fontSize={'28px'} /> :
               </div>
               <p className={`nav-bar--card--content space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-4px-H size-12px`}>{translations.hi}, {firstName}</p>
               <div className={`nav-bar--card--tag flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>

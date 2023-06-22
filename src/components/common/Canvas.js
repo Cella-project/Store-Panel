@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 const Canvas = ({ name, width, height, fontSize, borderRadius = '15px' }) => {
     const canvasRef = useRef(null);
+    const language = useSelector(state => state.language.language);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -20,7 +22,10 @@ const Canvas = ({ name, width, height, fontSize, borderRadius = '15px' }) => {
         context.fillStyle = '#ffffff';
 
         // Draw the characters onto the canvas
-        context.fillText(name.charAt(0).toUpperCase(), canvas.width / 2+1, canvas.height / 2+2);
+        if (language === 'ar')
+            context.fillText(name.charAt(0).toUpperCase(), canvas.width / 2 - 2, canvas.height / 2 + 1);
+        else
+            context.fillText(name.charAt(0).toUpperCase(), canvas.width / 2 + 2, canvas.height / 2 + 1);
     });
 
     return (
