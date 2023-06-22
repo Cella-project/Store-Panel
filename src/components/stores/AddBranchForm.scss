@@ -88,8 +88,10 @@
         &--locate {
             text-align: center;
             border: none;
+            display: flex;
+            flex-wrap: wrap;
             box-sizing: border-box;
-            padding: 6px;
+            padding: 10px;
             transition: all ease-in-out .3s;
 
             &:hover {

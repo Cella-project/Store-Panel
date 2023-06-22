@@ -522,9 +522,8 @@ const AddBranchForm = ({ popupToggle }) => {
         {optionalPhoneIsTouched && (<div className="error-message">{optionalPhoneError}</div>)}
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <div className='flex-row-between'>
-
-          <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
+        <div className='flex-row-between full-width'>
+          <label className='pointer text-shadow gray font-bold margin-6px-V'>
             {translate.latitude}:
             <input
               type="number"
@@ -535,7 +534,7 @@ const AddBranchForm = ({ popupToggle }) => {
               className='gray radius-10px white-bg margin-4px-V add-branch--input-number'
             />
           </label>
-          <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
+          <label className='pointer text-shadow gray font-bold margin-6px-V'>
             {translate.longitude}:
             <input
               type="number"
@@ -546,7 +545,7 @@ const AddBranchForm = ({ popupToggle }) => {
               className='gray radius-10px white-bg margin-4px-V add-branch--input-number'
             />
           </label>
-          <button onClick={locateMe} className={`add-branch--actions--locate pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-12px font-bold mint-green-bg`}>
+          <button onClick={locateMe} className={`add-branch--actions--locate pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-14px font-bold mint-green-bg`}>
             {translate.locateMe}
           </button>
         </div>
