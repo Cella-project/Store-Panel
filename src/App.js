@@ -49,14 +49,15 @@ const App = () => {
     }
   };
 
+  if (timeDifference >= 14 * 60 * 1000) {
+    refreshTokenHandler(refreshToken);
+  }
+  setInterval(() => {
+    refreshTokenHandler(refreshToken);
+  }, 14 * 60 * 1000);
+
   if (!isLoaded) {
     checkAuth();
-    if (timeDifference >= 14 * 60 * 1000) {
-      refreshTokenHandler(refreshToken);
-    }
-    setInterval(() => {
-      refreshTokenHandler(refreshToken);
-    }, 14 * 60 * 1000);
     isLoaded = true;
   }
 
