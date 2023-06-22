@@ -50,17 +50,20 @@ p {
         color: #f2f4f3 !important;
     }
 }
-.link{
-    all : unset;
+
+.link {
+    all: unset;
 }
+
 .fixed-item {
     position: fixed;
-    right :10px;
+    right: 10px;
 }
 
 .fixed-item-arabic {
     position: fixed;
     left: 10px;
+    z-index: 15;
 }
 
 @keyframes spin {
