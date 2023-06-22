@@ -50,6 +50,44 @@ const authActions = {
             }
         }
     },
+    verifyEmail(ownerID) {
+        return async (dispatch) => {
+            try {
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.popAllNotes());
+                dispatch(popupMutation.popLoading());
+                const response = await Axios.get(`/api/store-profile/verify-email/${ownerID}`);
+                if (response.status === 200) {
+                    dispatch(popupMutation.clearPopPanel());
+                }
+            } catch (error) {
+                errorHandler(dispatch, error.response);
+            }
+        }
+    },
+    validateOTP(payload, afterSuccess) {
+        return async (dispatch) => {
+            try {
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.popAllNotes());
+                dispatch(popupMutation.popLoading());
+                const response = await Axios.put('/api/store-profile/validate-otp', payload);
+                if (response.status === 200) {
+                    dispatch(authMutations.setUserData(response.data.data));
+                    dispatch(popupMutation.clearPopPanel());
+                    dispatch(stickyMutations.pushNote({
+                        type: 'success',
+                        msg: 'OTP verified successfully.'
+                    }));
+                    dispatch(this.getProfile());
+                    afterSuccess();
+                }
+            } catch (error) {
+                console.log(error);
+                errorHandler(dispatch, error.response);
+            }
+        }
+    },
     refreshToken(payload) {
         return async (dispatch) => {
             try {

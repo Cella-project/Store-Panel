@@ -1,0 +1,66 @@
+.verifyOTP {
+    all: unset;
+
+    & label,
+    & input {
+        padding: 0;
+    }
+
+    box-sizing: border-box;
+    padding: 40px 30px;
+
+    &--info {
+        box-sizing: border-box;
+        padding: 10px 15px;
+    }
+
+    &--slot {
+        position: relative;
+
+        &--input {
+            height: 40px;
+            outline: none;
+            background-color: transparent;
+
+            &--error {
+                border-color: #FF3636;
+            }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                appearance: none;
+            }
+        }
+
+        &--icon {
+            position: absolute;
+            top: 40px;
+            left: 15px;
+        }
+    }
+
+    &--btn {
+        border: none;
+        height: 40px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            transform: translateY(3px);
+        }
+
+        &:disabled {
+            background-color: gray;
+            color: #000000;
+            cursor: not-allowed;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .verifyOTP {
+        width: 90%;
+        padding: 30px 15px;
+    }
+}

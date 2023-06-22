@@ -18,7 +18,7 @@ const NavBar = ({ menuToggle }) => {
   const firstName = userData.owner.name.split(' ')[0];
 
   return (
-    <div className={`nav-bar ${mode === 'dark-mode' ? 'dark' : ''} full-width`}>
+    <div className={`nav-bar ${mode === 'dark-mode' ? 'dark' : ''} full-width`} style={{ marginTop: (userData.owner.validEmail !== null && userData.owner.validEmail) ? '0px' : '15px' }}>
       <div className='nav-bar--cont full-width white-bg flex-row-between'>
         <Link to={'/'} className='home-link'>
           <img src={mode === 'dark-mode' ? darkLogo : logo} alt='ACTORE' className='nav-bar--logo pointer' />

@@ -161,9 +161,9 @@ const ChangeOwnerInfo = () => {
                 </div>
                 <div className='full-width flex-col-left-start'>
                     <div className='flex-row-between full-width'>
-                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="email">{translate.ownerEmail}:</label>
-                        <div className={`${userData.status==='Active'?'green':'red'} font-bold`}>
-                            {userData.status}
+                        <label className='pointer text-shadow gray font-bold margin-6px-V' htmlFor="email">{translate.ownerEmail}:</label>
+                        <div className={`${userData.owner.validEmail ? 'green' : 'red'} font-bold`}>
+                            {userData.owner.validEmail ? 'Verified' : 'Not Verified'}
                         </div>
                     </div>
                     <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${emailClasses}`}>

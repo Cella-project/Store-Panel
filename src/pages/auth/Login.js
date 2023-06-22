@@ -43,7 +43,7 @@ const Login = () => {
         <i className={`${language === 'ar' ? style['arabic-login--slot--icon'] : style['login--slot--icon']} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px bi bi-envelope`}></i>
         <input
           className={`${language === 'ar' ? style['arabic-login--slot--input'] : style['login--slot--input']} ${errors.email && touched.email ? style['login--slot--input--error'] : ''} inter gray size-14px radius-10px shadow-2px`}
-          type="Email"
+          type="email"
           name="email"
           autoComplete="off"
           autoFocus
