@@ -60,7 +60,7 @@ const Home = () => {
                 <GreenCard title={card.title} key={Math.random().toString()}>
                   <div className="full-width flex-row-center">
                     <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
-                    {card.title === 'Sales' ? <p className="size-30px mint-green no-margin text-shadow inter">EGP</p> :
+                    {card.title === translations.sales ? <p className="size-30px mint-green no-margin text-shadow inter">{translations.EGP}</p> :
                       <i className={`${card.icon} mint-green size-30px`} />
                     }
                   </div>
