@@ -17,6 +17,8 @@ const ProductList = () => {
   const translate = languages[language];
   const storeData = useSelector(state => state.auth.userData);
 
+  const mode = useSelector(state => state.theme.mode);
+
   useEffect(() => {
     document.title = 'Products • Store Panel';
     dispatch(productMutations.setProducts(null));
@@ -140,7 +142,7 @@ const ProductList = () => {
         <Search width={'width-90-100'} page={'Products'} onSearch={handleSearch} />
         <Link to={`/products/addProduct`} className='pointer flex-row-left-start2col flex-wrap'>
           <div className='add-icon flex-row-center size-34px mint-green-bg radius-circular pointer'>
-            <i className="bi bi-plus-lg white" />
+            <i className={`bi bi-plus-lg ${mode === 'dark-mode' ? 'gray' : 'white'}`} />
           </div>
         </Link>
       </div>
