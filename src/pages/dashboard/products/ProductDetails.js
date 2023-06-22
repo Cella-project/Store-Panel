@@ -73,7 +73,7 @@ const ProductDetails = () => {
     setPopupShown(true);
     setHeader('Add Product Tag');
     document.getElementById('dashboard-view').style.zIndex = 60;
-    const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const TopScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     const LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
     window.onscroll = () => {
       window.scrollTo(LeftScroll, TopScroll);
@@ -84,7 +84,7 @@ const ProductDetails = () => {
     setPopupShown(true);
     setHeader('Add Product Color');
     document.getElementById('dashboard-view').style.zIndex = 60;
-    const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const TopScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     const LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
     window.onscroll = () => {
       window.scrollTo(LeftScroll, TopScroll);
@@ -95,7 +95,7 @@ const ProductDetails = () => {
     setPopupShown(true);
     setHeader('Add Product Size');
     document.getElementById('dashboard-view').style.zIndex = 60;
-    const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const TopScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     const LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
     window.onscroll = () => {
       window.scrollTo(LeftScroll, TopScroll);
