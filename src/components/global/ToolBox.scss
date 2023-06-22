@@ -108,7 +108,8 @@
 @media (max-width: 992px) {
     .tool-box {
         &--btn {
-            &:hover &--tag {
+            &:hover &--tag,
+            &:hover &--tag-arabic {
                 display: none !important;
             }
         }

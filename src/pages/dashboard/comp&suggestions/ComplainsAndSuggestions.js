@@ -36,7 +36,7 @@ const ComplainsAndSuggestions = () => {
   })
 
   const cards = [
-    { title: translate.compSuggestions, content: compAndSuggCards.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: <i className="bi bi-lightbulb mint-green size-28px"> <i className="bi bi-exclamation-triangle-fill mint-green size-28px" style={{ marginLeft: '-20px' }} /> </i> },
+    { title: translate.compSuggestions, content: compAndSuggCards.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: <i className="bi bi-lightbulb mint-green size-28px"> <i className="bi bi-exclamation-triangle-fill mint-green size-28px" style={language === 'en' ? { marginLeft: '-20px' } : { marginRight: '-20px' }} /> </i> },
     { title: translate.complains , content: complains.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: <i className="bi bi-exclamation-triangle-fill mint-green size-28px" /> },
     { title: translate.suggestions , content: suggests.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), icon: <i className="bi bi-lightbulb mint-green size-28px" /> },
   ];
