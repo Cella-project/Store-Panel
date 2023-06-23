@@ -81,9 +81,9 @@ const languages = {
     EGP: 'EGP',
     totalOrders: 'Total Orders',
     delivered: 'Delivered',
-    canceledByCustomer: 'Canceled By Customer',
-    canceledByStore: 'Canceled By Store',
-    canceledByAdmin: 'Canceled By Admin',
+    cancelledByCustomer: 'Cancelled By Customer',
+    cancelledByStore: 'Cancelled By Store',
+    cancelledByAdmin: 'Cancelled By Admin',
     pending: 'Pending',
     orderCode: 'Order Code',
     store: 'Store',
@@ -323,7 +323,7 @@ const languages = {
     orderChart : 'Order Chart',
     last7days : 'Last 7 Days',
     last30days : 'Last 30 Days',
-
+    returned : 'Returned',
 
   },
   ar: {
@@ -410,9 +410,9 @@ const languages = {
     EGP: 'جنيه',
     totalOrders: 'إجمالي الطلبات',
     delivered: 'تم التوصيل',
-    canceledByCustomer: 'تم الإلغاء من قبل العميل',
-    canceledByStore: 'تم الإلغاء من قبل المتجر',
-    canceledByAdmin: 'تم الإلغاء من قبل المشرف',
+    cancelledByCustomer: 'تم الإلغاء من قبل العميل',
+    cancelledByStore: 'تم الإلغاء من قبل المتجر',
+    cancelledByAdmin: 'تم الإلغاء من قبل المشرف',
     pending: 'قيد الانتظار',
     orderCode: 'رمز الطلب',
     store: 'المتجر',
@@ -649,6 +649,7 @@ const languages = {
     orderChart : 'احصائية للطلبات',
     last7days : 'آخر 7 أيام',
     last30days : 'آخر 30 يوم',
+    returned : 'مرتجع',
 
   },
 };
