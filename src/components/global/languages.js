@@ -81,9 +81,9 @@ const languages = {
     EGP: 'EGP',
     totalOrders: 'Total Orders',
     delivered: 'Delivered',
-    canceledByCustomer: 'Canceled By Customer',
-    canceledByStore: 'Canceled By Store',
-    canceledByAdmin: 'Canceled By Admin',
+    cancelledByCustomer: 'Cancelled By Customer',
+    cancelledByStore: 'Cancelled By Store',
+    cancelledByAdmin: 'Cancelled By Admin',
     pending: 'Pending',
     orderCode: 'Order Code',
     store: 'Store',
@@ -325,6 +325,7 @@ const languages = {
     last30days : 'Last 30 Days',
     emailIsRequire : 'Email is required.',
     yourVerificationCodeHasExpiredPleaseRequestNewOne : 'Your verification code has expired. Please request a new one.',
+    returned : 'Returned',
 
   },
   ar: {
@@ -411,9 +412,9 @@ const languages = {
     EGP: 'جنيه',
     totalOrders: 'إجمالي الطلبات',
     delivered: 'تم التوصيل',
-    canceledByCustomer: 'تم الإلغاء من قبل العميل',
-    canceledByStore: 'تم الإلغاء من قبل المتجر',
-    canceledByAdmin: 'تم الإلغاء من قبل المشرف',
+    cancelledByCustomer: 'تم الإلغاء من قبل العميل',
+    cancelledByStore: 'تم الإلغاء من قبل المتجر',
+    cancelledByAdmin: 'تم الإلغاء من قبل المشرف',
     pending: 'قيد الانتظار',
     orderCode: 'رمز الطلب',
     store: 'المتجر',
@@ -653,6 +654,7 @@ const languages = {
     emailIsRequire : 'البريد الإلكتروني مطلوب',
     yourVerificationCodeHasExpiredPleaseRequestNewOne:"لقد انتهت صلاحية رمز التحقق الخاص بك، من فضلك اطلب واحد جديد",
 
+    returned : 'مرتجع',
 
   },
 };

@@ -9,31 +9,19 @@ const Search = ({ width, onSearch, page }) => {
   const [filterList, setFilterList] = useState(false);
   const language = useSelector((state) => state.language.language);
   const translate = languages[language];
-  // const specialities = useSelector((state) => state.speciality.specialitys);
 
   const inputRef = useRef(null);
   const query = useRef('');
   const searchType = useRef('all');
   const filter = useRef({
     status: '',
-    specialty: '',
-    working: null,
-    vehicle: '',
   });
-
-  // useEffect(() => {
-  //   dispatch(specialityMutations.setspecialitys(null));
-  //   dispatch(specialityActions.getspecialitys());
-  // }, [dispatch]);
 
   const filterClickHandler = (isFilterList) => {
     if (isFilterList === true) {
       query.current = '';
       searchType.current = 'all';
       filter.current.status = '';
-      filter.current.specialty = '';
-      filter.current.working = null;
-      filter.current.vehicle = '';
     }
     handleSearch();
     setFilterList(!isFilterList)
@@ -67,7 +55,7 @@ const Search = ({ width, onSearch, page }) => {
       </div>
       {(filterList && page) &&
         <form noValidate className="flex-row-top-between2col search-bar--filter mint-green-bg shadow-5px full-width gray inter">
-          {( page === 'Products' || page === 'OrdersHistory') &&
+          {(page === 'Products' || page === 'OrdersHistory' || page === 'Orders') &&
             <div className="flex-row-top-start size-16px margin-8px-V width-50-100">
               {translate.searchBy}:
               <div className="flex-col-left-start search-bar--filter--options">
@@ -88,7 +76,7 @@ const Search = ({ width, onSearch, page }) => {
                     onChange={() => {
                       searchType.current = page === 'Stores' ? 'storeName' :
                         (page === 'Products') ? 'name' :
-                          page === 'OrdersHistory' ? 'customer.name' : 'all';
+                          (page === 'OrdersHistory' || page === 'Orders') ? 'customer.name' : 'all';
                       handleSearch();
                     }
                     }
@@ -97,6 +85,7 @@ const Search = ({ width, onSearch, page }) => {
                     {page === 'Stores' && translate.store}
                     {page === 'OrdersHistory' && translate.customerName}
                     {page === 'Products' && translate.name}
+                    {page === 'Orders' && translate.customerName}
                   </label>
                 </div>
                 {page === 'Products' &&
@@ -125,7 +114,7 @@ const Search = ({ width, onSearch, page }) => {
                     </div>
                   </>
                 }
-                {page === 'OrdersHistory' &&
+                {(page === 'OrdersHistory' || page === 'Orders') &&
                   <div className="flex-row-left-start">
                     <input type="radio" name="search-type" className="margin-12px-H pointer" id="code"
                       value="code"
@@ -142,9 +131,9 @@ const Search = ({ width, onSearch, page }) => {
             </div>
           }
 
-          {( page === 'Specialty' || page === 'Categories' || page === 'Products' || page === 'OrdersHistory' || page === 'Payments') &&
+          {(page === 'Products' || page === 'OrdersHistory' || page === 'Orders') &&
             <div className="flex-col-left-start size-16px margin-8px-V width-50-100">
-              {( page === 'Specialty' || page === 'Categories' || page === 'Products' || page === 'Payments') &&
+              {(page === 'Specialty' || page === 'Categories' || page === 'Products' || page === 'Payments') &&
                 <div className="flex-row-top-start">
                   {translate.status}:
                   <div className="flex-row-left-start2col search-bar--filter--options">
@@ -184,44 +173,10 @@ const Search = ({ width, onSearch, page }) => {
                   </div>
                 </div>
               }
-              {/* {page === 'Stores' && specialities !== null && specialities.length > 0 &&
-                <div className="flex-row-top-start margin-12px-V">
-                  speciality:
-                  <div className="flex-col-left-start2col search-bar--filter--options">
-                    <div className="flex-row-left-start">
-                      <input type="radio" name="search-specialty" className="margin-12px-H pointer" id="all-speciality"
-                        value="all" defaultChecked
-                        onChange={() => {
-                          filter.current.specialty = 'all';
-                          handleSearch();
-                        }
-                        }
-                      />
-                      <label className="pointer" htmlFor="all-speciality">All</label>
-                    </div>
-                    {specialities.filter((specialty) =>
-                      specialty.status === 'Active'
-                    ).map((specialty) => (
-                      <div className="flex-row-left-start" key={specialty._id}>
-                        <input type="radio" name="search-specialty" className="margin-12px-H pointer" id={specialty.title}
-                          value={specialty.title}
-                          onChange={() => {
-                            filter.current.specialty = specialty.title;
-                            handleSearch();
-                          }
-                          }
-                        />
-                        <label className="pointer" htmlFor={specialty.title}>{specialty.title}</label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              } */}
               {page === 'OrdersHistory' &&
                 <div className="flex-row-top-start">
                   {translate.status}:
                   <div className="flex-col-left-start2col search-bar--filter--options">
-
                     <div className="flex-row-left-start">
                       <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="all-orders-status"
                         value="all" defaultChecked
@@ -232,6 +187,90 @@ const Search = ({ width, onSearch, page }) => {
                         }
                       />
                       <label className="pointer" htmlFor="all-orders-status">{translate.all}</label>
+                    </div>
+                    <div className="flex-row-left-start">
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="cancelledByAdmin"
+                        value="cancelled"
+                        onChange={() => {
+                          filter.current.status = 'CanceledByAdmin';
+                          handleSearch();
+                        }
+                        }
+                      />
+                      <label className="pointer" htmlFor="cancelledByAdmin">{translate.cancelledByAdmin}</label>
+                    </div>
+                    <div className="flex-row-left-start">
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="cancelledByCustomer"
+                        value="cancelled"
+                        onChange={() => {
+                          filter.current.status = 'CanceledByCustomer';
+                          handleSearch();
+                        }
+                        }
+                      />
+                      <label className="pointer" htmlFor="cancelledByCustomer">{translate.cancelledByCustomer}</label>
+                    </div>
+                    <div className="flex-row-left-start">
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="cancelledByStore"
+                        value="cancelled"
+                        onChange={() => {
+                          filter.current.status = 'CanceledByStore';
+                          handleSearch();
+                        }
+                        }
+                      />
+                      <label className="pointer" htmlFor="cancelledByStore">{translate.cancelledByStore}</label>
+                    </div>
+                    <div className="flex-row-left-start">
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="returned"
+                        value="returned"
+                        onChange={() => {
+                          filter.current.status = 'Returned';
+                          handleSearch();
+                        }
+                        }
+                      />
+                      <label className="pointer" htmlFor="returned">{translate.returned}</label>
+                    </div>
+                    <div className="flex-row-left-start">
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="delivered"
+                        value="delivered"
+                        onChange={() => {
+                          filter.current.status = 'Delivered';
+                          handleSearch();
+                        }
+                        }
+                      />
+                      <label className="pointer" htmlFor="delivered">{translate.delivered}</label>
+                    </div>
+                  </div>
+                </div>
+              }
+              {page === 'Orders' &&
+                <div className="flex-row-top-start">
+                  {translate.status}:
+                  <div className="flex-col-left-start2col search-bar--filter--options">
+                    <div className="flex-row-left-start">
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="all-orders-status"
+                        value="all" defaultChecked
+                        onChange={() => {
+                          filter.current.status = 'all';
+                          handleSearch();
+                        }
+                        }
+                      />
+                      <label className="pointer" htmlFor="all-orders-status">{translate.all}</label>
+                    </div>
+                    <div className="flex-row-left-start">
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="approved"
+                        value="approved"
+                        onChange={() => {
+                          filter.current.status = 'Approved';
+                          handleSearch();
+                        }
+                        }
+                      />
+                      <label className="pointer" htmlFor="approved">{translate.approved}</label>
                     </div>
                     <div className="flex-row-left-start">
                       <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="pending"
@@ -245,37 +284,26 @@ const Search = ({ width, onSearch, page }) => {
                       <label className="pointer" htmlFor="pending">{translate.pending}</label>
                     </div>
                     <div className="flex-row-left-start">
-                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="delivered"
-                        value="delivered"
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="ready"
+                        value="ready"
                         onChange={() => {
-                          filter.current.status = 'Delivered';
+                          filter.current.status = 'Ready';
                           handleSearch();
                         }
                         }
                       />
-                      <label className="pointer" htmlFor="delivered">{translate.delivered}</label>
+                      <label className="pointer" htmlFor="ready">{translate.readyForPickup}</label>
                     </div>
                     <div className="flex-row-left-start">
-                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="cancelledByAdmin"
-                        value="cancelled"
+                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="picked"
+                        value="picked"
                         onChange={() => {
-                          filter.current.status = 'CanceledByAdmin';
+                          filter.current.status = 'Picked';
                           handleSearch();
                         }
                         }
                       />
-                      <label className="pointer" htmlFor="cancelledByAdmin">{translate.canceledByAdmin}</label>
-                    </div>
-                    <div className="flex-row-left-start">
-                      <input type="radio" name="search-orders-status" className="margin-12px-H pointer" id="cancelledByCustomer"
-                        value="cancelled"
-                        onChange={() => {
-                          filter.current.status = 'CanceledByCustomer';
-                          handleSearch();
-                        }
-                        }
-                      />
-                      <label className="pointer" htmlFor="cancelledByCustomer">{translate.canceledByCustomer}</label>
+                      <label className="pointer" htmlFor="ready">{translate.picked}</label>
                     </div>
                   </div>
                 </div>

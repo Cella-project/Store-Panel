@@ -21,6 +21,7 @@ export const voucherCards = [
 const Vouchers = () => {
   const language = useSelector(state => state.language.language);
   const translate = languages[language];
+  const mode = useSelector(state => state.theme.mode);
 
   let active = 0;
   let deactivated = 0;
@@ -68,7 +69,7 @@ const Vouchers = () => {
         <Search width={'width-90-100'} />
 
         <div className='vouchers add-icon flex-row-center size-34px mint-green-bg radius-circular pointer'>
-          <i className="bi bi-plus-lg white"></i>
+          <i className={`bi bi-plus-lg ${mode === 'dark-mode' ? 'gray' : 'white'}`}></i>
         </div>
       </div>
 
