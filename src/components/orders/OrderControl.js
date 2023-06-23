@@ -36,7 +36,7 @@ const OrderControl = () => {
             </div>
             <div className={`order-control--btn flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} red-bg radius-circular pointer`} onClick={handleCancel}>
               <i className="bi bi-x-lg pointer size-28px"></i>
-              <div className={`order-control--btn--tag${language === 'ar' ? '-arabic' : ''} flex-row-center white inter size-12px radius-5px shadow-5px`}>
+              <div className={`order-control--btn--tag${language === 'ar' ? '-arabic' : ''} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
                 {translate.cancelOrder}
               </div>
             </div>
@@ -49,7 +49,7 @@ const OrderControl = () => {
             </div>
           </div>
         ) : orderData.status==="Ready" ? (
-          <div className={`order-control--btn flex-row-center ${mode === 'dark-mode' ? 'white gray-bg' : 'white gray-bg'} radius-circular`}>
+          <div className={`order-control--btn flex-row-center white gray-bg radius-circular`}>
             <i className="bi bi-check size-28px"></i>
             <div className={`order-control--btn--tag${language === 'ar' ? '-arabic' : ''} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
               {translate.approved}

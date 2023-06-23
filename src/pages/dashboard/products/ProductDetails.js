@@ -53,7 +53,7 @@ const ProductDetails = () => {
     dispatch(productActions.deleteProductTag({
       _id: params.id,
       tagId: tagId
-    }));
+    },translate.areYouSureDeleteProductTag,translate.productTagDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
   };
   const handleColorDelete = (colorId) => {
     dispatch(productActions.deleteProductColor({
@@ -66,7 +66,7 @@ const ProductDetails = () => {
     dispatch(productActions.deleteProductSize({
       _id: product._id,
       sizeId: sizeId
-    }));
+    },translate.areYouSureDeleteProductSize,translate.productSizeDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
   };
 
   const addProductTag = () => {

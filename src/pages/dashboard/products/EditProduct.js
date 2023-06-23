@@ -123,7 +123,7 @@ export const EditProduct = () => {
             const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
             album.imgURL = url;
             dispatch(productActions.addProductImage({ _id: product._id, imgURL: album.imgURL }));
-        },translate.productImageAddedSuccessfully,translate.someThingWentWrongPleaseTry));
+        }, translate.productImageAddedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
 
     // const handlePhotoIndexChange = (oldIndex, newIndex) => {
@@ -133,7 +133,7 @@ export const EditProduct = () => {
     // };
 
     const handlePhotoRemove = (_id) => {
-        dispatch(productActions.deleteProductImage({ _id: product._id, imgId: _id },translate.areYouShowDeleteProductImage,translate.someThingWentWrongPleaseTry));
+        dispatch(productActions.deleteProductImage({ _id: product._id, imgId: _id }, translate.areYouShowDeleteProductImage, translate.someThingWentWrongPleaseTry));
     };
 
 
@@ -182,7 +182,7 @@ export const EditProduct = () => {
         dispatch(productActions.updateProduct(editedProduct,
             () => {
                 navigate(`/products/${product._id}`);
-            },translate.productUpdatedSuccessfully,translate.someThingWentWrongPleaseTry));
+            }, translate.productUpdatedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
 
 
@@ -250,7 +250,9 @@ export const EditProduct = () => {
                                             autoFocus
                                         />
                                     </div>
-                                    {titleIsTouched && (<div className="error-message">{titleError}</div>)}
+                                    <p style={{ marginLeft: '5px', visibility: titleError && titleIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                        <i className="bi bi-exclamation-triangle-fill red"></i> {titleError}
+                                    </p>
                                 </div>
                                 <div className='full-width flex-col-left-start edit-product--input-container'>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.productDescription} <span className='red'>*</span></label>
@@ -266,7 +268,9 @@ export const EditProduct = () => {
                                             style={{ resize: 'none' }}
                                         />
                                     </div>
-                                    {descriptionIsTouched && (<div className="error-message">{descriptionError}</div>)}
+                                    <p style={{ marginLeft: '5px', visibility: descriptionError && descriptionIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                        <i className="bi bi-exclamation-triangle-fill red"></i> {descriptionError}
+                                    </p>
                                 </div>
                                 {
                                     materials && materials.length > 0 && (
@@ -295,6 +299,9 @@ export const EditProduct = () => {
                                                 />
                                             </div>
                                             {materialIsTouched && (<div className="error-message">{materialError}</div>)}
+                                            <p style={{ marginLeft: '5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                                <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
+                                            </p>
                                         </div>
                                     )
                                 }
@@ -394,7 +401,9 @@ export const EditProduct = () => {
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="price">{translate.price}:<span className='red'>*</span></label>
                                         <input className="pointer margin-12px-H gray edit-product--input radius-10px" min='0' type="number" id="price" value={enteredPrice} onChange={priceChangedHandler} onBlur={priceBlurHandler} />
                                     </div>
-                                    {priceIsTouched && (<div className="error-message">{priceError}</div>)}
+                                    <p style={{ marginLeft: '5px', visibility: priceError && priceIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                        <i className="bi bi-exclamation-triangle-fill red"></i> {priceError}
+                                    </p>
                                     <div className='full-width edit-product--price--discount'>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.discount}:<span className='red'>*</span></label>
                                         <div className='margin-6px-V'>
