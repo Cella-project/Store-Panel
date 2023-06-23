@@ -87,7 +87,7 @@ const Login = () => {
   return (
     <form onSubmit={handleLogin} noValidate className={`${style['login']} flex-col-center white-bg radius-5px shadow-5px`}>
       <div className={`${language === 'ar' ? style['arabic-login--slot'] : style['login--slot']} full-width flex-col-left-start margin-4px-V`}>
-        <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.emailAddress}</p>
+        <p style={{ marginLeft: '0 5px 0 5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.emailAddress}</p>
         <i className={`${language === 'ar' ? style['arabic-login--slot--icon'] : style['login--slot--icon']} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px bi bi-envelope`}></i>
         <input
           className={`${language === 'ar' ? style['arabic-login--slot--input'] : style['login--slot--input']} ${emailError && emailIsTouched ? style['login--slot--input--error'] : ''} inter gray size-14px radius-10px shadow-2px`}
@@ -100,12 +100,12 @@ const Login = () => {
           onChange={emailChangedHandler}
           onBlur={emailBlurHandler}
         />
-        <p style={{ marginLeft: '5px', visibility: emailError && emailIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: emailError && emailIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
           <i className="bi bi-exclamation-triangle-fill red"></i> {emailError}
         </p>
       </div>
       <div className={`${language === 'ar' ? style['arabic-login--slot'] : style['login--slot']} full-width flex-col-left-start margin-4px-V`}>
-        <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.password}</p>
+        <p style={{ marginLeft: '0 5px 0 5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.password}</p>
         <i className={`${language === 'ar' ? style['arabic-login--slot--icon'] : style['login--slot--icon']} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px bi bi-key`}></i>
         <i className={`${language === 'ar' ? style['arabic-login--slot--icon--left'] : style['login--slot--icon--right']} bi bi-eye${!passwordShown ? "-slash" : ""} size-20px pointer ${mode === 'dark-mode' ? 'gray' : 'mint-green'}`} onClick={() => setPasswordShown(!passwordShown)} />
         <input
@@ -118,7 +118,7 @@ const Login = () => {
           onChange={passwordChangedHandler}
           onBlur={passwordBlurHandler}
         />
-        <p style={{ marginLeft: '5px', visibility: passwordError && passwordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: passwordError && passwordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
           <i className="bi bi-exclamation-triangle-fill red"></i> {passwordError}
         </p>
       </div>

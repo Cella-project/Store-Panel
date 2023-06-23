@@ -45,7 +45,7 @@ const ForgetPassword = () => {
         <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>{translations.pleaseEnterEmail}</p>
       </div>
       <div className={`${language === 'ar' ? style['arabic-forget--slot'] : style['forget--slot']} full-width flex-col-left-start margin-4px-V`}>
-        <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.emailAddress}</p>
+        <p style={{ marginLeft: '0 5px 0 5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.emailAddress}</p>
         <i className={`${language === 'ar' ? style['arabic-forget--slot--icon'] : style['forget--slot--icon']} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px bi bi-envelope`}></i>
         <input
           className={`${language === 'ar' ? style['arabic-forget--slot--input'] : style['forget--slot--input']} ${emailError && emailIsTouched ? style['login--slot--input--error'] : ''} inter gray size-14px radius-10px shadow-2px`}
@@ -58,7 +58,7 @@ const ForgetPassword = () => {
           onChange={emailChangedHandler}
           onBlur={emailBlurHandler}
         />
-        <p style={{ marginLeft: '5px', visibility: emailError && emailIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: emailError && emailIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
           <i className="bi bi-exclamation-triangle-fill red"></i> {emailError}
         </p>
       </div>

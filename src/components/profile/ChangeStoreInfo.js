@@ -17,7 +17,6 @@ const ChangeStoreInfo = () => {
 
     const {
         value: enteredStoreName,
-        isValid: enteredStoreNameIsValid,
         error: storeNameError,
         isTouched: storeNameIsTouched,
         valueChangeHandler: storeNameChangedHandler,
@@ -36,7 +35,6 @@ const ChangeStoreInfo = () => {
 
     const {
         value: enteredSlogan,
-        isValid: enteredSloganIsValid,
         error: sloganError,
         isTouched: sloganIsTouched,
         valueChangeHandler: sloganChangedHandler,
@@ -52,14 +50,6 @@ const ChangeStoreInfo = () => {
         }
         return { isValid, error };
     }, userData.slogan);
-
-    const storeNameClasses = storeNameIsTouched && !enteredStoreNameIsValid
-        ? 'form-control-invalid'
-        : '';
-    const sloganClasses = sloganIsTouched && !enteredSloganIsValid
-        ? 'form-control-invalid'
-        : '';
-
 
     const handleCancelForm = (event) => {
         event.preventDefault();
@@ -113,7 +103,7 @@ const ChangeStoreInfo = () => {
             <div className='width-80-100 flex-col-left-start inter gray margin-12px-V'>
                 <div className='full-width flex-col-left-start profile--input-container'>
                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='store-name'>{translate.storeName}:</label>
-                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${storeNameClasses}`}>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px`}>
                         <i className='bi bi-shop-window size-20px' />
                         <input className='profile--input full-width margin-12px-H gray radius-10px'
                             type={'text'}
@@ -124,11 +114,13 @@ const ChangeStoreInfo = () => {
                             onBlur={storeNameBlurHandler}
                         />
                     </div>
-                    {storeNameIsTouched && (<div className="error-message">{storeNameError}</div>)}
+                    <p style={{ marginLeft: '0 5px 0 5px', visibility: storeNameError && storeNameIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                        <i className="bi bi-exclamation-triangle-fill red"></i> {storeNameError}
+                    </p>
                 </div>
                 <div className='full-width flex-col-left-start profile--input-container'>
                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='slogan'>{translate.slogan}:</label>
-                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${sloganClasses}`}>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px`}>
                         <i className='bi bi-megaphone size-20px' />
                         <input className='profile--input full-width margin-8px-H gray radius-10px'
                             type={'text'}
@@ -139,7 +131,9 @@ const ChangeStoreInfo = () => {
                             onBlur={sloganBlurHandler}
                         />
                     </div>
-                    {sloganIsTouched && (<div className="error-message">{sloganError}</div>)}
+                    <p style={{ marginLeft: '0 5px 0 5px', visibility: sloganError && sloganIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                        <i className="bi bi-exclamation-triangle-fill red"></i> {sloganError}
+                    </p>
                 </div>
             </div>
             {editMode &&

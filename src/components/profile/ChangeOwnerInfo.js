@@ -18,7 +18,6 @@ const ChangeOwnerInfo = () => {
 
     const {
         value: enteredFullName,
-        isValid: enteredFullNameIsValid,
         error: fullNameError,
         isTouched: fullNameIsTouched,
         valueChangeHandler: fullNameChangedHandler,
@@ -36,7 +35,6 @@ const ChangeOwnerInfo = () => {
     }, userData.owner.name);
     const {
         value: enteredEmail,
-        isValid: enteredEmailIsValid,
         error: emailError,
         isTouched: emailIsTouched,
         valueChangeHandler: emailChangedHandler,
@@ -56,7 +54,6 @@ const ChangeOwnerInfo = () => {
     }, userData.owner.email);
     const {
         value: enteredPhone,
-        isValid: enteredPhoneIsValid,
         error: phoneError,
         isTouched: phoneIsTouched,
         valueChangeHandler: phoneChangedHandler,
@@ -74,18 +71,6 @@ const ChangeOwnerInfo = () => {
         }
         return { error, isValid };
     }, "+2" + userData.owner.phoneNum);
-
-    const fullNameClasses = fullNameIsTouched && !enteredFullNameIsValid
-        ? 'form-control-invalid'
-        : '';
-
-    const emailClasses = emailIsTouched && !enteredEmailIsValid
-        ? 'form-control-invalid'
-        : '';
-
-    const phoneClasses = phoneIsTouched && !enteredPhoneIsValid
-        ? 'form-control-invalid'
-        : '';
 
     const handleCancelForm = (event) => {
         event.preventDefault();
@@ -117,7 +102,7 @@ const ChangeOwnerInfo = () => {
         dispatch(authActions.editProfile({
             _id: userData._id,
             ...updatedFields,
-        }, () => setEditMode(false),translate.ownerInfoUpdatedSuccessfully,translate.someThingWentWrongPleaseTry))
+        }, () => setEditMode(false), translate.ownerInfoUpdatedSuccessfully, translate.someThingWentWrongPleaseTry))
 
     };
 
@@ -145,7 +130,7 @@ const ChangeOwnerInfo = () => {
             <div className='width-80-100 flex-col-left-start inter gray margin-12px-V'>
                 <div className='full-width flex-col-left-start'>
                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="fullName">{translate.ownerName}:</label>
-                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${fullNameClasses}`}>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px`}>
                         <i className="bi bi-person gray size-18px " />
                         <input className='profile--input full-width margin-8px-H gray radius-10px'
                             type="text"
@@ -155,9 +140,9 @@ const ChangeOwnerInfo = () => {
                             onBlur={fullNameBlurHandler}
                         />
                     </div>
-                    {fullNameIsTouched && (
-                        <div className="error-message">{fullNameError}</div>
-                    )}
+                    <p style={{ marginLeft: '0 5px 0 5px', visibility: fullNameError && fullNameIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                        <i className="bi bi-exclamation-triangle-fill red"></i> {fullNameError}
+                    </p>
                 </div>
                 <div className='full-width flex-col-left-start'>
                     <div className='flex-row-between full-width'>
@@ -166,7 +151,7 @@ const ChangeOwnerInfo = () => {
                             {userData.owner.validEmail ? translate.verified : translate.unverified}
                         </div>
                     </div>
-                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${emailClasses}`}>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px`}>
                         <i className="bi bi-envelope gray size-18px " />
                         <input className='profile--input full-width margin-8px-H gray radius-10px'
                             type="email"
@@ -177,13 +162,13 @@ const ChangeOwnerInfo = () => {
                             onBlur={emailBlurHandler}
                         />
                     </div>
-                    {emailIsTouched && (
-                        <div className="error-message">{emailError}</div>
-                    )}
+                    <p style={{ marginLeft: '0 5px 0 5px', visibility: emailError && emailIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                        <i className="bi bi-exclamation-triangle-fill red"></i> {emailError}
+                    </p>
                 </div>
                 <div className='full-width flex-col-left-start'>
                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="phone">{translate.ownerPhoneNumber}:</label>
-                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px ${phoneClasses}`}>
+                    <div className={`profile--input--container ${editMode && 'focus'} full-width shadow-2px flex-row-left-start radius-10px`}>
                         <PhoneInput
                             id={'phone'}
                             className={`profile--input white-bg full-width radius-10px`}
@@ -199,9 +184,9 @@ const ChangeOwnerInfo = () => {
                             onBlur={phoneBlurHandler}
                         />
                     </div>
-                    {phoneIsTouched && (
-                        <div className="error-message">{phoneError}</div>
-                    )}
+                    <p style={{ marginLeft: '0 5px 0 5px', visibility: phoneError && phoneIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                        <i className="bi bi-exclamation-triangle-fill red"></i> {phoneError}
+                    </p>
                 </div>
             </div>
             {editMode &&

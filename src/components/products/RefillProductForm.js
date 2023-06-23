@@ -82,7 +82,7 @@ export const RefillProductForm = ({ popupToggle }) => {
             popupToggle(false);
             document.getElementById("dashboard-view").style.zIndex = 10;
             window.onscroll = function () { };
-        },translate.productQuantityAddedSuccessfully,translate.someThingWentWrongPleaseTry));
+        }, translate.productQuantityAddedSuccessfully, translate.someThingWentWrongPleaseTry));
 
     }
 
@@ -99,7 +99,9 @@ export const RefillProductForm = ({ popupToggle }) => {
                         <div>
                             <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="quantity">{translate.quantity} : <span className='red'>*</span></label>
                             <input className="pointer margin-12px-H gray refill-product--input radius-10px" min='0' type="number" id="Quantity" value={enteredQuantity} onChange={quantityChangedHandler} onBlur={quantityBlurHandler} />
-                            {quantityIsTouched && (<div className="error-message">{quantityError}</div>)}
+                            <p style={{ marginLeft: '0 5px 0 5px', visibility: quantityError && quantityIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                <i className="bi bi-exclamation-triangle-fill red"></i> {quantityError}
+                            </p>
                         </div>
                         {productData.colors && productData.colors.length > 0 && (
                             <div className='full-width flex-col-left-start refill-product--input-container'>

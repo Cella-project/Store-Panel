@@ -126,7 +126,7 @@ const ChangePassword = () => {
             resetPassword();
             resetConfirmedPassword();
             resetCurrentPassword();
-        },translate.yourPasswordChangedSuccessfully,translate.someThingWentWrongPleaseTry))
+        }, translate.yourPasswordChangedSuccessfully, translate.someThingWentWrongPleaseTry))
     };
 
     return (
@@ -167,9 +167,9 @@ const ChangePassword = () => {
                                     <i className={`bi bi-eye${!currentPasswordShown ? "-slash" : ""} size-20px pointer`} onClick={() => setCurrentPasswordShown(!currentPasswordShown)} />
                                 </div>
                             </div>
-                            {currentPasswordError && (
-                                <p className="error-message">{currentPasswordError}</p>
-                            )}
+                            <p style={{ marginLeft: '0 5px 0 5px', visibility: currentPasswordError && currentPasswordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                <i className="bi bi-exclamation-triangle-fill red"></i> {currentPasswordError}
+                            </p>
                         </div>
                         <div className='full-width flex-col-left-start'>
                             <div className='full-width flex-row-left-start margin-12px-V size-18px'>
@@ -192,9 +192,9 @@ const ChangePassword = () => {
                                 </div>
                             </div>
                         </div>
-                        {passwordError && (
-                            <p className="error-message">{passwordError}</p>
-                        )}
+                        <p style={{ marginLeft: '0 5px 0 5px', visibility: passwordError && passwordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                            <i className="bi bi-exclamation-triangle-fill red"></i> {passwordError}
+                        </p>
                         <div className='full-width flex-col-left-start'>
                             <div className='full-width flex-row-left-start margin-12px-V size-18px'>
                                 <label className="font-bold size-20px pt-sans margin-12px-H" htmlFor="confirmNew" >{translate.confirm}:</label>
@@ -216,16 +216,15 @@ const ChangePassword = () => {
                                 </div>
                             </div>
                         </div>
-                        {confirmedPasswordError && (
-                            <p className="error-message">{confirmedPasswordError}</p>
-                        )}
+                        <p style={{ marginLeft: '0 5px 0 5px', visibility: confirmedPasswordError && confirmedPasswordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                            <i className="bi bi-exclamation-triangle-fill red"></i> {confirmedPasswordError}
+                        </p>
                     </div>
-                    <button disabled={formIsValid} className={ `profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px width-50-100 mint-green-bg size-20px pointer`}
+                    <button disabled={formIsValid} className={`profile--input--container shadow-2px ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px width-50-100 mint-green-bg size-20px pointer`}
                         type='submit'
                     >
                         {translate.save}
                     </button>
-
                 </form>
             }
         </div>

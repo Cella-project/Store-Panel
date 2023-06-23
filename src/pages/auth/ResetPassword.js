@@ -84,7 +84,7 @@ const ResetPassword = () => {
                 <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>{translations.enterNewPassword}</p>
             </div>
             <div className={`${language === 'ar' ? style['arabic-reset--slot'] : style['reset--slot']} full-width flex-col-left-start margin-4px-V`}>
-                <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.newPassword}</p>
+                <p style={{ marginLeft: '0 5px 0 5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.newPassword}</p>
                 <i className={`${language === 'ar' ? style['arabic-reset--slot--icon'] : style['reset--slot--icon']} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px bi bi-key`}></i>
                 <i className={`${language === 'ar' ? style['arabic-reset--slot--icon--left'] : style['reset--slot--icon--right']} bi bi-eye${!passwordShown ? "-slash" : ""} size-20px pointer ${mode === 'dark-mode' ? 'gray' : 'mint-green'}`} onClick={() => setPasswordShown(!passwordShown)} />
                 <input
@@ -98,12 +98,12 @@ const ResetPassword = () => {
                     onChange={passwordChangedHandler}
                     onBlur={passwordBlurHandler}
                 />
-                <p style={{ marginLeft: '5px', visibility: passwordError && passwordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                <p style={{ marginLeft: '0 5px 0 5px', visibility: passwordError && passwordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                     <i className="bi bi-exclamation-triangle-fill red"></i> {passwordError}
                 </p>
             </div>
             <div className={`${language === 'ar' ? style['arabic-reset--slot'] : style['reset--slot']} full-width flex-col-left-start margin-4px-V`}>
-                <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.confirmNewPassword}</p>
+                <p style={{ marginLeft: '0 5px 0 5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.confirmNewPassword}</p>
                 <i className={`${language === 'ar' ? style['arabic-reset--slot--icon'] : style['reset--slot--icon']} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-20px bi bi-key`}></i>
                 <i className={`${language === 'ar' ? style['arabic-reset--slot--icon--left'] : style['reset--slot--icon--right']} bi bi-eye${!confirmedPasswordShown ? "-slash" : ""} size-20px pointer ${mode === 'dark-mode' ? 'gray' : 'mint-green'}`} onClick={() => setConfirmedPasswordShown(!confirmedPasswordShown)} />
                 <input
@@ -118,7 +118,7 @@ const ResetPassword = () => {
                     }}
                     onBlur={confirmedPasswordBlurHandler}
                 />
-                <p style={{ marginLeft: '5px', visibility: confirmedPasswordError && confirmedPasswordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                <p style={{ marginLeft: '0 5px 0 5px', visibility: confirmedPasswordError && confirmedPasswordIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                     <i className="bi bi-exclamation-triangle-fill red"></i> {confirmedPasswordError}
                 </p>
             </div>

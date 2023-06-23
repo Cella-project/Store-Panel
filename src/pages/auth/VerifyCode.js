@@ -69,7 +69,7 @@ const VerifyCode = () => {
                 <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>{translations.resetCodeSent}</p>
             </div>
             <div className={`${style['verify--slot']} full-width flex-col-left-start margin-4px-V`}>
-                <p style={{ marginLeft: '5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.verifyCode}</p>
+                <p style={{ marginLeft: '0 5px 0 5px' }} className="no-padding margin-6px-V size-16px inter gray">{translations.verifyCode}</p>
                 <OtpInput
                     value={otp}
                     onChange={handleChange}

@@ -250,7 +250,7 @@ export const EditProduct = () => {
                                             autoFocus
                                         />
                                     </div>
-                                    <p style={{ marginLeft: '5px', visibility: titleError && titleIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <p style={{ marginLeft: '0 5px 0 5px', visibility: titleError && titleIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                         <i className="bi bi-exclamation-triangle-fill red"></i> {titleError}
                                     </p>
                                 </div>
@@ -268,7 +268,7 @@ export const EditProduct = () => {
                                             style={{ resize: 'none' }}
                                         />
                                     </div>
-                                    <p style={{ marginLeft: '5px', visibility: descriptionError && descriptionIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <p style={{ marginLeft: '0 5px 0 5px', visibility: descriptionError && descriptionIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                         <i className="bi bi-exclamation-triangle-fill red"></i> {descriptionError}
                                     </p>
                                 </div>
@@ -299,7 +299,7 @@ export const EditProduct = () => {
                                                 />
                                             </div>
                                             {materialIsTouched && (<div className="error-message">{materialError}</div>)}
-                                            <p style={{ marginLeft: '5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                            <p style={{ marginLeft: '0 5px 0 5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                                 <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
                                             </p>
                                         </div>
@@ -401,7 +401,7 @@ export const EditProduct = () => {
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="price">{translate.price}:<span className='red'>*</span></label>
                                         <input className="pointer margin-12px-H gray edit-product--input radius-10px" min='0' type="number" id="price" value={enteredPrice} onChange={priceChangedHandler} onBlur={priceBlurHandler} />
                                     </div>
-                                    <p style={{ marginLeft: '5px', visibility: priceError && priceIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <p style={{ marginLeft: '0 5px 0 5px', visibility: priceError && priceIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                         <i className="bi bi-exclamation-triangle-fill red"></i> {priceError}
                                     </p>
                                     <div className='full-width edit-product--price--discount'>

@@ -222,19 +222,7 @@ const AddBranchForm = ({ popupToggle }) => {
     return { error, isValid };
   });
 
-  const addressTypeClass = addressTypeIsTouched && !addressTypeIsValid ? 'form-control-invalid' : '';
-  const addressTitleClass = addressTitleIsTouched && !addressTitleIsValid ? 'form-control-invalid' : '';
-  const cityClass = cityIsTouched && !cityIsValid ? 'form-control-invalid' : '';
-  const districtClass = districtIsTouched && !districtIsValid ? 'form-control-invalid' : '';
-  const streetClass = streetIsTouched && !streetIsValid ? 'form-control-invalid' : '';
-  const buildingClass = buildingIsTouched && !buildingIsValid ? 'form-control-invalid' : '';
-  const floorClass = floorIsTouched && !floorIsValid ? 'form-control-invalid' : '';
-  const flatClass = flatIsTouched && !flatIsValid ? 'form-control-invalid' : '';
-  const landmarkClass = landmarkIsTouched && !landmarkIsValid ? 'form-control-invalid' : '';
-  const primaryPhoneClass = primaryPhoneIsTouched && !primaryPhoneIsValid ? 'form-control-invalid' : '';
-  const optionalPhoneClass = optionalPhoneIsTouched && !optionalPhoneIsValid ? 'form-control-invalid' : '';
-
-  const formIsValid = addressTypeIsValid && cityIsValid && districtIsValid && streetIsValid && buildingIsValid && floorIsValid && flatIsValid && landmarkIsValid && primaryPhoneIsValid;
+  const formIsValid = addressTitleIsValid && addressTypeIsValid && cityIsValid && districtIsValid && streetIsValid && buildingIsValid && floorIsValid && flatIsValid && landmarkIsValid && primaryPhoneIsValid;
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -281,7 +269,7 @@ const AddBranchForm = ({ popupToggle }) => {
       popupToggle(false);
       document.getElementById("dashboard-view").style.zIndex = 10;
       window.onscroll = function () { };
-    },translate.addStoreBranch,translate.someThingWentWrongPleaseTry
+    }, translate.addStoreBranch, translate.someThingWentWrongPleaseTry
     ));
 
   };
@@ -333,7 +321,7 @@ const AddBranchForm = ({ popupToggle }) => {
         <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="type" >
           {translate.addressType}
         </label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${addressTypeClass}`}>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className="bi bi-person size-20px" />
           <input
             className="full-width gray margin-4px-H"
@@ -345,15 +333,15 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={addressTypeBlurHandler}
           />
         </div>
-        {addressTypeIsTouched && (
-          <div className="error-message">{addressTypeError}</div>
-        )}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: addressTypeError && addressTypeIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {addressTypeError}
+        </p>
       </div>
       <div className="full-width flex-col-left-start add-branch--input-container">
         <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="title" >
-          {translate.addressTitle}
+          {translate.addressTitle}<span className='red'>*</span>
         </label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${addressTitleClass}`}>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className="bi bi-person size-20px" />
           <input
             className="full-width gray margin-4px-H"
@@ -365,13 +353,13 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={addressTitleBlurHandler}
           />
         </div>
-        {addressTitleIsTouched && (
-          <div className="error-message">{addressTitleError}</div>
-        )}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: addressTitleError && addressTitleIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {addressTitleError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='City'>{translate.city}</label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${cityClass}`}>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='City'>{translate.city}<span className='red'>*</span></label>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className='bi bi-pin-map size-20px' />
           <RegionDropdown className='full-width gray margin-4px-H radius-10px flex-row-left-start add-branch--select'
             disableWhenEmpty={true}
@@ -385,11 +373,13 @@ const AddBranchForm = ({ popupToggle }) => {
             }
             onBlur={handleCityBlur} />
         </div>
-        {cityIsTouched && (<div className="error-message">{cityError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: cityError && cityIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {cityError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='District'>{translate.district}</label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${districtClass}`}>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='District'>{translate.district}<span className='red'>*</span></label>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
@@ -401,11 +391,13 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={handleDistrictBlur}
           />
         </div>
-        {districtIsTouched && (<div className="error-message">{districtError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: districtError && districtIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {districtError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Street'>{translate.street}</label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${streetClass}`}>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Street'>{translate.street}<span className='red'>*</span></label>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
@@ -417,11 +409,13 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={handleStreetBlur}
           />
         </div>
-        {streetIsTouched && (<div className="error-message">{streetError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: streetError && streetIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {streetError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Building'>{translate.building}</label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${buildingClass}`}>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Building'>{translate.building}<span className='red'>*</span></label>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
@@ -433,11 +427,13 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={handleBuildingBlur}
           />
         </div>
-        {buildingIsTouched && (<div className="error-message">{buildingError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: buildingError && buildingIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {buildingError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Floor'>{translate.floor}</label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${floorClass}`}>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Floor'>{translate.floor}<span className='red'>*</span></label>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
@@ -449,11 +445,13 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={handleFloorBlur}
           />
         </div>
-        {floorIsTouched && (<div className="error-message">{floorError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: floorError && floorIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {floorError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Flat'>{translate.flat}</label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${flatClass}`}>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Flat'>{translate.flat}<span className='red'>*</span></label>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
@@ -465,11 +463,13 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={handleFlatBlur}
           />
         </div>
-        {flatIsTouched && (<div className="error-message">{flatError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: flatError && flatIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {flatError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='Landmark'>{translate.landmark}</label>
-        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input ${landmarkClass}`}>
+        <div className={`full-width gray radius-10px white-bg flex-row-left-start add-branch--input`}>
           <i className='bi bi-pin-map-fill size-20px' />
           <input
             className='full-width gray margin-4px-H'
@@ -481,12 +481,14 @@ const AddBranchForm = ({ popupToggle }) => {
             onBlur={handleLandmarkBlur}
           />
         </div>
-        {landmarkIsTouched && (<div className="error-message">{landmarkError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: landmarkError && landmarkIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {landmarkError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
-        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='PrimaryPhoneNum'>{translate.primaryPhoneNumber}</label>
+        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='PrimaryPhoneNum'>{translate.primaryPhoneNumber}<span className='red'>*</span></label>
         <PhoneInput
-          className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input ${primaryPhoneClass}`}
+          className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input`}
           id={'PrimaryPhoneNum'}
           placeholder={translate.primaryPhoneNumber}
           international
@@ -500,12 +502,14 @@ const AddBranchForm = ({ popupToggle }) => {
           }
           onBlur={primaryPhoneBlurHandler}
         />
-        {primaryPhoneIsTouched && (<div className="error-message">{primaryPhoneError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: primaryPhoneError && primaryPhoneIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {primaryPhoneError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='OptionallyPhoneNum'>{translate.optionalPhoneNumber}</label>
         <PhoneInput
-          className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input ${optionalPhoneClass}`}
+          className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input`}
           id={'OptionallyPhoneNum'}
           placeholder={translate.optionalPhoneNumber}
           international
@@ -519,7 +523,9 @@ const AddBranchForm = ({ popupToggle }) => {
           }
           onBlur={optionalPhoneBlurHandler}
         />
-        {optionalPhoneIsTouched && (<div className="error-message">{optionalPhoneError}</div>)}
+        <p style={{ marginLeft: '0 5px 0 5px', visibility: optionalPhoneError && optionalPhoneIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+          <i className="bi bi-exclamation-triangle-fill red"></i> {optionalPhoneError}
+        </p>
       </div>
       <div className='full-width flex-col-left-start add-branch--input-container'>
         <div className='flex-row-between full-width'>

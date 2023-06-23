@@ -14,6 +14,7 @@ import './PopupForm.scss';
 const Popup = ({ popupToggle, header, data }) => {
     const popupRef = useRef();
     const mode = useSelector(state => state.theme.mode);
+    const language = useSelector((state) => state.language.language);
     const dashboard = document.getElementById('dashboard-view');
 
     useEffect(() => {
@@ -47,10 +48,10 @@ const Popup = ({ popupToggle, header, data }) => {
                     </div>
                 </div>
             ) : (
-                <div className='popup--content flex-col-top-start inter white-bg width-25-100' ref={popupRef}>
+                <div className={`popup--content${language === 'ar' ? '-arabic' : ''} flex-col-top-start inter white-bg width-25-100`} ref={popupRef}>
                     <img src={mode === 'dark-mode' ? backgroundDark : background} className={mode === 'dark-mode' ? 'dark' : ''} alt='bg' />
 
-                    <div className={`popup--header flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-20px mint-green-bg full-width`}>
+                    <div className={`popup--header${language === 'ar' ? '-arabic' : ''} flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-20px mint-green-bg full-width`}>
                         {header}
                     </div>
 

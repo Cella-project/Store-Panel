@@ -411,7 +411,7 @@ export const AddProduct = () => {
                                         autoFocus
                                     />
                                 </div>
-                                <p style={{ marginLeft: '5px', visibility: titleError && titleIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                <p style={{ marginLeft: '0 5px 0 5px', visibility: titleError && titleIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                     <i className="bi bi-exclamation-triangle-fill red"></i> {titleError}
                                 </p>
                             </div>
@@ -429,7 +429,7 @@ export const AddProduct = () => {
                                         style={{ resize: 'none' }} // disable resizing
                                     />
                                 </div>
-                                <p style={{ marginLeft: '5px', visibility: descriptionError && descriptionIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                <p style={{ marginLeft: '0 5px 0 5px', visibility: descriptionError && descriptionIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                     <i className="bi bi-exclamation-triangle-fill red"></i> {descriptionError}
                                 </p>
                             </div>
@@ -456,7 +456,7 @@ export const AddProduct = () => {
                                             onBlur={mainCategoryBlurHandler}
                                         />
                                     </div>
-                                    <p style={{ marginLeft: '5px', visibility: mainCategoryError && mainCategoryIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <p style={{ marginLeft: '0 5px 0 5px', visibility: mainCategoryError && mainCategoryIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                         <i className="bi bi-exclamation-triangle-fill red"></i> {mainCategoryError}
                                     </p>
                                 </div>
@@ -484,7 +484,7 @@ export const AddProduct = () => {
                                             onBlur={subCategoryBlurHandler}
                                         />
                                     </div>
-                                    <p style={{ marginLeft: '5px', visibility: subCategoryError && subCategoryIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <p style={{ marginLeft: '0 5px 0 5px', visibility: subCategoryError && subCategoryIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                         <i className="bi bi-exclamation-triangle-fill red"></i> {subCategoryError}
                                     </p>
                                 </div>
@@ -584,7 +584,7 @@ export const AddProduct = () => {
                             <div>
                                 <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="quantity">{translate.quantity} : <span className='red'>*</span></label>
                                 <input className="pointer margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="Quantity" value={enteredQuantity} onChange={quantityChangedHandler} onBlur={quantityBlurHandler} />
-                                <p style={{ marginLeft: '5px', visibility: quantityError && quantityIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                <p style={{ marginLeft: '0 5px 0 5px', visibility: quantityError && quantityIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                     <i className="bi bi-exclamation-triangle-fill red"></i> {quantityError}
                                 </p>
                             </div>
@@ -614,7 +614,7 @@ export const AddProduct = () => {
                                                 onBlur={materialBlurHandler}
                                             />
                                         </div>
-                                        <p style={{ marginLeft: '5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                        <p style={{ marginLeft: '0 5px 0 5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                             <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
                                         </p>
                                     </div>
@@ -780,7 +780,7 @@ export const AddProduct = () => {
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="price">{translate.price}:<span className='red'>*</span></label>
                                     <input className="pointer margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="price" value={enteredPrice} onChange={priceChangedHandler} onBlur={priceBlurHandler} />
                                 </div>
-                                <p style={{ marginLeft: '5px', visibility: priceError && priceIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                <p style={{ marginLeft: '0 5px 0 5px', visibility: priceError && priceIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                     <i className="bi bi-exclamation-triangle-fill red"></i> {priceError}
                                 </p>
                                 <div className='full-width add-product--price--discount'>
