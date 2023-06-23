@@ -4,8 +4,9 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import GreenCard from "../../../components/common/GreenCard";
 import ProductCard from "../../../components/products/ProductCard";
 import OrderCard from "../../../components/orders/OrderCard";
-import { productActions, orderActions,orderHistoryActions } from "../../../apis/actions";
-import BarChart from "../../../components/common/BarChart";
+import { productActions, orderActions, orderHistoryActions } from "../../../apis/actions";
+import OrderBarChart from "../../../components/orders/OrderBarChart";
+import OrderLineChart from "../../../components/orders/OrderLineChart";
 import { useDispatch, useSelector } from "react-redux";
 import languages from '../../../components/global/languages';
 import Loading from "../../../components/global/Loading";
@@ -72,23 +73,8 @@ const Home = () => {
         </div>
         <div className="full-width flex-row2col">
           <div className="full-width flex-row-top-between2col">
-            <BarChart />
-            <GreenCard title={translations.orderHistory}>
-              {orderHistory && orderHistory !== null ?
-                <PerfectScrollbar className="home--scroll--cont full-width flex-col-top-start">
-                  {orderHistory
-                    .slice()
-                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                    .slice(0, 5)
-                    .map((orderHistory) => (
-                      <OrderCard key={orderHistory._id} order={orderHistory} />
-                    ))}
-                </PerfectScrollbar> : <Loading />
-              }
-              <Link to={`/OrdersHistory`} className="pointer lists-card--link">
-                <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
-              </Link>
-            </GreenCard>
+            <OrderBarChart />
+            <OrderLineChart />
           </div>
         </div>
         <div className="full-width flex-row2col home">
@@ -111,11 +97,27 @@ const Home = () => {
                 <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>
-            <GreenCard title={translations.reviews}>
-
+            <GreenCard title={translations.orderHistory}>
+              {orderHistory && orderHistory !== null ?
+                <PerfectScrollbar className="home--scroll--cont full-width flex-col-top-start">
+                  {orderHistory
+                    .slice()
+                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                    .slice(0, 5)
+                    .map((orderHistory) => (
+                      <OrderCard key={orderHistory._id} order={orderHistory} />
+                    ))}
+                </PerfectScrollbar> : <Loading />
+              }
+              <Link to={`/OrdersHistory`} className="pointer lists-card--link">
+                <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
+              </Link>
             </GreenCard>
           </div>
         </div>
+          <GreenCard title={translations.reviews}>
+
+          </GreenCard>
       </div >
     </div>
   );
