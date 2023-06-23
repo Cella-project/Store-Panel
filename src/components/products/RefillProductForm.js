@@ -88,10 +88,10 @@ export const RefillProductForm = ({ popupToggle }) => {
 
 
     return (
-        <div className='refill-product flex-row-center inter'>
+        <div className='refill-product full-width flex-row-center inter'>
             {
                 productData &&
-                <form onSubmit={handleSubmit} noValidate className=' flex-col-center'>
+                <form onSubmit={handleSubmit} noValidate className='flex-col-center full-width'>
                     <div>
                         <div className='full-width flex-col-left-start refill-product--header'>
                             <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.refillProduct}</label>
