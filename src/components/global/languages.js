@@ -323,7 +323,8 @@ const languages = {
     orderChart : 'Order Chart',
     last7days : 'Last 7 Days',
     last30days : 'Last 30 Days',
-
+    emailIsRequire : 'Email is required.',
+    yourVerificationCodeHasExpiredPleaseRequestNewOne : 'Your verification code has expired. Please request a new one.',
 
   },
   ar: {
@@ -649,6 +650,9 @@ const languages = {
     orderChart : 'احصائية للطلبات',
     last7days : 'آخر 7 أيام',
     last30days : 'آخر 30 يوم',
+    emailIsRequire : 'البريد الإلكتروني مطلوب',
+    yourVerificationCodeHasExpiredPleaseRequestNewOne:"لقد انتهت صلاحية رمز التحقق الخاص بك، من فضلك اطلب واحد جديد",
+
 
   },
 };

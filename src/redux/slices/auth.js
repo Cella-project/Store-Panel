@@ -8,7 +8,7 @@ const authSlice = createSlice({
         userData: null,
         forgetPasswordCycle: {
             email: null,
-            OTP: null,
+            OTP: [],
         }
     },
     reducers: {

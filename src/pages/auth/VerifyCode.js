@@ -28,21 +28,24 @@ const VerifyCode = () => {
         setOtp(event);
     }
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        if (codeRef.current.length === 6) {
+            handleVerifyOTP();
+        }
+    });
+
+    const handleVerifyOTP = (event) => {
         if (event) {
             event.preventDefault();
         }
-        dispatch(authActions.verifyOTP({
-            email: email,
-            otp: codeRef.current
-        }, translations.successfulSetNewPassword));
-    }
 
-    useEffect(() => {
-        if (codeRef.current.length === 6) {
-            handleSubmit();
-        }
-    });
+        const formData = {
+            email: email,
+            otp: codeRef.current,
+        };
+
+        dispatch(authActions.verifyOTP(formData, translations.successfulSetNewPassword));
+    };
 
 
     useEffect(() => {
@@ -52,7 +55,7 @@ const VerifyCode = () => {
             router.navigate('/auth/forget-password');
             dispatch(popupMutation.popFeedBack({
                 type: 'info',
-                msg: 'Your verification code has expired. Please request a new one.'
+                msg: translations.yourVerificationCodeHasExpiredPleaseRequestNewOne,
             }));
         }, 300 * 1000);
 
@@ -60,7 +63,7 @@ const VerifyCode = () => {
     });
 
     return (
-        <form onSubmit={handleSubmit} noValidate className={`${style['verify']} flex-col-center white-bg radius-5px shadow-2px`}>
+        <form onSubmit={handleVerifyOTP} noValidate className={`${style['verify']} flex-col-center white-bg radius-5px shadow-2px`}>
             <Timer className={`gold margin-12px-V`} sec={300} />
             <div className={`${style['verify--info']} full-width flex-col-left-start ${mode === 'dark-mode' ? 'gray-bg' : 'off-gray-bg'} radius-5px`}>
                 <p className={`space-none inter ${mode === 'dark-mode' ? 'white' : 'gray'} margin-4px-V size-12px`}>{translations.resetCodeSent}</p>

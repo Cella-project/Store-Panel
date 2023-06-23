@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {  mainCategoryActions, subCategoryActions, specialityControlActions, productActions } from '../../../apis/actions';
-import {  mainCategoryMutations, subCategoryMutations, specialityControlMutations } from '../../../redux/mutations';
+import { mainCategoryActions, subCategoryActions, specialityControlActions, productActions } from '../../../apis/actions';
+import { mainCategoryMutations, subCategoryMutations, specialityControlMutations } from '../../../redux/mutations';
 
 import useInput from '../../../hooks/useInput';
 import languages from '../../../components/global/languages';
@@ -164,7 +164,7 @@ export const AddProduct = () => {
             dispatch(productActions.addProductPicture(data, (response) => {
                 const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
                 album.photos.push({ 'URL': url });
-            },translate.productPictureAddedSuccessfully,translate.someThingWentWrongPleaseTry));
+            }, translate.productPictureAddedSuccessfully, translate.someThingWentWrongPleaseTry));
         }
         setAlbum(album.photos);
     }
@@ -272,7 +272,7 @@ export const AddProduct = () => {
             dispatch(mainCategoryMutations.setMainCategories(null));
             dispatch(mainCategoryActions.getMainCategories(storeData.speciality._id));
         }
-    }, [dispatch, enteredMainCategory,storeData.speciality._id]);
+    }, [dispatch, enteredMainCategory, storeData.speciality._id]);
 
 
     useEffect(() => {
@@ -288,7 +288,7 @@ export const AddProduct = () => {
             dispatch(specialityControlActions.getMaterials(storeData.speciality._id));
             dispatch(specialityControlActions.getSizes(storeData.speciality._id));
         }
-    }, [dispatch, enteredMainCategory,storeData.speciality._id]);
+    }, [dispatch, enteredMainCategory, storeData.speciality._id]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -297,7 +297,7 @@ export const AddProduct = () => {
             title: enteredTitle,
             description: enteredDescription,
             store:
-            {   
+            {
                 _id: storeData._id,
                 storeName: storeData.storeName,
             },
@@ -338,7 +338,7 @@ export const AddProduct = () => {
         dispatch(productActions.addProduct(product,
             () => {
                 navigate(`/home/`);
-            },translate.productAddedSuccessfully,translate.someThingWentWrongPleaseTry));
+            }, translate.productAddedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
 
 
@@ -411,7 +411,9 @@ export const AddProduct = () => {
                                         autoFocus
                                     />
                                 </div>
-                                {titleIsTouched && (<div className="error-message">{titleError}</div>)}
+                                <p style={{ marginLeft: '5px', visibility: titleError && titleIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <i className="bi bi-exclamation-triangle-fill red"></i> {titleError}
+                                </p>
                             </div>
                             <div className='full-width flex-col-left-start add-product--input-container'>
                                 <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.productDescription} <span className='red'>*</span></label>
@@ -427,7 +429,9 @@ export const AddProduct = () => {
                                         style={{ resize: 'none' }} // disable resizing
                                     />
                                 </div>
-                                {descriptionIsTouched && (<div className="error-message">{descriptionError}</div>)}
+                                <p style={{ marginLeft: '5px', visibility: descriptionError && descriptionIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <i className="bi bi-exclamation-triangle-fill red"></i> {descriptionError}
+                                </p>
                             </div>
                             {mainCategories && mainCategories.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
@@ -452,7 +456,9 @@ export const AddProduct = () => {
                                             onBlur={mainCategoryBlurHandler}
                                         />
                                     </div>
-                                    {mainCategoryIsTouched && (<div className="error-message">{mainCategoryError}</div>)}
+                                    <p style={{ marginLeft: '5px', visibility: mainCategoryError && mainCategoryIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                        <i className="bi bi-exclamation-triangle-fill red"></i> {mainCategoryError}
+                                    </p>
                                 </div>
                             )}
                             {subCategories && subCategories.length > 0 && (
@@ -478,7 +484,9 @@ export const AddProduct = () => {
                                             onBlur={subCategoryBlurHandler}
                                         />
                                     </div>
-                                    {subCategoryIsTouched && (<div className="error-message">{subCategoryError}</div>)}
+                                    <p style={{ marginLeft: '5px', visibility: subCategoryError && subCategoryIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                        <i className="bi bi-exclamation-triangle-fill red"></i> {subCategoryError}
+                                    </p>
                                 </div>
                             )}
 
@@ -576,7 +584,9 @@ export const AddProduct = () => {
                             <div>
                                 <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="quantity">{translate.quantity} : <span className='red'>*</span></label>
                                 <input className="pointer margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="Quantity" value={enteredQuantity} onChange={quantityChangedHandler} onBlur={quantityBlurHandler} />
-                                {quantityIsTouched && (<div className="error-message">{quantityError}</div>)}
+                                <p style={{ marginLeft: '5px', visibility: quantityError && quantityIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <i className="bi bi-exclamation-triangle-fill red"></i> {quantityError}
+                                </p>
                             </div>
                             {
                                 materials && materials.length > 0 && (
@@ -604,7 +614,9 @@ export const AddProduct = () => {
                                                 onBlur={materialBlurHandler}
                                             />
                                         </div>
-                                        {materialIsTouched && (<div className="error-message">{materialError}</div>)}
+                                        <p style={{ marginLeft: '5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                            <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
+                                        </p>
                                     </div>
                                 )
                             }
@@ -745,7 +757,7 @@ export const AddProduct = () => {
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
-                                    disabled={remainingQuantitiesOfColors !== 0 || (remainingQuantitiesOfSizes !== 0 )}
+                                    disabled={remainingQuantitiesOfColors !== 0 || (remainingQuantitiesOfSizes !== 0)}
                                     onClick={() => {
                                         setCurrentPage(4);
                                     }}
@@ -768,7 +780,9 @@ export const AddProduct = () => {
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="price">{translate.price}:<span className='red'>*</span></label>
                                     <input className="pointer margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="price" value={enteredPrice} onChange={priceChangedHandler} onBlur={priceBlurHandler} />
                                 </div>
-                                {priceIsTouched && (<div className="error-message">{priceError}</div>)}
+                                <p style={{ marginLeft: '5px', visibility: priceError && priceIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                    <i className="bi bi-exclamation-triangle-fill red"></i> {priceError}
+                                </p>
                                 <div className='full-width add-product--price--discount'>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>Discount:<span className='red'>*</span></label>
                                     <div className='margin-6px-V'>
