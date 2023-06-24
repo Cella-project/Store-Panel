@@ -66,7 +66,6 @@ const productActions = {
                 }));
                 afterSuccess();
             } catch (error) {
-                console.log(error)
                 errorHandler(dispatch, error.response, msg2);
             }
         }
@@ -309,7 +308,6 @@ const productActions = {
                     try {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
-                        console.log("payload ",payload);
                         const response = await Axios.put('/api/product-profile/remove-img', payload);
                         dispatch(productMutations.setProductData(response.data.data));
                         dispatch(popupMutation.clearPopPanel());

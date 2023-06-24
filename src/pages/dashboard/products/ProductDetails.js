@@ -214,7 +214,7 @@ const ProductDetails = () => {
 
           <div className="full-width flex-row-center">
             <GreenCard title={translate.reviews}>
-              <Link to={`/Reviews`} className="pointer lists-card--link">
+              <Link to={`/store-panel/Reviews`} className="pointer lists-card--link">
                 <i className={`bi bi-arrow-${language==='ar'?'left':'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>

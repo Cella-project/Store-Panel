@@ -26,7 +26,8 @@ const authActions = {
                     }));
                     localStorage.setItem('Access Token', response.data.token.access);
                     localStorage.setItem('Refresh Token', response.data.token.refresh);
-                    router.navigate('/');
+                    dispatch(this.getProfile());
+                    router.navigate('/store-panel/');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -83,7 +84,6 @@ const authActions = {
                     afterSuccess();
                 }
             } catch (error) {
-                console.log(error);
                 errorHandler(dispatch, error.response);
             }
         }
@@ -104,7 +104,7 @@ const authActions = {
                 if (error.response.status === 401 && error.response.message === 'jwt expired') {
                     localStorage.removeItem('Access Token');
                     localStorage.removeItem('Refresh Token');
-                    router.navigate('/login');
+                    router.navigate('/store-panel/login');
                 }
                 errorHandler(dispatch, error.response);
             }
@@ -119,7 +119,7 @@ const authActions = {
                 const response = await Axios.post('/api/store-auth/forget-password', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.setEmail(payload.email));
-                    router.navigate('/auth/verify-code');
+                    router.navigate('/store-panel/auth/verify-code');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -140,7 +140,7 @@ const authActions = {
                 const response = await Axios.post('/api/store-auth/validate-otp', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.setOTP(payload.otp));
-                    router.navigate('/auth/reset-password');
+                    router.navigate('/store-panel/auth/reset-password');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -161,7 +161,7 @@ const authActions = {
                 const response = await Axios.put('/api/store-auth/reset-password', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.clearForgetPasswordCycle());
-                    router.navigate('/auth/login');
+                    router.navigate('/store-panel/auth/login');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -208,8 +208,6 @@ const authActions = {
                     afterSuccess();
                 }
             } catch (error) {
-                console.log(error);
-                console.log(payload);
                 errorHandler(dispatch, error.response, msg2);
             }
         }
@@ -243,11 +241,9 @@ const authActions = {
             }));
             localStorage.removeItem('Access Token');
             localStorage.removeItem('Refresh Token');
-            localStorage.removeItem('User');
-            dispatch(authMutations.setAuthData({
-                token: null,
-                user: null
-            }));
+            
+
+            router.navigate('/store-panel/auth/login');
         }
     },
     addStoreSocialMediaAccount(payload, afterSuccess, msg1, msg2) {
@@ -263,6 +259,7 @@ const authActions = {
                     type: 'success',
                     msg: msg1
                 }));
+                dispatch(this.getProfile());
                 afterSuccess();
             } catch (error) {
                 errorHandler(dispatch, error.response, msg2);
@@ -309,6 +306,7 @@ const authActions = {
                         }));
                     }
                 }));
+                dispatch(this.getProfile());
             } catch (error) {
                 errorHandler(dispatch, error.response, msg3);
             }
@@ -327,6 +325,7 @@ const authActions = {
                     type: 'success',
                     msg: msg1
                 }));
+                dispatch(this.getProfile());
                 afterSuccess();
             } catch (error) {
                 errorHandler(dispatch, error.response, msg2);
@@ -371,6 +370,7 @@ const authActions = {
                         }));
                     }
                 }));
+                dispatch(this.getProfile());
             } catch (error) {
                 errorHandler(dispatch, error.response, msg3);
             }

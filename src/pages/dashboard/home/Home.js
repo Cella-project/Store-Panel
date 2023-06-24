@@ -38,7 +38,7 @@ const Home = () => {
   ]
 
   if (products !== null && orderHistory !== null && order !== null) {
-    const sales = order.reduce((total, order) => total + order.total, 0);
+    const sales = order.filter(order => order.status === 'Delivered').reduce((total, order) => total + order.total, 0);
 
     cards = [
       { title: translations.sales, content: sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") },
@@ -93,7 +93,7 @@ const Home = () => {
                 </PerfectScrollbar>
                 : <Loading />
               }
-              <Link to={`/Products`} className="pointer lists-card--link">
+              <Link to={`/store-panel/Products`} className="pointer lists-card--link">
                 <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>
@@ -109,15 +109,15 @@ const Home = () => {
                     ))}
                 </PerfectScrollbar> : <Loading />
               }
-              <Link to={`/OrdersHistory`} className="pointer lists-card--link">
+              <Link to={`/store-panel/OrdersHistory`} className="pointer lists-card--link">
                 <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>
           </div>
         </div>
-          <GreenCard title={translations.reviews}>
+        {/* <GreenCard title={translations.reviews}>
 
-          </GreenCard>
+        </GreenCard> */}
       </div >
     </div>
   );

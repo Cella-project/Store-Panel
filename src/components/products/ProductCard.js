@@ -34,7 +34,7 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
 
     return (
         <div className={`product-card ${width} shadow-5px inter radius-15px white-bg flex-row-top-between2col pointer`} >
-            <Link to={`/products/${productCard._id}`} className='lists-card--link pointer full-width flex-row-left-start2col flex-wrap'>
+            <Link to={`/store-panel/products/${productCard._id}`} className='lists-card--link pointer full-width flex-row-left-start2col flex-wrap'>
                 <div className='flex-col-top-start'>
                     <div className='product-card--img flex-row-center'>
                         {productCard.img ? (

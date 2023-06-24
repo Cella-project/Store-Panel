@@ -12,7 +12,7 @@ const StoreCard = ({ storeCards, index }) => {
 
     return (
         <div key={index} className='store-card width-90-100 shadow-5px margin-10px-V inter radius-15px white-bg pointer'>
-            <Link to={`/stores/${storeCards._id}`} className='store-card--link full-width flex-row-between2col flex-wrap'>
+            <Link to={`/store-panel/stores/${storeCards._id}`} className='store-card--link full-width flex-row-between2col flex-wrap'>
                 <div className='store-card--img flex-row-center'>
                     {storeCards.logo === 'No Image' ?
                         <Canvas name={storeCards.storeName} width={130} height={130} fontSize={'100px'} />
