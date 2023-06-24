@@ -98,7 +98,7 @@ const OrderBarChart = () => {
         <div className="full-width flex-row-top-between2col">
             <GreenCard title={translations.orderChart}>
                 <div className='flex-row-between2col full-width'>
-                    <label className='text-shadow mint-green inter'>
+                    <label className='text-shadow gray chart inter'>
                         <input
                             className='mint-green margin-6px-H'
                             type="radio"
@@ -108,7 +108,7 @@ const OrderBarChart = () => {
                         />
                         {translations.day}
                     </label>
-                    <label className='text-shadow mint-green inter'>
+                    <label className='text-shadow gray chart inter'>
                         <input
                             className='mint-green margin-6px-H'
                             type="radio"
@@ -118,7 +118,7 @@ const OrderBarChart = () => {
                         />
                         {translations.week}
                     </label>
-                    <label className='text-shadow mint-green inter'>
+                    <label className='text-shadow gray chart inter'>
                         <input
                             className='mint-green margin-6px-H'
                             type="radio"

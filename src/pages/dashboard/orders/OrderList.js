@@ -28,10 +28,9 @@ const OrderList = () => {
 
     let cards = [
         { title: translate.totalOrders, content: 0, icon: "bi bi-people mint-green" },
-        { title: translate.delivered, content: 0, icon: "bi bi-people mint-green" },
         { title: translate.pending, content: 0, icon: "bi bi-people mint-green" },
-        { title: translate.canceledByCustomer, content: 0, icon: "bi bi-people mint-green" },
-        { title: translate.canceledByAdmin, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.approved, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.readyForPickup, content: 0, icon: "bi bi-people mint-green" },
     ]
 
     let content = <Loading />;
@@ -88,7 +87,7 @@ const OrderList = () => {
             filteredOrder.map((orderCard) => {
                 return (
                     <ListsCard key={orderCard._id} >
-                        <OrderCard 
+                        <OrderCard
                             order={orderCard}
                         />
                     </ListsCard>
@@ -97,10 +96,9 @@ const OrderList = () => {
 
         cards = [
             { title: translate.totalOrders, content: orderCards.length, icon: "bi bi-people mint-green" },
-            { title: translate.delivered, content: orderCards.filter(orderCard => orderCard.status === 'Delivered').length, icon: "bi bi-people mint-green" },
             { title: translate.pending, content: orderCards.filter(orderCard => orderCard.status === 'Pending').length, icon: "bi bi-people mint-green" },
-            { title: translate.canceledByCustomer, content: orderCards.filter(orderCard => orderCard.status === 'CanceledByCustomer').length, icon: "bi bi-people mint-green" },
-            { title: translate.canceledByAdmin, content: orderCards.filter(orderCard => orderCard.status === 'CanceledByAdmin').length, icon: "bi bi-people mint-green" },
+            { title: translate.approved, content: orderCards.filter(orderCard => orderCard.status === 'Approved').length, icon: "bi bi-people mint-green" },
+            { title: translate.readyForPickup, content: orderCards.filter(orderCard => orderCard.status === 'Ready').length, icon: "bi bi-people mint-green" },
         ]
     }
 

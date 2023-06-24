@@ -57,10 +57,10 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                     }
                 </div>
                 <div className='product-card--details flex-col-left-start'>
-                    <div className={`product-card--type full-width ${mode === 'dark-mode' ? 'gray' : 'mint-green'} flex-row-left-start size-24px font-bold flex-wrap`}>
+                    <div className={`product-card--type full-width ${mode === 'dark-mode' ? 'gray' : 'mint-green'} flex-row-left-start size-20px font-bold flex-wrap`}>
                         {productCard.title.toUpperCase()}
                     </div>
-                    <div className='product-card--cont full-width flex-col-left-start gray size-16px font-bold margin-12px-V'>
+                    <div className='product-card--cont full-width flex-col-left-start gray size-14px font-bold margin-12px-V'>
                         {
                             productCard.store &&
                             <div className='product-card--store'>
@@ -76,23 +76,23 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
 
 
                         {(productCard.avilableQuantity || quantity) &&
-                            <span className="gray size-16px margin-2px-V">{translate.quantity}:
-                                <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-16px margin-6px-H`}>{quantity || productCard.avilableQuantity}</span>
+                            <span className="gray size-14px margin-2px-V">{translate.quantity}:
+                                <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{quantity || productCard.avilableQuantity}</span>
                             </span>
                         }
-                        <span className="gray size-16px margin-2px-V">{translate.material}:
-                            <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-16px margin-6px-H`}>{productCard.material}</span>
+                        <span className="gray size-14px margin-2px-V">{translate.material}:
+                            <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{productCard.material}</span>
                         </span>
                         {
                             size &&
-                            <span className="gray size-16px margin-2px-V">{translate.size}:
-                                <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-16px margin-6px-H`}>{size}</span>
+                            <span className="gray size-14px margin-2px-V">{translate.size}:
+                                <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{size}</span>
                             </span>
                         }
                         {
                             color &&
-                            <span className="gray size-16px margin-2px-V">{translate.color}:
-                                <span className="mint-green size-16px margin-6px-H">{color}</span>
+                            <span className="gray size-14px margin-2px-V">{translate.color}:
+                                <span className="mint-green size-14px margin-6px-H">{color}</span>
                             </span>
                         }
                     </div>
@@ -100,14 +100,14 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                         {hasDiscount && (
                             <div className='gray'>
                                 <s>
-                                    <span className='product-card--old-price size-16px font-bold'>{Math.trunc(formattedOldPrice)}</span>
+                                    <span className='product-card--old-price size-14px font-bold'>{Math.trunc(formattedOldPrice)}</span>
                                     <span className='size-8px'>.{formattedOldPrice.slice(-2)}</span>
                                 </s>
                             </div>
                         )}
                         <div className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-2px-V`}>
-                            <span className='product-card--new-price size-40px font-bold'>{Math.trunc(formattedNewPrice)}</span>
-                            <span className='size-14px'>.{formattedNewPrice.slice(-2)}</span>
+                            <span className='product-card--new-price size-34px font-bold'>{Math.trunc(formattedNewPrice)}</span>
+                            <span className='size-12px'>.{formattedNewPrice.slice(-2)}</span>
                         </div>
                     </div>
                 </div>
