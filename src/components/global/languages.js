@@ -330,6 +330,7 @@ const languages = {
     branchEditedSuccessfully: 'Branch edited successfully.',
     editSocialMediaAccount: 'Edit Social Media Accounts',
     noSocialMediaAccounts: 'No social media accounts.',
+    numberOfOrderHistory: 'Number of Ended Orders',
 
 
   },
@@ -663,6 +664,7 @@ const languages = {
     branchEditedSuccessfully: 'تم تعديل الفرع بنجاح',
     editSocialMediaAccount : 'تعديل حسابات وسائل التواصل الاجتماعي',
     noSocialMediaAccounts : 'لا يوجد حسابات وسائل التواصل الاجتماعي',
+    numberOfOrderHistory : 'عدد الطلبات المنتهية',
   },
 };
 
