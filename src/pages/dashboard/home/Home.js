@@ -38,7 +38,7 @@ const Home = () => {
   ]
 
   if (products !== null && orderHistory !== null && order !== null) {
-    const sales = order.reduce((total, order) => total + order.total, 0);
+    const sales = order.filter(order => order.status === 'Delivered').reduce((total, order) => total + order.total, 0);
 
     cards = [
       { title: translations.sales, content: sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") },
@@ -115,9 +115,9 @@ const Home = () => {
             </GreenCard>
           </div>
         </div>
-          <GreenCard title={translations.reviews}>
+        {/* <GreenCard title={translations.reviews}>
 
-          </GreenCard>
+        </GreenCard> */}
       </div >
     </div>
   );
