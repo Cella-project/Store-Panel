@@ -1,4 +1,4 @@
-.mint-green input[type="radio"] {
+.gray.chart input[type="radio"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -10,7 +10,7 @@
     transition: border-color 0.3s ease-in-out;
 }
 
-.mint-green input[type="radio"]:checked {
+.gray.chart  input[type="radio"]:checked {
     background-color: #70c8b0;
     border-color: #70c8b0;
 }

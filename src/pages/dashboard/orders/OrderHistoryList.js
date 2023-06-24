@@ -28,11 +28,11 @@ const OrderHistoryList = () => {
     }, []);
 
     let cards = [
-        { title: translate.totalOrders, content: 0, icon: "bi bi-people mint-green" },
-        { title: translate.delivered, content: 0, icon: "bi bi-people mint-green" },
-        { title: translate.pending, content: 0, icon: "bi bi-people mint-green" },
-        { title: translate.canceledByCustomer, content: 0, icon: "bi bi-people mint-green" },
-        { title: translate.canceledByAdmin, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.totalOrders, content: 0 , icon: "bi bi-people mint-green" },
+        { title: translate.cancelledByStore, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.cancelledByCustomer, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.cancelledByAdmin, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.returned, content: 0 , icon: "bi bi-people mint-green" },
     ]
 
     let content = <Loading />;
@@ -98,10 +98,10 @@ const OrderHistoryList = () => {
 
         cards = [
             { title: translate.totalOrders, content: orderHistoryCards.length, icon: "bi bi-people mint-green" },
-            { title: translate.delivered, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'Delivered').length, icon: "bi bi-people mint-green" },
-            { title: translate.pending, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'Pending').length, icon: "bi bi-people mint-green" },
-            { title: translate.canceledByCustomer, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByCustomer').length, icon: "bi bi-people mint-green" },
-            { title: translate.canceledByAdmin, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByAdmin').length, icon: "bi bi-people mint-green" },
+            { title: translate.cancelledByStore, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByStore').length, icon: "bi bi-people mint-green" },
+            { title: translate.cancelledByCustomer, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByCustomer').length, icon: "bi bi-people mint-green" },
+            { title: translate.cancelledByAdmin, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'CanceledByAdmin').length, icon: "bi bi-people mint-green" },
+            { title: translate.returned, content: orderHistoryCards.filter(orderHistoryCard => orderHistoryCard.status === 'Returned').length, icon: "bi bi-people mint-green" },
         ]
     }
 

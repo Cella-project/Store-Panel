@@ -319,7 +319,7 @@ const languages = {
     dec : 'Dec',
     month : 'Month',
     day : 'Day',
-    week : 'week',
+    week : 'Week',
     orderChart : 'Order Chart',
     last7days : 'Last 7 Days',
     last30days : 'Last 30 Days',
