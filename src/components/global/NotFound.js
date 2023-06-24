@@ -72,7 +72,7 @@ const NotFound = () => {
     <Container>
       <Title>404</Title>
       <Subtitle>Page not found</Subtitle>
-      <Button to="/">Go back to Home</Button>
+      <Button to="/store-panel/">Go back to Home</Button>
     </Container>
   );
 };

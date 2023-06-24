@@ -93,7 +93,7 @@ const Home = () => {
                 </PerfectScrollbar>
                 : <Loading />
               }
-              <Link to={`/Products`} className="pointer lists-card--link">
+              <Link to={`/store-panel/Products`} className="pointer lists-card--link">
                 <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>
@@ -109,7 +109,7 @@ const Home = () => {
                     ))}
                 </PerfectScrollbar> : <Loading />
               }
-              <Link to={`/OrdersHistory`} className="pointer lists-card--link">
+              <Link to={`/store-panel/OrdersHistory`} className="pointer lists-card--link">
                 <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>

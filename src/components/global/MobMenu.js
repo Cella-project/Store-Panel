@@ -122,7 +122,7 @@ const MobMenu = ({ menuToggle }) => {
                         <i className={`bi bi-exclamation-triangle ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.compSuggestions}</span>
                     </NavLink>
                     <NavLink
-                        onClick={handleLogout} to={'/store-panel/login'} className="margin-8px-V"
+                        onClick={handleLogout} to={'/store-panel/auth/login'} className="margin-8px-V"
                     >
                         <i className={`bi bi-door-open ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.logout}</span>
                     </NavLink>

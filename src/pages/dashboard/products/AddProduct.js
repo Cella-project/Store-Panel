@@ -337,7 +337,7 @@ export const AddProduct = () => {
 
         dispatch(productActions.addProduct(product,
             () => {
-                navigate(`/home/`);
+                navigate(`/store-panel/products/`);
             }, translate.productAddedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
 

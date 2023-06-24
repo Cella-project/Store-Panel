@@ -26,6 +26,7 @@ const authActions = {
                     }));
                     localStorage.setItem('Access Token', response.data.token.access);
                     localStorage.setItem('Refresh Token', response.data.token.refresh);
+                    dispatch(this.getProfile());
                     router.navigate('/store-panel/');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
@@ -83,7 +84,6 @@ const authActions = {
                     afterSuccess();
                 }
             } catch (error) {
-                console.log(error);
                 errorHandler(dispatch, error.response);
             }
         }
@@ -208,8 +208,6 @@ const authActions = {
                     afterSuccess();
                 }
             } catch (error) {
-                console.log(error);
-                console.log(payload);
                 errorHandler(dispatch, error.response, msg2);
             }
         }
@@ -243,11 +241,9 @@ const authActions = {
             }));
             localStorage.removeItem('Access Token');
             localStorage.removeItem('Refresh Token');
-            localStorage.removeItem('User');
-            dispatch(authMutations.setAuthData({
-                token: null,
-                user: null
-            }));
+            
+
+            router.navigate('/store-panel/auth/login');
         }
     },
     addStoreSocialMediaAccount(payload, afterSuccess, msg1, msg2) {
@@ -263,6 +259,7 @@ const authActions = {
                     type: 'success',
                     msg: msg1
                 }));
+                dispatch(this.getProfile());
                 afterSuccess();
             } catch (error) {
                 errorHandler(dispatch, error.response, msg2);
@@ -288,6 +285,7 @@ const authActions = {
                         }));
                     }
                 }));
+                dispatch(this.getProfile());
             } catch (error) {
                 errorHandler(dispatch, error.response, msg3);
             }
@@ -306,6 +304,7 @@ const authActions = {
                     type: 'success',
                     msg: msg1
                 }));
+                dispatch(this.getProfile());
                 afterSuccess();
             } catch (error) {
                 errorHandler(dispatch, error.response, msg2);
@@ -331,6 +330,7 @@ const authActions = {
                         }));
                     }
                 }));
+                dispatch(this.getProfile());
             } catch (error) {
                 errorHandler(dispatch, error.response, msg3);
             }

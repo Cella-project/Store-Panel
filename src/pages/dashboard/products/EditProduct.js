@@ -181,7 +181,7 @@ export const EditProduct = () => {
 
         dispatch(productActions.updateProduct(editedProduct,
             () => {
-                navigate(`/products/${product._id}`);
+                navigate(`/store-panel/products/${product._id}`);
             }, translate.productUpdatedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
 

@@ -19,7 +19,7 @@ const StoreControl = ({ id }) => {
   //handle delete 
   const handleDelete = () => {
     dispatch(authActions.deleteStore(id, () => {
-      router.navigate("/stores");
+      router.navigate("/store-panel/stores");
     }))
   }
 
