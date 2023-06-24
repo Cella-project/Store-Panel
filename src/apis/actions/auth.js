@@ -26,7 +26,7 @@ const authActions = {
                     }));
                     localStorage.setItem('Access Token', response.data.token.access);
                     localStorage.setItem('Refresh Token', response.data.token.refresh);
-                    router.navigate('/');
+                    router.navigate('/store-panel/');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -104,7 +104,7 @@ const authActions = {
                 if (error.response.status === 401 && error.response.message === 'jwt expired') {
                     localStorage.removeItem('Access Token');
                     localStorage.removeItem('Refresh Token');
-                    router.navigate('/login');
+                    router.navigate('/store-panel/login');
                 }
                 errorHandler(dispatch, error.response);
             }
@@ -119,7 +119,7 @@ const authActions = {
                 const response = await Axios.post('/api/store-auth/forget-password', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.setEmail(payload.email));
-                    router.navigate('/auth/verify-code');
+                    router.navigate('/store-panel/auth/verify-code');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -140,7 +140,7 @@ const authActions = {
                 const response = await Axios.post('/api/store-auth/validate-otp', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.setOTP(payload.otp));
-                    router.navigate('/auth/reset-password');
+                    router.navigate('/store-panel/auth/reset-password');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -161,7 +161,7 @@ const authActions = {
                 const response = await Axios.put('/api/store-auth/reset-password', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.clearForgetPasswordCycle());
-                    router.navigate('/auth/login');
+                    router.navigate('/store-panel/auth/login');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',

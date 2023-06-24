@@ -37,7 +37,7 @@ import NotFound from "../components/global/NotFound";
 
 export const routes = [
     {
-        path: '/',
+        path: '/store-panel',
         element: <App />,
         children: [
             {
@@ -63,7 +63,7 @@ export const routes = [
                 ],
             },
             {
-                path: '/',
+                path: '',
                 element: <AutoGuard component={Dashboard} />,
                 children: [
                     {

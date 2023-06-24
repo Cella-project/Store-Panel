@@ -54,7 +54,7 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        end to={'/'} className="margin-8px-V"
+                        end to={'/store-panel/'} className="margin-8px-V"
                     >
                         <i className={`bi bi-house-door ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.home}</span>
                     </NavLink>
@@ -63,7 +63,7 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/products'} className="margin-8px-V"
+                        to={'/store-panel/products'} className="margin-8px-V"
                     >
                         <i className={`bi bi-box-seam ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.products}</span>
                     </NavLink>
@@ -72,7 +72,7 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/orders'} className="margin-8px-V"
+                        to={'/store-panel/orders'} className="margin-8px-V"
                     >
                         <i className={`bi bi-receipt ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.orders}</span>
                     </NavLink>
@@ -81,7 +81,7 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/ordersHistory'} className="margin-8px-V"
+                        to={'/store-panel/ordersHistory'} className="margin-8px-V"
                     >
                         <i className={`bi bi-hourglass-split ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.orderHistory}</span>
                     </NavLink>
@@ -90,7 +90,7 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/reviews'} className="margin-8px-V"
+                        to={'/store-panel/reviews'} className="margin-8px-V"
                     >
                         <i className={`bi bi-stars ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.reviews}</span>
                     </NavLink>
@@ -99,7 +99,7 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/vouchers'} className="margin-8px-V"
+                        to={'/store-panel/vouchers'} className="margin-8px-V"
                     >
                         <i className={`bi bi-tags ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.vouchers}</span>
                     </NavLink>
@@ -108,7 +108,7 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/logActivities'} className="margin-8px-V"
+                        to={'/store-panel/logActivities'} className="margin-8px-V"
                     >
                         <i className={`bi bi-clock-history ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.logActivity}</span>
                     </NavLink>
@@ -117,12 +117,12 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/comp&suggestions'} className="margin-8px-V"
+                        to={'/store-panel/comp&suggestions'} className="margin-8px-V"
                     >
                         <i className={`bi bi-exclamation-triangle ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.compSuggestions}</span>
                     </NavLink>
                     <NavLink
-                        onClick={handleLogout} to={'/login'} className="margin-8px-V"
+                        onClick={handleLogout} to={'/store-panel/login'} className="margin-8px-V"
                     >
                         <i className={`bi bi-door-open ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.logout}</span>
                     </NavLink>

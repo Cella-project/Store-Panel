@@ -6,7 +6,7 @@ const AuthGuard = ({ component: Component, ...rest }) => {
   return isLoggedIn ? (
     <Component {...rest} />
   ) : (
-    <Navigate to="/auth/login" />
+    <Navigate to="/store-panel/auth/login" />
   );
 };
 
