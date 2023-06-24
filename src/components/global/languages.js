@@ -326,6 +326,10 @@ const languages = {
     emailIsRequire : 'Email is required.',
     yourVerificationCodeHasExpiredPleaseRequestNewOne : 'Your verification code has expired. Please request a new one.',
     returned : 'Returned',
+    branchEditedSuccessfully: 'Branch edited successfully.',
+    editSocialMediaAccount: 'Edit Social Media Accounts',
+    noSocialMediaAccounts: 'No social media accounts.',
+
 
   },
   ar: {
@@ -653,9 +657,10 @@ const languages = {
     last30days : 'آخر 30 يوم',
     emailIsRequire : 'البريد الإلكتروني مطلوب',
     yourVerificationCodeHasExpiredPleaseRequestNewOne:"لقد انتهت صلاحية رمز التحقق الخاص بك، من فضلك اطلب واحد جديد",
-
     returned : 'مرتجع',
-
+    branchEditedSuccessfully: 'تم تعديل الفرع بنجاح',
+    editSocialMediaAccount : 'تعديل حسابات وسائل التواصل الاجتماعي',
+    noSocialMediaAccounts : 'لا يوجد حسابات وسائل التواصل الاجتماعي',
   },
 };
 

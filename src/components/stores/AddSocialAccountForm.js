@@ -24,7 +24,7 @@ const AddSocialAccountForm = ({ popupToggle }) => {
     const formSubmissionHandler = (e) => {
         e.preventDefault();
 
-        if (Facebook.current.length > 0) {
+        if (Facebook.current.length > 0 && !userData.socialMediaAccounts.some(account => account.accountType === 'Facebook')) {
             dispatch(authActions.addStoreSocialMediaAccount({
                 _id: userData._id,
                 accountType: 'Facebook',
@@ -33,11 +33,10 @@ const AddSocialAccountForm = ({ popupToggle }) => {
                 Facebook.current = '';
                 setSocialMediaAccounts({ ...socialMediaAccounts, Facebook: '' });
                 popupToggle(false);
-                document.getElementById("dashboard-view").style.zIndex = 10;
-                window.onscroll = function () { };
-            },translate.socialMediaAddedSuccessfully,translate.someThingWentWrongPleaseTry));
+            }, translate.socialMediaAddedSuccessfully, translate.someThingWentWrongPleaseTry));
         }
-        if (Whatsapp.current.length > 0) {
+
+        if (Whatsapp.current.length > 0 && !userData.socialMediaAccounts.some(account => account.accountType === 'Whatsapp')) {
             dispatch(authActions.addStoreSocialMediaAccount({
                 _id: userData._id,
                 accountType: 'Whatsapp',
@@ -46,11 +45,10 @@ const AddSocialAccountForm = ({ popupToggle }) => {
                 Whatsapp.current = '';
                 setSocialMediaAccounts({ ...socialMediaAccounts, Whatsapp: '' });
                 popupToggle(false);
-                document.getElementById("dashboard-view").style.zIndex = 10;
-                window.onscroll = function () { };
-            },translate.socialMediaAddedSuccessfully,translate.someThingWentWrongPleaseTry));
+            }, translate.socialMediaAddedSuccessfully, translate.someThingWentWrongPleaseTry));
         }
-        if (Instagram.current.length > 0) {
+
+        if (Instagram.current.length > 0 && !userData.socialMediaAccounts.some(account => account.accountType === 'Instagram')) {
             dispatch(authActions.addStoreSocialMediaAccount({
                 _id: userData._id,
                 accountType: 'Instagram',
@@ -59,9 +57,7 @@ const AddSocialAccountForm = ({ popupToggle }) => {
                 Instagram.current = '';
                 setSocialMediaAccounts({ ...socialMediaAccounts, Instagram: '' });
                 popupToggle(false);
-                document.getElementById("dashboard-view").style.zIndex = 10;
-                window.onscroll = function () { };
-            },translate.socialMediaAddedSuccessfully,translate.someThingWentWrongPleaseTry));
+            }, translate.socialMediaAddedSuccessfully, translate.someThingWentWrongPleaseTry));
         }
     }
 
@@ -69,42 +65,48 @@ const AddSocialAccountForm = ({ popupToggle }) => {
         <form noValidate className='add-store-socials full-width' onSubmit={formSubmissionHandler}>
             <div className='full-width flex-col-center add-store-socials--input-container'>
                 <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.socialMediaAccounts}</label>
-                <div className='full-width gray radius-10px margin-8px-V white-bg flex-row-left-start add-store-socials--input'>
-                    <i className='bi bi-facebook size-20px' />
-                    <input className='full-width gray margin-6px-H'
-                        type={'text'}
-                        placeholder={translate.facebookAccountLink}
-                        value={socialMediaAccounts.Facebook}
-                        onChange={(e) => {
-                            Facebook.current = e.target.value;
-                            setSocialMediaAccounts({ ...socialMediaAccounts, Facebook: e.target.value })
-                        }}
-                    />
-                </div>
-                <div className='full-width gray radius-10px margin-8px-V white-bg flex-row-left-start add-store-socials--input'>
-                    <i className='bi bi-whatsapp size-20px' />
-                    <input className='full-width gray margin-6px-H'
-                        type={'text'}
-                        placeholder={translate.whatsappAccountLink}
-                        value={socialMediaAccounts.Whatsapp}
-                        onChange={(e) => {
-                            Whatsapp.current = e.target.value;
-                            setSocialMediaAccounts({ ...socialMediaAccounts, Whatsapp: e.target.value })
-                        }}
-                    />
-                </div>
-                <div className='full-width gray radius-10px margin-8px-V white-bg flex-row-left-start add-store-socials--input'>
-                    <i className='bi bi-instagram size-20px' />
-                    <input className='full-width gray margin-6px-H'
-                        type={'text'}
-                        placeholder={translate.instagramAccountLink}
-                        value={socialMediaAccounts.Instagram}
-                        onChange={(e) => {
-                            Instagram.current = e.target.value;
-                            setSocialMediaAccounts({ ...socialMediaAccounts, Instagram: e.target.value })
-                        }}
-                    />
-                </div>
+                {(!userData.socialMediaAccounts.some(account => account.accountType === 'Facebook')) && (
+                    <div className='full-width gray radius-10px margin-8px-V white-bg flex-row-left-start add-store-socials--input'>
+                        <i className='bi bi-facebook size-20px' />
+                        <input className='full-width gray margin-6px-H'
+                            type={'text'}
+                            placeholder={translate.facebookAccountLink}
+                            value={socialMediaAccounts.Facebook}
+                            onChange={(e) => {
+                                Facebook.current = e.target.value;
+                                setSocialMediaAccounts({ ...socialMediaAccounts, Facebook: e.target.value })
+                            }}
+                        />
+                    </div>
+                )}
+                {(!userData.socialMediaAccounts.some(account => account.accountType === 'Whatsapp')) && (
+                    <div className='full-width gray radius-10px margin-8px-V white-bg flex-row-left-start add-store-socials--input'>
+                        <i className='bi bi-whatsapp size-20px' />
+                        <input className='full-width gray margin-6px-H'
+                            type={'text'}
+                            placeholder={translate.whatsappAccountLink}
+                            value={socialMediaAccounts.Whatsapp}
+                            onChange={(e) => {
+                                Whatsapp.current = e.target.value;
+                                setSocialMediaAccounts({ ...socialMediaAccounts, Whatsapp: e.target.value })
+                            }}
+                        />
+                    </div>
+                )}
+                {(!userData.socialMediaAccounts.some(account => account.accountType === 'Instagram')) && (
+                    <div className='full-width gray radius-10px margin-8px-V white-bg flex-row-left-start add-store-socials--input'>
+                        <i className='bi bi-instagram size-20px' />
+                        <input className='full-width gray margin-6px-H'
+                            type={'text'}
+                            placeholder={translate.instagramAccountLink}
+                            value={socialMediaAccounts.Instagram}
+                            onChange={(e) => {
+                                Instagram.current = e.target.value;
+                                setSocialMediaAccounts({ ...socialMediaAccounts, Instagram: e.target.value })
+                            }}
+                        />
+                    </div>
+                )}
             </div>
             <div className="add-store--actions flex-row-between full-width">
                 <button
@@ -127,4 +129,4 @@ const AddSocialAccountForm = ({ popupToggle }) => {
     )
 }
 
-export default AddSocialAccountForm
+export default AddSocialAccountForm;

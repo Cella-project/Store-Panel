@@ -169,7 +169,6 @@ const AddBranchForm = ({ popupToggle }) => {
   });
   const {
     value: landmark,
-    isValid: landmarkIsValid,
     error: landmarkError,
     isTouched: landmarkIsTouched,
     valueChangeHandler: handleLandmarkChange,
@@ -222,7 +221,7 @@ const AddBranchForm = ({ popupToggle }) => {
     return { error, isValid };
   });
 
-  const formIsValid = addressTitleIsValid && addressTypeIsValid && cityIsValid && districtIsValid && streetIsValid && buildingIsValid && floorIsValid && flatIsValid && landmarkIsValid && primaryPhoneIsValid;
+  const formIsValid = addressTitleIsValid && addressTypeIsValid && cityIsValid && districtIsValid && streetIsValid && buildingIsValid && floorIsValid && flatIsValid && primaryPhoneIsValid;
 
   const submitHandler = (event) => {
     event.preventDefault();
