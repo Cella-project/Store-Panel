@@ -97,9 +97,9 @@ const ProductList = () => {
       });
 
     const counts = products.reduce((acc, product) => {
-      if (product.status === 'Active' && product.quantity > 0) {
+      if (product.status === 'Active' && product.avilableQuantity > 0) {
         acc.activeCount++; // Active and has quantity
-      } else if (product.status === 'Active' && product.quantity === 0) {
+      } else if (product.status === 'Active' && product.avilableQuantity === 0) {
         acc.outOfStockCount++; // Active but no quantity
       } else if (product.status === 'InActive') {
         acc.inactiveCount++; // Inactive
