@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 
 const OrderLineChart = () => {
     const language = useSelector(state => state.language.language);
-    const mode = useSelector(state => state.theme.mode);
     const translations = languages[language];
     const orders = useSelector(state => state.order.orders); // Get the orders from the Redux store
     const ordersHistory = useSelector(state => state.orderHistory.ordersHistory); // Get the order history from the Redux store
