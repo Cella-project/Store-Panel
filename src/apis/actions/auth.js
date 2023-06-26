@@ -98,6 +98,7 @@ const authActions = {
                     dispatch(authMutations.setToken(response.data.token));
                     localStorage.setItem('Access Token', response.data.token.access);
                     localStorage.setItem('Refresh Token', response.data.token.refresh);
+                    localStorage.setItem('Refresh Token Time', new Date().getTime());
                 }
             }
             catch (error) {
@@ -241,7 +242,7 @@ const authActions = {
             }));
             localStorage.removeItem('Access Token');
             localStorage.removeItem('Refresh Token');
-            
+
 
             router.navigate('/store-panel/auth/login');
         }

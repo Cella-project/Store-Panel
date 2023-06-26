@@ -45,7 +45,6 @@ const App = () => {
   const refreshTokenHandler = (token) => {
     if (token) {
       dispatch(authActions.refreshToken(token));
-      localStorage.setItem('Refresh Token Time', new Date().getTime());
     }
   };
 
