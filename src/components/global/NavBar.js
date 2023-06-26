@@ -41,7 +41,7 @@ const NavBar = ({ menuToggle }) => {
               {translations.notification}
             </div>
           </div>
-          <Link to={'/profile'}>
+          <Link to={'/store-panel/profile'}>
             <div className='nav-bar--card flex-row-center white-bg radius-15px margin-6px-H shadow-2px pointer'>
               <div className='nav-bar--card--img flex-row-center radius-circular'>
                 <Canvas name={userData.owner.name} borderRadius='50%' width={55} height={55} fontSize={'28px'} /> :
