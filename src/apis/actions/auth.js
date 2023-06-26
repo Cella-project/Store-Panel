@@ -267,6 +267,27 @@ const authActions = {
             }
         }
     },
+    editStoreSocialMediaAccount(payload, afterSuccess, msg1, msg2) {
+        return async (dispatch) => {
+            try {
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.popAllNotes());
+                dispatch(popupMutation.popLoading());
+                const response = await Axios.put('/api/store-profile/edit-social-account', payload);
+                dispatch(authMutations.setUserData(response.data.data));
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.pushNote({
+                    type: 'success',
+                    msg: msg1
+                }));
+                afterSuccess();
+            } catch (error) {
+                console.log(payload);
+                console.log(error);
+                errorHandler(dispatch, error.response, msg2);
+            }
+        }
+    },
     deleteStoreSocialMediaAccount(payload, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
@@ -306,6 +327,25 @@ const authActions = {
                     msg: msg1
                 }));
                 dispatch(this.getProfile());
+                afterSuccess();
+            } catch (error) {
+                errorHandler(dispatch, error.response, msg2);
+            }
+        }
+    },
+    editStoreBranch(payload, afterSuccess, msg1, msg2) {
+        return async (dispatch) => {
+            try {
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.popAllNotes());
+                dispatch(popupMutation.popLoading());
+                const response = await Axios.put('/api/store-profile/edit-address', payload);
+                dispatch(authMutations.setUserData(response.data.data));
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.pushNote({
+                    type: 'success',
+                    msg: msg1
+                }));
                 afterSuccess();
             } catch (error) {
                 errorHandler(dispatch, error.response, msg2);

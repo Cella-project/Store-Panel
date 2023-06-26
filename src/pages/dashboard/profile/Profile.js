@@ -6,7 +6,9 @@ import ChangePassword from '../../../components/profile/ChangePassword';
 import Canvas from '../../../components/common/Canvas';
 import GreenCard from '../../../components/common/GreenCard';
 import AddBranchForm from '../../../components/stores/AddBranchForm';
+import EditBranchForm from '../../../components/stores/EditBranchForm';
 import AddSocialAccountForm from '../../../components/stores/AddSocialAccountForm';
+import EditSocialAccountForm from '../../../components/stores/EditSocialAccountForm';
 import FaceBook from "../../../assets/images/facebook.png";
 import Instagram from "../../../assets/images/instagram.png";
 import Whatsapp from "../../../assets/images/whatsapp.png";
@@ -27,6 +29,8 @@ const Profile = () => {
     const [section, setSection] = useState('storeInfo');
     const [addBranchForm, setAddBranchForm] = useState(false);
     const [addSocialAccountForm, setAddSocialAccountForm] = useState(false);
+    const [editBranchForm, setEditBranchForm] = useState(false);
+    const [editSocialAccountForm, setEditSocialAccountForm] = useState(false);
 
     const mode = useSelector((state) => state.theme.mode);
 
@@ -156,12 +160,21 @@ const Profile = () => {
                                                 const isExpanded = expandedAddressId === address._id;
                                                 return (
                                                     <div key={address._id}>
+                                                        {
+                                                            editBranchForm && (
+                                                                <EditBranchForm popupToggle={setEditBranchForm} data={address} />
+                                                            )
+                                                        }
                                                         <div className="pointer flex-col-right-start" onClick={() => toggleAddress(address._id)}>
                                                             <div className="profile--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
                                                                 <div className="text-shadow">{address.addressTitle}
                                                                     <i
                                                                         className="profile--address--btn--delete margin-6px-H shadow-2px bi bi-trash pointer size-14px mint-green white-bg radius-circular flex-row-center"
                                                                         onClick={() => deleteAddress(address._id)}
+                                                                    />
+                                                                    <i
+                                                                        className="profile--address--btn--edit margin-6px-H shadow-2px bi bi-pencil-square pointer size-14px mint-green white-bg radius-circular flex-row-center"
+                                                                        onClick={() => setEditBranchForm(true)}
                                                                     />
                                                                 </div>
                                                                 {isExpanded && (
@@ -243,7 +256,7 @@ const Profile = () => {
                                 <div className='flex-row-top-start2col full-width'>
                                     <GreenCard title={translate.socialMedia} icon={addSocialAccountForm ? 'bi bi-x-circle' : 'bi bi-plus-circle'} iconClickHandle={addSocialAccount}>
                                         <div className="flex-row-between pointer full-width profile--socials flex-wrap">
-                                            {!addSocialAccountForm && userData && userData.socialMediaAccounts && userData.socialMediaAccounts.length > 0 && (
+                                            {!editSocialAccountForm && !addSocialAccountForm && userData && userData.socialMediaAccounts && userData.socialMediaAccounts.length > 0 ? (
                                                 userData.socialMediaAccounts.map(account => {
                                                     if (account.accountType === 'Facebook') {
                                                         return (
@@ -295,12 +308,26 @@ const Profile = () => {
                                                     }
                                                     return account;
                                                 })
-                                            )}
+                                            ) : userData.socialMediaAccounts.length === 0 && !addSocialAccountForm && !editSocialAccountForm ? (
+                                                <div className={`text-shadow font-bold ${mode === 'dark-mode' ? 'white' : 'gray'} radius-15px size-14px`}>{translate.noSocialMediaAccounts}</div>
+                                            ) : <></>
+                                            }
                                             {
                                                 addSocialAccountForm && (
                                                     <AddSocialAccountForm popupToggle={setAddSocialAccountForm} />
                                                 )
                                             }
+                                            {
+                                                !addSocialAccountForm && !editSocialAccountForm && userData && userData.socialMediaAccounts && userData.socialMediaAccounts.length > 0 ? (
+                                                    <input type='button' className={`profile--input--container margin-14px-V full-width shadow-5px font-bold ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px mint-green-bg size-14px pointer`}
+                                                        onClick={() => setEditSocialAccountForm(true)}
+                                                        value={translate.editSocialMediaAccount} />
+                                                ) : <>  </>
+                                            }
+                                            {
+                                                editSocialAccountForm && (
+                                                    <EditSocialAccountForm popupToggle={setEditSocialAccountForm} />
+                                                )}
                                         </div>
                                     </GreenCard>
                                     <GreenCard title={translate.specialty} >

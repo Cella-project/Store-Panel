@@ -9,27 +9,11 @@ const OrderLineChart = () => {
     const language = useSelector(state => state.language.language);
     const translations = languages[language];
     const orders = useSelector(state => state.order.orders); // Get the orders from the Redux store
-    const ordersHistory = useSelector(state => state.orderHistory.ordersHistory); // Get the orders from the Redux store
-    let allOrders = [];
-    if (orders !== null && ordersHistory !== null) {
-        allOrders = orders.concat(ordersHistory);
-    }
+    const ordersHistory = useSelector(state => state.orderHistory.ordersHistory); // Get the order history from the Redux store
 
-    // Extract the date (day) from the createdAt attribute of each order
-    const ordersByDay = allOrders.map(order => new Date(order.createdAt));
+    const ordersByDay = orders ? orders.map(order => new Date(order.createdAt)) : [];
+    const ordersHistoryByDay = ordersHistory ? ordersHistory.map(order => new Date(order.createdAt)) : [];
 
-    // Calculate the orders count for the last 7 days
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // Reset hours, minutes, seconds, and milliseconds to compare dates accurately
-    currentDate.setDate(currentDate.getDate() - 6); // Subtract 6 days to get the starting date
-    const ordersByLast7Days = ordersByDay.filter(day => day >= currentDate);
-
-    // Calculate the orders count for the last 30 days
-    const currentMonth = currentDate.getMonth();
-    currentDate.setDate(currentDate.getDate() - 23); // Subtract 23 days to get the starting date
-    const ordersByLast30Days = ordersByDay.filter(day => day >= currentDate && day.getMonth() === currentMonth);
-
-    // Configure the chart data and labels
     const [selectedTimeframe, setSelectedTimeframe] = useState('last7days');
 
     const handleTimeframeChange = (event) => {
@@ -61,8 +45,14 @@ const OrderLineChart = () => {
         datasets: [
             {
                 label: translations.numberOfOrders,
-                data: [], // Initialize the data array
+                data: [], // Initialize the data array for orders
                 borderColor: '#70c8b0', // Line color
+                fill: false, // Disable area fill
+            },
+            {
+                label: translations.numberOfOrderHistory,
+                data: [], // Initialize the data array for order history
+                borderColor:'#163a4a', // Line color
                 fill: false, // Disable area fill
             },
         ],
@@ -73,13 +63,15 @@ const OrderLineChart = () => {
         startDate.setDate(startDate.getDate() - 6); // Subtract 6 days to get the starting date
         const datesInRange = getDatesInRange(startDate, new Date());
         lineChartData.labels = datesInRange.map(date => date.toLocaleDateString('en-US'));
-        lineChartData.datasets[0].data = getOrdersCountByDate(ordersByLast7Days, datesInRange);
+        lineChartData.datasets[0].data = getOrdersCountByDate(ordersByDay, datesInRange);
+        lineChartData.datasets[1].data = getOrdersCountByDate(ordersHistoryByDay, datesInRange);
     } else if (selectedTimeframe === 'last30days') {
         const startDate = new Date();
         startDate.setDate(startDate.getDate() - 29); // Subtract 29 days to get the starting date
         const datesInRange = getDatesInRange(startDate, new Date());
         lineChartData.labels = datesInRange.map(date => date.toLocaleDateString('en-US'));
-        lineChartData.datasets[0].data = getOrdersCountByDate(ordersByLast30Days, datesInRange);
+        lineChartData.datasets[0].data = getOrdersCountByDate(ordersByDay, datesInRange);
+        lineChartData.datasets[1].data = getOrdersCountByDate(ordersHistoryByDay, datesInRange);
     }
 
     // Configure the chart options

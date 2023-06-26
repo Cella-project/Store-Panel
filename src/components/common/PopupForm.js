@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import background from '../../assets/images/background.png';
-import backgroundDark from '../../assets/images/background-dark.png';
+import background from '../../assets/images/background.svg';
+import backgroundDark from '../../assets/images/background-dark.svg';
 import AddProductTagForm from "../products/AddProductTagForm";
 import AddProductColorForm from "../products/AddProductColorForm";
 import AddProductSizeForm from "../products/AddProductSizeForm";
