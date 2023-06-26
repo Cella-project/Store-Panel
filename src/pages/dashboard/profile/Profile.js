@@ -153,106 +153,108 @@ const Profile = () => {
                         ) : section === 'storeInfo' ? (
                             <div className='flex-col-top-start full-width'>
                                 <ChangeStoreInfo />
-                                <GreenCard title={translate.branches} icon={addBranchForm ? 'bi bi-x-circle' : 'bi bi-plus-circle'} iconClickHandle={addBranch}>
-                                    {(addBranchForm !== true && userData && userData.addresses.length > 0) && (
-                                        <div>
-                                            {userData.addresses.map((address) => {
-                                                const isExpanded = expandedAddressId === address._id;
-                                                return (
-                                                    <div key={address._id}>
-                                                        {
-                                                            editBranchForm && (
-                                                                <EditBranchForm popupToggle={setEditBranchForm} data={address} />
-                                                            )
-                                                        }
-                                                        <div className="pointer flex-col-right-start" onClick={() => toggleAddress(address._id)}>
-                                                            <div className="profile--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
-                                                                <div className="text-shadow">{address.addressTitle}
-                                                                    <i
-                                                                        className="profile--address--btn--delete margin-6px-H shadow-2px bi bi-trash pointer size-14px mint-green white-bg radius-circular flex-row-center"
-                                                                        onClick={() => deleteAddress(address._id)}
-                                                                    />
-                                                                    <i
-                                                                        className="profile--address--btn--edit margin-6px-H shadow-2px bi bi-pencil-square pointer size-14px mint-green white-bg radius-circular flex-row-center"
-                                                                        onClick={() => setEditBranchForm(true)}
-                                                                    />
-                                                                </div>
-                                                                {isExpanded && (
-                                                                    <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
-                                                                        <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
-                                                                            <div className='gray margin-12px-H'>
-                                                                                {address.addressType}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">{translate.city}:
-                                                                            <div className='gray margin-12px-H'>
-                                                                                {address.city}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">{translate.district}:
-                                                                            <div className='gray margin-12px-H'>
-                                                                                {address.district}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">{translate.street}:
-                                                                            <div className='gray margin-12px-H'>
-                                                                                {address.street}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">{translate.building}:
-                                                                            <div className='gray margin-12px-H'>
-                                                                                {address.building}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">{translate.floor}:
-                                                                            <div className='gray margin-12px-H'>
-                                                                                {address.floor}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="margin-6px-V flex-row-left-start">{translate.flat}:
-                                                                            <div className='gray margin-12px-H'>
-                                                                                {address.flat}
-                                                                            </div>
-                                                                        </div>
-                                                                        {
-                                                                            address.landmark && (
-                                                                                <div className="margin-6px-V flex-row-left-start">{translate.landmark}:
-                                                                                    <div className='gray margin-12px-H'>
-                                                                                        {address.landmark}
-                                                                                    </div>
-                                                                                </div>
-                                                                            )
-                                                                        }
-                                                                        <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumber}:
-                                                                            <div className="margin-12px-H flex-col-left-start gray">
-                                                                                {address.phoneNums.map((phone) => (
-                                                                                    <div key={phone._id}>
-                                                                                        {phone.type}: {phone.phoneNum}
-                                                                                    </div>
-                                                                                ))}
-                                                                            </div>
-                                                                        </div>
+                                <div className='flex-row-top-start2col full-width'>
+                                    <GreenCard title={translate.branches} icon={addBranchForm ? 'bi bi-x-circle' : 'bi bi-plus-circle'} iconClickHandle={addBranch}>
+                                        {(addBranchForm !== true && userData && userData.addresses.length > 0) && (
+                                            <div>
+                                                {userData.addresses.map((address) => {
+                                                    const isExpanded = expandedAddressId === address._id;
+                                                    return (
+                                                        <div key={address._id}>
+                                                            {
+                                                                editBranchForm && (
+                                                                    <EditBranchForm popupToggle={setEditBranchForm} data={address} />
+                                                                )
+                                                            }
+                                                            <div className="pointer flex-col-right-start" onClick={() => toggleAddress(address._id)}>
+                                                                <div className="profile--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
+                                                                    <div className="text-shadow">{address.addressTitle}
+                                                                        <i
+                                                                            className="profile--address--btn--delete margin-6px-H shadow-2px bi bi-trash pointer size-14px mint-green white-bg radius-circular flex-row-center"
+                                                                            onClick={() => deleteAddress(address._id)}
+                                                                        />
+                                                                        <i
+                                                                            className="profile--address--btn--edit margin-6px-H shadow-2px bi bi-pencil-square pointer size-14px mint-green white-bg radius-circular flex-row-center"
+                                                                            onClick={() => setEditBranchForm(true)}
+                                                                        />
                                                                     </div>
-                                                                )}
+                                                                    {isExpanded && (
+                                                                        <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
+                                                                            <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
+                                                                                <div className='gray margin-12px-H'>
+                                                                                    {address.addressType}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="margin-6px-V flex-row-left-start">{translate.city}:
+                                                                                <div className='gray margin-12px-H'>
+                                                                                    {address.city}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="margin-6px-V flex-row-left-start">{translate.district}:
+                                                                                <div className='gray margin-12px-H'>
+                                                                                    {address.district}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="margin-6px-V flex-row-left-start">{translate.street}:
+                                                                                <div className='gray margin-12px-H'>
+                                                                                    {address.street}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="margin-6px-V flex-row-left-start">{translate.building}:
+                                                                                <div className='gray margin-12px-H'>
+                                                                                    {address.building}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="margin-6px-V flex-row-left-start">{translate.floor}:
+                                                                                <div className='gray margin-12px-H'>
+                                                                                    {address.floor}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="margin-6px-V flex-row-left-start">{translate.flat}:
+                                                                                <div className='gray margin-12px-H'>
+                                                                                    {address.flat}
+                                                                                </div>
+                                                                            </div>
+                                                                            {
+                                                                                address.landmark && (
+                                                                                    <div className="margin-6px-V flex-row-left-start">{translate.landmark}:
+                                                                                        <div className='gray margin-12px-H'>
+                                                                                            {address.landmark}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                )
+                                                                            }
+                                                                            <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumber}:
+                                                                                <div className="margin-12px-H flex-col-left-start gray">
+                                                                                    {address.phoneNums.map((phone) => (
+                                                                                        <div key={phone._id}>
+                                                                                            {phone.type}: {phone.phoneNum}
+                                                                                        </div>
+                                                                                    ))}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex-row-right-start margin-2px-V size-14px font-bold">
+                                                                <i
+                                                                    className={`pointer bi bi-chevron-${isExpanded ? "up" : "down"} gray`}
+                                                                    onClick={() => toggleAddress(address._id)}
+                                                                />
                                                             </div>
                                                         </div>
-                                                        <div className="flex-row-right-start margin-2px-V size-14px font-bold">
-                                                            <i
-                                                                className={`pointer bi bi-chevron-${isExpanded ? "up" : "down"} gray`}
-                                                                onClick={() => toggleAddress(address._id)}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    )}
-                                    {
-                                        addBranchForm && (
-                                            <AddBranchForm popupToggle={setAddBranchForm} />
-                                        )
-                                    }
-                                </GreenCard>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
+                                        {
+                                            addBranchForm && (
+                                                <AddBranchForm popupToggle={setAddBranchForm} />
+                                            )
+                                        }
+                                    </GreenCard>
+                                </div>
                                 <div className='flex-row-top-start2col full-width'>
                                     <GreenCard title={translate.socialMedia} icon={addSocialAccountForm ? 'bi bi-x-circle' : 'bi bi-plus-circle'} iconClickHandle={addSocialAccount}>
                                         <div className="flex-row-between pointer full-width profile--socials flex-wrap">
@@ -309,7 +311,7 @@ const Profile = () => {
                                                     return account;
                                                 })
                                             ) : userData.socialMediaAccounts.length === 0 && !addSocialAccountForm && !editSocialAccountForm ? (
-                                                <div className={`text-shadow font-bold ${mode === 'dark-mode' ? 'white' : 'gray'} radius-15px size-14px`}>{translate.noSocialMediaAccounts}</div>
+                                                <div className={`text-shadow font-bold gray inter radius-15px size-14px`}>{translate.noSocialMediaAccounts}</div>
                                             ) : <></>
                                             }
                                             {
