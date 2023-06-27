@@ -355,7 +355,7 @@ const EditBranchForm = ({ popupToggle, data }) => {
     }
 
     return (
-        <form noValidate className='edit-branch' onSubmit={submitHandler}>
+        <form noValidate className='edit-branch inter' onSubmit={submitHandler}>
             <div className="full-width flex-col-left-start edit-branch--input-container">
                 <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="type" >
                     {translate.addressType}

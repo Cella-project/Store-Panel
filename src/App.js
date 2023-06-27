@@ -29,6 +29,10 @@ const App = () => {
 
   const checkAuth = () => {
     if (accessToken && refreshToken) {
+      if (timeDifference >= 14 * 60 * 1000) {
+        refreshTokenHandler(refreshToken);
+      }
+      dispatch(authMutations.setUserData(null));
       dispatch(authActions.getProfile());
       dispatch(authMutations.setAuthData({
         userData: user,
@@ -48,9 +52,6 @@ const App = () => {
     }
   };
 
-  if (timeDifference >= 14 * 60 * 1000) {
-    refreshTokenHandler(refreshToken);
-  }
   setInterval(() => {
     refreshTokenHandler(refreshToken);
   }, 14 * 60 * 1000);
