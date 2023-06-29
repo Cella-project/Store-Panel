@@ -52,12 +52,12 @@ const App = () => {
     }
   };
 
-  setInterval(() => {
-    refreshTokenHandler(refreshToken);
-  }, 14 * 60 * 1000);
-
+  
   if (!isLoaded) {
     checkAuth();
+    setInterval(() => {
+      refreshTokenHandler(refreshToken);
+    }, 14 * 60 * 1000);
     isLoaded = true;
   }
 
