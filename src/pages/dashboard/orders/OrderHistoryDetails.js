@@ -13,6 +13,7 @@ import { orderHistoryMutations } from "../../../redux/mutations";
 import languages from "../../../components/global/languages";
 
 import "./OrderHistoryDetails.scss";
+
 const OrderHistoryDetails = () => {
     const params = useParams();
     const dispatch = useDispatch();
@@ -82,24 +83,6 @@ const OrderHistoryDetails = () => {
                                     <Link to={`/store-panel/Reviews`} className="pointer lists-card--link">
                                         <i className={`flex-row-right-start ${language==='ar'?'bi bi-arrow-left':"bi bi-arrow-right"}`}></i>
                                     </Link>
-                                </GreenCard>
-                                <GreenCard title={translate.vouchers}>
-                                    {/* {
-                                    voucherCards.map((voucher) => {
-                                        return (
-                                            voucher.id === orderHistory.voucher &&
-                                            <VoucherCard type={voucher.type}
-                                            status={voucher.status}
-                                            store={voucher.store}
-                                            value={voucher.value}
-                                            code={voucher.code}
-                                            img={voucher.img} />
-                                            );
-                                        })
-                                    }
-                                    <Link to={`/store-panel/Vouchers`} className="pointer lists-card--link">
-                                    <i className="bi bi-arrow-right flex-row-right-start"></i>
-                                </Link> */}
                                 </GreenCard>
                             </div>
                         </div>

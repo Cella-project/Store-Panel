@@ -99,27 +99,9 @@ const MobMenu = ({ menuToggle }) => {
                             menuToggle(false)
                             window.onscroll = function () { };
                         }}
-                        to={'/store-panel/vouchers'} className="margin-8px-V"
-                    >
-                        <i className={`bi bi-tags ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.vouchers}</span>
-                    </NavLink>
-                    <NavLink
-                        onClick={() => {
-                            menuToggle(false)
-                            window.onscroll = function () { };
-                        }}
                         to={'/store-panel/logActivities'} className="margin-8px-V"
                     >
                         <i className={`bi bi-clock-history ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.logActivity}</span>
-                    </NavLink>
-                    <NavLink
-                        onClick={() => {
-                            menuToggle(false)
-                            window.onscroll = function () { };
-                        }}
-                        to={'/store-panel/comp&suggestions'} className="margin-8px-V"
-                    >
-                        <i className={`bi bi-exclamation-triangle ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} /><span className={`mob-menu${language === 'ar' ? '-arabic' : ''}--body--description inter size-20px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.compSuggestions}</span>
                     </NavLink>
                     <NavLink
                         onClick={handleLogout} to={'/store-panel/auth/login'} className="margin-8px-V"

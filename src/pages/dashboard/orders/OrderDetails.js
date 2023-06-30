@@ -14,6 +14,7 @@ import { orderMutations } from "../../../redux/mutations";
 import languages from "../../../components/global/languages";
 
 import "./OrderDetails.scss";
+
 const OrderDetails = () => {
   const params = useParams();
   const dispatch = useDispatch();
@@ -208,24 +209,6 @@ const OrderDetails = () => {
                 <div className="gray inter size-20px font-bold flex-row-center">{translate.assigned}</div>
               )}
             </GreenCard>
-            <GreenCard title={translate.vouchers}>
-                  {/* {
-                                    voucherCards.map((voucher) => {
-                                        return (
-                                            voucher.id === order.voucher &&
-                                            <VoucherCard type={voucher.type}
-                                            status={voucher.status}
-                                            store={voucher.store}
-                                            value={voucher.value}
-                                            code={voucher.code}
-                                            img={voucher.img} />
-                                            );
-                                        })
-                                    }
-                                    <Link to={`/store-panel/Vouchers`} className="pointer lists-card--link">
-                                    <i className="bi bi-arrow-right flex-row-right-start"></i>
-                                </Link> */}
-                </GreenCard>
           </div>
         </div>
       </>)}
