@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/messaging';
 import { getMessaging, getToken } from "firebase/messaging";
@@ -22,13 +22,25 @@ function PushNotification() {
     //     console.log('FCM token:', token);
     //     // You can store the token on your server for sending notifications later
     // });
-    const messaging = getMessaging();
-    // Add the public key generated from the console here.
-    getToken(messaging, { vapidKey: "BH9-0-fHGeM6bA_9I_IAhHlRLpiOSQ_9gaApnTg7JIxDvBTGCrOL_JsJRSNCuPp4yXk8fDZ0i_IV7t8WCJape44" })
-        .then((token) => {
-            console.log('FCM token:', token);
-            // You can store the token on your server for sending notifications later
-        })
+    useEffect(() => {
+        const messaging = getMessaging();
+
+        const hasToken = localStorage.getItem('fcmToken');
+
+        if (!hasToken) {
+            getToken(messaging, { vapidKey: 'BH9-0-fHGeM6bA_9I_IAhHlRLpiOSQ_9gaApnTg7JIxDvBTGCrOL_JsJRSNCuPp4yXk8fDZ0i_IV7t8WCJape44' })
+                .then((token) => {
+                    console.log('FCM token:', token);
+                    // You can store the token on your server for sending notifications later
+
+                    // Store the token in local storage to indicate that it has been retrieved
+                    localStorage.setItem('fcmToken', token);
+                })
+                .catch((error) => {
+                    console.log('Error getting FCM token:', error);
+                });
+        }
+    }, []);
     return <div></div>;
 }
 

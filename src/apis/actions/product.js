@@ -194,7 +194,7 @@ const productActions = {
             }
         }
     },
-    deleteProductSize(payload, afterSuccess, msg1, msg2, msg3) {
+    deleteProductSize(payload, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -211,7 +211,6 @@ const productActions = {
                             type: 'success',
                             msg: msg2
                         }));
-                        afterSuccess();
                     }
                 }));
             } catch (error) {

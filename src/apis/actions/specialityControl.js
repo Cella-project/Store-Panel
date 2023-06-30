@@ -9,6 +9,7 @@ const specialityControlActions = {
             try {
                 const response = await Axios.get(`api/color-list/speciality-colors/${specialityId}`);
                 dispatch(specialityControlMutations.setColors(response.data.data));
+                console.log(response.data);
             } catch (error) {
                 dispatch(specialityControlMutations.setColors(null));
                 errorHandler(dispatch, error.response);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import PushNotification from "../PushNotification";
 
 import NavBar from "../components/global/NavBar";
 import SideBar from "../components/global/SideBar";
@@ -41,6 +42,7 @@ const Dashboard = () => {
 
     return (
         <div className={`dashboard`} style={{ marginTop: userData.owner.validEmail ? '0px' : '15px' }}>
+            <PushNotification />
             <div className={`dashboard--bg${mode === 'dark-mode' ? '--dark' : '--light'}`}></div>
             {!userData.owner.validEmail &&
                 <VerifyEmail popupToggle={handleClick} />
