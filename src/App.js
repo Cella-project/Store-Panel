@@ -18,17 +18,26 @@ const App = () => {
 
   const language = useSelector(state => state.language.language);
 
-  const lastRefreshTime = localStorage.getItem('Refresh Token Time');
-  const currentTime = new Date().getTime();
-  const timeDifference = currentTime - lastRefreshTime;
-
   const mode = useSelector(state => state.theme.mode);
   const accessToken = localStorage.getItem('Access Token');
   const refreshToken = localStorage.getItem('Refresh Token');
   const user = useSelector(state => state.auth.userData);
 
+  useEffect(() => {
+    const lastRefreshTime = localStorage.getItem('Refresh Token Time');
+    const currentTime = new Date().getTime();
+    const timeDifference = currentTime - lastRefreshTime;
+    if (timeDifference >= 14 * 60 * 1000) {
+      refreshTokenHandler(refreshToken);
+    }
+    setInterval(() => {
+      refreshTokenHandler(refreshToken);
+    }, 14 * 60 * 1000);
+  });
+
   const checkAuth = () => {
     if (accessToken && refreshToken) {
+      dispatch(authMutations.setUserData(null));
       dispatch(authActions.getProfile());
       dispatch(authMutations.setAuthData({
         userData: user,
@@ -49,12 +58,6 @@ const App = () => {
     }
   };
 
-  if (timeDifference >= 14 * 60 * 1000) {
-    refreshTokenHandler(refreshToken);
-  }
-  setInterval(() => {
-    refreshTokenHandler(refreshToken);
-  }, 14 * 60 * 1000);
 
   if (!isLoaded) {
     checkAuth();

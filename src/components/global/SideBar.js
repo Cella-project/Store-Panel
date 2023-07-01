@@ -40,17 +40,9 @@ const SideBar = () => {
           <i className={`bi bi-stars margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />
           <div className={`${language === 'ar' ? 'side-bar-arabic' : 'side-bar'}--cont--description inter size-16px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.reviews}</div>
         </NavLink>
-        <NavLink to={'/store-panel/vouchers'} >
-          <i className={`bi bi-tags margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />
-          <div className={`${language === 'ar' ? 'side-bar-arabic' : 'side-bar'}--cont--description inter size-16px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.vouchers}</div>
-        </NavLink>
         <NavLink to={'/store-panel/logActivities'} >
           <i className={`bi bi-clock-history margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />
           <div className={`${language === 'ar' ? 'side-bar-arabic' : 'side-bar'}--cont--description inter size-16px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.logActivity}</div>
-        </NavLink>
-        <NavLink to={'/store-panel/comp&suggestions'} >
-          <i className={`bi bi-exclamation-triangle margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />
-          <div className={`${language === 'ar' ? 'side-bar-arabic' : 'side-bar'}--cont--description inter size-16px ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{translations.compSuggestions}</div>
         </NavLink>
         <NavLink onClick={handleLogout} to={'/store-panel/auth/login'} >
           <i className={`bi bi-door-open margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'white'} size-24px`} />

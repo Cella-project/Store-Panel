@@ -10,6 +10,7 @@ import subCategoryMutations from './mutations/subCategory';
 import productMutations from './mutations/product';
 import orderMutations from './mutations/order';
 import orderHistoryMutations from './mutations/orderHistory';
+import logActivityMutations from './mutations/logActivity';
 
 export { 
     stickyMutations,
@@ -24,4 +25,5 @@ export {
     productMutations,
     orderMutations,
     orderHistoryMutations,
+    logActivityMutations,
 };
