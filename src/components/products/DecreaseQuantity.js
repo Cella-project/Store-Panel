@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { productActions } from '../../apis/actions';
 import Select from 'react-select';
-
+import languages from '../../../src/components/global/languages';
 import useInput from '../../hooks/useInput';
 import './DecreaseQuantity.scss';
 
@@ -11,6 +11,8 @@ export const DecreaseQuantity = ({ popupToggle }) => {
     const mode = useSelector((state) => state.theme.mode);
     const productData = useSelector((state) => state.product.productData);
     const pieces = productData.pieces;
+    const language = useSelector((state) => state.language.language);
+    const translate = languages[language];
     const [newPieces, setNewPieces] = useState([]);
     const [selectedPiece, setSelectedPiece] = useState(null);
 
@@ -25,9 +27,9 @@ export const DecreaseQuantity = ({ popupToggle }) => {
         const isValid = value !== '';
         let error = '';
         if (value === '') {
-            error = 'Please enter a quantity.';
+            error = translate.pleaseEnterQuantity;
         } else if (value <= 0) {
-            error = 'Please enter a quantity greater than 0.';
+            error = translate.pleaseEnterQuantityMoreThan0;
         }
         return { isValid, error };
     }, 0);
@@ -43,7 +45,7 @@ export const DecreaseQuantity = ({ popupToggle }) => {
             if (existingPiece) {
                 const updatedPiece = {
                     ...existingPiece,
-                    decreasedQuantity: existingPiece.decreasedQuantity + updatedQuantity,
+                    decreasedQuantity: updatedQuantity,
                     quantity: remainingQuantity >= 0 ? remainingQuantity : 0,
                 };
                 setNewPieces((prevPieces) =>
@@ -74,7 +76,7 @@ export const DecreaseQuantity = ({ popupToggle }) => {
         console.log(newPieces);
         const formattedPieces = newPieces.map((piece) => ({
             pieceId: piece.value,
-            decreasedQuantity: piece.decreasedQuantity >= piece.quantity ? piece.quantity : piece.decreasedQuantity,
+            decreasedQuantity: piece.decreasedQuantity,
         }));
 
         const product = {
@@ -86,7 +88,7 @@ export const DecreaseQuantity = ({ popupToggle }) => {
             popupToggle(false);
             document.getElementById('dashboard-view').style.zIndex = 10;
             window.onscroll = function () { };
-        }));
+        }, translate.productQuantityDecreasedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
 
     return (
@@ -95,33 +97,34 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                 <div className="flex-col-center inter">
                     <div className="full-width flex-col-left-start decrease-quantity--header">
                         <label className="pointer full-width text-shadow gray font-bold size-26px">
-                            Decrease Quantity
+                            {translate.decreaseQuantity}
                         </label>
                     </div>
                     <label className="pointer full-width text-shadow gray font-bold size-14px">
-                        Before
+                        {translate.before}
                     </label>
                     {pieces.map((piece, index) => (
                         <div key={index} className="product-details--piece flex-row-center flex-wrap">
-                            <div className="flex-row-center orange-bg shadow-2px white product-details--piece--size font-bold size-20px">
+                            <div className="flex-row-center mint-green-bg shadow-2px white product-details--piece--size font-bold size-20px">
                                 {piece.size}
                             </div>
                             <div className="white-bg font-bold gray shadow-5px product-details--piece--info flex-row-between">
-                                Available: {piece.quantity}
+                                {translate.available}: {piece.quantity}
                             </div>
                             <div style={{ backgroundColor: piece.color.hexCode }} className="shadow-5px product-details--piece--color shadow-2px flex-row-between" />
                         </div>
                     ))}
                     <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="piece">
-                        Select Piece: <span className="red">*</span>
+                        {translate.selectPiece}: <span className="red">*</span>
                     </label>
                     <div className="decrease-quantity--input radius-10px">
                         <Select
                             value={selectedPiece}
+                            placeholder={translate.selectPiece}
                             onChange={setSelectedPiece}
                             options={pieces.map((piece) => ({
                                 value: piece._id,
-                                label: "Size " + piece.size + ' - color ' + piece.color.title + ' - the Available ' + piece.quantity,
+                                label: translate.size+' ' + piece.size + ' - ' + translate.color +' ' + piece.color.title + ' - ' + translate.available+' ' + piece.quantity,
                                 quantity: piece.quantity,
                                 size: piece.size,
                                 color: {
@@ -132,7 +135,7 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                         />
                     </div>
                     <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="quantity">
-                        Quantity: <span className="red">*</span>
+                        {translate.quantity}: <span className="red">*</span>
                     </label>
                     <div className="decrease-quantity--input radius-10px">
                         <input
@@ -147,31 +150,32 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                     </div>
                     {quantityIsTouched && <div className="error-message">{quantityError}</div>}
                     <label className="pointer full-width text-shadow gray font-bold size-14px">
-                        After
+                        {translate.after}
                     </label>
                     {newPieces.map((piece, index) => (
                         <div key={index} className="product-details--piece flex-row-center flex-wrap">
-                            <div className="flex-row-center orange-bg shadow-2px white product-details--piece--size font-bold size-20px">
+                            {console.log(piece)}
+                            <div className="flex-row-center mint-green-bg shadow-2px white product-details--piece--size font-bold size-20px">
                                 {piece.size}
                             </div>
                             <div className="white-bg font-bold gray shadow-5px product-details--piece--info flex-row-between">
-                                Available: {piece.quantity - piece.decreasedQuantity >=0 ? piece.quantity - piece.decreasedQuantity : 0}
+                                {translate.available}: {piece.quantity > 0 ? piece.quantity : 0}
                             </div>
                             <div style={{ backgroundColor: piece.color.hexCode }} className="shadow-5px product-details--piece--color shadow-2px flex-row-between" />
                         </div>
                     ))}
 
-                    <input type='button' className={`profile--input--container margin-6px-V full-width shadow-5px font-bold ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px orange-bg size-20px pointer`}
+                    <input type='button' className={`profile--input--container margin-6px-V full-width shadow-5px font-bold ${mode === 'dark-mode' ? 'gray' : 'white'} radius-15px mint-green-bg size-20px pointer`}
                         onClick={() => handleDecreasePiece()}
-                        value="Add Action" />
+                        value={translate.addAction} />
 
                     <div className="decrease-quantity--actions flex-row-between full-width">
                         <button
                             className={`decrease-quantity--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'
-                                } text-shadow size-18px font-bold orange-bg`}
+                                } text-shadow size-18px font-bold mint-green-bg`}
                             type="submit"
                         >
-                            Confirm
+                            {translate.confirm}
                         </button>
                         <button
                             className="decrease-quantity--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
@@ -181,7 +185,7 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                                 window.onscroll = function () { };
                             }}
                         >
-                            Cancel
+                            {translate.cancel}
                         </button>
                     </div>
                 </div>

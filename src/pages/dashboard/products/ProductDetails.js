@@ -39,12 +39,6 @@ const ProductDetails = () => {
   if (product && product !== null) {
     cards = [
       { title: translate.quantity, content: product.avilableQuantity, icon: "bi bi-box-seam" },
-      { title: translate.numberOfOrders, content: 0, icon: "bi bi-box-seam" },
-      { title: translate.successOrders, content: 0, icon: "bi bi-box-seam" },
-      { title: translate.returnOrders, content: 0, icon: "bi bi-box-seam" },
-      // { title: '# of orders', content: product.orders.length, icon: "bi bi-box-seam" },
-      // { title: 'Success Orders', content: product.orders.filter((order) => order.status === 'Delivered').length, icon: "bi bi-box-seam" },
-      // { title: 'returned orders', content: product.orders.filter((order) => order.status === 'Returned').length, icon: "bi bi-box-seam" },
     ];
   }
   const hasDiscount = product?.discount?.hasDiscount;
@@ -53,20 +47,20 @@ const ProductDetails = () => {
     dispatch(productActions.deleteProductTag({
       _id: params.id,
       tagId: tagId
-    },translate.areYouSureDeleteProductTag,translate.productTagDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
+    }, translate.areYouSureDeleteProductTag, translate.productTagDeletedSuccessfully, translate.someThingWentWrongPleaseTry));
   };
   const handleColorDelete = (colorId) => {
     dispatch(productActions.deleteProductColor({
       _id: params.id,
       colorId: colorId
-    },translate.areYouSureDeleteProductColor,translate.productColorDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
+    }, translate.areYouSureDeleteProductColor, translate.productColorDeletedSuccessfully, translate.someThingWentWrongPleaseTry));
   };
 
   const handleSizeDelete = (sizeId) => {
     dispatch(productActions.deleteProductSize({
       _id: product._id,
       sizeId: sizeId
-    },translate.areYouSureDeleteProductSize,translate.productSizeDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
+    }, translate.areYouSureDeleteProductSize, translate.productSizeDeletedSuccessfully, translate.someThingWentWrongPleaseTry));
   };
 
   const addProductTag = () => {
@@ -101,6 +95,16 @@ const ProductDetails = () => {
       window.scrollTo(LeftScroll, TopScroll);
     };
   }
+  const decreaseQuantity = () => {
+    setPopupShown(true);
+    setHeader('Decrease Quantity');
+    document.getElementById('dashboard-view').style.zIndex = 60;
+    const TopScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const LeftScroll = document.documentElement.scrollLeft || document.body.scrollLeft;
+    window.onscroll = () => {
+      window.scrollTo(LeftScroll, TopScroll);
+    };
+  }
 
   return (
     <div className="product-details--container full-width flex-col-left-start2col">
@@ -112,7 +116,7 @@ const ProductDetails = () => {
           <div className="flex-row-left-start2col product-details full-width">
             <div className="width-90-100 product-details">
               <ProductInfo
-                product={product} 
+                product={product}
               />
             </div>
             <div className="flex-row-between product-details width-10-100">
@@ -124,7 +128,7 @@ const ProductDetails = () => {
               <div className="product-details--tags flex-row-between full-width" >
                 {product.tags.map((tag, index) => (
                   <div key={index} className="add-product--selected-item shadow-2px radius-15px flex-row-between size-14px lavender-bg text-shadow">
-                    <span className={`margin-4px-H ${mode === 'dark-mode' ? 'white' : 'gray'}`}>{tag.tag}</span>
+                    <span className={`margin-4px-H ${mode === 'dark-mode' ? 'white' : 'gray'}`}>{tag.title}</span>
                     <button className={`add-product--input--number--button bi bi-trash pointer ${mode === 'dark-mode' ? 'white' : 'gray'} size-20px pointer `} type="button" onClick={() => handleTagDelete(tag._id)}></button>
                   </div>
                 ))}
@@ -146,18 +150,6 @@ const ProductDetails = () => {
           <div className="full-width">
             <div className="full-width flex-row-between2col">
               {
-                cards.map((card, index) => {
-                  return (
-                    <GreenCard title={card.title} key={index}>
-                      <div className="full-width flex-row-center">
-                        <i className={`${card.icon} mint-green size-30px`}></i>
-                        <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
-                      </div>
-                    </GreenCard>
-                  );
-                })
-              }
-              {
                 hasDiscount &&
                 <div className="flex-col-center width-20-100">
                   <GreenCard title={translate.discount}>
@@ -170,52 +162,79 @@ const ProductDetails = () => {
                   </GreenCard>
                 </div>
               }
+              {
+                cards.map((card, index) => {
+                  return (
+                    <GreenCard title={card.title} key={index}>
+                      <div className="full-width flex-row-center">
+                        <i className={`${card.icon} mint-green size-30px`}></i>
+                        <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
+                      </div>
+                    </GreenCard>
+                  );
+                })
+              }
+
             </div>
           </div>
           <div className="full-width">
             <div className="full-width flex-row-top-start2col">
-              <GreenCard title={translate.sizes} icon={'bi bi-plus-circle'} iconClickHandle={addProductSize}>
-                <div className="product-details--sizes flex-row-center flex-wrap">
-                  {product.sizes.map((size, index) => (
-                    <div key={index} className="product-details--sizes flex-row-center flex-wrap">
-                      <div className="mint-green-bg shadow-2px margin-6px-V radius-15px white flex-row-between">
-                        <div className="product-details--sizes--quantity white-bg gray radius-15px">{size.quantity} {translate.available}</div>
-                        <div className="product-details--sizes--size font-bold size-20px ">{size.title}</div>
-                        <i
-                          className="product-details--sizes--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
-                          onClick={() => handleSizeDelete(size._id)}
-                        />
+              <div className="flex-col-center width-50-100">
+                <GreenCard title="Sizes" icon={'bi bi-plus-circle'} iconClickHandle={addProductSize}>
+                  <div className="product-details--sizes flex-row-center flex-wrap">
+                    {product.sizes.map((size, index) => (
+                      <div key={index} className="product-details--sizes flex-row-center flex-wrap">
+                        <div className="mint-green-bg shadow-2px margin-6px-H radius-circular white flex-row-between">
+                          <div className="product-details--sizes--size font-bold size-20px ">{size.title}</div>
+                          <i
+                            className="product-details--sizes--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
+                            onClick={() => handleSizeDelete(size._id)}
+                          />
+                        </div>
                       </div>
+                    ))}
+                  </div>
+                </GreenCard>
+              </div>
+              <div className="flex-col-center margin-10px-H width-50-100">
+                <GreenCard title="Colors" icon={'bi bi-plus-circle'} iconClickHandle={addProductColor}>
+                  <div className="product-details--colors flex-row-center flex-wrap">
+                    {product.colors.map((color, index) => (
+                      <div key={index} className="product-details--colors flex-row-center flex-wrap">
+                        <div style={{ backgroundColor: color.hexCode }} className=" shadow-5px margin-6px-H full-width radius-circular flex-row-between">
+                          <div className=" product-details--colors--color" />
+                          <i
+                            className="product-details--colors--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
+                            onClick={() => handleColorDelete(color._id)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </GreenCard>
+              </div>
+              <GreenCard title="Pieces" icon={'bi bi-dash-circle'} iconClickHandle={decreaseQuantity}>
+                <div className="product-details--piece flex-row-center flex-wrap">
+                  {product.pieces.map((piece, index) => (
+                    <div key={index} className="product-details--piece flex-row-center flex-wrap">
+                      <div className="flex-row-center mint-green-bg shadow-2px white product-details--piece--size font-bold size-20px">
+                        {piece.size}
+                      </div>
+                      <div className="white-bg font-bold gray shadow-5px product-details--piece--info flex-row-between">
+                        {translate.available}: {piece.quantity}
+                      </div>
+                      <div style={{ backgroundColor: piece.color.hexCode }} className="shadow-5px product-details--piece--color shadow-2px flex-row-between" />
                     </div>
                   ))}
                 </div>
-
               </GreenCard>
-              <GreenCard title={translate.colors} icon={'bi bi-plus-circle'} iconClickHandle={addProductColor}>
-                <div className="product-details--colors flex-row-center flex-wrap">
-                  {product.colors.map((color, index) => (
-                    <div key={index} className="product-details--colors flex-row-center">
-                      <div style={{ backgroundColor: color.hexCode }} className=" shadow-2px margin-6px-V full-width radius-15px white flex-row-between">
-                        <div className="product-details--colors--quantity white-bg gray radius-15px">{color.quantity} {translate.availableFrom} {color.title}</div>
-                        <div className="gray size-14px margin-10px-H text-shadow"> </div>
-                        <i
-                          className="product-details--colors--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
-                          onClick={() => handleColorDelete(color._id)}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </GreenCard>
-
-
             </div>
           </div>
 
           <div className="full-width flex-row-center">
             <GreenCard title={translate.reviews}>
               <Link to={`/store-panel/Reviews`} className="pointer lists-card--link">
-                <i className={`bi bi-arrow-${language==='ar'?'left':'right'} flex-row-right-start`}></i>
+                <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>
           </div>

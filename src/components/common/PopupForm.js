@@ -6,6 +6,7 @@ import AddProductTagForm from "../products/AddProductTagForm";
 import AddProductColorForm from "../products/AddProductColorForm";
 import AddProductSizeForm from "../products/AddProductSizeForm";
 import RefillProductForm from "../products/RefillProductForm";
+import DecreaseQuantity from "../products/DecreaseQuantity";
 import { useSelector } from "react-redux";
 import VerifyOTP from "../verifyEmail/VerifyOTP";
 
@@ -60,6 +61,7 @@ const Popup = ({ popupToggle, header, data }) => {
                         {header === 'Add Product Color' && <AddProductColorForm popupToggle={popupToggle} data={data} />}
                         {header === 'Add Product Size' && <AddProductSizeForm popupToggle={popupToggle} data={data} />}
                         {header === 'Refill Product' && <RefillProductForm popupToggle={popupToggle} data={data} />}
+                        {header === 'Decrease Quantity' && <DecreaseQuantity popupToggle={popupToggle} data={data} />}
                     </PerfectScrollbar>
                 </div>
             )

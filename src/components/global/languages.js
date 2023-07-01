@@ -331,6 +331,12 @@ const languages = {
     editSocialMediaAccount: 'Edit Social Media Accounts',
     noSocialMediaAccounts: 'No social media accounts.',
     numberOfOrderHistory: 'Number of Ended Orders',
+    productQuantityDecreasedSuccessfully: 'Product quantity decreased successfully.',
+    decreaseQuantity: 'Decrease Quantity',
+    after : 'After',
+    before : 'Before',
+    selectPiece : 'Select Piece',
+    addAction : 'Add Action',
 
 
   },
@@ -665,6 +671,13 @@ const languages = {
     editSocialMediaAccount : 'تعديل حسابات وسائل التواصل الاجتماعي',
     noSocialMediaAccounts : 'لا يوجد حسابات وسائل التواصل الاجتماعي',
     numberOfOrderHistory : 'عدد الطلبات المنتهية',
+    productQuantityDecreasedSuccessfully : 'تم تخفيض كمية المنتج بنجاح',
+    decreaseQuantity: 'تخفيض الكمية',
+    after : 'بعد',
+    before : 'قبل',
+    selectPiece : 'اختر قطعة',
+    addAction : 'إضافة عملية',
+
   },
 };
 

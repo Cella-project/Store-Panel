@@ -27,11 +27,11 @@ const OrderList = () => {
     }, []);
 
     let cards = [
-        { title: translate.totalOrders, content: 0, icon: "bi bi-people orange" },
-        { title: translate.pending, content: 0, icon: "bi bi-people orange" },
-        { title: translate.approved, content: 0, icon: "bi bi-people orange" },
-        { title: translate.readyForPickup, content: 0, icon: "bi bi-people orange" },
-        { title: translate.picked, content: 0, icon: "bi bi-people orange" },
+        { title: translate.totalOrders, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.pending, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.approved, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.readyForPickup, content: 0, icon: "bi bi-people mint-green" },
+        { title: translate.picked, content: 0, icon: "bi bi-people mint-green" },
     ]
 
     let content = <Loading />;
@@ -97,11 +97,11 @@ const OrderList = () => {
             })
 
         cards = [
-            { title: translate.totalOrders, content: orderCards.length, icon: "bi bi-people orange" },
-            { title: translate.pending, content: orderCards.filter(orderCard => orderCard.status === 'Pending').length, icon: "bi bi-people orange" },
-            { title: translate.approved, content: orderCards.filter(orderCard => orderCard.status === 'Approved').length, icon: "bi bi-people orange" },
-            { title: translate.readyForPickup, content: orderCards.filter(orderCard => orderCard.status === 'Ready').length, icon: "bi bi-people orange" },
-            { title: translate.picked, content: orderCards.filter(orderCard => orderCard.status === 'Picked').length, icon: "bi bi-people orange" },
+            { title: translate.totalOrders, content: orderCards.length, icon: "bi bi-people mint-green" },
+            { title: translate.pending, content: orderCards.filter(orderCard => orderCard.status === 'Pending').length, icon: "bi bi-people mint-green" },
+            { title: translate.approved, content: orderCards.filter(orderCard => orderCard.status === 'Approved').length, icon: "bi bi-people mint-green" },
+            { title: translate.readyForPickup, content: orderCards.filter(orderCard => orderCard.status === 'Ready').length, icon: "bi bi-people mint-green" },
+            { title: translate.picked, content: orderCards.filter(orderCard => orderCard.status === 'Picked').length, icon: "bi bi-people mint-green" },
         ]
     }
 
