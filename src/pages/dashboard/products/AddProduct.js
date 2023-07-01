@@ -244,7 +244,6 @@ export const AddProduct = () => {
 
 
     useEffect(() => {
-        console.log(storeData.speciality._id);
         dispatch(specialityControlActions.getColors(storeData.speciality._id));
         dispatch(specialityControlActions.getTags(storeData.speciality._id));
         dispatch(specialityControlActions.getMaterials(storeData.speciality._id));
@@ -285,19 +284,17 @@ export const AddProduct = () => {
                 title: enteredSubCategory.title,
             },
             colors: selectedColors.map(item => ({
-                color: item.color,
+                title: item.color,
                 hexCode: item.hexCode,
-                quantity: parseInt(item.quantity)
             })),
             sizes: selectedSizes.map(item => ({
-                size: item.size,
-                quantity: parseInt(item.quantity)
+                title: item.size,
             })),
             material: enteredMaterial.title,
         };
         if (selectedTags.length > 0) {
             product.tags = selectedTags.map(item => ({
-                tag: item.tag
+                title: item.tag
             }));
         }
         if (album.length > 0) {
@@ -621,7 +618,7 @@ export const AddProduct = () => {
                                     <div className="flex-row-between flex-wrap ">
                                         {selectedColors.map((color, index) => (
                                             <div key={index} style={{ background: color.hexCode }} className="add-product--selected-item shadow-2px radius-10px flex-row-between size-14px white">
-                                                <span className={`margin-4px-H ${(mode === 'dark-mode') ? 'gray' : 'white'}`}>{color.color}:</span>
+                                                <span className={`margin-4px-H ${(mode === 'dark-mode') ? 'gray' : 'white'}`}>{color.color}</span>
                                                 <button className={`add-product--input--number--button bi bi-trash pointer size-20px pointer ${mode === 'dark-mode' ? 'gray' : 'white'}`} type="button" onClick={() => handleColorDelete(index)}></button>
                                             </div>
                                         ))}
@@ -660,7 +657,7 @@ export const AddProduct = () => {
                                         <div className="flex-row-between flex-wrap ">
                                             {selectedSizes.map((size, index) => (
                                                 <div key={index} className="add-product--selected-item shadow-2px radius-10px flex-row-between size-14px white-bg gray">
-                                                    <span className='margin-4px-H '>{size.title}:</span>
+                                                    <span className='margin-4px-H '>{size.size}</span>
                                                     <button className='add-product--input--number--button bi bi-trash pointer size-20px pointer gray' type="button" onClick={() => handleSizeDelete(index)}></button>
                                                 </div>
                                             ))}

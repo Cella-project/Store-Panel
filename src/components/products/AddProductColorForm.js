@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
-import { productActions, specialityActions, specialityControlActions } from '../../apis/actions';
-import { specialityMutations } from '../../redux/mutations';
+import { productActions, specialityControlActions } from '../../apis/actions';
 import Loading from '../global/Loading';
 import languages from '../global/languages';
 import './AddProductColorForm.scss';
@@ -43,7 +42,6 @@ const AddProductColorForm = ({ popupToggle }) => {
     };
 
     useEffect(() => {
-        console.log(product.speciality._id)
         dispatch(specialityControlActions.getColors(product.speciality._id));
     }, [dispatch, product.speciality._id]);
 
@@ -90,7 +88,7 @@ const AddProductColorForm = ({ popupToggle }) => {
                     <div className="flex-row-between flex-wrap ">
                         {product.colors.map((color, index) => (
                             <div key={index} style={{ background: color.hexCode }} className="add-product--selected-item shadow-2px radius-10px flex-row-between size-14px white">
-                                <span className={`margin-4px-H ${(mode === 'dark-mode') ? 'gray' : 'white'}`}>{color.color}</span>
+                                <span className={`margin-4px-H ${(mode === 'dark-mode') ? 'gray' : 'white'}`}>{color.title}</span>
                                 <button className={`add-product--input--number--button bi bi-trash pointer size-20px pointer ${mode === 'dark-mode' ? 'gray' : 'white'}`} type="button" onClick={() => handleColorDelete(color._id)}></button>
                             </div>
                         ))}

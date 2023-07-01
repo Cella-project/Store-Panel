@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
-import { productActions, specialityActions, specialityControlActions } from '../../apis/actions';
-import { specialityMutations } from '../../redux/mutations';
+import { productActions, specialityControlActions } from '../../apis/actions';
 import Loading from '../global/Loading';
 import languages from '../global/languages';
 import './AddProductTagForm.scss';
@@ -13,7 +12,6 @@ const AddProductTagForm = ({ popupToggle }) => {
     const language = useSelector(state => state.language.language);
     const translate = languages[language];
     const tags = useSelector(state => state.specialityControl.tags);
-    const category = useSelector(state => state.speciality.categoryData);
     const product = useSelector(state => state.product.productData);
 
     // Handle Tag Select
@@ -39,22 +37,10 @@ const AddProductTagForm = ({ popupToggle }) => {
             tagId: tagId
         },translate.areYouSureDeleteProductTag,translate.productTagDeletedSuccessfully,translate.someThingWentWrongPleaseTry));
     };
-    useEffect(() => {
-        if (category === null) {
-            dispatch(specialityActions.getCategoryData(product.category._id));
-            dispatch(specialityMutations.setCategoryData(product.category._id));
-        }
-        else if (category.type === 'Sub') {
-            dispatch(specialityActions.getCategoryData(category.parent._id));
-            dispatch(specialityMutations.setCategoryData(category.parent._id));
-        }
-        else if (category.type === 'Main') {
-            dispatch(specialityActions.getspecialityData(category.parent._id));
-            dispatch(specialityMutations.setspecialityData(category.parent._id));
-            dispatch(specialityControlActions.getTags(category.parent._id));
-        }
 
-    }, [dispatch, category, product.category._id]);
+    useEffect(() => {
+        dispatch(specialityControlActions.getTags(product.speciality._id));
+    }, [dispatch, product.speciality._id]);
 
 
 
@@ -100,7 +86,7 @@ const AddProductTagForm = ({ popupToggle }) => {
                         <div className="flex-row-between flex-wrap ">
                             {product.tags.map((tag, index) => (
                                 <div key={index} className="add-product-tag--selected-item shadow-2px radius-15px flex-row-between size-14px lavender-bg text-shadow">
-                                    <span className={`margin-4px-H ${mode === 'dark-mode' ? 'white' : 'gray'}`}>{tag.tag}</span>
+                                    <span className={`margin-4px-H ${mode === 'dark-mode' ? 'white' : 'gray'}`}>{tag.title}</span>
                                     <button className={`add-product-tag--input--number--button bi bi-trash pointer ${mode === 'dark-mode' ? 'white' : 'gray'} size-20px pointer `} type="button" onClick={() => handleTagDelete(tag._id)}></button>
                                 </div>
                             ))}
