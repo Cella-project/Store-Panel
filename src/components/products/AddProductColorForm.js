@@ -11,7 +11,6 @@ const AddProductColorForm = ({ popupToggle }) => {
     const dispatch = useDispatch();
     const mode = useSelector(state => state.theme.mode);
     const colors = useSelector(state => state.specialityControl.colors);
-    const category = useSelector(state => state.speciality.categoryData);
     const product = useSelector(state => state.product.productData);
     const language = useSelector(state => state.language.language);
     const translations = languages[language];
@@ -19,12 +18,12 @@ const AddProductColorForm = ({ popupToggle }) => {
     // Handle color Select
     const handleColorSelect = (color) => {
         const selectedColor = color;
-        const index = product.colors.findIndex((t) => t.color === selectedColor.target.label);
+        const index = product.colors.findIndex((t) => t.title === selectedColor.target.label);
         if (index === -1) {
             dispatch(productActions.addProductColor({
                 _id: product._id,
                 color: {
-                    color: selectedColor.target.label,
+                    title: selectedColor.target.label,
                     hexCode: selectedColor.target.hexCode
                 }
             },translations.productColorAddedSuccessfully,translations.someThingWentWrongPleaseTry));
@@ -42,22 +41,11 @@ const AddProductColorForm = ({ popupToggle }) => {
             colorId: colorId
         },translations.areYouSureDeleteProductColor,translations.productColorDeletedSuccessfully,translations.someThingWentWrongPleaseTry));
     };
-    useEffect(() => {
-        if (category === null) {
-            dispatch(specialityActions.getCategoryData(product.category._id));
-            dispatch(specialityMutations.setCategoryData(product.category._id));
-        }
-        else if (category.type === 'Sub') {
-            dispatch(specialityActions.getCategoryData(category.parent._id));
-            dispatch(specialityMutations.setCategoryData(category.parent._id));
-        }
-        else if (category.type === 'Main') {
-            dispatch(specialityActions.getspecialityData(category.parent._id));
-            dispatch(specialityMutations.setspecialityData(category.parent._id));
-            dispatch(specialityControlActions.getColors(category.parent._id));
-        }
 
-    }, [dispatch, category, product.category._id]);
+    useEffect(() => {
+        console.log(product.speciality._id)
+        dispatch(specialityControlActions.getColors(product.speciality._id));
+    }, [dispatch, product.speciality._id]);
 
 
 
@@ -75,7 +63,7 @@ const AddProductColorForm = ({ popupToggle }) => {
             {colors && colors.length > 0 ? (
                 <div className='full-width flex-col-left-start add-product--input-container'>
                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='color'>
-                        {translations.colors} :<span className='red'>*</span>
+                        {translations.colors}<span className='red'>*</span>
                     </label>
                     <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
                         <i className='bi bi-pin-map size-20px gray' />

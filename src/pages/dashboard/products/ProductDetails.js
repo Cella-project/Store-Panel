@@ -180,7 +180,7 @@ const ProductDetails = () => {
                     <div key={index} className="product-details--sizes flex-row-center flex-wrap">
                       <div className="mint-green-bg shadow-2px margin-6px-V radius-15px white flex-row-between">
                         <div className="product-details--sizes--quantity white-bg gray radius-15px">{size.quantity} {translate.available}</div>
-                        <div className="product-details--sizes--size font-bold size-20px ">{size.size}</div>
+                        <div className="product-details--sizes--size font-bold size-20px ">{size.title}</div>
                         <i
                           className="product-details--sizes--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
                           onClick={() => handleSizeDelete(size._id)}
@@ -196,7 +196,7 @@ const ProductDetails = () => {
                   {product.colors.map((color, index) => (
                     <div key={index} className="product-details--colors flex-row-center">
                       <div style={{ backgroundColor: color.hexCode }} className=" shadow-2px margin-6px-V full-width radius-15px white flex-row-between">
-                        <div className="product-details--colors--quantity white-bg gray radius-15px">{color.quantity} {translate.availableFrom} {color.color}</div>
+                        <div className="product-details--colors--quantity white-bg gray radius-15px">{color.quantity} {translate.availableFrom} {color.title}</div>
                         <div className="gray size-14px margin-10px-H text-shadow"> </div>
                         <i
                           className="product-details--colors--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
