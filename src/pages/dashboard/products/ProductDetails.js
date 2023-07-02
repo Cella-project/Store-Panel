@@ -7,25 +7,32 @@ import GreenCard from "../../../components/common/GreenCard";
 import ProductInfo from "../../../components/products/ProductInfo";
 import ProductControl from "../../../components/products/ProductControl";
 
-import "./ProductDetails.scss";
 import Popup from "../../../components/common/PopupForm";
 import { useDispatch, useSelector } from "react-redux";
-import { productActions } from "../../../apis/actions";
-import { productMutations } from "../../../redux/mutations";
+import { productActions, reviewActions } from "../../../apis/actions";
+import { productMutations, reviewMutations } from "../../../redux/mutations";
 import languages from "../../../components/global/languages";
+import ListsCard from "../../../components/common/ListsCard";
+import ReviewCard from "../../../components/reviews/ReviewCard";
+
+import "./ProductDetails.scss";
 
 const ProductDetails = () => {
   const params = useParams();
   const product = useSelector((state) => state.product.productData);
   const mode = useSelector((state) => state.theme.mode);
   const language = useSelector((state) => state.language.language);
+  const reviews = useSelector((state) => state.review.reviews);
   const translate = languages[language];
   const [popupShown, setPopupShown] = useState(false);
   const [header, setHeader] = useState('');
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(productMutations.setProductData(null));
     dispatch(productActions.getProductData(params.id));
+    dispatch(reviewMutations.setReviews(null));
+    dispatch(reviewActions.getReviewsForProduct(params.id));
   }, [dispatch, params.id]);
 
   product && (document.title = `${product.title} • Store Panel`);
@@ -144,9 +151,6 @@ const ProductDetails = () => {
             )}
 
           </PerfectScrollbar>
-
-
-
           <div className="full-width">
             <div className="full-width flex-row-between2col">
               {
@@ -233,7 +237,23 @@ const ProductDetails = () => {
 
           <div className="full-width flex-row-center">
             <GreenCard title={translate.reviews}>
-              <Link to={`/store-panel/Reviews`} className="pointer lists-card--link">
+              <PerfectScrollbar className="product-details--scroll--cont full-width flex-col-top-start">
+                {(reviews && reviews.length > 0) ? (
+                  reviews
+                    .slice()
+                    .sort((a, b) => b.rate - a.rate)
+                    .slice(0, 3)
+                    .map((review) => (
+                      <ListsCard key={review._id} width="full-width">
+                        <ReviewCard review={review} />
+                      </ListsCard>
+                    ))
+                ) : (
+                  <p className="gray inter size-16px font-bold">{translate.noReviewsToDisplay}</p>
+                )
+                }
+              </PerfectScrollbar>
+              <Link to={`/store-panel/Reviews?product=${product._id}`} className="pointer lists-card--link">
                 <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
               </Link>
             </GreenCard>

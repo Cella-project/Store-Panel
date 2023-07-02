@@ -15,11 +15,6 @@
         }
     }
 
-    &--info {
-        box-sizing: border-box;
-        padding: 5px;
-    }
-
     &--exp {
         box-sizing: border-box;
         padding: 5px;
@@ -46,7 +41,16 @@
         &--tag {
             display: none !important;
             position: absolute;
-            right: 45px;
+            width: max-content;
+
+            &.change {
+                bottom: 45px;
+            }
+
+            &.delete {
+                top: 45px;
+            }
+
             padding: 6px 8px;
             background-color: rgba($color: #000000, $alpha: 0.6);
         }

@@ -56,9 +56,9 @@ const Home = () => {
       <div className="full-width">
         <div className="full-width flex-row2col">
           {
-            cards.map((card) => {
+            cards.map((card, index) => {
               return (
-                <GreenCard title={card.title} key={Math.random().toString()}>
+                <GreenCard title={card.title} key={index}>
                   <div className="full-width flex-row-center">
                     <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
                     {card.title === translations.sales ? <p className="size-30px mint-green no-margin text-shadow inter">{translations.EGP}</p> :

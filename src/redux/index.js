@@ -13,6 +13,7 @@ import productSlice from './slices/product';
 import orderSlice from './slices/order';
 import orderHistorySlice from './slices/orderHistory';
 import logActivitySlice from './slices/logActivity';
+import reviewSlice from './slices/reviews';
 
 
 export default configureStore({
@@ -30,5 +31,6 @@ export default configureStore({
         order: orderSlice.reducer,
         orderHistory: orderHistorySlice.reducer,
         log: logActivitySlice.reducer,
+        review: reviewSlice.reducer,
     }
 });

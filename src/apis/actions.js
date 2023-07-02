@@ -7,6 +7,7 @@ import productActions from './actions/product';
 import orderActions from './actions/order';
 import orderHistoryActions from './actions/orderHistory';
 import logActivityActions from './actions/logActivity';
+import reviewActions from './actions/reviews';
 
 export {
     authActions,
@@ -18,4 +19,5 @@ export {
     orderActions,
     orderHistoryActions,
     logActivityActions,
+    reviewActions,
 }

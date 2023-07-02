@@ -62,7 +62,7 @@ $gold: #FDCC0D;
 }
 
 .mint-green-bg {
-    background: linear-gradient(to bottom , $mint-green, lighten($mint-green, 8%));
+    background: linear-gradient(to bottom, $mint-green, lighten($mint-green, 8%));
 }
 
 .yellow {
@@ -71,10 +71,6 @@ $gold: #FDCC0D;
 
 .yellow-bg {
     background-color: $yellow;
-}
-
-.yellow-status {
-    border-left: 4px solid $yellow ;
 }
 
 .gold {
@@ -101,10 +97,6 @@ $gold: #FDCC0D;
     background-color: $baby-blue;
 }
 
-.baby-blue-status {
-    border-left: 4px solid $baby-blue ;
-}
-
 .pink {
     color: $pink;
 }
@@ -121,10 +113,6 @@ $gold: #FDCC0D;
     background-color: $red;
 }
 
-.red-status {
-    border-left: 4px solid $red ;
-}
-
 .green {
     color: $green;
 }
@@ -133,7 +121,10 @@ $gold: #FDCC0D;
     background-color: $green;
 }
 
-.green-status {
-    border-left: 4px solid $green ;
-
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    background-color: transparent !important;
+    color: $gray !important;
 }

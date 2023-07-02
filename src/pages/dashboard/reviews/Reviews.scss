@@ -19,14 +19,9 @@
         justify-content: center;
     }
 
-    &--list-header {
-        box-sizing: border-box;
-        padding: 0px 60px 0px 60px;
-    }
-
     &--braud-cramb {
         box-sizing: border-box;
-        padding: 0px 60px 0px 60px
+        padding: 0px 60px;
     }
 }
 
@@ -47,11 +42,7 @@
             flex-direction: row;
             flex-wrap: wrap;
         }
-
-        &--list-header {
-            display: none !important;
-        }
-
+        
         &--braud-cramb {
             padding: 0px 10px 0px 10px;
         }
