@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { mainCategoryActions, subCategoryActions, specialityControlActions, productActions } from '../../../apis/actions';
-import { mainCategoryMutations, subCategoryMutations, specialityControlMutations } from '../../../redux/mutations';
+import { mainCategoryMutations, subCategoryMutations } from '../../../redux/mutations';
 
 import useInput from '../../../hooks/useInput';
 import languages from '../../../components/global/languages';
