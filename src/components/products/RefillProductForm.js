@@ -90,11 +90,11 @@ export const RefillProductForm = ({ popupToggle }) => {
                         </div>
                         <div>
                             <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="quantity">
-                                Quantity : <span className="red">*</span>
+                                {translate.quantity}: <span className="red">*</span>
                             </label>
-                            <div className='refill-product--input radius-10px'>
+                            <div className='refill-product--input radius-10px white-bg'>
                                 <input
-                                    className="pointer margin-12px-H gray refill-product--input radius-10px"
+                                    className="margin-12px-H gray refill-product--input radius-10px"
                                     min="0"
                                     type="number"
                                     id="Quantity"
@@ -103,7 +103,9 @@ export const RefillProductForm = ({ popupToggle }) => {
                                     onBlur={quantityBlurHandler}
                                 />
                             </div>
-                            {quantityIsTouched && <div className="error-message">{quantityError}</div>}
+                            <p style={{ marginLeft: '0 5px 0 5px', visibility: quantityError && quantityIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                <i className="bi bi-exclamation-triangle-fill red"></i> {quantityError}
+                            </p>
                         </div>
                         {colors && colors.length > 0 && (
                             <div className='full-width flex-col-left-start refill-product--input-container'>
@@ -122,7 +124,7 @@ export const RefillProductForm = ({ popupToggle }) => {
                                         menu: (provided) => ({ ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}` }),
                                     }}
                                     isDisabled={colors.length === 0}
-                                    placeholder="Select Color"
+                                    placeholder={translate.selectColors}
                                     options={colors.map((color) => ({
                                         label: color.title,
                                         value: color.title,
@@ -149,7 +151,7 @@ export const RefillProductForm = ({ popupToggle }) => {
                                         menu: (provided) => ({ ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}` }),
                                     }}
                                     isDisabled={sizes.length === 0}
-                                    placeholder="Select Size"
+                                    placeholder={translate.selectSizes}
                                     options={sizes.map((size) => ({
                                         label: size.title,
                                         value: size.title,
@@ -162,14 +164,20 @@ export const RefillProductForm = ({ popupToggle }) => {
                             onClick={() => handleAddPiece()}
                             value="Add" />
                         {pieces.map((piece, index) => (
-                            <div key={index} className="product-details--piece flex-row-center flex-wrap">
-                                <div className="flex-row-center mint-green-bg shadow-2px white product-details--piece--size font-bold size-20px">
-                                    {piece.size}
+                            <div key={index} className="product-details--piece white-bg flex-row-between radius-10px gray shadow-2px flex-wrap margin-6px-V">
+                                <div className="flex-col-center">
+                                    <div className="full-width size-18px">
+                                        {translate.size}: {piece.size}
+                                    </div>
+                                    <div className="full-width size-18px">
+                                        {translate.color}: {piece.color.title}
+                                    </div>
                                 </div>
-                                <div className="white-bg font-bold gray shadow-5px product-details--piece--info flex-row-between">
-                                    Available: {piece.quantity}
+                                <div className={`product-details--piece--quantity ${language === 'ar' ? 'ar' : 'en'} margin-12px-H`}>
+                                    <i className={`bi bi-bookmark-fill mint-green flex-col-top-start size-38px`}>
+                                        <span style={{ position: 'absolute', fontStyle: 'normal' }} className={`size-22px pt-sans ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{piece.quantity > 0 ? piece.quantity : 0}</span>
+                                    </i>
                                 </div>
-                                <div style={{ backgroundColor: piece.color.hexCode }} className="shadow-5px product-details--piece--color shadow-2px flex-row-between" />
                             </div>
                         ))}
                         <div className="refill-product--actions flex-row-between full-width">

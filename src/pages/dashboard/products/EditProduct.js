@@ -3,12 +3,14 @@ import Select from 'react-select';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { productActions } from '../../../apis/actions';
+import { productActions, specialityControlActions, subCategoryActions } from '../../../apis/actions';
 
 import languages from '../../../components/global/languages';
 import useInput from '../../../hooks/useInput';
+import { subCategoryMutations } from '../../../redux/mutations';
 
-import './EditProduct.scss'
+import './EditProduct.scss';
+
 export const EditProduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -18,33 +20,16 @@ export const EditProduct = () => {
     const translate = languages[language];
     const productData = useSelector((state) => state.product.productData);
     const materials = useSelector(state => state.specialityControl.materials);
-    const product = useSelector((state) => state.product.products.find((p) => p._id === params.id));
     const [currentPage, setCurrentPage] = useState(1);
-    const storeData = useSelector(state => state.auth.userData);
+    const subCategories = useSelector((state) => state.subCategory.subCategories);
 
     useEffect(() => {
         document.title = 'Edit product • Store Panel';
-        dispatch(productActions.getProducts(storeData._id));
-    }, [dispatch, storeData._id]);
-
-
-    // useEffect(() => {
-    //     if (category === null) {
-    //         dispatch(specialityActions.getCategoryData(product.category._id));
-    //         dispatch(specialityMutations.setCategoryData(product.category._id));
-    //     }
-    //     else if (category.type === 'Sub') {
-    //         dispatch(specialityActions.getCategoryData(category.parent._id));
-    //         dispatch(specialityMutations.setCategoryData(category.parent._id));
-    //     }
-    //     else if (category.type === 'Main') {
-    //         dispatch(specialityActions.getspecialityData(category.parent._id));
-    //         dispatch(specialityMutations.setspecialityData(category.parent._id));
-    //         dispatch(specialityControlActions.getColors(category.parent._id));
-    //     }
-
-    // }, [dispatch, category, product.category._id]);
-
+        dispatch(productActions.getProductData(params.id));
+        dispatch(subCategoryMutations.setSubCategories(null));
+        dispatch(subCategoryActions.getSubCategories(productData.mainCategory._id));
+        dispatch(specialityControlActions.getMaterials(productData.speciality._id));
+    }, [dispatch, params.id, productData.mainCategory._id, productData.speciality._id]);
 
     const {
         value: enteredTitle,
@@ -62,7 +47,7 @@ export const EditProduct = () => {
             error = translate.pleaseEnterTitle3_50;
         }
         return { isValid, error };
-    }, product.title);
+    }, productData.title);
 
     const {
         value: enteredDescription,
@@ -77,7 +62,7 @@ export const EditProduct = () => {
             error = translate.pleaseEnterDescription;
         }
         return { isValid, error };
-    }, product.description);
+    }, productData.description);
 
 
     const {
@@ -93,7 +78,7 @@ export const EditProduct = () => {
             error = translate.pleaseEnterMaterial;
         }
         return { isValid, error };
-    }, product.material);
+    }, productData.material);
 
     const {
         value: enteredPrice,
@@ -111,8 +96,22 @@ export const EditProduct = () => {
             error = translate.pleaseEnterPriceMoreThan0;
         }
         return { isValid, error };
-    }, product.price);
+    }, productData.price);
 
+    const {
+        value: enteredSubCategory,
+        error: subCategoryError,
+        isTouched: subCategoryIsTouched,
+        valueChangeHandler: subCategoryChangedHandler,
+        inputBlurHandler: subCategoryBlurHandler,
+    } = useInput((value) => {
+        const isValid = value !== '';
+        let error = '';
+        if (value === '') {
+            error = translate.pleaseEnterMainCategory;
+        }
+        return { isValid, error };
+    }, productData.subCategory.title);
 
     const handlePhotoAdd = (event) => {
         const album = {}
@@ -122,24 +121,18 @@ export const EditProduct = () => {
         dispatch(productActions.addProductPicture(data, (response) => {
             const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
             album.imgURL = url;
-            dispatch(productActions.addProductImage({ _id: product._id, imgURL: album.imgURL }));
+            dispatch(productActions.addProductImage({ _id: productData._id, imgURL: album.imgURL }));
         }, translate.productImageAddedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
 
-    // const handlePhotoIndexChange = (oldIndex, newIndex) => {
-    //     const newPhotos = [...photos];
-    //     [newPhotos[oldIndex], newPhotos[newIndex]] = [newPhotos[newIndex], newPhotos[oldIndex]];
-    //     setPhotos(newPhotos);
-    // };
-
     const handlePhotoRemove = (_id) => {
-        dispatch(productActions.deleteProductImage({ _id: product._id, imgId: _id }, translate.areYouShowDeleteProductImage, translate.someThingWentWrongPleaseTry));
+        dispatch(productActions.deleteProductImage({ _id: productData._id, imgId: _id }, translate.areYouShowDeleteProductImage, translate.someThingWentWrongPleaseTry));
     };
 
 
     // Handle Price Change
-    const [discountType, setDiscountType] = useState(product.discount.discountType);
-    const [discountValue, setDiscountValue] = useState(product.discount.discountAmount);
+    const [discountType, setDiscountType] = useState(productData.discount.discountType);
+    const [discountValue, setDiscountValue] = useState(productData.discount.discountAmount);
 
     const handleDiscountTypeChange = (event) => {
         setDiscountType(event.target.value);
@@ -159,18 +152,38 @@ export const EditProduct = () => {
         }
     };
 
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const editedProduct = {
-            _id: product._id,
-            title: enteredTitle,
-            description: enteredDescription,
-            price: parseInt(enteredPrice),
-            material: enteredMaterial.title,
-        };
+        const updatedProduct = {
+            _id: productData._id,
+        }
+
+        if (enteredTitle !== productData.title) {
+            updatedProduct.title = enteredTitle;
+        }
+
+        if (enteredDescription !== productData.description) {
+            updatedProduct.description = enteredDescription;
+        }
+
+        if (parseFloat(enteredPrice) !== productData.price) {
+            updatedProduct.price = parseFloat(enteredPrice);
+        }
+
+        if (enteredMaterial.title !== productData.material && enteredMaterial.title !== '') {
+            updatedProduct.material = enteredMaterial.title;
+        }
+
+        if (enteredSubCategory.title !== productData.subCategory.title && enteredSubCategory.title !== '') {
+            updatedProduct.subCategory = {
+                _id: enteredSubCategory.id,
+                title: enteredSubCategory.title,
+            };
+        }
+
+        const editedProduct = { ...updatedProduct };
+
         if (discountType !== 'None') {
             editedProduct.discount = {
                 hasDiscount: true,
@@ -181,17 +194,15 @@ export const EditProduct = () => {
 
         dispatch(productActions.updateProduct(editedProduct,
             () => {
-                navigate(`/store-panel/products/${product._id}`);
+                navigate(`/store-panel/products/${productData._id}`);
             }, translate.productUpdatedSuccessfully, translate.someThingWentWrongPleaseTry));
     };
-
-
 
     return (
         <div className='edit-product flex-row-center inter'>
             {
                 productData &&
-                <form onSubmit={handleSubmit} noValidate className=' flex-col-center'>
+                <form onSubmit={handleSubmit} noValidate className='flex-col-center full-width'>
                     <div className="full-width flex-row-center margin-12px-V">
                         <p
                             style={{ margin: '30px' }}
@@ -201,31 +212,29 @@ export const EditProduct = () => {
 
                     <div className="edit-product--body white-bg full-width radius-10px shadow-2px">
                         <div className="edit-product--muiBox-root radius-10px shadow-2px">
-                            <div className='edit-product--muiBox-root--main mint-green-bg radius-10px'>
-                                <div className='flex-row-between edit-product--muiBox-root--main--title'>
-                                    <div className='flex-col-center  padding-10px-H'>
-                                        <div>
-                                            <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 1 ? "-fill" : ""} white`}></i>
-                                        </div>
-                                        <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
-                                            1. {translate.productInformation}
-                                        </div>
+                            <div className='edit-product--muiBox-root--main mint-green-bg radius-10px flex-row-between'>
+                                <div className='flex-col-center padding-10px-H'>
+                                    <div>
+                                        <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 1 ? "-fill" : ""} white`}></i>
                                     </div>
-                                    <div className='flex-col-center  padding-10px-H'>
-                                        <div>
-                                            <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 2 ? "-fill" : ""} white`}></i>
-                                        </div>
-                                        <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
-                                            2. {translate.productAlbum}
-                                        </div>
+                                    <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
+                                        1. {translate.productInformation}
                                     </div>
-                                    <div className='flex-col-center  padding-10px-H'>
-                                        <div>
-                                            <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 3 ? "-fill" : ""} white`}></i>
-                                        </div>
-                                        <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
-                                            3. {translate.productPricing}
-                                        </div>
+                                </div>
+                                <div className='flex-col-center padding-10px-H'>
+                                    <div>
+                                        <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 2 ? "-fill" : ""} white`}></i>
+                                    </div>
+                                    <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
+                                        2. {translate.productAlbum}
+                                    </div>
+                                </div>
+                                <div className='flex-col-center padding-10px-H'>
+                                    <div>
+                                        <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 3 ? "-fill" : ""} white`}></i>
+                                    </div>
+                                    <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
+                                        3. {translate.productPricing}
                                     </div>
                                 </div>
                             </div>
@@ -272,6 +281,34 @@ export const EditProduct = () => {
                                         <i className="bi bi-exclamation-triangle-fill red"></i> {descriptionError}
                                     </p>
                                 </div>
+                                {subCategories && subCategories.length > 0 && (
+                                    <div className='full-width flex-col-left-start add-product--input-container'>
+                                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='SubCategory'>{translate.subCategory} <span className='red'>*</span></label>
+                                        <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
+                                            <i className='bi bi-pin-map size-20px gray' />
+                                            <Select
+                                                className='add-product--select full-width gray margin-4px-H'
+                                                styles={{
+                                                    option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
+                                                    menu: (provided) => ({
+                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
+                                                    }),
+                                                }}
+                                                value={enteredSubCategory}
+                                                disabled={subCategories.length === 0}
+                                                placeholder="Select Sub Category"
+                                                options={subCategories.filter(subCategory => subCategory.status === "Active").map(subCategory => ({ label: subCategory.title, value: { label: subCategory.title, title: subCategory.title, id: subCategory._id } }))}
+                                                onChange={(subCategory) =>
+                                                    subCategoryChangedHandler({ target: { id: "subCategory", label: subCategory.title, value: subCategory.value } })
+                                                }
+                                                onBlur={subCategoryBlurHandler}
+                                            />
+                                        </div>
+                                        <p style={{ marginLeft: '0 5px 0 5px', visibility: subCategoryError && subCategoryIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                            <i className="bi bi-exclamation-triangle-fill red"></i> {subCategoryError}
+                                        </p>
+                                    </div>
+                                )}
                                 {
                                     materials && materials.length > 0 && (
                                         <div className='full-width flex-col-left-start edit-product--input-container'>
@@ -305,12 +342,11 @@ export const EditProduct = () => {
                                         </div>
                                     )
                                 }
-
                                 <div className="edit-product--actions flex-row-between full-width">
                                     <button
                                         className="edit-product--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
                                         onClick={() => {
-                                            navigate('/products');
+                                            navigate('/store-panel/products');
                                         }}
                                     >
                                         {translate.cancel}
@@ -340,25 +376,9 @@ export const EditProduct = () => {
                                             <div className={`inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-6px-V`}> {translate.photoNumber} : {index + 1}</div>
                                             <img src={photo.URL} alt={` ${index}`} />
                                             <div className="flex-row-center full-width margin-6px-V ">
-                                                {/* <button
-                                                    type="button"
-                                                    className={`edit-product--gallary-left ${mode === 'dark-mode' ? 'gray-bg' : 'mint-green-bg'} radius-circular pointer white`}
-                                                    onClick={() => handlePhotoIndexChange(index, index - 1)}
-                                                    disabled={index === 0}
-                                                >
-                                                    <i className="bi bi-caret-left-fill flex-row-right-start"></i>
-                                                </button> */}
                                                 <button className='edit-product--gallary ' type="button" onClick={() => handlePhotoRemove(photo._id)}>
                                                     <i className="bi bi-trash pointer size-20px gray"></i>
                                                 </button>
-                                                {/* <button
-                                                    type="button"
-                                                    className={`edit-product--gallary-right ${mode === 'dark-mode' ? 'gray-bg' : 'mint-green-bg'} radius-circular pointer white`}
-                                                    onClick={() => handlePhotoIndexChange(index, index + 1)}
-                                                    disabled={index === photos.length - 1}
-                                                >
-                                                    <i className="bi bi-caret-right-fill flex-row-right-start"></i>
-                                                </button> */}
                                             </div>
                                         </div>
                                     ))}
@@ -406,7 +426,7 @@ export const EditProduct = () => {
                                     </p>
                                     <div className='full-width edit-product--price--discount'>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.discount}:<span className='red'>*</span></label>
-                                        <div className='margin-6px-V'>
+                                        <div className='margin-6px-V flex-row-left-start2col'>
                                             <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>
                                                 <input className="pointer margin-12px-H" type="radio" name="discount-type" value="None" checked={discountType === 'None'} onChange={handleDiscountTypeChange} />
                                                 {translate.noDiscount}
@@ -422,7 +442,7 @@ export const EditProduct = () => {
                                         </div>
                                         {discountType !== 'None' && (
                                             <div className='full-width'>
-                                                <div className='margin-6px-V flex-row-center  full-width'>
+                                                <div className='margin-6px-V flex-row-center full-width flex-wrap'>
                                                     <label className='pointer text-shadow gray font-bold margin-6px-H' htmlFor="discount-value">{discountType === 'Percentage' ? translate.percentage : translate.value}:</label>
                                                     <input className='gray edit-product--input radius-10px' min='0' type="number" id="discount-value" value={discountValue} onChange={handleDiscountValueChange} />
                                                 </div>

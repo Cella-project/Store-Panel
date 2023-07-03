@@ -9,6 +9,7 @@ import RefillProductForm from "../products/RefillProductForm";
 import DecreaseQuantity from "../products/DecreaseQuantity";
 import { useSelector } from "react-redux";
 import VerifyOTP from "../verifyEmail/VerifyOTP";
+import languages from "../global/languages";
 
 import './PopupForm.scss';
 
@@ -17,6 +18,7 @@ const Popup = ({ popupToggle, header, data }) => {
     const mode = useSelector(state => state.theme.mode);
     const language = useSelector((state) => state.language.language);
     const dashboard = document.getElementById('dashboard-view');
+    const translate = languages[language];
 
     useEffect(() => {
         const mouseHandler = (e) => {
@@ -57,11 +59,11 @@ const Popup = ({ popupToggle, header, data }) => {
                     </div>
 
                     <PerfectScrollbar className='popup--form full-width flex-col-top-start'>
-                        {header === 'Add Product Tag' && <AddProductTagForm popupToggle={popupToggle} data={data} />}
-                        {header === 'Add Product Color' && <AddProductColorForm popupToggle={popupToggle} data={data} />}
-                        {header === 'Add Product Size' && <AddProductSizeForm popupToggle={popupToggle} data={data} />}
-                        {header === 'Refill Product' && <RefillProductForm popupToggle={popupToggle} data={data} />}
-                        {header === 'Decrease Quantity' && <DecreaseQuantity popupToggle={popupToggle} data={data} />}
+                        {header === translate.addProductTag && <AddProductTagForm popupToggle={popupToggle} data={data} />}
+                        {header === translate.addProductColor && <AddProductColorForm popupToggle={popupToggle} data={data} />}
+                        {header === translate.addProductSize && <AddProductSizeForm popupToggle={popupToggle} data={data} />}
+                        {header === translate.refillProduct && <RefillProductForm popupToggle={popupToggle} data={data} />}
+                        {header === translate.decreaseQuantity && <DecreaseQuantity popupToggle={popupToggle} data={data} />}
                     </PerfectScrollbar>
                 </div>
             )

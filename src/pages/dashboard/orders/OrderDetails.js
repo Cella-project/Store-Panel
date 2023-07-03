@@ -82,131 +82,127 @@ const OrderDetails = () => {
                 </GreenCard>
               </div>
               <div className="flex-row-top-between2col full-width full-width">
-              <GreenCard title={translate.pickupLocation}>
-              {order && order.pickupLocation && (
-                <div>
-                  <div className="pointer flex-col-right-start" onClick={handleExpandPick}>
-                    <div className="order-details--content-container shadow-2px flex-col-left-start radius-15px margin-8px-V gray inter full-width">
-                      <div className="text-shadow full-width flex-row-center">{order.pickupLocation.addressTitle}</div>
-                      {expandedPickup && (
-                        <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
-                          <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
-                            <div className='gray margin-12px-H'>{order.pickupLocation.addressType}</div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.city}:
-                            <div className='gray margin-12px-H'>{order.pickupLocation.city}</div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.district}:
-                            <div className='gray margin-12px-H'>{order.pickupLocation.district}</div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.street}:
-                            <div className='gray margin-12px-H'>{order.pickupLocation.street}</div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.building}:
-                            <div className='gray margin-12px-H'>{order.pickupLocation.building}</div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.floor}:
-                            <div className='gray margin-12px-H'>{order.pickupLocation.floor}</div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.flat}:
-                            <div className='gray margin-12px-H'>{order.pickupLocation.flat}</div>
-                          </div>
-                          <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumbers}:
-                            <div className="margin-12px-H flex-col-left-start gray">
-                              {order.pickupLocation.phoneNums.map((phone) => (
-                                <div key={phone._id}>
-                                  {phone.type}: {phone.phoneNum}
+                <GreenCard title={translate.pickupLocation}>
+                  {order && order.pickupLocation && (
+                    <div>
+                      <div className="pointer flex-col-right-start" onClick={handleExpandPick}>
+                        <div className="order-details--content-container shadow-2px flex-col-left-start radius-15px margin-8px-V gray inter full-width">
+                          <div className="text-shadow full-width flex-row-center">{order.pickupLocation.addressTitle}</div>
+                          {expandedPickup && (
+                            <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
+                              <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
+                                <div className='gray margin-12px-H'>{order.pickupLocation.addressType}</div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.city}:
+                                <div className='gray margin-12px-H'>{order.pickupLocation.city}</div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.district}:
+                                <div className='gray margin-12px-H'>{order.pickupLocation.district}</div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.street}:
+                                <div className='gray margin-12px-H'>{order.pickupLocation.street}</div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.building}:
+                                <div className='gray margin-12px-H'>{order.pickupLocation.building}</div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.floor}:
+                                <div className='gray margin-12px-H'>{order.pickupLocation.floor}</div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.flat}:
+                                <div className='gray margin-12px-H'>{order.pickupLocation.flat}</div>
+                              </div>
+                              <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumbers}:
+                                <div className="margin-12px-H flex-col-left-start gray">
+                                  {order.pickupLocation.phoneNums.map((phone) => (
+                                    <div key={phone._id}>
+                                      {phone.type}: {phone.phoneNum}
+                                    </div>
+                                  ))}
                                 </div>
-                              ))}
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </div>
-                      )}
+                      </div>
+                      <div className="flex-row-right-start margin-2px-V size-14px font-bold">
+                        <i className={`bi bi-chevron-${expandedPickup ? "up" : "down"} gray`} />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex-row-right-start margin-2px-V size-14px font-bold">
-                    <i className={`bi bi-chevron-${expandedPickup ? "up" : "down"} gray`} />
-                  </div>
-                </div>
-              )}
-
-
-            </GreenCard>
-            <GreenCard title={translate.dropLocation}>
-              {order && order.dropLocation && (
-                <div>
-                  <div className="pointer flex-col-right-start" onClick={() => handleExpandDrop()}>
-                    <div className="order-details--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
-                      <div className="text-shadow">{order.dropLocation.addressTitle}</div>
-                      {expandedDrop && (
-                        <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
-                          <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
-                            <div className='gray margin-12px-H'>
-                              {order.dropLocation.addressType}
-                            </div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.city}:
-                            <div className='gray margin-12px-H'>
-                              {order.dropLocation.city}
-                            </div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.district}:
-                            <div className='gray margin-12px-H'>
-                              {order.dropLocation.district}
-                            </div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.street}:
-                            <div className='gray margin-12px-H'>
-                              {order.dropLocation.street}
-                            </div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.building}:
-                            <div className='gray margin-12px-H'>
-                              {order.dropLocation.building}
-                            </div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.floor}:
-                            <div className='gray margin-12px-H'>
-                              {order.dropLocation.floor}
-                            </div>
-                          </div>
-                          <div className="margin-6px-V flex-row-left-start">{translate.flat}:
-                            <div className='gray margin-12px-H'>
-                              {order.dropLocation.flat}
-                            </div>
-                          </div>
-                          <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumbers}:
-                            <div className="margin-12px-H flex-col-left-start gray">
-                              {order.dropLocation.phoneNums.map((phone) => (
-                                <div key={phone._id}>
-                                  {phone.type}: {phone.phoneNum}
+                  )}
+                </GreenCard>
+                <GreenCard title={translate.dropLocation}>
+                  {order && order.dropLocation && (
+                    <div>
+                      <div className="pointer flex-col-right-start" onClick={() => handleExpandDrop()}>
+                        <div className="order-details--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
+                          <div className="text-shadow">{order.dropLocation.addressTitle}</div>
+                          {expandedDrop && (
+                            <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
+                              <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
+                                <div className='gray margin-12px-H'>
+                                  {order.dropLocation.addressType}
                                 </div>
-                              ))}
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.city}:
+                                <div className='gray margin-12px-H'>
+                                  {order.dropLocation.city}
+                                </div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.district}:
+                                <div className='gray margin-12px-H'>
+                                  {order.dropLocation.district}
+                                </div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.street}:
+                                <div className='gray margin-12px-H'>
+                                  {order.dropLocation.street}
+                                </div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.building}:
+                                <div className='gray margin-12px-H'>
+                                  {order.dropLocation.building}
+                                </div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.floor}:
+                                <div className='gray margin-12px-H'>
+                                  {order.dropLocation.floor}
+                                </div>
+                              </div>
+                              <div className="margin-6px-V flex-row-left-start">{translate.flat}:
+                                <div className='gray margin-12px-H'>
+                                  {order.dropLocation.flat}
+                                </div>
+                              </div>
+                              <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumbers}:
+                                <div className="margin-12px-H flex-col-left-start gray">
+                                  {order.dropLocation.phoneNums.map((phone) => (
+                                    <div key={phone._id}>
+                                      {phone.type}: {phone.phoneNum}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </div>
-                      )}
+                      </div>
+                      <div className="flex-row-right-start margin-2px-V size-14px font-bold">
+                        <i
+                          className={`bi bi-chevron-${expandedDrop ? "up" : "down"} gray`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex-row-right-start margin-2px-V size-14px font-bold">
-                    <i
-                      className={`bi bi-chevron-${expandedDrop ? "up" : "down"} gray`}
-                    />
-                  </div>
-                </div>
-              )}
-
-            </GreenCard>
+                  )}
+                </GreenCard>
               </div>
             </div>
-
           </div>
           <div className="flex-col-top-start order-details--card-cont width-20-100">
             <GreenCard title={translate.delivery}>
               {order.driver.state === 'NotAssigned' ? (
                 <div className="gray inter size-20px font-bold flex-row-center">{translate.notAssigned}</div>
               ) : (
-                <div className="gray inter size-20px font-bold flex-row-center">{translate.assigned}</div>
+                <div className="gray inter size-20px font-bold flex-row-center">{order.driver.name}</div>
               )}
             </GreenCard>
           </div>

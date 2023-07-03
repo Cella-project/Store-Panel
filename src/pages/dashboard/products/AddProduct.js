@@ -7,7 +7,9 @@ import { mainCategoryMutations, subCategoryMutations } from '../../../redux/muta
 
 import useInput from '../../../hooks/useInput';
 import languages from '../../../components/global/languages';
-import './AddProduct.scss'
+
+import './AddProduct.scss';
+
 export const AddProduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -253,7 +255,6 @@ export const AddProduct = () => {
 
     useEffect(() => {
         if (enteredMainCategory !== '') {
-            console.log(enteredMainCategory);
             dispatch(subCategoryMutations.setSubCategories(null));
             dispatch(subCategoryActions.getSubCategories(enteredMainCategory.id));
         }
@@ -270,7 +271,7 @@ export const AddProduct = () => {
                 _id: storeData._id,
                 storeName: storeData.storeName,
             },
-            price: parseInt(enteredPrice),
+            price: parseFloat(enteredPrice),
             speciality: {
                 _id: storeData.speciality.id,
                 title: storeData.speciality.title,
@@ -318,7 +319,7 @@ export const AddProduct = () => {
 
     return (
         <div className='add-product flex-row-center inter'>
-            <form onSubmit={handleSubmit} noValidate className=' flex-col-center'>
+            <form onSubmit={handleSubmit} noValidate className=' flex-col-center full-width'>
                 <div className="full-width flex-row-center margin-12px-V">
                     <p
                         style={{ margin: '30px' }}
@@ -326,47 +327,45 @@ export const AddProduct = () => {
                     </p>
                 </div>
 
-                <div className="add-product--body white-bg full-width radius-10px shadow-2px">
+                <div className="add-product--body flex-col-center white-bg full-width radius-10px shadow-2px">
                     <div className="add-product--muiBox-root radius-10px shadow-2px">
-                        <div className='add-product--muiBox-root--main mint-green-bg radius-10px'>
-                            <div className='flex-row-between add-product--muiBox-root--main--title'>
-                                <div className='flex-col-center  padding-10px-H'>
-                                    <div>
-                                        <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 1 ? "-fill" : ""} white`}></i>
-                                    </div>
-                                    <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
-                                        1. {translate.productInformation}
-                                    </div>
+                        <div className='add-product--muiBox-root--main mint-green-bg radius-10px flex-row-between'>
+                            <div className='flex-col-center padding-10px-H'>
+                                <div>
+                                    <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 1 ? "-fill" : ""} white`}></i>
                                 </div>
-                                <div className='flex-col-center  padding-10px-H'>
-                                    <div>
-                                        <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 2 ? "-fill" : ""} white`}></i>
-                                    </div>
-                                    <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
-                                        2. {translate.productAlbum}
-                                    </div>
+                                <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
+                                    1. {translate.productInformation}
                                 </div>
-                                <div className='flex-col-center  padding-10px-H'>
-                                    <div>
-                                        <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 3 ? "-fill" : ""} white`}></i>
-                                    </div>
-                                    <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
-                                        3. {translate.productVariants}
-                                    </div>
+                            </div>
+                            <div className='flex-col-center padding-10px-H'>
+                                <div>
+                                    <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 2 ? "-fill" : ""} white`}></i>
                                 </div>
-                                <div className='flex-col-center  padding-10px-H'>
-                                    <div>
-                                        <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 4 ? "-fill" : ""} white`}></i>
-                                    </div>
-                                    <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
-                                        4. {translate.productPricing}
-                                    </div>
+                                <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
+                                    2. {translate.productAlbum}
+                                </div>
+                            </div>
+                            <div className='flex-col-center padding-10px-H'>
+                                <div>
+                                    <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 3 ? "-fill" : ""} white`}></i>
+                                </div>
+                                <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
+                                    3. {translate.productVariants}
+                                </div>
+                            </div>
+                            <div className='flex-col-center padding-10px-H'>
+                                <div>
+                                    <i className={`${mode === 'dark-mode' ? 'gray' : 'white'} bi bi-circle${currentPage >= 4 ? "-fill" : ""} white`}></i>
+                                </div>
+                                <div className={`${mode === 'dark-mode' ? 'gray' : 'white'} size-12px inter`}>
+                                    4. {translate.productPricing}
                                 </div>
                             </div>
                         </div>
                     </div>
                     {currentPage === 1 &&
-                        <div>
+                        <div className='full-width'>
                             <div className='full-width flex-col-left-start add-product--header'>
                                 <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productInformation}</label>
                             </div>
@@ -484,74 +483,75 @@ export const AddProduct = () => {
                             </div>
                         </div>
                     }
-                    {currentPage === 2 && <div>
-                        <div className='full-width flex-col-left-start add-product--header'>
-                            <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productAlbum}</label>
-                        </div>
-                        <div className='full-width flex-col-left-start add-product--input-container'>
-                            <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.productImages} : <span className='red'>*</span></label>
-                        </div>
-                        <div className="add-product--photo flex-col-center">
-                            <div className="flex-row-center flex-wrap">
-                                {photos.map((photo, index) => (
-                                    <div className="add-product--photo--item padding-10px-H flex-col-center " key={index}>
-                                        <div className={`inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-6px-V`}> {translate.photoNumber} : {index + 1}</div>
-                                        <img src={URL.createObjectURL(photo)} alt={` ${index}`} />
-                                        <div className="flex-row-between full-width margin-6px-V ">
-                                            <button
-                                                type="button"
-                                                className={`add-product--gallary-left ${mode === 'dark-mode' ? 'gray-bg' : 'mint-green-bg'} radius-circular pointer white`}
-                                                onClick={() => handlePhotoIndexChange(index, index - 1)}
-                                                disabled={index === 0}
-                                            >
-                                                <i className="bi bi-caret-left-fill flex-row-right-start"></i>
-                                            </button>
-                                            <button className='add-product--gallary' type="button" onClick={() => handlePhotoRemove(index)}>
-                                                <i className="bi bi-trash pointer size-20px gray"></i>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className={`add-product--gallary-right ${mode === 'dark-mode' ? 'gray-bg' : 'mint-green-bg'} radius-circular pointer white`}
-                                                onClick={() => handlePhotoIndexChange(index, index + 1)}
-                                                disabled={index === photos.length - 1}
-                                            >
-                                                <i className="bi bi-caret-right-fill flex-row-right-start"></i>
-                                            </button>
+                    {currentPage === 2 &&
+                        <div className='full-width'>
+                            <div className='full-width flex-col-left-start add-product--header'>
+                                <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productAlbum}</label>
+                            </div>
+                            <div className='full-width flex-col-left-start add-product--input-container'>
+                                <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.productImages} : <span className='red'>*</span></label>
+                            </div>
+                            <div className="add-product--photo flex-col-center">
+                                <div className="flex-row-center flex-wrap">
+                                    {photos.map((photo, index) => (
+                                        <div className="add-product--photo--item padding-10px-H flex-col-center " key={index}>
+                                            <div className={`inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-6px-V`}> {translate.photoNumber} : {index + 1}</div>
+                                            <img src={URL.createObjectURL(photo)} alt={` ${index}`} />
+                                            <div className="flex-row-between full-width margin-6px-V ">
+                                                <button
+                                                    type="button"
+                                                    className={`add-product--gallary-left ${mode === 'dark-mode' ? 'gray-bg' : 'mint-green-bg'} radius-circular pointer white`}
+                                                    onClick={() => handlePhotoIndexChange(index, index - 1)}
+                                                    disabled={index === 0}
+                                                >
+                                                    <i className="bi bi-caret-left-fill flex-row-right-start"></i>
+                                                </button>
+                                                <button className='add-product--gallary' type="button" onClick={() => handlePhotoRemove(index)}>
+                                                    <i className="bi bi-trash pointer size-20px gray"></i>
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    className={`add-product--gallary-right ${mode === 'dark-mode' ? 'gray-bg' : 'mint-green-bg'} radius-circular pointer white`}
+                                                    onClick={() => handlePhotoIndexChange(index, index + 1)}
+                                                    disabled={index === photos.length - 1}
+                                                >
+                                                    <i className="bi bi-caret-right-fill flex-row-right-start"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+                                <div className="flex-row-center full-width">
+                                    <label htmlFor="photos" className={`add-product--actions--button radius-10px mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`}>
+                                        {translate.addPhoto}
+                                    </label>
+                                    <input type="file" id="photos" onChange={handlePhotoAdd} multiple hidden />
+                                </div>
                             </div>
-                            <div className="flex-row-center full-width">
-                                <label htmlFor="photos" className={`add-product--actions--button radius-10px mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`}>
-                                    {translate.addPhoto}
-                                </label>
-                                <input type="file" id="photos" onChange={handlePhotoAdd} multiple hidden />
-                            </div>
-                        </div>
 
-                        <div className="add-product--actions flex-row-between full-width">
-                            <button
-                                className="add-product--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
-                                onClick={() => {
-                                    setCurrentPage(1);
-                                }}
-                            >
-                                {translate.back}
-                            </button>
-                            <button
-                                className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
-                                onClick={() => {
-                                    uploadPhotosToServer(photos);
-                                    setCurrentPage(3);
-                                }}
-                            >
-                                {translate.next}
-                            </button>
-                        </div>
-                    </div>}
+                            <div className="add-product--actions flex-row-between full-width">
+                                <button
+                                    className="add-product--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
+                                    onClick={() => {
+                                        setCurrentPage(1);
+                                    }}
+                                >
+                                    {translate.back}
+                                </button>
+                                <button
+                                    className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
+                                    onClick={() => {
+                                        uploadPhotosToServer(photos);
+                                        setCurrentPage(3);
+                                    }}
+                                >
+                                    {translate.next}
+                                </button>
+                            </div>
+                        </div>}
 
                     {currentPage === 3 &&
-                        <div>
+                        <div className='full-width'>
                             <div className='full-width flex-col-left-start add-product--header'>
                                 <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productVariants}</label>
                             </div>
@@ -729,7 +729,7 @@ export const AddProduct = () => {
                     }
 
                     {currentPage === 4 &&
-                        <div>
+                        <div className='full-width'>
                             <div className='full-width flex-col-left-start add-product--header'>
                                 <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productPricing}</label>
                             </div>

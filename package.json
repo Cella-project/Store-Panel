@@ -2,6 +2,7 @@
   "name": "store-panel",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/store-panel",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",

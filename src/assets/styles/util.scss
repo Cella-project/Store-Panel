@@ -66,6 +66,12 @@ p {
     z-index: 15;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);

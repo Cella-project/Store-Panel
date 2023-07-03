@@ -18,13 +18,6 @@ const productSlice = createSlice({
         },
         updateProduct(state, action) {
             state.productData = action.payload;
-            state.products = state.products.map(product => {
-                if (product._id === action.payload._id) {
-                    return action.payload;
-                }
-                return product;
-            }
-            );
         },
         setProductData(state, action) {
             state.productData = action.payload;

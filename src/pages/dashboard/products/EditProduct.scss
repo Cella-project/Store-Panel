@@ -1,16 +1,19 @@
 .edit-product {
     position: relative;
-
+    
     &--body {
         box-sizing: border-box;
-        padding: 0 50px 50px 50px;
+        padding: 0 50px;
         max-width: 900px;
+        margin: 10px 0;
     }
 
     &--muiBox-root {
         margin: -24px 16px 24px;
+        min-width: fit-content;
 
         &--main {
+            box-sizing: border-box;
             padding: 10px;
         }
     }
@@ -193,5 +196,4 @@
         }
 
     }
-
 }

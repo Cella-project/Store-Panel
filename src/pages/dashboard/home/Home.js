@@ -13,7 +13,6 @@ import Loading from "../../../components/global/Loading";
 
 import './Home.scss';
 
-
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
@@ -22,6 +21,7 @@ const Home = () => {
   const language = useSelector(state => state.language.language);
   const translations = languages[language];
   const storeData = useSelector(state => state.auth.userData);
+  const mode = useSelector(state => state.theme.mode);
 
   useEffect(() => {
     document.title = 'Home • Store Panel';
@@ -61,8 +61,8 @@ const Home = () => {
                 <GreenCard title={card.title} key={index}>
                   <div className="full-width flex-row-center">
                     <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
-                    {card.title === translations.sales ? <p className="size-30px mint-green no-margin text-shadow inter">{translations.EGP}</p> :
-                      <i className={`${card.icon} mint-green size-30px`} />
+                    {card.title === translations.sales ? <p className={`size-30px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} no-margin text-shadow inter`}>{translations.EGP}</p> :
+                      <i className={`${card.icon} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-30px`} />
                     }
                   </div>
                 </GreenCard>
@@ -98,16 +98,18 @@ const Home = () => {
               </Link>
             </GreenCard>
             <GreenCard title={translations.orderHistory}>
-              {orderHistory && orderHistory !== null ?
+              {orderHistory && orderHistory !== null ? (
                 <PerfectScrollbar className="home--scroll--cont full-width flex-col-top-start">
-                  {orderHistory
-                    .slice()
-                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                    .slice(0, 5)
-                    .map((orderHistory) => (
-                      <OrderCard key={orderHistory._id} order={orderHistory} type="history" />
-                    ))}
-                </PerfectScrollbar> : <Loading />
+                  {orderHistory.length === 0 ? <p className="gray inter size-16px">{translations.foundNoOrders}</p> :
+                    orderHistory
+                      .slice()
+                      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                      .slice(0, 5)
+                      .map((orderHistory) => (
+                        <OrderCard key={orderHistory._id} order={orderHistory} type="history" />
+                      ))}
+                </PerfectScrollbar>
+              ) : <Loading />
               }
               <Link to={`/store-panel/OrdersHistory`} className="pointer lists-card--link">
                 <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>

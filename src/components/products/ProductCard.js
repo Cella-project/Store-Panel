@@ -51,7 +51,7 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                     {
                         productCard.rating != null &&
                         <div className='flex-row-center full-width'>
-                            <Rating name="rating" emptyIcon={<StarBorder className='gray' fontSize='inherit' />} style={{ color: '#FDCC0D' }} value={productCard.rating} size={"medium"} precision={0.5} readOnly />
+                            <Rating name="rating" emptyIcon={<StarBorder className='gray' fontSize='inherit' />} style={{ color: '#FDCC0D' }} value={productCard.rating} size={"medium"} precision={1} readOnly />
                             <span className='size-14px gray font-bold margin-4px-H'>{productCard.rating}</span>
                         </div>
                     }

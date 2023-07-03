@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { FaArrowCircleUp } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 
 import './ScrollButton.scss';
 
 const ScrollButton = () => {
-    const mode = useSelector(state => state.theme.mode);
     const [visible, setVisible] = useState(false)
 
     const toggleVisible = () => {
@@ -29,17 +27,15 @@ const ScrollButton = () => {
 
     return (
         <div className='scroll-button'>
-            <FaArrowCircleUp onClick={scrollToTop}
+            <BsFillArrowUpCircleFill onClick={scrollToTop}
                 style={{
                     display: visible ? 'inline' : 'none',
-                    color: `${mode === 'dark-mode' ? '#163a4a' : '#70c8b0'}`
+                    opacity: 0.7
                 }}
+                className='mint-green'
             />
         </div>
     );
 }
 
 export default ScrollButton;
-
-
-

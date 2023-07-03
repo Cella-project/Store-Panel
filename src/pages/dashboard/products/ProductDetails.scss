@@ -5,26 +5,21 @@
 
     &--tags {
         box-sizing: border-box;
-        padding: 10px;
-        justify-content: space-around !important;
+        padding: 5px;
 
         &--tag {
             box-sizing: border-box;
-            padding: 10px;
+            padding: 5px;
 
             &--button {
                 box-sizing: border-box;
-                padding: 10px;
+                padding: 5px;
                 border: none;
                 background-color: transparent;
+                transition: all 0.15s ease-in-out;
 
                 &:hover {
-                    transform: translateY(3px);
-                }
-
-                &--icon {
-                    padding: 10px;
-                    margin-right: 5px;
+                    transform: translateY(2px);
                 }
             }
         }
@@ -58,6 +53,19 @@
         }
     }
 
+    &--info {
+        & .mint-green-card {
+            min-height: 150px;
+
+            &--body {
+                height: 130px;
+
+                &>div {
+                    height: 100%;
+                }
+            }
+        }
+    }
 
     &--colors {
         box-sizing: border-box;
@@ -89,55 +97,54 @@
     &--piece {
         box-sizing: border-box;
         position: relative;
-        margin: 5px;
+        padding: 10px 15px;
+        min-width: fit-content;
 
-        &--color {
+        &--quantity {
             box-sizing: border-box;
-            width: 40px;
-            height: 40px;
-            border-radius: 0 50% 50% 0;
-        }
+            padding: 25px;
 
-        &--info {
-            box-sizing: border-box;
-            padding: 10px 4px 10px 4px;
-        }
+            &.en {
+                &>i {
+                    position: absolute;
+                    right: 12px;
+                    top: 0;
+                }
+            }
 
-        &--size {
-            box-sizing: border-box;
-            min-width: 40px;
-            height: 40px;
-            text-align: center;
-            border-radius: 50% 0 0 50%;
-
+            &.ar {
+                &>i {
+                    position: absolute;
+                    left: 12px;
+                    top: 0;
+                }
+            }
         }
     }
-
-
 
     &--scroll--cont {
         overflow: hidden;
         position: relative;
-
-        &--add {
-            box-sizing: border-box;
-            padding: 3px;
-            position: absolute;
-            border: transparent;
-            right: 25px;
-            transition: all 0.15s ease-in-out;
-
-            &:hover {
-                transform: scale(1.5);
-            }
-
-        }
-
+        box-sizing: border-box;
+        padding: 5px;
 
         & .ps__thumb-x,
         & .ps__rail-x {
             left: 0 !important;
             width: 0 !important;
+        }
+    }
+
+    & .review-scroll--cont {
+        max-height: 370px;
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 10px;
+
+        & .ps__thumb-y,
+        & .ps__rail-y {
+            top: 0 !important;
+            height: 0 !important;
         }
     }
 }

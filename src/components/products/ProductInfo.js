@@ -70,11 +70,11 @@ export const ProductInfo = ({ product }) => {
             <i className={`bi bi-caret-${language==='ar'?'left':'right'}-fill flex-row-right-start`}></i>
           </button>
         </div>
-        <div className="product-info--thumbnails flex-row-between">
+        <div className="product-info--thumbnails flex-row-center margin-12px-V">
           {product.album.length > 1 && product.album.map((_, index) => (
             <div
               key={Math.random().toString()}
-              className={`pointer product-info--thumbnail ${index === currentPhotoIndex ? "mint-green-bg" : ""}`}
+              className={`pointer product-info--thumbnail margin-8px-H ${index === currentPhotoIndex ? "mint-green-bg" : ""}`}
               style={{ borderColor: "mint-green" }}
               
               onClick={() => handleSelectPhoto(index)}
@@ -91,7 +91,7 @@ export const ProductInfo = ({ product }) => {
               style={{ color: "#FDCC0D" }}
               emptyIcon={<StarBorder className="gray" fontSize='inherit' />}
               value={product.rating}
-              precision={0.5}
+              precision={1}
               size={"medium"}
               readOnly
             />
@@ -106,7 +106,7 @@ export const ProductInfo = ({ product }) => {
         </Link>
         <div className="product-info-details">{product.description}</div>
 
-        <div className="product-info-details margin-4px-V size-12px gray ">{translate.material} : {product.material}</div>
+        <div className="product-info-details margin-12px-V size-14px gray">{translate.material} : {product.material}</div>
 
         <div className="full-width flex-row-between">
           <div className="flex-row-left-start lavender">{product.subCategory.title}</div>

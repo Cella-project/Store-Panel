@@ -18,6 +18,9 @@ import { authActions } from '../../../apis/actions';
 
 import { useEffect } from 'react';
 
+import { Rating } from '@mui/material';
+import { StarBorder } from '@material-ui/icons';
+
 import './Profile.scss';
 
 const Profile = () => {
@@ -113,6 +116,20 @@ const Profile = () => {
                                     <img src={logoIMG} className='white-bg' alt="" />
                                 }
                             </div>
+                            <div className="flex-row-right-start margin-8px-V">
+                                <Rating
+                                    name="rating"
+                                    style={{ color: "#FDCC0D" }}
+                                    emptyIcon={<StarBorder className="gray" fontSize='inherit' />}
+                                    value={userData.rating}
+                                    precision={1}
+                                    size={"medium"}
+                                    readOnly
+                                />
+                                <div className="size-14px gray font-bold margin-4px-H">
+                                    {userData.rating}
+                                </div>
+                            </div>
                             <div className='profile--change-img flex-row-center radius-circular'>
                                 <label className='full-width size-16px' htmlFor='profile-picture'>
                                     <div className='full-width profile--change-img--tag flex-row-center white-bg gray open-sans pointer'>
@@ -155,12 +172,12 @@ const Profile = () => {
                                 <ChangeStoreInfo />
                                 <div className='flex-row-top-start2col full-width'>
                                     <GreenCard title={translate.branches} icon={addBranchForm ? 'bi bi-x-circle' : 'bi bi-plus-circle'} iconClickHandle={addBranch}>
-                                        {(addBranchForm !== true && userData && userData.addresses.length > 0) && (
-                                            <div>
-                                                {userData.addresses.map((address) => {
+                                        <div className='full-width flex-col-center'>
+                                            {(addBranchForm !== true && userData && userData.addresses.length > 0) ? (
+                                                userData.addresses.map((address) => {
                                                     const isExpanded = expandedAddressId === address._id;
                                                     return (
-                                                        <div key={address._id}>
+                                                        <div key={address._id} className='full-width'>
                                                             {
                                                                 editBranchForm && (
                                                                     <EditBranchForm popupToggle={setEditBranchForm} data={address} />
@@ -170,11 +187,11 @@ const Profile = () => {
                                                                 <div className="profile--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
                                                                     <div className="text-shadow">{address.addressTitle}
                                                                         <i
-                                                                            className="profile--address--btn--delete margin-6px-H shadow-2px bi bi-trash pointer size-14px mint-green white-bg radius-circular flex-row-center"
+                                                                            className={`profile--address--btn--delete margin-6px-H shadow-2px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} bi bi-trash pointer size-14px white-bg radius-circular flex-row-center`}
                                                                             onClick={() => deleteAddress(address._id)}
                                                                         />
                                                                         <i
-                                                                            className="profile--address--btn--edit margin-6px-H shadow-2px bi bi-pencil-square pointer size-14px mint-green white-bg radius-circular flex-row-center"
+                                                                            className={`profile--address--btn--edit margin-6px-H shadow-2px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} bi bi-pencil-square pointer size-14px white-bg radius-circular flex-row-center`}
                                                                             onClick={() => setEditBranchForm(true)}
                                                                         />
                                                                     </div>
@@ -245,9 +262,12 @@ const Profile = () => {
                                                             </div>
                                                         </div>
                                                     );
-                                                })}
-                                            </div>
-                                        )}
+                                                })
+                                            ) : (
+                                                <div className={`text-shadow font-bold gray inter radius-15px size-14px`}>{translate.noBranchesToDisplay}</div>
+                                            )
+                                            }
+                                        </div>
                                         {
                                             addBranchForm && (
                                                 <AddBranchForm popupToggle={setAddBranchForm} />

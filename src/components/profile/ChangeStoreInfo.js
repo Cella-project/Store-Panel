@@ -112,6 +112,7 @@ const ChangeStoreInfo = () => {
                             value={enteredStoreName}
                             onChange={storeNameChangedHandler}
                             onBlur={storeNameBlurHandler}
+                            disabled={!editMode}
                         />
                     </div>
                     <p style={{ marginLeft: '0 5px 0 5px', visibility: storeNameError && storeNameIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
@@ -129,6 +130,7 @@ const ChangeStoreInfo = () => {
                             value={enteredSlogan}
                             onChange={sloganChangedHandler}
                             onBlur={sloganBlurHandler}
+                            disabled={!editMode}
                         />
                     </div>
                     <p style={{ marginLeft: '0 5px 0 5px', visibility: sloganError && sloganIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">

@@ -67,10 +67,6 @@ export const DecreaseQuantity = ({ popupToggle }) => {
         }
     };
 
-
-
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(newPieces);
@@ -104,14 +100,20 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                         {translate.before}
                     </label>
                     {pieces.map((piece, index) => (
-                        <div key={index} className="product-details--piece flex-row-center flex-wrap">
-                            <div className="flex-row-center mint-green-bg shadow-2px white product-details--piece--size font-bold size-20px">
-                                {piece.size}
+                        <div key={index} className="product-details--piece white-bg flex-row-between radius-10px gray shadow-2px flex-wrap margin-6px-V">
+                            <div className="flex-col-center">
+                                <div className="full-width size-18px">
+                                    {translate.size}: {piece.size}
+                                </div>
+                                <div className="full-width size-18px">
+                                    {translate.color}: {piece.color.title}
+                                </div>
                             </div>
-                            <div className="white-bg font-bold gray shadow-5px product-details--piece--info flex-row-between">
-                                {translate.available}: {piece.quantity}
+                            <div className={`product-details--piece--quantity ${language === 'ar' ? 'ar' : 'en'} margin-12px-H`}>
+                                <i className={`bi bi-bookmark-fill mint-green flex-col-top-start size-38px`}>
+                                    <span style={{ position: 'absolute', fontStyle: 'normal' }} className={`size-22px pt-sans ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{piece.quantity}</span>
+                                </i>
                             </div>
-                            <div style={{ backgroundColor: piece.color.hexCode }} className="shadow-5px product-details--piece--color shadow-2px flex-row-between" />
                         </div>
                     ))}
                     <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="piece">
@@ -124,7 +126,7 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                             onChange={setSelectedPiece}
                             options={pieces.map((piece) => ({
                                 value: piece._id,
-                                label: translate.size+' ' + piece.size + ' - ' + translate.color +' ' + piece.color.title + ' - ' + translate.available+' ' + piece.quantity,
+                                label: translate.size + ' ' + piece.size + ' - ' + translate.color + ' ' + piece.color.title + ' - ' + translate.available + ' ' + piece.quantity,
                                 quantity: piece.quantity,
                                 size: piece.size,
                                 color: {
@@ -137,9 +139,9 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                     <label className="pointer full-width text-shadow gray font-bold margin-6px-V" htmlFor="quantity">
                         {translate.quantity}: <span className="red">*</span>
                     </label>
-                    <div className="decrease-quantity--input radius-10px">
+                    <div className="decrease-quantity--input white-bg radius-10px">
                         <input
-                            className="pointer margin-12px-H gray decrease-quantity--input radius-10px"
+                            className="margin-12px-H gray decrease-quantity--input radius-10px"
                             min="0"
                             type="number"
                             id="Quantity"
@@ -153,15 +155,20 @@ export const DecreaseQuantity = ({ popupToggle }) => {
                         {translate.after}
                     </label>
                     {newPieces.map((piece, index) => (
-                        <div key={index} className="product-details--piece flex-row-center flex-wrap">
-                            {console.log(piece)}
-                            <div className="flex-row-center mint-green-bg shadow-2px white product-details--piece--size font-bold size-20px">
-                                {piece.size}
+                        <div key={index} className="product-details--piece white-bg flex-row-between radius-10px gray shadow-2px flex-wrap margin-6px-V">
+                            <div className="flex-col-center">
+                                <div className="full-width size-18px">
+                                    {translate.size}: {piece.size}
+                                </div>
+                                <div className="full-width size-18px">
+                                    {translate.color}: {piece.color.title}
+                                </div>
                             </div>
-                            <div className="white-bg font-bold gray shadow-5px product-details--piece--info flex-row-between">
-                                {translate.available}: {piece.quantity > 0 ? piece.quantity : 0}
+                            <div className={`product-details--piece--quantity ${language === 'ar' ? 'ar' : 'en'} margin-12px-H`}>
+                                <i className={`bi bi-bookmark-fill mint-green flex-col-top-start size-38px`}>
+                                    <span style={{ position: 'absolute', fontStyle: 'normal' }} className={`size-22px pt-sans ${mode === 'dark-mode' ? 'gray' : 'white'}`}>{piece.quantity > 0 ? piece.quantity : 0}</span>
+                                </i>
                             </div>
-                            <div style={{ backgroundColor: piece.color.hexCode }} className="shadow-5px product-details--piece--color shadow-2px flex-row-between" />
                         </div>
                     ))}
 

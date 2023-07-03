@@ -17,7 +17,7 @@ const ProductControl = ({ id }) => {
 
   //handle change state
   const handleChangeState = async () => {
-    dispatch(productActions.changeProductState(id,translate.areYouSureYouWantChangeStateOfThisProduct,translate.productStateChangedSuccessfully,translate.someThingWentWrongPleaseTry));
+    dispatch(productActions.changeProductState(id, translate.areYouSureYouWantChangeStateOfThisProduct, translate.productStateChangedSuccessfully, translate.someThingWentWrongPleaseTry));
   };
 
   //handle delete
@@ -25,7 +25,7 @@ const ProductControl = ({ id }) => {
     dispatch(
       productActions.deleteProduct(id, () => {
         router.navigate("/store-panel/products");
-      },translate.areYouSureDeleteProduct,translate.productDeletedSuccessfully,translate.someThingWentWrongPleaseTry)
+      }, translate.areYouSureDeleteProduct, translate.productDeletedSuccessfully, translate.someThingWentWrongPleaseTry)
     );
   };
   const handleRefill = () => {
@@ -38,15 +38,14 @@ const ProductControl = ({ id }) => {
     };
   }
 
-  const handleEdit =()=>{
+  const handleEdit = () => {
     navigate(`/store-panel/products/editProduct/${id}`);
   }
-
 
   return (
     <div className="full-width flex-col-left-start product-control flex-wrap">
       {popupShown &&
-        <Popup popupToggle={setPopupShown} header={'Refill Product'} />
+        <Popup popupToggle={setPopupShown} header={translate.refillProduct} />
       }
       <div onClick={handleChangeState} className="product-control--btn flex-row-center white mint-green-bg radius-circular pointer">
         <i className={`bi bi-arrow-clockwise size-28px ${mode === 'dark-mode' ? 'gray' : 'white'}`}></i>

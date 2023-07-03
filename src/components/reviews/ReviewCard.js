@@ -34,7 +34,7 @@ const ReviewCard = ({ review }) => {
                             <div className='review-lists-card--cont margin-2px-V font-bold flex-row-left-start'>
                                 <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.rating}: </span>
                                 <div className='flex-row-left-start flex-wrap'>
-                                    <Rating name="rating" emptyIcon={<StarBorder className='gray' fontSize='inherit' />} style={{ color: '#FDCC0D' }} value={review.rate} precision={0.5} size={"small"} readOnly />
+                                    <Rating name="rating" emptyIcon={<StarBorder className='gray' fontSize='inherit' />} style={{ color: '#FDCC0D' }} value={review.rate} precision={1} size={"small"} readOnly />
                                     <span className='size-12px gray font-bold margin-4px-H'>{review.rate}</span>
                                 </div>
                             </div>

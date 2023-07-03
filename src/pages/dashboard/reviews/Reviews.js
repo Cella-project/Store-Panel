@@ -5,11 +5,11 @@ import ReviewCard from '../../../components/reviews/ReviewCard';
 import { useDispatch, useSelector } from 'react-redux';
 import languages from '../../../components/global/languages';
 
-import './Reviews.scss';
 import { useLocation } from 'react-router-dom';
 import { productMutations, reviewMutations } from '../../../redux/mutations';
 import { productActions, reviewActions } from '../../../apis/actions';
-import Loading from '../../../components/global/Loading';
+
+import './Reviews.scss';
 
 const Reviews = () => {
   const language = useSelector(state => state.language.language);
@@ -35,7 +35,7 @@ const Reviews = () => {
     }
   }, [dispatch, productId]);
 
-  let content = <Loading />;
+  let content = <></>;
 
   let cards = [
     { title: translate.reviews, content: 0, icon: "bi bi-stars" },

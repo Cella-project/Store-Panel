@@ -3,14 +3,17 @@
 
     &--body {
         box-sizing: border-box;
-        padding: 0 50px 50px 50px;
+        padding: 0 50px;
         max-width: 900px;
+        margin: 10px 0;
     }
 
     &--muiBox-root {
-        margin: -24px 16px 24px;
+        margin: -24px 0 24px 0;
+        min-width: fit-content;
 
         &--main {
+            box-sizing: border-box;
             padding: 10px;
         }
     }
@@ -25,9 +28,10 @@
     &--selected-item {
         padding: 5px 10px;
         margin: 10px;
-        
+
     }
-    &--select{
+
+    &--select {
         & .css-13cymwt-control {
             cursor: pointer;
             border: none;
@@ -84,6 +88,7 @@
                 background-color: transparent;
                 border: none;
                 transition: all 0.2s ease-in-out;
+
                 &:hover {
 
                     transform: translateY(3px);
@@ -191,7 +196,5 @@
                 cursor: not-allowed;
             }
         }
-
     }
-
 }

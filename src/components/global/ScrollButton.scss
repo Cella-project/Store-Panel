@@ -1,11 +1,10 @@
 .scroll-button {
     position: fixed;
     width: fit-content;
-    left: 50%;
-    bottom: 0;
+    top: 100px;
+    right: 15px;
     height: fit-content;
-    font-size: 3rem;
+    font-size: 2.7rem;
     z-index: 20;
     cursor: pointer;
-    color: green;
 }
