@@ -266,14 +266,14 @@ export const AddProduct = () => {
         const product = {
             title: enteredTitle,
             description: enteredDescription,
+            price: parseFloat(enteredPrice),
             store:
             {
                 _id: storeData._id,
                 storeName: storeData.storeName,
             },
-            price: parseFloat(enteredPrice),
             speciality: {
-                _id: storeData.speciality.id,
+                _id: storeData.speciality._id,
                 title: storeData.speciality.title,
             },
             mainCategory: {

@@ -8,7 +8,7 @@ import orderActions from './actions/order';
 import orderHistoryActions from './actions/orderHistory';
 import logActivityActions from './actions/logActivity';
 import reviewActions from './actions/reviews';
-
+import notificationActions from './actions/notification';
 export {
     authActions,
     specialityActions,
@@ -20,4 +20,5 @@ export {
     orderHistoryActions,
     logActivityActions,
     reviewActions,
+    notificationActions,
 }

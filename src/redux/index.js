@@ -14,6 +14,7 @@ import orderSlice from './slices/order';
 import orderHistorySlice from './slices/orderHistory';
 import logActivitySlice from './slices/logActivity';
 import reviewSlice from './slices/reviews';
+import notificationSlice from './slices/notification';
 
 
 export default configureStore({
@@ -32,5 +33,6 @@ export default configureStore({
         orderHistory: orderHistorySlice.reducer,
         log: logActivitySlice.reducer,
         review: reviewSlice.reducer,
+        notification: notificationSlice.reducer,
     }
 });

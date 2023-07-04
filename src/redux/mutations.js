@@ -12,6 +12,7 @@ import orderMutations from './mutations/order';
 import orderHistoryMutations from './mutations/orderHistory';
 import logActivityMutations from './mutations/logActivity';
 import reviewMutations from './mutations/reviews';
+import notificationMutations from './mutations/notification';
 
 export { 
     stickyMutations,
@@ -28,4 +29,5 @@ export {
     orderHistoryMutations,
     logActivityMutations,
     reviewMutations,
+    notificationMutations,
 };
