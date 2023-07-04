@@ -214,7 +214,9 @@ const AddBranchForm = ({ popupToggle }) => {
   } = useInput((value) => {
     let error = '';
     let isValid = true;
-    if (value.length < 13) {
+    if (!value) {
+      isValid = false;
+    } else if (value.length < 13) {
       error = translate.pleaseEnterValidPhoneNumber;
       isValid = false;
     }
@@ -487,6 +489,7 @@ const AddBranchForm = ({ popupToggle }) => {
       <div className='full-width flex-col-left-start add-branch--input-container'>
         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='PrimaryPhoneNum'>{translate.primaryPhoneNumber}<span className='red'>*</span></label>
         <PhoneInput
+          style={{ direction: 'ltr' }}
           className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input`}
           id={'PrimaryPhoneNum'}
           placeholder={translate.primaryPhoneNumber}
@@ -508,6 +511,7 @@ const AddBranchForm = ({ popupToggle }) => {
       <div className='full-width flex-col-left-start add-branch--input-container'>
         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='OptionallyPhoneNum'>{translate.optionalPhoneNumber}</label>
         <PhoneInput
+          style={{ direction: 'ltr' }}
           className={`full-width gray white-bg radius-10px flex-row-left-start add-branch--input`}
           id={'OptionallyPhoneNum'}
           placeholder={translate.optionalPhoneNumber}

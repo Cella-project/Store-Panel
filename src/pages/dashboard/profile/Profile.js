@@ -263,9 +263,9 @@ const Profile = () => {
                                                         </div>
                                                     );
                                                 })
-                                            ) : (
+                                            ) : !addBranchForm ? (
                                                 <div className={`text-shadow font-bold gray inter radius-15px size-14px`}>{translate.noBranchesToDisplay}</div>
-                                            )
+                                            ) : (<></>)
                                             }
                                         </div>
                                         {
@@ -303,10 +303,10 @@ const Profile = () => {
                                                                     <div className="profile--socials--btn--tag white inter size-12px radius-5px shadow-5px">
                                                                         {translate.whatsapp}
                                                                     </div>
-                                                                    <i className="profile--socials--btn--delete shadow-2px bi bi-trash pointer size-14px mint-green white-bg radius-circular flex-row-center" onClick={deleteSocialAcc} />
+                                                                    <i className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-14px ${mode==='dark-mode'? 'white':'mint-green' } white-bg radius-circular flex-row-center`} onClick={deleteSocialAcc} />
                                                                 </a>
                                                                 <i
-                                                                    className="profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
+                                                                    className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px ${mode==='dark-mode'? 'white':'mint-green' } white-bg radius-circular flex-row-center`}
                                                                     onClick={() => deleteSocialAcc(account._id)}
                                                                 />
                                                             </div>

@@ -70,12 +70,13 @@ const VerifyOTP = ({ popupToggle }) => {
             </div>
             <div className="verifyOTP--slot full-width flex-col-left-start margin-12px-V">
                 <p
-                    style={{ marginLeft: "5px" }}
+                    style={{ marginLeft: '0 5px 0 5px' }}
                     className="no-padding margin-6px-V size-16px inter gray"
                 >
                     {translate.verifyCode}
                 </p>
                 <OtpInput
+                    style={{ direction: 'ltr' }}
                     value={value}
                     onChange={handleCodeChange}
                     numInputs={6}
