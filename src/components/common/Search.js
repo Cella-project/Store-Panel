@@ -74,7 +74,7 @@ const Search = ({ width, onSearch, page }) => {
                   <input type="radio" name="search-type" className="margin-12px-H pointer" id="name"
                     value='name'
                     onChange={() => {
-                      searchType.current = page === 'Stores' ? 'storeName' :
+                      searchType.current = 
                         (page === 'Products') ? 'name' :
                           (page === 'OrdersHistory' || page === 'Orders') ? 'customer.name' : 'all';
                       handleSearch();
@@ -82,7 +82,6 @@ const Search = ({ width, onSearch, page }) => {
                     }
                   />
                   <label className="pointer" htmlFor="name">
-                    {page === 'Stores' && translate.store}
                     {page === 'OrdersHistory' && translate.customerName}
                     {page === 'Products' && translate.name}
                     {page === 'Orders' && translate.customerName}
@@ -94,7 +93,7 @@ const Search = ({ width, onSearch, page }) => {
                       <input type="radio" name="search-type" className="margin-12px-H pointer" id="category"
                         value="category"
                         onChange={() => {
-                          searchType.current = 'category.title';
+                          searchType.current = 'subCategory.title';
                           handleSearch();
                         }
                         }
@@ -133,7 +132,7 @@ const Search = ({ width, onSearch, page }) => {
 
           {(page === 'Products' || page === 'OrdersHistory' || page === 'Orders') &&
             <div className="flex-col-left-start size-16px margin-8px-V width-50-100">
-              {(page === 'Specialty' || page === 'Categories' || page === 'Products' || page === 'Payments') &&
+              {( page === 'Products' ) &&
                 <div className="flex-row-top-start">
                   {translate.status}:
                   <div className="flex-row-left-start2col search-bar--filter--options">

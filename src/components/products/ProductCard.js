@@ -68,9 +68,9 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                             </div>
                         }
                         <div className='product-card--specialty margin-2px-V'>
-                            {productCard.category && typeof productCard.category === 'object' ?
-                                productCard.category.title :
-                                productCard.category
+                            {productCard.subCategory && typeof productCard.subCategory === 'object' ?
+                                productCard.subCategory.title :
+                                productCard.subCategory
                             }
                         </div>
 

@@ -17,6 +17,7 @@ const OrderHistoryList = () => {
     const translate = languages[language];
     const orderHistoryCards = useSelector(state => state.orderHistory.ordersHistory);
     const storeData = useSelector(state => state.auth.userData);
+    const mode = useSelector(state => state.theme.mode);
 
     useEffect(() => {
         dispatch(orderHistoryMutations.setOrderHistory(null));
@@ -114,7 +115,7 @@ const OrderHistoryList = () => {
                         return (
                             <GreenCard title={card.title} key={index}>
                                 <div className="full-width flex-row-center">
-                                    <i className='bi bi-receipt mint-green size-28px'></i>
+                                    <i className={`bi bi-receipt ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-28px`}></i>
                                     <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
                                 </div>
                             </GreenCard>

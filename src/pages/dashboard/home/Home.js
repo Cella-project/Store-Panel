@@ -112,14 +112,11 @@ const Home = () => {
               ) : <Loading />
               }
               <Link to={`/store-panel/OrdersHistory`} className="pointer lists-card--link">
-                <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} flex-row-right-start`}></i>
+                <i className={`bi bi-arrow-${language === 'ar' ? 'left' : 'right'} pointer flex-row-right-start`}></i>
               </Link>
             </GreenCard>
           </div>
         </div>
-        {/* <GreenCard title={translations.reviews}>
-
-        </GreenCard> */}
       </div >
     </div>
   );

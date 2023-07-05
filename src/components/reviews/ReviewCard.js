@@ -11,6 +11,7 @@ import './ReviewCard.scss';
 const ReviewCard = ({ review }) => {
     const language = useSelector(state => state.language.language);
     const translate = languages[language];
+    const mode = useSelector(state => state.theme.mode);
 
     return (
         <>
@@ -27,7 +28,7 @@ const ReviewCard = ({ review }) => {
                         {review.reviewAt &&
                             <div className='review-lists-card--cont margin-2px-V'>
                                 <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.type}: </span>
-                                <i className={`bi bi-box-seam mint-green size-30px`} />
+                                <i className={`bi bi-box-seam ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-30px`} />
                             </div>
                         }
                         <div className='flex-row-between2col review-lists-card--rating-cont flex-wrap'>

@@ -17,6 +17,8 @@ const OrderList = () => {
     const translate = languages[language];
     const orderCards = useSelector(state => state.order.orders);
     const storeData = useSelector(state => state.auth.userData);
+    const mode = useSelector(state => state.theme.mode);
+
     useEffect(() => {
         dispatch(orderMutations.setOrder(null));
         dispatch(orderActions.getOrder(storeData._id));
@@ -116,7 +118,7 @@ const OrderList = () => {
                         return (
                             <GreenCard title={card.title} key={index}>
                                 <div className="full-width flex-row-center">
-                                    <i className='bi bi-receipt mint-green size-28px'></i>
+                                    <i className={`bi bi-receipt ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-28px`}></i>
                                     <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
                                 </div>
                             </GreenCard>

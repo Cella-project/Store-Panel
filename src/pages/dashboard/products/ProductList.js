@@ -130,7 +130,7 @@ const ProductList = () => {
             return (
               <GreenCard title={card.title} key={index}>
                 <div className="full-width flex-row-center">
-                  <i className={`${card.icon} mint-green size-28px`}></i>
+                  <i className={`${card.icon} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-28px`}></i>
                   <p className="gray inter size-28px margin-12px-H text-shadow">{card.content}</p>
                 </div>
               </GreenCard>

@@ -83,6 +83,7 @@ const Profile = () => {
         setAddBranchForm(!addBranchForm);
     }
 
+
     const deleteSocialAcc = (accountID) => {
         dispatch(authActions.deleteStoreSocialMediaAccount({
             _id: userData._id,
@@ -95,6 +96,7 @@ const Profile = () => {
             addressId: addressID
         }, translate.areYouSureDeleteBranch, translate.branchDeletedSuccessfully, translate.someThingWentWrongPleaseTry));
     }
+
 
     return (
         <div className="profile full-width" >
@@ -179,81 +181,80 @@ const Profile = () => {
                                                     return (
                                                         <div key={address._id} className='full-width'>
                                                             {
-                                                                editBranchForm && (
+                                                                editBranchForm === address._id ? (
                                                                     <EditBranchForm popupToggle={setEditBranchForm} data={address} />
-                                                                )
-                                                            }
-                                                            <div className="pointer flex-col-right-start" onClick={() => toggleAddress(address._id)}>
-                                                                <div className="profile--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
-                                                                    <div className="text-shadow">{address.addressTitle}
-                                                                        <i
-                                                                            className={`profile--address--btn--delete margin-6px-H shadow-2px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} bi bi-trash pointer size-14px white-bg radius-circular flex-row-center`}
-                                                                            onClick={() => deleteAddress(address._id)}
-                                                                        />
-                                                                        <i
-                                                                            className={`profile--address--btn--edit margin-6px-H shadow-2px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} bi bi-pencil-square pointer size-14px white-bg radius-circular flex-row-center`}
-                                                                            onClick={() => setEditBranchForm(true)}
-                                                                        />
-                                                                    </div>
-                                                                    {isExpanded && (
-                                                                        <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
-                                                                            <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
-                                                                                <div className='gray margin-12px-H'>
-                                                                                    {address.addressType}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="margin-6px-V flex-row-left-start">{translate.city}:
-                                                                                <div className='gray margin-12px-H'>
-                                                                                    {address.city}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="margin-6px-V flex-row-left-start">{translate.district}:
-                                                                                <div className='gray margin-12px-H'>
-                                                                                    {address.district}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="margin-6px-V flex-row-left-start">{translate.street}:
-                                                                                <div className='gray margin-12px-H'>
-                                                                                    {address.street}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="margin-6px-V flex-row-left-start">{translate.building}:
-                                                                                <div className='gray margin-12px-H'>
-                                                                                    {address.building}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="margin-6px-V flex-row-left-start">{translate.floor}:
-                                                                                <div className='gray margin-12px-H'>
-                                                                                    {address.floor}
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="margin-6px-V flex-row-left-start">{translate.flat}:
-                                                                                <div className='gray margin-12px-H'>
-                                                                                    {address.flat}
-                                                                                </div>
-                                                                            </div>
-                                                                            {
-                                                                                address.landmark && (
-                                                                                    <div className="margin-6px-V flex-row-left-start">{translate.landmark}:
-                                                                                        <div className='gray margin-12px-H'>
-                                                                                            {address.landmark}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                )
-                                                                            }
-                                                                            <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumber}:
-                                                                                <div className="margin-12px-H flex-col-left-start gray">
-                                                                                    {address.phoneNums.map((phone) => (
-                                                                                        <div key={phone._id}>
-                                                                                            {phone.type}: {phone.phoneNum}
-                                                                                        </div>
-                                                                                    ))}
-                                                                                </div>
-                                                                            </div>
+                                                                ) : (<div className="pointer flex-col-right-start" onClick={() => toggleAddress(address._id)}>
+                                                                    <div className="profile--content-container shadow-2px flex-col-center radius-15px margin-8px-V gray inter full-width">
+                                                                        <div className="text-shadow">{address.addressTitle}
+                                                                            <i
+                                                                                className={`profile--address--btn--delete margin-6px-H shadow-2px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} bi bi-trash pointer size-14px white-bg radius-circular flex-row-center`}
+                                                                                onClick={() => deleteAddress(address._id)}
+                                                                            />
+                                                                            <i
+                                                                                className={`profile--address--btn--edit margin-6px-H shadow-2px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} bi bi-pencil-square pointer size-14px white-bg radius-circular flex-row-center`}
+                                                                                onClick={() => setEditBranchForm(address._id)}
+                                                                            />
                                                                         </div>
-                                                                    )}
-                                                                </div>
-                                                            </div>
+                                                                        {isExpanded && (
+                                                                            <div className="flex-col-left-start gray mint-green full-width margin-8px-V">
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.addressType}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.addressType}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.city}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.city}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.district}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.district}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.street}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.street}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.building}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.building}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.floor}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.floor}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="margin-6px-V flex-row-left-start">{translate.flat}:
+                                                                                    <div className='gray margin-12px-H'>
+                                                                                        {address.flat}
+                                                                                    </div>
+                                                                                </div>
+                                                                                {
+                                                                                    address.landmark && (
+                                                                                        <div className="margin-6px-V flex-row-left-start">{translate.landmark}:
+                                                                                            <div className='gray margin-12px-H'>
+                                                                                                {address.landmark}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    )
+                                                                                }
+                                                                                <div className="margin-6px-V flex-row-top-start full-width">{translate.phoneNumber}:
+                                                                                    <div className="margin-12px-H flex-col-left-start gray">
+                                                                                        {address.phoneNums.map((phone) => (
+                                                                                            <div key={phone._id}>
+                                                                                                {phone.type}: {phone.phoneNum}
+                                                                                            </div>
+                                                                                        ))}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </div>)
+                                                            }
                                                             <div className="flex-row-right-start margin-2px-V size-14px font-bold">
                                                                 <i
                                                                     className={`pointer bi bi-chevron-${isExpanded ? "up" : "down"} gray`}
@@ -285,12 +286,12 @@ const Profile = () => {
                                                             <div className="profile--socials--btn" key={account.accountType}>
                                                                 <a href={account.link} target="_blank" rel="noreferrer">
                                                                     <img src={FaceBook} alt='facebook' />
-                                                                    <div className="profile--socials--btn--tag white inter size-12px radius-5px shadow-5px">
+                                                                    <div className={`profile--socials--btn--tag ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
                                                                         {translate.facebook}
                                                                     </div>
                                                                 </a>
                                                                 <i
-                                                                    className="profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
+                                                                    className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} white-bg radius-circular flex-row-center`}
                                                                     onClick={() => deleteSocialAcc(account._id)}
                                                                 />
                                                             </div>
@@ -300,13 +301,13 @@ const Profile = () => {
                                                             <div className="profile--socials--btn" key={account.accountType}>
                                                                 <a href={account.link} target="_blank" rel="noreferrer">
                                                                     <img src={Whatsapp} alt='whatsapp' />
-                                                                    <div className="profile--socials--btn--tag white inter size-12px radius-5px shadow-5px">
+                                                                    <div className={`profile--socials--btn--tag ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
                                                                         {translate.whatsapp}
                                                                     </div>
-                                                                    <i className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-14px ${mode==='dark-mode'? 'white':'mint-green' } white-bg radius-circular flex-row-center`} onClick={deleteSocialAcc} />
+                                                                    <i className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-14px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} white-bg radius-circular flex-row-center`} onClick={deleteSocialAcc} />
                                                                 </a>
                                                                 <i
-                                                                    className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px ${mode==='dark-mode'? 'white':'mint-green' } white-bg radius-circular flex-row-center`}
+                                                                    className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} white-bg radius-circular flex-row-center`}
                                                                     onClick={() => deleteSocialAcc(account._id)}
                                                                 />
                                                             </div>
@@ -317,12 +318,12 @@ const Profile = () => {
                                                             <div className="profile--socials--btn" key={account.accountType}>
                                                                 <a href={account.link} target="_blank" rel="noreferrer">
                                                                     <img src={Instagram} alt='instagram' />
-                                                                    <div className="profile--socials--btn--tag white inter size-12px radius-5px shadow-5px">
+                                                                    <div className={`profile--socials--btn--tag ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
                                                                         {translate.instagram}
                                                                     </div>
                                                                 </a>
                                                                 <i
-                                                                    className="profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px mint-green white-bg radius-circular flex-row-center"
+                                                                    className={`profile--socials--btn--delete shadow-2px bi bi-trash pointer size-12px ${mode === 'dark-mode' ? 'gray' : 'mint-green'} white-bg radius-circular flex-row-center`}
                                                                     onClick={() => deleteSocialAcc(account._id)}
                                                                 />
                                                             </div>
