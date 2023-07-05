@@ -14,7 +14,7 @@ const notificationActions = {
                     notifications = [];
                 }
 
-                const response = await Axios.get(`/api/notification-center/get-all-notifications?skip=${offset}&limit=4`);
+                const response = await Axios.get(`/api/notification-center/notifications?skip=${offset}&limit=10`);
 
                 const newNotifications = [...notifications, ...response.data.data];
 
@@ -39,6 +39,27 @@ const notificationActions = {
             }
         }
     },
+    setNotificationAsRead(notificationId) {
+        return async (dispatch) => {
+            try {
+                const response = await Axios.put('/api/notification-center/mark-read', { "_id": notificationId });
+                dispatch(notificationMutations.updateNotification(response.data.data));
+            } catch (error) {
+                errorHandler(dispatch, error.response);
+            }
+        }
+    },
+    setAllNotificationsAsRead(userId) {
+        return async (dispatch) => {
+            try {
+                await Axios.put('/api/notification-center/mark-all-read', { "userId": userId });
+                dispatch(notificationMutations.setNotifications(null));
+                dispatch(this.getAllNotifications(0));
+            } catch (error) {
+                errorHandler(dispatch, error.response);
+            }
+        }
+    }
 }
 
 export default notificationActions;

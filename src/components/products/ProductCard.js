@@ -14,7 +14,7 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
     const mode = useSelector(state => state.theme.mode);
     const language = useSelector(state => state.language.language);
     const translate = languages[language];
-    
+
     // calculate the discounted price
     let newPrice = price ? price : productCard.price;
     let oldPrice = '';
@@ -42,15 +42,13 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                         ) : (
                             <>
                                 <img src={productCard.album.length > 0 ? productCard.album[0].URL : defaultProductPhoto} alt='product-pic' />
-                                <div
-                                    className={`product-card--status${language === 'ar' ? '-arabic' : ''} ${productCard.status === 'Active' ? 'green-bg' : (productCard.status === 'Deactivea' ? 'yellow-bg' : 'red-bg')} shadow-5px radius-circular`}
-                                ></div>
+                                <div className={`product-card--status${language === 'ar' ? '-arabic' : ''} ${(productCard.status === 'Active' && productCard.avilableQuantity > 0)? 'green-bg' : ((productCard.status === 'Active' && productCard.avilableQuantity === 0)? 'yellow-bg' : 'red-bg')} shadow-5px radius-circular`}></div>
                             </>
                         )}
                     </div>
                     {
                         productCard.rating != null &&
-                        <div className='flex-row-center full-width'>
+                        <div className='flex-row-center full-width margin-6px-V'>
                             <Rating name="rating" emptyIcon={<StarBorder className='gray' fontSize='inherit' />} style={{ color: '#FDCC0D' }} value={productCard.rating} size={"medium"} precision={1} readOnly />
                             <span className='size-14px gray font-bold margin-4px-H'>{productCard.rating}</span>
                         </div>
