@@ -19,21 +19,28 @@ const App = () => {
   const language = useSelector(state => state.language.language);
 
   const mode = useSelector(state => state.theme.mode);
+  const user = useSelector(state => state.auth.userData);
   const accessToken = localStorage.getItem('Access Token');
   const refreshToken = localStorage.getItem('Refresh Token');
-  const user = useSelector(state => state.auth.userData);
 
   useEffect(() => {
+    const refreshToken = localStorage.getItem('Refresh Token');
     const lastRefreshTime = localStorage.getItem('Refresh Token Time');
-    const currentTime = new Date().getTime();
-    const timeDifference = currentTime - lastRefreshTime;
-    if (timeDifference >= 14 * 60 * 1000) {
-      refreshTokenHandler(refreshToken);
-    }
-    setInterval(() => {
-      refreshTokenHandler(refreshToken);
-    }, 14 * 60 * 1000);
-  });
+
+    const checkTimeDifference = () => {
+      const currentTime = new Date().getTime();
+      const timeDifference = currentTime - lastRefreshTime;
+
+      if (timeDifference >= 14 * 60 * 1000) {
+        refreshTokenHandler(refreshToken);
+      }
+    };
+
+    const interval = setInterval(checkTimeDifference, 1 * 60 * 1000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
+  })
 
   const checkAuth = () => {
     if (accessToken && refreshToken) {
@@ -62,6 +69,7 @@ const App = () => {
 
   if (!isLoaded) {
     checkAuth();
+    refreshTokenHandler(refreshToken);
     isLoaded = true;
   }
 
