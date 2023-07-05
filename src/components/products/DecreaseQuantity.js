@@ -36,7 +36,6 @@ export const DecreaseQuantity = ({ popupToggle }) => {
 
 
     const handleDecreasePiece = () => {
-        console.log(newPieces)
         if (selectedPiece && enteredQuantity > 0) {
             const existingPiece = newPieces.find((piece) => piece.value === selectedPiece.value);
             const updatedQuantity = Math.min(enteredQuantity, selectedPiece.quantity);
@@ -69,7 +68,6 @@ export const DecreaseQuantity = ({ popupToggle }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(newPieces);
         const formattedPieces = newPieces.map((piece) => ({
             pieceId: piece.value,
             decreasedQuantity: piece.decreasedQuantity,

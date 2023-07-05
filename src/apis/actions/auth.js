@@ -286,8 +286,6 @@ const authActions = {
                 }));
                 afterSuccess();
             } catch (error) {
-                console.log(payload);
-                console.log(error);
                 errorHandler(dispatch, error.response, msg2);
             }
         }

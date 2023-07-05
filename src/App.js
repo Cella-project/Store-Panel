@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
@@ -10,20 +10,6 @@ import Popup from './components/popups/Popup';
 import { authMutations } from './redux/mutations';
 import router from './router/router';
 import { authActions } from './apis/actions';
-import Axios from 'axios';
-
-if (localStorage.getItem('Refresh Token')) {
-  Axios.post('http://www.actore.store/api/store-auth/refresh-token', {
-    refreshToken: localStorage.getItem('Refresh Token')
-  }).then(response => {
-    if (response.status === 200) {
-      localStorage.setItem('Access Token', response.data.token.access);
-      localStorage.setItem('Refresh Token', response.data.token.refresh);
-      localStorage.setItem('Refresh Token Time', new Date().getTime());
-    }
-  });
-}
-
 
 let isLoaded = false;
 
@@ -39,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     const refreshToken = localStorage.getItem('Refresh Token');
-
+    
     const checkTimeDifference = () => {
       const currentTime = new Date().getTime();
       const lastRefreshTime = localStorage.getItem('Refresh Token Time');
@@ -58,13 +44,13 @@ const App = () => {
 
   const checkAuth = () => {
     if (accessToken && refreshToken) {
-      dispatch(authMutations.setUserData(null));
-      dispatch(authActions.getProfile());
-      dispatch(authMutations.setAuthData({
-        userData: user,
-        access: accessToken,
-        refresh: refreshToken
-      }));
+      dispatch(authActions.refreshToken(refreshToken)).then(() => {
+        dispatch(authMutations.setUserData(null));
+        dispatch(authActions.getProfile());
+        dispatch(authMutations.setAuthData({
+          userData: user,
+        }));
+      });
     } else {
       localStorage.removeItem('Access Token');
       localStorage.removeItem('Refresh Token');
@@ -77,7 +63,7 @@ const App = () => {
 
   const refreshTokenHandler = (token) => {
     if (token) {
-      dispatch(authActions.refreshToken(token));
+      dispatch(authActions.refreshToken(token), () => { });
     }
   };
 

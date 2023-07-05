@@ -29,8 +29,6 @@ const productActions = {
                 }));
                 afterSuccess();
             } catch (error) {
-                console.log(error);
-                console.log(payload);
                 errorHandler(dispatch, error.response, msg2);
             }
         }
@@ -296,8 +294,6 @@ const productActions = {
                 }));
                 afterSuccess();
             } catch (error) {
-                console.log(error)
-                console.log(payload)
                 errorHandler(dispatch, error.response, msg2);
             }
         }
