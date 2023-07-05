@@ -5,8 +5,11 @@ import logo from '../../assets/images/mint-logo.png';
 import darkLogo from '../../assets/images/white-logo.png';
 import Canvas from '../common/Canvas';
 import { useSelector } from 'react-redux';
-import './NavBar.scss';
 import languages from './languages';
+
+import Notifications from '../common/Notifications';
+
+import './NavBar.scss';
 
 const NavBar = ({ menuToggle }) => {
   const userData = useSelector(state => state.auth.userData)
@@ -35,12 +38,7 @@ const NavBar = ({ menuToggle }) => {
         <i className={`nav-bar--btn bi bi-list ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-38px pointer`} onClick={handleClick}></i>
         <div className='flex-row-center'>
           <LangMenu />
-          <div className='nav-bar--card flex-row-center radius-15px margin-6px-H white-bg shadow-2px pointer'>
-            <i className={`bi bi-bell ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-22px`} />
-            <div className={`nav-bar--card--tag flex-row-center ${mode === 'dark-mode' ? 'gray' : 'white'} inter size-12px radius-5px shadow-5px`}>
-              {translations.notification}
-            </div>
-          </div>
+          <Notifications />
           <Link to={'/store-panel/profile'}>
             <div className='nav-bar--card flex-row-center white-bg radius-15px margin-6px-H shadow-2px pointer'>
               <div className='nav-bar--card--img flex-row-center radius-circular'>
