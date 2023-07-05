@@ -10,6 +10,20 @@ import Popup from './components/popups/Popup';
 import { authMutations } from './redux/mutations';
 import router from './router/router';
 import { authActions } from './apis/actions';
+import Axios from 'axios';
+
+if (localStorage.getItem('Refresh Token')) {
+  Axios.post('http://www.actore.store/api/store-auth/refresh-token', {
+    refreshToken: localStorage.getItem('Refresh Token')
+  }).then(response => {
+    if (response.status === 200) {
+      localStorage.setItem('Access Token', response.data.token.access);
+      localStorage.setItem('Refresh Token', response.data.token.refresh);
+      localStorage.setItem('Refresh Token Time', new Date().getTime());
+    }
+  });
+}
+
 
 let isLoaded = false;
 
@@ -25,10 +39,10 @@ const App = () => {
 
   useEffect(() => {
     const refreshToken = localStorage.getItem('Refresh Token');
-    const lastRefreshTime = localStorage.getItem('Refresh Token Time');
 
     const checkTimeDifference = () => {
       const currentTime = new Date().getTime();
+      const lastRefreshTime = localStorage.getItem('Refresh Token Time');
       const timeDifference = currentTime - lastRefreshTime;
 
       if (timeDifference >= 14 * 60 * 1000) {
@@ -60,6 +74,7 @@ const App = () => {
   };
 
 
+
   const refreshTokenHandler = (token) => {
     if (token) {
       dispatch(authActions.refreshToken(token));
@@ -68,8 +83,7 @@ const App = () => {
 
 
   if (!isLoaded) {
-    checkAuth();
-    refreshTokenHandler(refreshToken);
+    checkAuth()
     isLoaded = true;
   }
 
