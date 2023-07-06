@@ -187,7 +187,7 @@ const Notifications = () => {
             <div className='notifications--icon flex-row-center pointer full-width' onClick={setNotificationsShown.bind(null, !notificationsShown)} >
                 {unReadNotifications > 0 && !notificationsShown &&
                     <div className={`notifications--unread inter shadow-5px ${mode === 'dark-mode' ? 'gray' : 'white'} font-bold red-bg size-10px flex-row-center`}>
-                        {unReadNotifications}
+                        {unReadNotifications >= 10 ? '9+' : unReadNotifications}
                     </div>
                 }
                 <i className={`bi bi-bell${notificationsShown ? '-fill' : ''} ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-22px`} />
