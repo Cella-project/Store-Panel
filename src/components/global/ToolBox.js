@@ -75,7 +75,7 @@ const Tools = () => {
   let calendarRef = useRef();
 
   return (
-    <div className={`fixed-item ${language === 'ar' ? 'fixed-item-arabic' : ''} tool-box flex-col-right-start`} ref={menuRef}>
+    <div className={`${language === 'ar' ? 'fixed-item-arabic' : 'fixed-item'} tool-box flex-col-right-start`} ref={menuRef}>
       {isCalendarShown &&
         <div className="calendar-container margin-12px-V" ref={calendarRef}>
           <Calendar />
