@@ -28,7 +28,7 @@
     &--sizes {
         position: relative;
         box-sizing: border-box;
-        margin: 5px;
+        padding: 5px;
 
         &--size {
             box-sizing: border-box;
@@ -42,8 +42,8 @@
             box-sizing: border-box;
             padding: 3px;
             position: absolute;
-            right: -3px;
-            bottom: 1px;
+            right: 3px;
+            bottom: 3px;
             transition: all 0.15s ease-in-out;
 
             &:hover {
@@ -58,7 +58,18 @@
             min-height: 150px;
 
             &--body {
-                height: 130px;
+                height: 140px;
+                box-sizing: border-box;
+                padding: 0 10px;
+                overflow-y: auto;
+                // hide the scrollbar
+                scrollbar-width: none;
+                // Firefox
+                -ms-overflow-style: none;
+                // Safari and Chrome
+                &::-webkit-scrollbar {
+                    display: none;
+                }
 
                 &>div {
                     height: 100%;
@@ -70,7 +81,7 @@
     &--colors {
         box-sizing: border-box;
         position: relative;
-        margin: 5px;
+        padding: 5px;
 
         &--color {
             box-sizing: border-box;
@@ -83,8 +94,8 @@
             box-sizing: border-box;
             padding: 3px;
             position: absolute;
-            right: -3px;
-            bottom: 1px;
+            right: 3px;
+            bottom: 3px;
             transition: all 0.15s ease-in-out;
 
             &:hover {
@@ -95,6 +106,7 @@
     }
 
     &--piece {
+        margin: 10px;
         box-sizing: border-box;
         position: relative;
         padding: 10px 15px;

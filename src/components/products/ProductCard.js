@@ -98,13 +98,13 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                         {hasDiscount && (
                             <div className='gray'>
                                 <s>
-                                    <span className='product-card--old-price size-14px font-bold'>{Math.trunc(formattedOldPrice)}</span>
+                                    <span className='product-card--old-price size-14px font-bold'>{Math.trunc(formattedOldPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                                     <span className='size-8px'>.{formattedOldPrice.slice(-2)}</span>
                                 </s>
                             </div>
                         )}
                         <div className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-2px-V`}>
-                            <span className='product-card--new-price size-34px font-bold'>{Math.trunc(formattedNewPrice)}</span>
+                            <span className='product-card--new-price size-34px font-bold'>{Math.trunc(formattedNewPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                             <span className='size-12px'>.{formattedNewPrice.slice(-2)}</span>
                         </div>
                     </div>

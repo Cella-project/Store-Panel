@@ -22,6 +22,7 @@ export const EditProduct = () => {
     const materials = useSelector(state => state.specialityControl.materials);
     const [currentPage, setCurrentPage] = useState(1);
     const subCategories = useSelector((state) => state.subCategory.subCategories);
+    const [model, setModel] = useState(null);
 
     useEffect(() => {
         document.title = 'Edit product • Store Panel';
@@ -129,6 +130,15 @@ export const EditProduct = () => {
         dispatch(productActions.deleteProductImage({ _id: productData._id, imgId: _id }, translate.areYouShowDeleteProductImage, translate.someThingWentWrongPleaseTry));
     };
 
+    const upload3DModelToServer = async (e) => {
+        const data = new FormData();
+        data.append('path', '3DModels');
+        data.append('file', e.target.files[0]);
+        dispatch(productActions.addProduct3DModel(data, (response) => {
+            const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
+            setModel(url);
+        }));
+    }
 
     // Handle Price Change
     const [discountType, setDiscountType] = useState(productData.discount.discountType);
@@ -173,6 +183,10 @@ export const EditProduct = () => {
 
         if (enteredMaterial.title !== productData.material && enteredMaterial.title !== '') {
             updatedProduct.material = enteredMaterial.title;
+        }
+
+        if (model) {
+            updatedProduct.model3D = model;
         }
 
         if (enteredSubCategory.title !== productData.subCategory.title && enteredSubCategory.title !== '') {
@@ -284,17 +298,19 @@ export const EditProduct = () => {
                                 {subCategories && subCategories.length > 0 && (
                                     <div className='full-width flex-col-left-start add-product--input-container'>
                                         <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='SubCategory'>{translate.subCategory} <span className='red'>*</span></label>
-                                        <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
+                                        <div className={`full-width light-gray radius-10px white-bg flex-row-top-start add-product--input `}>
                                             <i className='bi bi-pin-map size-20px gray' />
                                             <Select
                                                 className='add-product--select full-width gray margin-4px-H'
                                                 styles={{
                                                     option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
                                                     menu: (provided) => ({
-                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
+                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                        position: 'relative',
                                                     }),
                                                 }}
                                                 value={enteredSubCategory}
+                                                defaultInputValue={enteredSubCategory}
                                                 disabled={subCategories.length === 0}
                                                 placeholder="Select Sub Category"
                                                 options={subCategories.filter(subCategory => subCategory.status === "Active").map(subCategory => ({ label: subCategory.title, value: { label: subCategory.title, title: subCategory.title, id: subCategory._id } }))}
@@ -309,38 +325,39 @@ export const EditProduct = () => {
                                         </p>
                                     </div>
                                 )}
-                                {
-                                    materials && materials.length > 0 && (
-                                        <div className='full-width flex-col-left-start edit-product--input-container'>
-                                            <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='material'>
-                                                {translate.material} :<span className='red'>*</span>
-                                            </label>
-                                            <div className={`full-width light-gray radius-10px white-bg flex-row-left-start edit-product--input `}>
-                                                <i className='bi bi-pin-map size-20px gray' />
-                                                <Select
-                                                    className='edit-product--select full-width gray margin-4px-H'
-                                                    styles={{
-                                                        option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
-                                                        menu: (provided) => ({
-                                                            ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
-                                                        }),
-                                                    }}
-                                                    value={enteredMaterial}
-                                                    disabled={materials.length === 0}
-                                                    placeholder={translate.selectMaterial}
-                                                    options={materials.map(m => ({ label: m.title, value: { label: m.title, title: m.title, id: m._id } }))}
-                                                    onChange={(subCategory) =>
-                                                        materialChangedHandler({ target: { id: "subCategory", label: subCategory.title, value: subCategory.value } })
-                                                    }
-                                                    onBlur={materialBlurHandler}
-                                                />
-                                            </div>
-                                            {materialIsTouched && (<div className="error-message">{materialError}</div>)}
-                                            <p style={{ marginLeft: '0 5px 0 5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
-                                                <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
-                                            </p>
+                                {materials && materials.length > 0 && (
+                                    <div className='full-width flex-col-left-start edit-product--input-container'>
+                                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='material'>
+                                            {translate.material} :<span className='red'>*</span>
+                                        </label>
+                                        <div className={`full-width light-gray radius-10px white-bg flex-row-top-start edit-product--input `}>
+                                            <i className='bi bi-pin-map size-20px gray' />
+                                            <Select
+                                                className='edit-product--select full-width gray margin-4px-H'
+                                                styles={{
+                                                    option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
+                                                    menu: (provided) => ({
+                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                        position: 'relative',
+                                                    }),
+                                                }}
+                                                value={enteredMaterial}
+                                                defaultInputValue={enteredMaterial}
+                                                disabled={materials.length === 0}
+                                                placeholder={translate.selectMaterial}
+                                                options={materials.map(m => ({ label: m.title, value: { label: m.title, title: m.title, id: m._id } }))}
+                                                onChange={(subCategory) =>
+                                                    materialChangedHandler({ target: { id: "subCategory", label: subCategory.title, value: subCategory.value } })
+                                                }
+                                                onBlur={materialBlurHandler}
+                                            />
                                         </div>
-                                    )
+                                        {materialIsTouched && (<div className="error-message">{materialError}</div>)}
+                                        <p style={{ marginLeft: '0 5px 0 5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                            <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
+                                        </p>
+                                    </div>
+                                )
                                 }
                                 <div className="edit-product--actions flex-row-between full-width">
                                     <button
@@ -390,7 +407,38 @@ export const EditProduct = () => {
                                     <input type="file" id="photos" onChange={handlePhotoAdd} hidden />
                                 </div>
                             </div>
-
+                            <div className='full-width flex-col-left-start add-product--input-container'>
+                                <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.product3DModel}: </label>
+                            </div>
+                            {productData.model3D === 'No Model' ?
+                                <>
+                                    <div className="flex-row-center full-width">
+                                        <label htmlFor="3D" className={`add-product--actions--button radius-10px mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`}>
+                                            {translate.add3DModel}
+                                        </label>
+                                        <input type="file" id="3D" onChange={upload3DModelToServer} hidden />
+                                    </div>
+                                    {model &&
+                                        <div className="flex-row-center full-width">
+                                            <p className="no-space green size-16px">{translate.modelAdded}</p>
+                                        </div>
+                                    }
+                                </>
+                                :
+                                <>
+                                    <div className="flex-row-center full-width">
+                                        <label htmlFor="3D" className={`add-product--actions--button radius-10px mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`}>
+                                            {translate.edit3DModel}
+                                        </label>
+                                        <input type="file" id="3D" onChange={upload3DModelToServer} hidden />
+                                    </div>
+                                    {model &&
+                                        <div className="flex-row-center full-width">
+                                            <p className="no-space green size-16px">{translate.modelEdited}</p>
+                                        </div>
+                                    }
+                                </>
+                            }
                             <div className="edit-product--actions flex-row-between full-width">
                                 <button
                                     className="edit-product--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
@@ -475,9 +523,6 @@ export const EditProduct = () => {
 
                 </form>
             }
-
-
-
         </div >
     );
 }

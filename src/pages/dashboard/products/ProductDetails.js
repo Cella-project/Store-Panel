@@ -216,7 +216,7 @@ const ProductDetails = () => {
               <div className="product-details--piece flex-row-center flex-wrap">
                 {product.pieces.length > 0 ? (
                   product.pieces.map((piece, index) => (
-                    <div key={index} className="product-details--piece flex-row-between radius-10px gray shadow-2px flex-wrap margin-6px-H">
+                    <div key={index} className="product-details--piece flex-row-between radius-10px gray shadow-2px flex-wrap">
                       <div className="flex-col-center">
                         <div className="full-width size-18px">
                           {translate.size}: {piece.size}

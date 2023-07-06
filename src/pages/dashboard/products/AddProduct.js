@@ -25,9 +25,11 @@ export const AddProduct = () => {
     const materials = useSelector(state => state.specialityControl.materials);
     const [currentPage, setCurrentPage] = useState(1);
     const [photos, setPhotos] = useState([]);
+    const [model, setModel] = useState();
 
     const {
         value: enteredTitle,
+        isValid: titleIsValid,
         error: titleError,
         isTouched: titleIsTouched,
         valueChangeHandler: titleChangedHandler,
@@ -46,6 +48,7 @@ export const AddProduct = () => {
 
     const {
         value: enteredDescription,
+        isValid: descriptionIsValid,
         error: descriptionError,
         isTouched: descriptionIsTouched,
         valueChangeHandler: descriptionChangedHandler,
@@ -61,6 +64,7 @@ export const AddProduct = () => {
 
     const {
         value: enteredMainCategory,
+        isValid: mainCategoryIsValid,
         error: mainCategoryError,
         isTouched: mainCategoryIsTouched,
         valueChangeHandler: mainCategoryChangedHandler,
@@ -76,6 +80,7 @@ export const AddProduct = () => {
 
     const {
         value: enteredSubCategory,
+        isValid: subCategoryIsValid,
         error: subCategoryError,
         isTouched: subCategoryIsTouched,
         valueChangeHandler: subCategoryChangedHandler,
@@ -89,9 +94,9 @@ export const AddProduct = () => {
         return { isValid, error };
     });
 
-
     const {
         value: enteredMaterial,
+        isValid: materialIsValid,
         error: materialError,
         isTouched: materialIsTouched,
         valueChangeHandler: materialChangedHandler,
@@ -107,12 +112,13 @@ export const AddProduct = () => {
 
     const {
         value: enteredPrice,
+        isValid: priceIsValid,
         error: priceError,
         isTouched: priceIsTouched,
         valueChangeHandler: priceChangedHandler,
         inputBlurHandler: priceBlurHandler,
     } = useInput((value) => {
-        const isValid = value !== '';
+        const isValid = value !== '' && value > 0;
         let error = '';
         if (value === '') {
             error = translate.pleaseEnterPrice;
@@ -121,7 +127,7 @@ export const AddProduct = () => {
             error = translate.pleaseEnterPriceMoreThan0;
         }
         return { isValid, error };
-    }, 0);
+    });
 
     const handlePhotoAdd = (event) => {
         const newPhotos = Array.from(event.target.files);
@@ -153,6 +159,16 @@ export const AddProduct = () => {
             }, translate.productPictureAddedSuccessfully, translate.someThingWentWrongPleaseTry));
         }
         setAlbum(album.photos);
+    }
+
+    const upload3DModelToServer = async (e) => {
+        const data = new FormData();
+        data.append('path', '3DModels');
+        data.append('file', e.target.files[0]);
+        dispatch(productActions.addProduct3DModel(data, (response) => {
+            const url = 'http://www.actore.store/api/file-manager/file/' + response.data.data;
+            setModel(url);
+        }));
     }
 
     // Handle Color Select
@@ -218,7 +234,7 @@ export const AddProduct = () => {
 
     // Handle Price Change
     const [discountType, setDiscountType] = useState('None');
-    const [discountValue, setDiscountValue] = useState(0);
+    const [discountValue, setDiscountValue] = useState();
 
     const handleDiscountTypeChange = (event) => {
         setDiscountType(event.target.value);
@@ -292,6 +308,7 @@ export const AddProduct = () => {
                 title: item.size,
             })),
             material: enteredMaterial.title,
+            model3D: model,
         };
         if (selectedTags.length > 0) {
             product.tags = selectedTags.map(item => ({
@@ -409,14 +426,15 @@ export const AddProduct = () => {
                             {mainCategories && mainCategories.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='MainCategory'>{translate.mainCategory} <span className='red'>*</span></label>
-                                    <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input`}>
+                                    <div className={`full-width light-gray radius-10px white-bg flex-row-top-start add-product--input`}>
                                         <i className='bi bi-pin-map size-20px gray' />
                                         <Select
                                             className='add-product--select full-width gray margin-4px-H'
                                             styles={{
                                                 option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
                                                 menu: (provided) => ({
-                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
+                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                    position: 'relative'
                                                 }),
                                             }}
                                             value={enteredMainCategory}
@@ -437,14 +455,15 @@ export const AddProduct = () => {
                             {subCategories && subCategories.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='SubCategory'>{translate.subCategory} <span className='red'>*</span></label>
-                                    <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
+                                    <div className={`full-width light-gray radius-10px white-bg flex-row-top-start add-product--input `}>
                                         <i className='bi bi-pin-map size-20px gray' />
                                         <Select
                                             className='add-product--select full-width gray margin-4px-H'
                                             styles={{
                                                 option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
                                                 menu: (provided) => ({
-                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
+                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                    position: 'relative'
                                                 }),
                                             }}
                                             value={enteredSubCategory}
@@ -462,7 +481,6 @@ export const AddProduct = () => {
                                     </p>
                                 </div>
                             )}
-
                             <div className="add-product--actions flex-row-between full-width">
                                 <button
                                     className="add-product--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
@@ -474,6 +492,7 @@ export const AddProduct = () => {
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
+                                    disabled={!titleIsValid || !descriptionIsValid || !mainCategoryIsValid || !subCategoryIsValid}
                                     onClick={() => {
                                         setCurrentPage(2);
                                     }}
@@ -489,13 +508,13 @@ export const AddProduct = () => {
                                 <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productAlbum}</label>
                             </div>
                             <div className='full-width flex-col-left-start add-product--input-container'>
-                                <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.productImages} : <span className='red'>*</span></label>
+                                <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.productImages}: <span className='red'>*</span></label>
                             </div>
                             <div className="add-product--photo flex-col-center">
                                 <div className="flex-row-center flex-wrap">
                                     {photos.map((photo, index) => (
                                         <div className="add-product--photo--item padding-10px-H flex-col-center " key={index}>
-                                            <div className={`inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-6px-V`}> {translate.photoNumber} : {index + 1}</div>
+                                            <div className={`inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} margin-6px-V`}> {translate.photoNumber}: {index + 1}</div>
                                             <img src={URL.createObjectURL(photo)} alt={` ${index}`} />
                                             <div className="flex-row-between full-width margin-6px-V ">
                                                 <button
@@ -504,7 +523,7 @@ export const AddProduct = () => {
                                                     onClick={() => handlePhotoIndexChange(index, index - 1)}
                                                     disabled={index === 0}
                                                 >
-                                                    <i className="bi bi-caret-left-fill flex-row-right-start"></i>
+                                                    <i className={`bi bi-caret-${language === 'ar' ? 'right' : 'left'}-fill flex-row-right-start`}></i>
                                                 </button>
                                                 <button className='add-product--gallary' type="button" onClick={() => handlePhotoRemove(index)}>
                                                     <i className="bi bi-trash pointer size-20px gray"></i>
@@ -515,7 +534,7 @@ export const AddProduct = () => {
                                                     onClick={() => handlePhotoIndexChange(index, index + 1)}
                                                     disabled={index === photos.length - 1}
                                                 >
-                                                    <i className="bi bi-caret-right-fill flex-row-right-start"></i>
+                                                    <i className={`bi bi-caret-${language === 'ar' ? 'left' : 'right'}-fill flex-row-right-start`}></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -528,7 +547,20 @@ export const AddProduct = () => {
                                     <input type="file" id="photos" onChange={handlePhotoAdd} multiple hidden />
                                 </div>
                             </div>
-
+                            <div className='full-width flex-col-left-start add-product--input-container'>
+                                <label className='pointer full-width text-shadow gray font-bold margin-6px-V'>{translate.product3DModel}: </label>
+                            </div>
+                            <div className="flex-row-center full-width">
+                                <label htmlFor="3D" className={`add-product--actions--button radius-10px mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} pointer`}>
+                                    {translate.add3DModel}
+                                </label>
+                                <input type="file" id="3D" onChange={upload3DModelToServer} hidden />
+                            </div>
+                            {model &&
+                                <div className="flex-row-center full-width">
+                                    <p className="no-space green size-16px">{translate.modelAdded}</p>
+                                </div>
+                            }
                             <div className="add-product--actions flex-row-between full-width">
                                 <button
                                     className="add-product--actions--button pointer radius-10px shadow-4px white text-shadow size-18px gray-bg"
@@ -555,45 +587,44 @@ export const AddProduct = () => {
                             <div className='full-width flex-col-left-start add-product--header'>
                                 <label className='pointer full-width text-shadow gray font-bold size-26px'>{translate.productVariants}</label>
                             </div>
-                            {
-                                materials && materials.length > 0 && (
-                                    <div className='full-width flex-col-left-start add-product--input-container'>
-                                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='material'>
-                                            {translate.material} :<span className='red'>*</span>
-                                        </label>
-                                        <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
-                                            <i className='bi bi-pin-map size-20px gray' />
-                                            <Select
-                                                className='add-product--select full-width gray margin-4px-H'
-                                                styles={{
-                                                    option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
-                                                    menu: (provided) => ({
-                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
-                                                    }),
-                                                }}
-                                                value={enteredMaterial}
-                                                disabled={materials.length === 0}
-                                                placeholder={translate.selectMaterial}
-                                                options={materials.map(m => ({ label: m.title, value: { label: m.title, title: m.title, id: m._id } }))}
-                                                onChange={(subCategory) =>
-                                                    materialChangedHandler({ target: { id: "material", label: subCategory.title, value: subCategory.value } })
-                                                }
-                                                onBlur={materialBlurHandler}
-                                            />
-                                        </div>
-                                        <p style={{ marginLeft: '0 5px 0 5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
-                                            <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
-                                        </p>
+                            {materials && materials.length > 0 && (
+                                <div className='full-width flex-col-left-start add-product--input-container'>
+                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='material'>
+                                        {translate.material} :<span className='red'>*</span>
+                                    </label>
+                                    <div className={`full-width light-gray radius-10px white-bg flex-row-top-start add-product--input `}>
+                                        <i className='bi bi-pin-map size-20px gray' />
+                                        <Select
+                                            className='add-product--select full-width gray margin-4px-H'
+                                            styles={{
+                                                option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
+                                                menu: (provided) => ({
+                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                    position: 'relative',
+                                                }),
+                                            }}
+                                            value={enteredMaterial}
+                                            disabled={materials.length === 0}
+                                            placeholder={translate.selectMaterial}
+                                            options={materials.map(m => ({ label: m.title, value: { label: m.title, title: m.title, id: m._id } }))}
+                                            onChange={(subCategory) =>
+                                                materialChangedHandler({ target: { id: "material", label: subCategory.title, value: subCategory.value } })
+                                            }
+                                            onBlur={materialBlurHandler}
+                                        />
                                     </div>
-                                )
+                                    <p style={{ marginLeft: '0 5px 0 5px', visibility: materialError && materialIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
+                                        <i className="bi bi-exclamation-triangle-fill red"></i> {materialError}
+                                    </p>
+                                </div>
+                            )
                             }
-
                             {colors && colors.length > 0 && (
                                 <div className='full-width flex-col-left-start add-product--input-container'>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='color'>
                                         {translate.colors} :<span className='red'>*</span>
                                     </label>
-                                    <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
+                                    <div className={`full-width light-gray radius-10px white-bg flex-row-top-start add-product--input `}>
                                         <i className='bi bi-pin-map size-20px gray' />
                                         <Select
                                             multiple
@@ -601,7 +632,8 @@ export const AddProduct = () => {
                                             styles={{
                                                 option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
                                                 menu: (provided) => ({
-                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
+                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                    position: 'relative',
                                                 }),
                                             }}
                                             disabled={colors.length === 0}
@@ -625,84 +657,84 @@ export const AddProduct = () => {
                                     </div>
                                 </div>
                             )}
-                            {
-                                sizes && sizes.length && (
-                                    <div className='full-width flex-col-left-start add-product--input-container'>
-                                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='size'>
-                                            {translate.sizes} :<span className='red'>*</span>
-                                        </label>
-                                        <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
-                                            <i className='bi bi-pin-map size-20px gray' />
-                                            <Select
-                                                multiple
-                                                className='add-product--select full-width gray margin-4px-H'
-                                                styles={{
-                                                    option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
-                                                    menu: (provided) => ({
-                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
-                                                    }),
-                                                }}
-                                                disabled={sizes.length === 0}
-                                                placeholder={translate.selectSizes}
-                                                options={sizes.map((size) => ({
-                                                    label: size.title,
-                                                    value: { label: size.title, title: size.title, id: size._id },
-                                                }))}
-                                                onChange={(size) =>
-                                                    handleSizeSelect({ target: { id: size.value.id, label: size.value.title, value: size.value.title } })
-                                                }
-                                            />
+                            {sizes && sizes.length && (
+                                <div className='full-width flex-col-left-start add-product--input-container'>
+                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='size'>
+                                        {translate.sizes} :<span className='red'>*</span>
+                                    </label>
+                                    <div className={`full-width light-gray radius-10px white-bg flex-row-top-start add-product--input `}>
+                                        <i className='bi bi-pin-map size-20px gray' />
+                                        <Select
+                                            multiple
+                                            className='add-product--select full-width gray margin-4px-H'
+                                            styles={{
+                                                option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
+                                                menu: (provided) => ({
+                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                    position: 'relative',
+                                                }),
+                                            }}
+                                            disabled={sizes.length === 0}
+                                            placeholder={translate.selectSizes}
+                                            options={sizes.map((size) => ({
+                                                label: size.title,
+                                                value: { label: size.title, title: size.title, id: size._id },
+                                            }))}
+                                            onChange={(size) =>
+                                                handleSizeSelect({ target: { id: size.value.id, label: size.value.title, value: size.value.title } })
+                                            }
+                                        />
 
-                                        </div>
-                                        <div className="flex-row-between flex-wrap ">
-                                            {selectedSizes.map((size, index) => (
-                                                <div key={index} className="add-product--selected-item shadow-2px radius-10px flex-row-between size-14px white-bg gray">
-                                                    <span className='margin-4px-H '>{size.size}</span>
-                                                    <button className='add-product--input--number--button bi bi-trash pointer size-20px pointer gray' type="button" onClick={() => handleSizeDelete(index)}></button>
-                                                </div>
-                                            ))}
-                                        </div>
                                     </div>
-                                )
+                                    <div className="flex-row-between flex-wrap ">
+                                        {selectedSizes.map((size, index) => (
+                                            <div key={index} className="add-product--selected-item shadow-2px radius-10px flex-row-between size-14px white-bg gray">
+                                                <span className='margin-4px-H '>{size.size}</span>
+                                                <button className='add-product--input--number--button bi bi-trash pointer size-20px pointer gray' type="button" onClick={() => handleSizeDelete(index)}></button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )
                             }
-                            {
-                                tags && tags.length > 0 && (
-                                    <div className='full-width flex-col-left-start add-product--input-container'>
-                                        <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='tags'>
-                                            {translate.tags} :<span className='red'>*</span>
-                                        </label>
-                                        <div className={`full-width light-gray radius-10px white-bg flex-row-left-start add-product--input `}>
-                                            <i className='bi bi-pin-map size-20px gray' />
-                                            <Select
-                                                multiple
-                                                className='add-product--select full-width gray margin-4px-H'
-                                                styles={{
-                                                    option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
-                                                    menu: (provided) => ({
-                                                        ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`
-                                                    }),
-                                                }}
-                                                disabled={tags.length === 0}
-                                                placeholder={translate.selectTags}
-                                                options={tags.map((tag) => ({
-                                                    label: tag.title,
-                                                    value: { label: tag.title, title: tag.title, id: tag._id },
-                                                }))}
-                                                onChange={(tag) =>
-                                                    handleTagSelect({ target: { id: tag.value.id, label: tag.value.title, value: tag.value.title } })
-                                                }
-                                            />
-                                        </div>
-                                        <div className="flex-row-between flex-wrap ">
-                                            {selectedTags.map((tag, index) => (
-                                                <div key={index} className="add-product--selected-item shadow-2px radius-15px flex-row-between size-14px lavender-bg text-shadow">
-                                                    <span className={`margin-4px-H ${mode === 'dark-mode' ? 'white' : 'gray'}`}>{tag.tag}</span>
-                                                    <button className={`add-product--input--number--button bi bi-trash pointer ${mode === 'dark-mode' ? 'white' : 'gray'} size-20px pointer `} type="button" onClick={() => handleTagDelete(tag._id)}></button>
-                                                </div>
-                                            ))}
-                                        </div>
+                            {tags && tags.length > 0 && (
+                                <div className='full-width flex-col-left-start add-product--input-container'>
+                                    <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor='tags'>
+                                        {translate.tags} :<span className='red'>*</span>
+                                    </label>
+                                    <div className={`full-width light-gray radius-10px white-bg flex-row-top-start add-product--input `}>
+                                        <i className='bi bi-pin-map size-20px gray' />
+                                        <Select
+                                            multiple
+                                            className='add-product--select full-width gray margin-4px-H'
+                                            styles={{
+                                                option: (provided, state) => ({ ...provided, cursor: 'pointer', ":hover": { backgroundColor: `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` }, backgroundColor: (state.isFocused || state.isSelected) ? `${mode === 'dark-mode' ? '#163a4a' : '#7FBCD2'}` : 'inherit' }),
+                                                menu: (provided) => ({
+                                                    ...provided, backgroundColor: `${mode === 'dark-mode' ? '#242526' : '#ffffff'}`,
+                                                    position: 'relative',
+                                                }),
+                                            }}
+                                            disabled={tags.length === 0}
+                                            placeholder={translate.selectTags}
+                                            options={tags.map((tag) => ({
+                                                label: tag.title,
+                                                value: { label: tag.title, title: tag.title, id: tag._id },
+                                            }))}
+                                            onChange={(tag) =>
+                                                handleTagSelect({ target: { id: tag.value.id, label: tag.value.title, value: tag.value.title } })
+                                            }
+                                        />
                                     </div>
-                                )
+                                    <div className="flex-row-between flex-wrap ">
+                                        {selectedTags.map((tag, index) => (
+                                            <div key={index} className="add-product--selected-item shadow-2px radius-15px flex-row-between size-14px lavender-bg text-shadow">
+                                                <span className={`margin-4px-H ${mode === 'dark-mode' ? 'white' : 'gray'}`}>{tag.tag}</span>
+                                                <button className={`add-product--input--number--button bi bi-trash pointer ${mode === 'dark-mode' ? 'white' : 'gray'} size-20px pointer `} type="button" onClick={() => handleTagDelete(tag._id)}></button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )
                             }
 
                             <div className="add-product--actions flex-row-between full-width">
@@ -716,6 +748,7 @@ export const AddProduct = () => {
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
+                                    disabled={!materialIsValid || selectedSizes.length === 0 || selectedColors.length === 0 || selectedTags.length === 0}
                                     onClick={() => {
                                         setCurrentPage(4);
                                     }}
@@ -727,7 +760,6 @@ export const AddProduct = () => {
                         </div>
 
                     }
-
                     {currentPage === 4 &&
                         <div className='full-width'>
                             <div className='full-width flex-col-left-start add-product--header'>
@@ -736,7 +768,7 @@ export const AddProduct = () => {
                             <div className="add-product--price full-width flex-col-left-start add-product--input-container">
                                 <div>
                                     <label className='pointer full-width text-shadow gray font-bold margin-6px-V' htmlFor="price">{translate.price}:<span className='red'>*</span></label>
-                                    <input className="pointer margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="price" value={enteredPrice} onChange={priceChangedHandler} onBlur={priceBlurHandler} />
+                                    <input className="margin-12px-H gray add-product--input radius-10px" min='0' type="number" id="price" value={enteredPrice} onChange={priceChangedHandler} onBlur={priceBlurHandler} />
                                 </div>
                                 <p style={{ marginLeft: '0 5px 0 5px', visibility: priceError && priceIsTouched ? 'visible' : 'hidden' }} className="no-padding margin-6px-V size-12px inter gray">
                                     <i className="bi bi-exclamation-triangle-fill red"></i> {priceError}
@@ -782,12 +814,14 @@ export const AddProduct = () => {
                                 </button>
                                 <button
                                     className={`add-product--actions--button pointer radius-10px shadow-4px ${mode === 'dark-mode' ? 'gray' : 'white'} text-shadow size-18px font-bold mint-green-bg`}
+                                    disabled={!priceIsValid}
                                     type="submit"
                                 >
                                     {translate.confirm}
                                 </button>
                             </div>
-                        </div>}
+                        </div>
+                    }
                 </div>
 
             </form>

@@ -31,7 +31,7 @@ const OrderInfo = ({ order }) => {
             </div>
             <div className="flex-row-center">
               {translate.total} :
-              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-24px margin-2px-H`}> {order.total} {translate.EGP}</div>
+              <div className={`flex-row-center ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-24px margin-2px-H`}> {order.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {translate.EGP}</div>
             </div>
           </div>
         </div>

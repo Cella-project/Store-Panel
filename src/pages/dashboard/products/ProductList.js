@@ -55,7 +55,7 @@ const ProductList = () => {
     if (searchQuery !== '') {
       if (searchType === 'all') {
         filteredProducts = filteredProducts.filter(product =>
-          (product.title + product.description + product.store.storeName + product.category.title + product.material)?.toLowerCase().includes(searchQuery?.toLowerCase())
+          (product.title + product.description + product.store.storeName + product.subCategory.title + product.material)?.toLowerCase().includes(searchQuery?.toLowerCase())
         );
       } else if (searchType === 'name') {
         filteredProducts = filteredProducts.filter(product =>
@@ -75,7 +75,7 @@ const ProductList = () => {
           searchQuery === '' ? product.status === searchStatus :
             (product.status === searchStatus &&
               (searchType === 'all' ?
-                (product.title + product.description + product.store.storeName + product.category.title + product.material)?.toLowerCase().includes(searchQuery?.toLowerCase()) :
+                (product.title + product.description + product.store.storeName + product.subCategory.title + product.material)?.toLowerCase().includes(searchQuery?.toLowerCase()) :
                 searchType === 'name' ? (product.title + product.description)?.toLowerCase().includes(searchQuery?.toLowerCase()) :
                   searchType.includes('.') ?
                     product[searchType.split('.')[0]][searchType.split('.')[1]]?.toLowerCase().includes(searchQuery?.toLowerCase()) :

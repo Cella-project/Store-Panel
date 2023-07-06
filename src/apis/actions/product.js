@@ -14,7 +14,7 @@ const productActions = {
             }
         }
     },
-    addProduct(payload, afterSuccess,msg1,msg2) {
+    addProduct(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -51,7 +51,25 @@ const productActions = {
             }
         }
     },
-    updateProduct(payload,afterSuccess,msg1,msg2) {
+    addProduct3DModel(payload, afterSuccess) {
+        return async (dispatch) => {
+            try {
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.popAllNotes());
+                dispatch(popupMutation.popLoading());
+                const response = await Axios.post('/api/file-manager/file', payload);
+                dispatch(popupMutation.clearPopPanel());
+                dispatch(stickyMutations.pushNote({
+                    type: 'success',
+                    msg: 'product 3D model added successfully.'
+                }));
+                afterSuccess(response);
+            } catch (error) {
+                errorHandler(dispatch, error.response, 'Something went wrong, please try again.');
+            }
+        }
+    },
+    updateProduct(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -134,7 +152,7 @@ const productActions = {
             }
         }
     },
-    addProductColor(payload,msg1,msg2) {
+    addProductColor(payload, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -152,7 +170,7 @@ const productActions = {
             }
         }
     },
-    deleteProductColor(payload,msg1,msg2,msg3) {
+    deleteProductColor(payload, msg1, msg2, msg3) {
         return async (dispatch) => {
             dispatch(popupMutation.clearPopPanel());
             dispatch(stickyMutations.popAllNotes());
@@ -176,7 +194,7 @@ const productActions = {
             }));
         }
     },
-    addProductSize(payload,msg1,msg2) {
+    addProductSize(payload, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -218,7 +236,7 @@ const productActions = {
             }
         }
     },
-    addProductTag(payload,msg1,msg2) {
+    addProductTag(payload, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -236,7 +254,7 @@ const productActions = {
             }
         }
     },
-    deleteProductTag(payload,msg1,msg2,msg3) {
+    deleteProductTag(payload, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -279,7 +297,7 @@ const productActions = {
             }
         }
     },
-    decreaseQuantity(payload, afterSuccess,msg1, msg2) {
+    decreaseQuantity(payload, afterSuccess, msg1, msg2) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -334,7 +352,7 @@ const productActions = {
                             msg: msg2
                         }));
                     } catch (error) {
-                        
+
                         errorHandler(dispatch, error.response, msg3);
                     }
                 }

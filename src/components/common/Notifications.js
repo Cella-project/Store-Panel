@@ -27,6 +27,19 @@ const Notifications = () => {
     let menuRef = useRef();
 
     useEffect(() => {
+        // Handle notification clicks
+        navigator.serviceWorker.onmessage = () => {
+            dispatch(notificationMutations.setNotifications(null));
+            dispatch(notificationActions.getAllNotifications(0));
+            setOffset(0);
+        };
+
+        return () => {
+            navigator.serviceWorker.onmessage = null; // Remove the event listener on component unmount
+        };
+    }, [dispatch]);
+
+    useEffect(() => {
         let mouseHandler = (e) => {
             if (!menuRef.current.contains(e.target)) {
                 setNotificationsShown(false);

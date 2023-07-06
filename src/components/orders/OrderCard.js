@@ -28,7 +28,7 @@ const OrderCard = ({ order, type = "" }) => {
                         </span>
                     </div>
                     <div className='flex-row-left-start margin-2px-V'>
-                        <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.total}: </span>{order.total} {translate.EGP}
+                        <span className='lists-card--info--disc--hide margin-2px-H font-bold'>{translate.total}: </span>{order.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {translate.EGP}
                     </div>
                 </div>
             </Link>

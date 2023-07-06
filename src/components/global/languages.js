@@ -1,4 +1,3 @@
-
 const languages = {
   en: {
     home: 'Home',
@@ -143,6 +142,11 @@ const languages = {
     productImages: 'Product Images',
     photoNumber: 'Photo Number',
     addPhoto: 'Add Photo',
+    product3DModel: 'Product 3D Model',
+    add3DModel: 'Add 3D Model',
+    edit3DModel: 'Edit 3D Model',
+    modelAdded: 'Model added',
+    modelEdited: 'Model edited',
     noDiscount: 'No Discount',
     discountType: 'Discount Type',
     discountValue: 'Discount Value',
@@ -503,6 +507,11 @@ const languages = {
     productImages: 'صور المنتج',
     photoNumber: 'رقم الصورة',
     addPhoto: 'إضافة صورة',
+    product3DModel: 'نموذج ثلاثي الأبعاد',
+    add3DModel: 'إضافة نموذج ثلاثي الأبعاد',
+    edit3DModel: 'تعديل نموذج ثلاثي الأبعاد',
+    modelAdded: 'تمت إضافة النموذج',
+    modelEdited: 'تم تعديل النموذج',
     noDiscount: 'بدون خصم',
     discountType: 'نوع الخصم',
     discountValue: 'قيمة الخصم',

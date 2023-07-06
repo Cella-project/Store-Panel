@@ -74,6 +74,11 @@
         box-sizing: border-box;
         padding: 5px;
 
+        &>i {
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
         &--number {
             width: 40px;
             border: transparent;

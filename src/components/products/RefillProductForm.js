@@ -44,7 +44,7 @@ export const RefillProductForm = ({ popupToggle }) => {
             const existingPiece = pieces.find(
                 (piece) =>
                     piece.color?.title === selectedColor.label &&
-                    piece.size?.title === selectedSize.title
+                    piece.size?.title === selectedSize
             );
 
             if (existingPiece) {

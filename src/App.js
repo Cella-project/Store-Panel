@@ -9,7 +9,7 @@ import Popup from './components/popups/Popup';
 
 import { authMutations } from './redux/mutations';
 import router from './router/router';
-import { authActions, notificationActions } from './apis/actions';
+import { authActions } from './apis/actions';
 
 let isLoaded = false;
 
@@ -50,7 +50,6 @@ const App = () => {
         dispatch(authMutations.setAuthData({
           userData: user,
         }));
-        dispatch(notificationActions.getAllNotifications(0));
       });
     } else {
       localStorage.removeItem('Access Token');

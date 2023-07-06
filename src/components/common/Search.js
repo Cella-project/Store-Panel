@@ -74,7 +74,7 @@ const Search = ({ width, onSearch, page }) => {
                   <input type="radio" name="search-type" className="margin-12px-H pointer" id="name"
                     value='name'
                     onChange={() => {
-                      searchType.current = 
+                      searchType.current =
                         (page === 'Products') ? 'name' :
                           (page === 'OrdersHistory' || page === 'Orders') ? 'customer.name' : 'all';
                       handleSearch();
@@ -83,7 +83,7 @@ const Search = ({ width, onSearch, page }) => {
                   />
                   <label className="pointer" htmlFor="name">
                     {page === 'OrdersHistory' && translate.customerName}
-                    {page === 'Products' && translate.name}
+                    {page === 'Products' && translate.title}
                     {page === 'Orders' && translate.customerName}
                   </label>
                 </div>
@@ -98,7 +98,7 @@ const Search = ({ width, onSearch, page }) => {
                         }
                         }
                       />
-                      <label className="pointer" htmlFor="category">{translate.category}</label>
+                      <label className="pointer" htmlFor="category">{translate.subCategory}</label>
                     </div>
                     <div className="flex-row-left-start">
                       <input type="radio" name="search-type" className="margin-12px-H pointer" id="material"
@@ -132,7 +132,7 @@ const Search = ({ width, onSearch, page }) => {
 
           {(page === 'Products' || page === 'OrdersHistory' || page === 'Orders') &&
             <div className="flex-col-left-start size-16px margin-8px-V width-50-100">
-              {( page === 'Products' ) &&
+              {(page === 'Products') &&
                 <div className="flex-row-top-start">
                   {translate.status}:
                   <div className="flex-row-left-start2col search-bar--filter--options">
