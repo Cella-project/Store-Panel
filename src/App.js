@@ -19,7 +19,6 @@ const App = () => {
   const language = useSelector(state => state.language.language);
 
   const mode = useSelector(state => state.theme.mode);
-  const user = useSelector(state => state.auth.userData);
   const accessToken = localStorage.getItem('Access Token');
   const refreshToken = localStorage.getItem('Refresh Token');
 
@@ -47,9 +46,6 @@ const App = () => {
       dispatch(authActions.refreshToken(refreshToken)).then(() => {
         dispatch(authMutations.setUserData(null));
         dispatch(authActions.getProfile());
-        dispatch(authMutations.setAuthData({
-          userData: user,
-        }));
       });
     } else {
       localStorage.removeItem('Access Token');
