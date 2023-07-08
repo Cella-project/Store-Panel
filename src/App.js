@@ -55,8 +55,6 @@ const App = () => {
     }
   };
 
-
-
   const refreshTokenHandler = (token) => {
     if (token) {
       dispatch(authActions.refreshToken(token), () => { });
@@ -87,6 +85,7 @@ const App = () => {
     <div className={`u-disable-touch ${mode}`}>
       {notes.length > 0 && <StickyBoard />}
       {isPopupShown && <Popup />}
+      
       <Outlet />
     </div>
   );

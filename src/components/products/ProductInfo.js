@@ -4,9 +4,11 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import { Link } from "react-router-dom";
 import productDefault from "../../assets/images/productDefault.png";
 import { useSelector } from "react-redux";
+import languages from "../global/languages";
+import { CheckCircle, ClearRounded } from "@material-ui/icons";
 
 import "./ProductInfo.scss";
-import languages from "../global/languages";
+
 export const ProductInfo = ({ product }) => {
   // handle the current photo index
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -51,11 +53,11 @@ export const ProductInfo = ({ product }) => {
       <div className="product-info--slide-show flex-col-center">
         <div className="product-info--img flex-row-between">
           <button
-            className={`product-info--gallary-${language==='ar'?'right':'left'} pointer gray `}
+            className={`product-info--gallary-${language === 'ar' ? 'right' : 'left'} pointer gray `}
             onClick={handlePreviousPhoto}
             disabled={product.album.length === 1 || product.album.length === 0}
           >
-            <i className={`bi bi-caret-${language==='ar'?'right':'left'}-fill flex-row-right-start`}></i>
+            <i className={`bi bi-caret-${language === 'ar' ? 'right' : 'left'}-fill flex-row-right-start`}></i>
           </button>
           <img
             src={album[currentPhotoIndex].URL}
@@ -63,11 +65,11 @@ export const ProductInfo = ({ product }) => {
             className="product-photo"
           />
           <button
-            className={`product-info--gallary-${language==='ar'?'left':'right'} pointer gray`}
+            className={`product-info--gallary-${language === 'ar' ? 'left' : 'right'} pointer gray`}
             onClick={handleNextPhoto}
             disabled={product.album.length === 1 || product.album.length === 0}
           >
-            <i className={`bi bi-caret-${language==='ar'?'left':'right'}-fill flex-row-right-start`}></i>
+            <i className={`bi bi-caret-${language === 'ar' ? 'left' : 'right'}-fill flex-row-right-start`}></i>
           </button>
         </div>
         <div className="product-info--thumbnails flex-row-center margin-12px-V">
@@ -76,7 +78,7 @@ export const ProductInfo = ({ product }) => {
               key={Math.random().toString()}
               className={`pointer product-info--thumbnail margin-8px-H ${index === currentPhotoIndex ? "mint-green-bg" : ""}`}
               style={{ borderColor: "mint-green" }}
-              
+
               onClick={() => handleSelectPhoto(index)}
             />
           ))}
@@ -84,7 +86,7 @@ export const ProductInfo = ({ product }) => {
       </div>
       <div className="product-info--info full-width flex-col-left-start">
         <div className='margin-2px-V flex-row-between full-width'>
-          <div className={`${product.status === 'Active' ? 'green' : 'red'}`}>{product.status==='Active'? translate.active :translate.inactive }</div>
+          <div className={`${product.status === 'Active' ? 'green' : 'red'}`}>{product.status === 'Active' ? translate.active : translate.inactive}</div>
           <div className="product-info--rate flex-row-right-start margin-8px-V">
             <Rating
               name="rating"
@@ -104,9 +106,11 @@ export const ProductInfo = ({ product }) => {
         <Link to={`/store-panel/profile`} className={`pointer lists-card--link product-info--store size-20px margin-8px-V ${mode === 'dark-mode' ? 'gray' : 'mint-green'}`}>
           {translate.store} : {product.store.storeName}
         </Link>
-        <div className="product-info-details">{product.description}</div>
+        <div className="product-info-details margin-6px-V">{product.description}</div>
 
-        <div className="product-info-details margin-12px-V size-14px gray">{translate.material} : {product.material}</div>
+        <div className="product-info-details margin-6px-V size-14px gray">{translate.material} : {product.material}</div>
+
+        <div className="product-info--details margin-6px size-14px gray flex-row-left-start">{translate.model3D}: {product.model3D === 'No Model' ? <ClearRounded color='error' /> : <CheckCircle color='primary' />} </div>
 
         <div className="full-width flex-row-between">
           <div className="flex-row-left-start lavender">{product.subCategory.title}</div>

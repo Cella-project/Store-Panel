@@ -245,8 +245,15 @@ const authActions = {
                 type: 'success',
                 msg: msg1
             }));
+            dispatch(authMutations.setAuthData({
+                access: null,
+                refresh: null,
+                userData: null
+            }));
             localStorage.removeItem('Access Token');
             localStorage.removeItem('Refresh Token');
+            localStorage.removeItem('Refresh Token Time');
+            localStorage.removeItem('fcmToken');
 
             router.navigate('/store-panel/auth/login');
         }

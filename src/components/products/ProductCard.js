@@ -5,6 +5,8 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import defaultProductPhoto from '../../assets/images/productDefault.png';
 import { useSelector } from 'react-redux';
 import languages from '../global/languages';
+import { CheckCircle, ClearRounded } from '@material-ui/icons';
+
 import './ProductCard.scss';
 
 const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantity, color }) => {
@@ -42,7 +44,7 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                         ) : (
                             <>
                                 <img src={productCard.album.length > 0 ? productCard.album[0].URL : defaultProductPhoto} alt='product-pic' />
-                                <div className={`product-card--status${language === 'ar' ? '-arabic' : ''} ${(productCard.status === 'Active' && productCard.avilableQuantity > 0)? 'green-bg' : ((productCard.status === 'Active' && productCard.avilableQuantity === 0)? 'yellow-bg' : 'red-bg')} shadow-5px radius-circular`}></div>
+                                <div className={`product-card--status${language === 'ar' ? '-arabic' : ''} ${(productCard.status === 'Active' && productCard.avilableQuantity > 0) ? 'green-bg' : ((productCard.status === 'Active' && productCard.avilableQuantity === 0) ? 'yellow-bg' : 'red-bg')} shadow-5px radius-circular`}></div>
                             </>
                         )}
                     </div>
@@ -71,8 +73,6 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                                 productCard.subCategory
                             }
                         </div>
-
-
                         {(productCard.avilableQuantity || quantity) &&
                             <span className="gray size-14px margin-2px-V">{translate.quantity}:
                                 <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{quantity || productCard.avilableQuantity}</span>
@@ -81,18 +81,11 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                         <span className="gray size-14px margin-2px-V">{translate.material}:
                             <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{productCard.material}</span>
                         </span>
-                        {
-                            size &&
-                            <span className="gray size-14px margin-2px-V">{translate.size}:
-                                <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{size}</span>
+                        {productCard.model3D && (
+                            <span className="gray size-14px margin-2px-V flex-row-left-start">{translate.model3D}:
+                                <span className="orange size-14px margin-6px-H flex-row-left-start">{productCard.model3D === 'No Model' ? <ClearRounded color='error' /> : <CheckCircle color='primary' />}</span>
                             </span>
-                        }
-                        {
-                            color &&
-                            <span className="gray size-14px margin-2px-V">{translate.color}:
-                                <span className="mint-green size-14px margin-6px-H">{color}</span>
-                            </span>
-                        }
+                        )}
                     </div>
                     <div className='product-card--price full-width flex-row-right-start'>
                         {hasDiscount && (
