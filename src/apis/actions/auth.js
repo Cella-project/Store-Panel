@@ -26,8 +26,9 @@ const authActions = {
                     }));
                     localStorage.setItem('Access Token', response.data.token.access);
                     localStorage.setItem('Refresh Token', response.data.token.refresh);
-                    dispatch(this.getProfile());
+
                     router.navigate('/store-panel/');
+
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -246,7 +247,6 @@ const authActions = {
             }));
             localStorage.removeItem('Access Token');
             localStorage.removeItem('Refresh Token');
-
 
             router.navigate('/store-panel/auth/login');
         }
