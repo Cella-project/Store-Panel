@@ -124,7 +124,7 @@ const Login = () => {
       </div>
       <button className={`${style['login--btn']} full-width mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} inter pointer radius-10px shadow-2px`} type="submit">{translations.logIn}</button>
       <div className="full-width flex-row-left-start">
-        <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.forgetPassword}</NavLink>
+        <NavLink to={'/store-panel/auth/forget-password'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.forgetPassword}</NavLink>
       </div>
     </form>
   );
