@@ -8,9 +8,10 @@ import OrderInfo from "../../../components/orders/OrderInfo";
 import ProductCard from "../../../components/products/ProductCard";
 import ListsCard from "../../../components/common/ListsCard";
 import { useSelector, useDispatch } from 'react-redux';
-import { orderHistoryActions } from "../../../apis/actions";
-import { orderHistoryMutations } from "../../../redux/mutations";
+import { orderHistoryActions, reviewActions } from "../../../apis/actions";
+import { orderHistoryMutations, reviewMutations } from "../../../redux/mutations";
 import languages from "../../../components/global/languages";
+import ReviewCard from "../../../components/reviews/ReviewCard";
 
 import "./OrderHistoryDetails.scss";
 
@@ -20,8 +21,9 @@ const OrderHistoryDetails = () => {
     const language = useSelector(state => state.language.language);
     const translate = languages[language]
     const order = useSelector(state => state.orderHistory.orderHistoryData);
-    const [expandedPickup, setExpandedPickup] = useState(false)
-    const [expandedDrop, setExpandedDrop] = useState(false)
+    const reviews = useSelector(state => state.review.reviews);
+    const [expandedPickup, setExpandedPickup] = useState(false);
+    const [expandedDrop, setExpandedDrop] = useState(false);
 
     const handleExpandPick = () => {
         setExpandedPickup(!expandedPickup)
@@ -34,6 +36,8 @@ const OrderHistoryDetails = () => {
     useEffect(() => {
         dispatch(orderHistoryMutations.setOrderHistoryData(null));
         dispatch(orderHistoryActions.getOrderHistoryData(params.id));
+        dispatch(reviewMutations.setReviews(null));
+        dispatch(reviewActions.getReviewsForOrder(params.id));
     }, [dispatch, params.id]);
 
     order && (document.title = `${order.code} • Store Panel`);
@@ -73,16 +77,27 @@ const OrderHistoryDetails = () => {
                                         }
                                     </PerfectScrollbar>
                                     <Link to={`/store-panel/Products`} className="pointer lists-card--link">
-                                        <i className={`flex-row-right-start ${language==='ar'?'bi bi-arrow-left':"bi bi-arrow-right"}`}></i>
+                                        <i className={`flex-row-right-start ${language === 'ar' ? 'bi bi-arrow-left' : "bi bi-arrow-right"}`}></i>
                                     </Link>
                                 </GreenCard>
                             </div>
                             <div className="flex-row-top-between2col full-width full-width">
                                 <GreenCard title={translate.reviews}>
-                                    {/* <PerfectScrollbar className="review-scroll--cont full-width"></PerfectScrollbar> */}
-                                    <Link to={`/store-panel/Reviews`} className="pointer lists-card--link">
-                                        <i className={`flex-row-right-start ${language==='ar'?'bi bi-arrow-left':"bi bi-arrow-right"}`}></i>
-                                    </Link>
+                                    <PerfectScrollbar className="review-scroll--cont full-width">
+                                        {(reviews && reviews.length > 0) ? (
+                                            reviews
+                                                .slice()
+                                                .sort((a, b) => b.rate - a.rate)
+                                                .map((review) => (
+                                                    <ListsCard key={review._id} width="full-width">
+                                                        <ReviewCard review={review} />
+                                                    </ListsCard>
+                                                ))
+                                        ) : (
+                                            <p className="gray inter size-16px font-bold">{translate.noReviewsToDisplay}</p>
+                                        )
+                                        }
+                                    </PerfectScrollbar>
                                 </GreenCard>
                             </div>
                         </div>

@@ -30,7 +30,7 @@ const orderActions = {
             }
         }
     },
-    cancelOrder(orderId,msg1,msg2,msg3) {
+    cancelOrder(orderId, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -40,7 +40,7 @@ const orderActions = {
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
-                        const response = await Axios.put('/api/order-operation/canceled-by-store', {_id: orderId});
+                        const response = await Axios.put('/api/order-operations/canceled-by-store', { _id: orderId });
                         dispatch(orderMutations.setOrderData(response.data.data));
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
@@ -54,7 +54,7 @@ const orderActions = {
             }
         }
     },
-    approveOrder(orderId,msg1,msg2,msg3) {
+    approveOrder(orderId, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -64,7 +64,7 @@ const orderActions = {
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
-                        const response = await Axios.put('/api/order-operations/approve', {_id: orderId});
+                        const response = await Axios.put('/api/order-operations/approve', { _id: orderId });
                         dispatch(orderMutations.setOrderData(response.data.data));
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({
@@ -78,7 +78,7 @@ const orderActions = {
             }
         }
     },
-    readyForPickup(orderId,msg1,msg2,msg3) {
+    readyForPickup(orderId, msg1, msg2, msg3) {
         return async (dispatch) => {
             try {
                 dispatch(popupMutation.clearPopPanel());
@@ -88,7 +88,7 @@ const orderActions = {
                     onSubmit: async () => {
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(popupMutation.popLoading());
-                        const response = await Axios.put('/api/order-operations/ready', {_id: orderId});
+                        const response = await Axios.put('/api/order-operations/ready', { _id: orderId });
                         dispatch(orderMutations.setOrderData(response.data.data));
                         dispatch(popupMutation.clearPopPanel());
                         dispatch(stickyMutations.pushNote({

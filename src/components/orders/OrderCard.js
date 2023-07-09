@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import languages from '../global/languages';
 
-
 const OrderCard = ({ order, type = "" }) => {
     const language = useSelector(state => state.language.language);
     const translate = languages[language]

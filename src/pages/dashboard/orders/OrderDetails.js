@@ -42,7 +42,6 @@ const OrderDetails = () => {
   return (
     <div className="order-details--container full-width flex-col-left-start2col">
       {order && (<>
-
         <div className="flex-row-left-start2col order-details full-width">
           <div className="width-90-100 order-details">
             <OrderInfo order={order} />
