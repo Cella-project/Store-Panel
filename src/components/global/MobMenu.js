@@ -13,7 +13,10 @@ const MobMenu = ({ menuToggle }) => {
     const mode = useSelector(state => state.theme.mode);
     const language = useSelector(state => state.language.language);
     const translations = languages[language];
+
     const handleLogout = () => {
+        menuToggle(false);
+        window.onscroll = function () { };
         dispatch(authActions.logout(translations.logoutSuccessfully));
     }
 

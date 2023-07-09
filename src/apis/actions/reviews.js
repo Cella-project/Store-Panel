@@ -22,7 +22,7 @@ const reviewActions = {
                 dispatch(popupMutation.clearPopPanel());
                 dispatch(stickyMutations.popAllNotes());
                 dispatch(popupMutation.popLoading());
-                const response = await Axios.get(`/api/review-main/order/${orderId}`);
+                const response = await Axios.get(`/api/review-main/order-reviews/${orderId}`);
                 dispatch(reviewMutations.setReviews(response.data.data));
                 dispatch(popupMutation.clearPopPanel());
             } catch (error) {

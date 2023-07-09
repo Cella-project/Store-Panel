@@ -33,7 +33,6 @@ const Notifications = () => {
                 dispatch(notificationMutations.setNotifications(null));
                 dispatch(notificationActions.getAllNotifications(0));
                 setOffset(0);
-                console.log('Notification clicked');
             };
         }
 
