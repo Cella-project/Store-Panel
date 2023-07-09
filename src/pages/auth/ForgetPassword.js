@@ -64,7 +64,7 @@ const ForgetPassword = () => {
       </div>
       <button type="submit" className={`${style['forget--btn']} full-width mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} inter pointer radius-10px shadow-2px`}>{translations.requestPasswordReset}</button>
       <div className="full-width flex-row-left-start">
-        <NavLink to={'/auth/login'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.login}</NavLink>
+        <NavLink to={'/store-panel/auth/login'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.login}</NavLink>
       </div>
     </form>
   );

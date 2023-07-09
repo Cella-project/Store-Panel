@@ -85,7 +85,7 @@ const VerifyCode = () => {
             </div>
             <button type="submit" className={`${style['verify--btn']} full-width mint-green-bg ${mode === 'dark-mode' ? 'gray' : 'white'} inter pointer radius-10px shadow-2px`}>{translations.verify}</button>
             <div className="full-width flex-row-left-start">
-                <NavLink to={'/auth/forget-password'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.didNotReceiveCode}</NavLink>
+                <NavLink to={'/store-panel/auth/forget-password'} style={{ textDecoration: 'none' }} className={`space-none inter ${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-12px-H pointer`}>{translations.didNotReceiveCode}</NavLink>
             </div>
         </form>
     );
