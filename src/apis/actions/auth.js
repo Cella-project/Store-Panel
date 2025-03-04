@@ -24,8 +24,8 @@ const authActions = {
                         refresh: response.data.token.refresh,
                         userData: response.data.data
                     }));
-                    localStorage.setItem('Access Token', response.data.token.access);
-                    localStorage.setItem('Refresh Token', response.data.token.refresh);
+                    localStorage.setItem('Store Access Token', response.data.token.access);
+                    localStorage.setItem('Store Refresh Token', response.data.token.refresh);
 
                     router.navigate('/store-panel/');
 
@@ -97,9 +97,9 @@ const authActions = {
                 });
                 if (response.status === 200) {
                     dispatch(authMutations.setToken(response.data.token));
-                    localStorage.setItem('Access Token', response.data.token.access);
-                    localStorage.setItem('Refresh Token', response.data.token.refresh);
-                    localStorage.setItem('Refresh Token Time', new Date().getTime());
+                    localStorage.setItem('Store Access Token', response.data.token.access);
+                    localStorage.setItem('Store Refresh Token', response.data.token.refresh);
+                    localStorage.setItem('Store Refresh Token Time', new Date().getTime());
                 }
             }
             catch (error) {
@@ -108,8 +108,8 @@ const authActions = {
                         type: 'error',
                         msg: 'Session expired. Please login again.'
                     }));
-                    localStorage.removeItem('Access Token');
-                    localStorage.removeItem('Refresh Token');
+                    localStorage.removeItem('Store Access Token');
+                    localStorage.removeItem('Store Refresh Token');
                     router.navigate('/store-panel/login');
                 }
                 errorHandler(dispatch, error.response);
@@ -125,7 +125,7 @@ const authActions = {
                 const response = await Axios.post('/api/store-auth/forget-password', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.setEmail(payload.email));
-                    router.navigate('/store-panel/auth/verify-code');
+                    router.navigate('/store-panel/login/verify-code');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -146,7 +146,7 @@ const authActions = {
                 const response = await Axios.post('/api/store-auth/validate-otp', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.setOTP(payload.otp));
-                    router.navigate('/store-panel/auth/reset-password');
+                    router.navigate('/store-panel/login/reset-password');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -167,7 +167,7 @@ const authActions = {
                 const response = await Axios.put('/api/store-auth/reset-password', payload);
                 if (response.status === 200) {
                     dispatch(authMutations.clearForgetPasswordCycle());
-                    router.navigate('/store-panel/auth/login');
+                    router.navigate('/store-panel/login');
                     dispatch(popupMutation.clearPopPanel());
                     dispatch(stickyMutations.pushNote({
                         type: 'success',
@@ -250,12 +250,12 @@ const authActions = {
                 refresh: null,
                 userData: null
             }));
-            localStorage.removeItem('Access Token');
-            localStorage.removeItem('Refresh Token');
-            localStorage.removeItem('Refresh Token Time');
-            localStorage.removeItem('fcmToken');
+            localStorage.removeItem('Store Access Token');
+            localStorage.removeItem('Store Refresh Token');
+            localStorage.removeItem('Store Refresh Token Time');
+            localStorage.removeItem('Store fcmToken');
 
-            router.navigate('/store-panel/auth/login');
+            router.navigate('/store-panel/login');
         }
     },
     addStoreSocialMediaAccount(payload, afterSuccess, msg1, msg2) {

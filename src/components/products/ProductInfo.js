@@ -12,14 +12,41 @@ import "./ProductInfo.scss";
 export const ProductInfo = ({ product }) => {
   // handle the current photo index
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+
   const handlePreviousPhoto = () => {
     setCurrentPhotoIndex((currentPhotoIndex - 1 + product.album.length) % product.album.length);
   };
+
   const handleNextPhoto = () => {
     setCurrentPhotoIndex((currentPhotoIndex + 1) % product.album.length);
   };
+
   const handleSelectPhoto = (index) => {
     setCurrentPhotoIndex(index);
+  };
+
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX && touchEndX) {
+      const touchDistance = touchEndX - touchStartX;
+      if (touchDistance > 50) {
+        handlePreviousPhoto();
+      } else if (touchDistance < -50) {
+        handleNextPhoto();
+      }
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
   };
 
   const mode = useSelector((state) => state.theme.mode);
@@ -63,6 +90,9 @@ export const ProductInfo = ({ product }) => {
             src={album[currentPhotoIndex].URL}
             alt={product.description}
             className="product-photo"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           />
           <button
             className={`product-info--gallary-${language === 'ar' ? 'left' : 'right'} pointer gray`}

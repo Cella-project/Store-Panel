@@ -24,13 +24,13 @@ const PushNotification = () => {
         if ('Notification' in window && 'serviceWorker' in navigator && 'localStorage' in window) {
             const messaging = firebase.messaging();
 
-            const hasToken = localStorage.getItem('fcmToken');
+            const hasToken = localStorage.getItem('Store fcmToken');
 
             if (!hasToken) {
                 messaging.getToken({ vapidKey: 'BH9-0-fHGeM6bA_9I_IAhHlRLpiOSQ_9gaApnTg7JIxDvBTGCrOL_JsJRSNCuPp4yXk8fDZ0i_IV7t8WCJape44' })
                     .then((token) => {
                         dispatch(notificationActions.registerToken(token));
-                        localStorage.setItem('fcmToken', token);
+                        localStorage.setItem('Store fcmToken', token);
                     })
                     .catch((error) => {
                         console.log('Error getting FCM token:', error);

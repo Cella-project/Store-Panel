@@ -19,15 +19,15 @@ const App = () => {
   const language = useSelector(state => state.language.language);
 
   const mode = useSelector(state => state.theme.mode);
-  const accessToken = localStorage.getItem('Access Token');
-  const refreshToken = localStorage.getItem('Refresh Token');
+  const accessToken = localStorage.getItem('Store Access Token');
+  const refreshToken = localStorage.getItem('Store Refresh Token');
 
   useEffect(() => {
-    const refreshToken = localStorage.getItem('Refresh Token');
+    const refreshToken = localStorage.getItem('Store Refresh Token');
     
     const checkTimeDifference = () => {
       const currentTime = new Date().getTime();
-      const lastRefreshTime = localStorage.getItem('Refresh Token Time');
+      const lastRefreshTime = localStorage.getItem('Store Refresh Token Time');
       const timeDifference = currentTime - lastRefreshTime;
 
       if (timeDifference >= 14 * 60 * 1000) {
@@ -48,10 +48,10 @@ const App = () => {
         dispatch(authActions.getProfile());
       });
     } else {
-      localStorage.removeItem('Access Token');
-      localStorage.removeItem('Refresh Token');
-      localStorage.removeItem('fcmToken');
-      router.navigate('/store-panel/auth/login');
+      localStorage.removeItem('Store Access Token');
+      localStorage.removeItem('Store Refresh Token');
+      localStorage.removeItem('Store fcmToken');
+      router.navigate('/store-panel/login');
     }
   };
 

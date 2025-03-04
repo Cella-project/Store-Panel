@@ -7,7 +7,7 @@ import Canvas from '../common/Canvas';
 import { useSelector } from 'react-redux';
 import languages from './languages';
 
-import Notifications from '../common/Notifications';
+import Notifications from './Notifications';
 
 import './NavBar.scss';
 

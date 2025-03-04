@@ -1,12 +1,12 @@
 import { Navigate } from 'react-router-dom';
 
 const AuthGuard = ({ component: Component, ...rest }) => {
-  const isLoggedIn = localStorage.getItem("Access Token");
+  const isLoggedIn = localStorage.getItem('Store Access Token');
 
   return isLoggedIn ? (
     <Component {...rest} />
   ) : (
-    <Navigate to="/store-panel/auth/login" />
+    <Navigate to="/store-panel/login" />
   );
 };
 

@@ -15,6 +15,7 @@ const languages = {
     logActivity: 'Log Activity',
     compSuggestions: 'Comp & Suggestions',
     logout: 'Log out',
+    noLogsToDisplay: 'No logs to display',
     notes: 'Notes',
     theme: 'Theme',
     darkMode: 'Dark Mode',
@@ -365,6 +366,7 @@ const languages = {
     addProductTag: 'Add Product Tag',
     addProductSize: 'Add Product Size',
     addProductColor: 'Add Product Color',
+    pieces: 'Pieces',
   },
   ar: {
     home: 'الرئيسية',
@@ -382,6 +384,7 @@ const languages = {
     logActivity: 'سجل النشاط',
     compSuggestions: 'الشكاوى والاقتراحات',
     logout: 'تسجيل الخروج',
+    noLogsToDisplay: 'لا يوجد سجلات لعرضها.',
     notes: 'ملاحظات',
     theme: 'المظهر',
     darkMode: 'الوضع الداكن',
@@ -732,6 +735,7 @@ const languages = {
     addProductTag: 'إضافة علامة للمنتج',
     addProductSize: 'إضافة حجم للمنتج',
     addProductColor: 'إضافة لون للمنتج',
+    pieces: 'القطع',
   },
 };
 

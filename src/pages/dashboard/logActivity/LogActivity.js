@@ -29,7 +29,7 @@ const LogActivity = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
         setOffset((prevOffset) => prevOffset + 10);
       }
     }
@@ -39,9 +39,11 @@ const LogActivity = () => {
     setIsLoading(true);
     setShowLoading(true);
 
+    window.removeEventListener('scroll', handleScroll);
     dispatch(logActivityActions.getLogs(userData._id, offset)).then(() => {
       setIsLoading(false);
       setShowLoading(false);
+      window.addEventListener('scroll', handleScroll);
     });
 
     return () => {
@@ -53,7 +55,7 @@ const LogActivity = () => {
     <>
       {
         (logs !== null && logs.length === 0) ? (
-          <div className='gray inter size-16px font-bold'>No logs found</div>
+          <div className='gray inter size-16px font-bold'>{translate.noLogsToDisplay}</div>
         ) : (logs !== null && logs.length > 0) ? (
           <>
             <div className='log-activity--list-header full-width flex-row-left-start margin-2px-V'>
@@ -74,18 +76,17 @@ const LogActivity = () => {
           <Loading />
         )
       }
-
       {isLoading && !showLoading && <Loading />}
     </>
   );
 
   return (
-    <div className="log-activity full-width" >
+    <div className={`log-activity full-width ${showLoading ? 'loading' : ''}`} >
       <div className="log-activity--braud-cramb gray inter size-16px font-bold">
         {translate.logActivity}
       </div>
 
-      <div className='flex-col-left-start full-width inter gray margin-12px-V'>
+      <div className='flex-col-left-start full-width inter gray'>
         {content}
       </div>
     </div>
