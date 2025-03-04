@@ -8,18 +8,18 @@
         &--light {
             position: fixed;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             background-image: url('../assets/images/background.svg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            opacity: .35;
+            opacity: .30;
         }
 
         &--dark {
             position: fixed;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             background-image: url('../assets/images/background-dark.svg');
             background-size: cover;
             background-position: center center;

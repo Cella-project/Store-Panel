@@ -1,15 +1,24 @@
 .log-activity {
     position: relative;
-    z-index: 2;
+    transition: top 0.3s ease-out;
+
+    &.loading {
+        top: -100%;
+    }
 
     &--list-header {
         box-sizing: border-box;
         padding: 0 20px;
+
+        &>div {
+            margin: 0 5px;
+        }
     }
 
     &--braud-cramb {
         box-sizing: border-box;
-        padding: 0px 60px;
+        padding-left: 60px;
+        margin-bottom: 50px;
     }
 }
 
@@ -20,7 +29,7 @@
         }
 
         &--braud-cramb {
-            padding: 0px 10px 0px 10px;
+            padding-left: 10px;
         }
     }
 

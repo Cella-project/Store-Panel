@@ -48,8 +48,7 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                             </>
                         )}
                     </div>
-                    {
-                        productCard.rating != null &&
+                    {productCard.rating != null &&
                         <div className='flex-row-center full-width margin-6px-V'>
                             <Rating name="rating" emptyIcon={<StarBorder className='gray' fontSize='inherit' />} style={{ color: '#FDCC0D' }} value={productCard.rating} size={"medium"} precision={1} readOnly />
                             <span className='size-14px gray font-bold margin-4px-H'>{productCard.rating}</span>
@@ -61,8 +60,7 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                         {productCard.title.toUpperCase()}
                     </div>
                     <div className='product-card--cont full-width flex-col-left-start gray size-14px font-bold margin-12px-V'>
-                        {
-                            productCard.store &&
+                        {productCard.store &&
                             <div className='product-card--store'>
                                 {productCard.store.storeName}
                             </div>
@@ -81,6 +79,16 @@ const ProductCard = ({ productCard, width = 'width-90-100', price, size, quantit
                         <span className="gray size-14px margin-2px-V">{translate.material}:
                             <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{productCard.material}</span>
                         </span>
+                        {size &&
+                            <span className="gray size-14px margin-2px-V">{translate.size}:
+                                <span className={`${mode === 'dark-mode' ? 'gray' : 'mint-green'} size-14px margin-6px-H`}>{size}</span>
+                            </span>
+                        }
+                        {color &&
+                            <span className="gray size-14px margin-2px-V">{translate.color}:
+                                <span className="mint-green size-14px margin-6px-H">{color}</span>
+                            </span>
+                        }
                         {productCard.model3D && (
                             <span className="gray size-14px margin-2px-V flex-row-left-start">{translate.model3D}:
                                 <span className="orange size-14px margin-6px-H flex-row-left-start">{productCard.model3D === 'No Model' ? <ClearRounded color='error' /> : <CheckCircle color='primary' />}</span>

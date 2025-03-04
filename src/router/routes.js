@@ -1,18 +1,18 @@
-import App from '../App';
+import App from "../App";
 
 import AutoGuard from "./guards/AuthGuard";
 
-import Auth from '../pages/Auth';
+import Auth from "../pages/Auth";
 
-import Login from '../pages/auth/Login';
-import ForgetPassword from '../pages/auth/ForgetPassword';
-import VerifyCode from '../pages/auth/VerifyCode';
-import ResetPassword from '../pages/auth/ResetPassword';
+import Login from "../pages/auth/Login";
+import ForgetPassword from "../pages/auth/ForgetPassword";
+import VerifyCode from "../pages/auth/VerifyCode";
+import ResetPassword from "../pages/auth/ResetPassword";
 
-import Dashboard from '../pages/Dashboard';
+import Dashboard from "../pages/Dashboard";
 
 import Home from "../pages/dashboard/home/Home";
-import Profile from '../pages/dashboard/profile/Profile';
+import Profile from "../pages/dashboard/profile/Profile";
 import Products from "../pages/dashboard/products/Products";
 import ProductList from "../pages/dashboard/products/ProductList"
 import ProductDetails from "../pages/dashboard/products/ProductDetails";
@@ -31,33 +31,33 @@ import NotFound from "../components/global/NotFound";
 
 export const routes = [
     {
-        path: '/store-panel',
+        path: "/store-panel",
         element: <App />,
         children: [
             {
-                path: 'auth',
+                path: "login",
                 element: <Auth />,
                 children: [
                     {
-                        path: 'login',
+                        path: "",
                         element: <Login />
                     },
                     {
-                        path: 'forget-password',
+                        path: "forget-password",
                         element: <ForgetPassword />
                     },
                     {
-                        path: 'verify-code',
+                        path: "verify-code",
                         element: <VerifyCode />
                     },
                     {
-                        path: 'reset-password',
+                        path: "reset-password",
                         element: <ResetPassword />
                     }
                 ],
             },
             {
-                path: '',
+                path: "",
                 element: <AutoGuard component={Dashboard} />,
                 children: [
                     {

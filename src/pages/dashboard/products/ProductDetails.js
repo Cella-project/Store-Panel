@@ -161,7 +161,7 @@ const ProductDetails = () => {
                 );
               })
             }
-            <GreenCard title="Sizes" icon={'bi bi-plus-circle'} iconClickHandle={addProductSize}>
+            <GreenCard title={translate.sizes} icon={'bi bi-plus-circle'} iconClickHandle={addProductSize}>
               <div className="product-details--sizes flex-row-center flex-wrap">
                 {product.sizes.length > 0 ? (
                   product.sizes.map((size, index) => (
@@ -181,7 +181,7 @@ const ProductDetails = () => {
                 }
               </div>
             </GreenCard>
-            <GreenCard title="Colors" icon={'bi bi-plus-circle'} iconClickHandle={addProductColor}>
+            <GreenCard title={translate.colors} icon={'bi bi-plus-circle'} iconClickHandle={addProductColor}>
               <div className="product-details--colors flex-row-center flex-wrap">
                 {product.colors.length > 0 ? (
                   product.colors.map((color, index) => (
@@ -203,7 +203,7 @@ const ProductDetails = () => {
             </GreenCard>
             {
               hasDiscount &&
-              <GreenCard title="Discount">
+              <GreenCard title={translate.discount}>
                 <div className="flex-col-center">
                   <p className="flex-row-center gray inter size-28px no-margin text-shadow">{product.discount.discountAmount}{product.discount.discountType === 'Percentage' && <i className="bi bi-percent"></i>}</p>
                   <p className="gray inter no-margin text-shadow">{product.discount.discountType}</p>
@@ -212,7 +212,7 @@ const ProductDetails = () => {
             }
           </div>
           <div className="full-width flex-col-center">
-            <GreenCard title="Pieces" icon={'bi bi-dash-circle'} iconClickHandle={decreaseQuantity}>
+            <GreenCard title={translate.pieces} icon={'bi bi-dash-circle'} iconClickHandle={decreaseQuantity}>
               <div className="product-details--piece flex-row-center flex-wrap">
                 {product.pieces.length > 0 ? (
                   product.pieces.map((piece, index) => (
